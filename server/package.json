@@ -2,10 +2,24 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "compiled/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
+    "build": "tsc",
+    "prestart": "npm run build",
+    "start": "node .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "production": "node .",
+    "preproduction": "tsc"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DSC-VJTI/CA-Client.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DSC-VJTI/CA-Client/issues"
+  },
+  "homepage": "https://github.com/DSC-VJTI/CA-Client#readme",
   "author": "",
   "license": "ISC",
   "devDependencies": {
