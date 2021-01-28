@@ -1,19 +1,15 @@
 {
-    "defaultSeverity": "error",
-    "extends": [
-        "tslint:recommended"
+  "defaultSeverity": "error",
+  "extends": ["tslint:recommended"],
+  "jsRules": {},
+  "rules": {
+    "only-arrow-functions": [
+      true,
+      "allow-declarations",
+      "allow-named-functions"
     ],
-    "jsRules": {},
-    "rules": {
-        "only-arrow-functions": [
-            true,
-            "allow-declarations",
-            "allow-named-functions"
-        ],
-        "trailing-comma": [
-            false
-        ],
-        "no-console": false
-    },
-    "rulesDirectory": []
+    "trailing-comma": [false],
+    "no-console": false
+  },
+  "rulesDirectory": []
 }
