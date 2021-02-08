@@ -16,5 +16,10 @@
     },
     "include": [
         "server/**/*"
+    ],
+    "exclude":[
+        "./tests/",
+        "./node_modules/",
+        "./compiled"
     ]
 }
