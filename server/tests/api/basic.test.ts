@@ -5,6 +5,7 @@ import "mocha";
 
 chai.use(chaiHttp);
 const expect = chai.expect;
+// const should = chai.should();
 
 describe("Basic test", () => {
   it("gets without error", (done: Mocha.Done) => {
@@ -14,6 +15,7 @@ describe("Basic test", () => {
       .end((err, res) => {
         expect(err).to.be.null;
         expect(res).to.be.an("object");
+        expect(res.body).to.have.property("payload").equal("Hello");
         done();
       });
   });
