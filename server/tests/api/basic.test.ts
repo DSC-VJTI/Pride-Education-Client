@@ -5,7 +5,6 @@ import "mocha";
 
 chai.use(chaiHttp);
 const expect = chai.expect;
-// const should = chai.should();
 
 describe("Basic test", () => {
   it("gets without error", (done: Mocha.Done) => {
