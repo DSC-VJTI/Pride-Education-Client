@@ -1,2 +1,6 @@
 build 
 coverage
+compiled
+node_modules
+.gitignore
+.prettierignore
