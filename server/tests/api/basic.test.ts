@@ -8,13 +8,14 @@ const expect = chai.expect;
 
 describe("Basic test", () => {
   it("gets without error", (done: Mocha.Done) => {
+    const should = chai.should();
     chai
       .request(app)
       .get("/api/")
       .end((err, res) => {
         expect(err).to.be.null;
-        expect(res).to.be.an("object");
-        expect(res.body).to.have.property("payload").equal("Hello");
+        expect(res.body).to.be.an("object");
+        res.body.should.have.property("payload").equal("Hello");
         done();
       });
   });
