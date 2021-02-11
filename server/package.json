@@ -9,7 +9,7 @@
     "prestart": "npm run build",
     "start": "node compiled/app.js",
     "test": "cross-env NODE_ENV=test mocha -r ts-node/register 'tests/**/*.ts' --timeout 120000 --exit",
-    "production": "node .",
+    "production": "cross-env NODE_ENV=production node .",
     "preproduction": "tsc"
   },
   "husky": {
