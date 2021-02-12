@@ -4,5 +4,5 @@ import IUser from "../User/IUser"
 
 export default interface ICart extends Document {
     user: IUser['_id'];
-    product: Array<IProduct['_id']>;
+    products: Array<IProduct['_id']>;
 };
