@@ -1,9 +1,5 @@
-build 
-coverage
 compiled
 node_modules
 .gitignore
 .prettierignore
-.eslintignore
-.eslintrc
 .env.sample
