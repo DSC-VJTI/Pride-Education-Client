@@ -2,10 +2,10 @@ name: Server test
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      -master
+      - main
 jobs:
   test:
     runs-on: ${{ matrix.os }}
@@ -13,12 +13,17 @@ jobs:
       matrix:
         node-version: [10, 12]
         os: [ubuntu-latest, windows-latest]
+        mongodb-version: [4.0, 4.4]
     steps:
       - uses: actions/checkout@v2
       - name: Uses Node version ${{matrix.node-version}}
         uses: actions/setup-node@v2
         with:
           node-version: ${{matrix.node-version}}
+      - name: Uses MongoDB version ${{matrix.mong0db-version}}
+        uses: supercharge/mongodb-github-action@1.3.0
+        with:
+          mongodb-version: ${{matrix.mong0db-version}}
       - name: Installing dependencies and running tests
         run: |
           cd server
