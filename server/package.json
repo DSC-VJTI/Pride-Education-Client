@@ -4,10 +4,10 @@
   "description": "",
   "main": "compiled/app.js",
   "scripts": {
-    "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "tsc",
     "prestart": "npm run build",
     "start": "node compiled/app.js",
+    "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/app.ts",
     "test": "cross-env NODE_ENV=test mocha -r ts-node/register 'tests/**/*.ts' --timeout 120000 --exit",
     "production": "cross-env NODE_ENV=production node .",
     "preproduction": "tsc"
