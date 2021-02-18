@@ -9,11 +9,10 @@ on:
       - main
 jobs:
   test:
-    runs-on: ${{ os }}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [12.x, 14.x]
-        os: ubuntu-latest
         mongodb-version: [4.0, 4.4]
     steps:
       - uses: actions/checkout@v2
