@@ -8,11 +8,11 @@ on:
       - main
 jobs:
   test:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ os }}
     strategy:
       matrix:
-        node-version: [10, 12]
-        os: [ubuntu-latest, windows-latest]
+        node-version: [12.x, 14.x]
+        os: ubuntu-latest
         mongodb-version: [4.0, 4.4]
     steps:
       - uses: actions/checkout@v2
