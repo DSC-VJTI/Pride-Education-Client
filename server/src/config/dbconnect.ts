@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 
-function dbConnect() {
+function dbConnect(): void {
   const mongooseOptions: mongoose.ConnectionOptions = {
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: false,
+    useFindAndModify: false
   };
 
   let connectionString = process.env.MONGO_URI || "";

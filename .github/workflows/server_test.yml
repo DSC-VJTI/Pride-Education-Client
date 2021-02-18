@@ -4,15 +4,15 @@ on:
     branches:
       - main
   pull_request:
+    types: [opened, synchronize]
     branches:
       - main
 jobs:
   test:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [10, 12]
-        os: [ubuntu-latest, windows-latest]
+        node-version: [12.x, 14.x]
         mongodb-version: [4.0, 4.4]
     steps:
       - uses: actions/checkout@v2
