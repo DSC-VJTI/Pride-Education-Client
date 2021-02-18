@@ -5,7 +5,7 @@ function dbConnect(): void {
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: false,
+    useFindAndModify: false
   };
 
   let connectionString = process.env.MONGO_URI || "";
