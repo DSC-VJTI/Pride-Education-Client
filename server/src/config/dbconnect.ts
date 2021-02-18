@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-function dbConnect() {
+function dbConnect(): void {
   const mongooseOptions: mongoose.ConnectionOptions = {
     useCreateIndex: true,
     useNewUrlParser: true,
