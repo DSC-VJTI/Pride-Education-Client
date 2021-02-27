@@ -1,0 +1,16 @@
+.ClassHead{
+    background-color: gray;
+    width: fit-content;
+    border-radius: 0.5rem;
+}
+.ProdPane{
+    background-color: gray;
+    width: fit-content;
+    border-radius: 0rem 3rem 0rem 3rem;
+    margin: auto;
+}
+.Icons{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;   
+}
