@@ -13,42 +13,37 @@ import {
   MDBView,
   MDBIcon
 } from "mdbreact";
-const Pane = () => {
+const Pane = ({field}) => {
   return (
     <>
-      {/* <MDBIcon icon="chevron-left" size="lg"/> */}
-      <MDBBox className="m-3 p-2 title text-white ClassHead">
+    {/* This is the Main Search BOx for the courses with Names */}
+      <MDBBox className="m-3 p-2 text-white ClassHead">
         <MDBCol>
-          <MDBIcon icon="file-contract" className="form-inline">
-            Financial Reporting
-          </MDBIcon>
-          <form className="form-inline mt-2 mx-2">
+          <form className="form-inline mx-2">
+            <MDBIcon icon="file-contract">
+              {field}
+            </MDBIcon>
             <input
-              className="form-control mx-2 w-30"
+              className="form-control mx-2"
               type="text"
               placeholder="Search"
-              aria-label="Search"
             />
             <MDBIcon icon="search"></MDBIcon>
           </form>
         </MDBCol>
       </MDBBox>
-      <div className="p-4 ProdPane">
-        <MDBRow>
-          <Product></Product>
-          <Product></Product>
-          <Product></Product>
+        {/* THis is the Products that on click takes to next page */}
+        <MDBRow className="m-auto p-4 ProdPane center">
           <Product></Product>
         </MDBRow>
-      </div>
-      {/* <MDBIcon icon="chevron-right" /> */}
     </>
   );
 };
 
 const Product = () => {
   return (
-    <MDBCol md="4" style={{ maxWidth: "22rem", Height: "fit-content" }} className="my-3">
+    <MDBCol style={{ maxWidth: "max-content"}} className="my-3">
+      
       <MDBCard narrow cascade>
         <MDBView cascade>
           <MDBCardImage
@@ -56,19 +51,23 @@ const Product = () => {
             overlay="white-slight"
             className="card-img-top"
             src={img1}
-            alt="Card cap"
+            // Width of the image should be <= 300px
+            style={{ width:"300px"}}
           />
         </MDBView>
 
+        {/* The main Body start */}
         <MDBCardBody cascade className="text-center">
+          {/* This will be course title */}
           <MDBCardTitle className="card-title">
             <strong>Abhishek Khilwani</strong>
           </MDBCardTitle>
 
+          {/* This will be course instructor */}
           <p className="font-weight-bold blue-text">Photographer</p>
-          <MDBCol md="12" className="d-flex justify-content-center">
+          
+          {/* Button to go to the Course Page */}
             <MDBBtn>Go to the Course Page</MDBBtn>
-          </MDBCol>
         </MDBCardBody>
       </MDBCard>
     </MDBCol>
