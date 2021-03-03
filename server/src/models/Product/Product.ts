@@ -15,8 +15,8 @@ const ProductSchema: Schema = new Schema({
     language: { type: String, required: true },
     duration: { type: Number, required: true },
     validity: { type: Number, required: true },
-    mode: { type: String, required: true },
-  },
+    mode: { type: String, required: true }
+  }
 });
 
 export default model<IProduct>("Product", ProductSchema);

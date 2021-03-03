@@ -9,7 +9,7 @@ const UserSchema: Schema = new Schema({
   address: { type: String, required: true },
   field: { type: String, required: true },
   level: { type: String, required: true },
-  reference: { type: String, required: true },
+  reference: { type: String, required: true }
 });
 
 export default model<IUser>("User", UserSchema);
