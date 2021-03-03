@@ -65,7 +65,7 @@ export default function FormTabs() {
 
   return (
     <>
-      <div className="container  form">
+      <div className="form">
         <div className={classes.root}>
           <AppBar position="static" color="default">
             <Tabs

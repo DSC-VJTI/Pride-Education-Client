@@ -1,16 +1,16 @@
-import React, { useDebugValue, useState } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import "./css/FormStyle.css";
+import { FormControl, Input, InputLabel, Button } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
-  container: {
-    display: "flex",
-    flexWrap: "wrap",
+  root: {
+    flexGrow: 1,
   },
-  textField: {
-    marginLeft: theme.spacing(5),
-    marginRight: theme.spacing(1),
-    width: 200,
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
   },
 }));
 
@@ -50,86 +50,113 @@ const Registration = () => {
   };
   return (
     <>
-      <h1 class="heading text-center" style={{ color: "#0065d1" }}>
+      <h1 class="heading" style={{ color: "#0065d1", textAlign: "center" }}>
         Sign up for a free account
       </h1>
-      <div className="row">
-        <div className="mainSection col-md-9 col-12">
-          <form className="my-0">
-            <div className="row">
-              <div class="col-lg-5 col-sm-11  my-2  mx-auto">
-                <input
-                  name="name"
-                  value={name}
-                  onChange={onRegistration}
-                  type="text"
-                  class="form-control"
-                  id="exampleInputPassword1"
-                  placeholder="Enter Full Name"
-                  required
-                />
-              </div>
-              <div class="col-lg-5 col-sm-11 my-2 mx-auto ">
-                <input
-                  name="email"
-                  value={email}
-                  onChange={onRegistration}
-                  type="email"
-                  class="form-control"
-                  id="exampleInputPassword1"
-                  placeholder="Enter Email Address"
-                  required
-                />
-              </div>
-              <div class=" col-lg-5 col-sm-11 my-2   mx-auto ">
-                <input
-                  name="number"
-                  value={number}
-                  onChange={onRegistration}
-                  type="tel"
-                  class="form-control"
-                  id="exampleInputPassword1"
-                  placeholder="Enter Mobile Number"
-                  required
-                />
-              </div>
-              <div class="col-lg-5 col-sm-11 my-2  mx-auto ">
-                <input
-                  onChange={onRegistration}
-                  name="id"
-                  value={id}
-                  type="text"
-                  class="form-control"
-                  id="exampleInputPassword1"
-                  placeholder="Enter Institute ID"
-                  required
-                />
-              </div>
-              <div class="col-lg-11 col-sm-11 my-2  mx-auto ">
-                <input
-                  name="addr"
-                  value={addr}
-                  onChange={onRegistration}
-                  type="text"
-                  class="form-control"
-                  id="exampleInputPassword1"
-                  placeholder="Enter your Address"
-                  required
-                />
-              </div>
-              <div class="col-lg-11 col-sm-11 my-2   mx-auto ">
-                <input
-                  name="suggestedBy"
-                  value={suggestedBy}
-                  onChange={onRegistration}
-                  type="text"
-                  class="form-control"
-                  id="exampleInputPassword1"
-                  placeholder="How did you come to know about us?"
-                  required
-                />
-              </div>
+      <div className="mainSection">
+        <form method="post" action="">
+          <div
+            class="inputFields"
+            style={{ display: "flex", justifyContent: "space-around" }}
+          >
+            <FormControl className="inputField" style={{ width: "40%" }}>
+              <InputLabel htmlFor="my-input">Enter Full Name</InputLabel>
+              <Input
+                name="name"
+                value={name}
+                onChange={onRegistration}
+                type="text"
+                id="my-input"
+                aria-describedby="my-helper-text"
+                required
+              />
+            </FormControl>
+            <FormControl className="inputField" style={{ width: "40%" }}>
+              <InputLabel htmlFor="my-input">Enter Email address</InputLabel>
+              <Input
+                name="email"
+                value={email}
+                onChange={onRegistration}
+                type="email"
+                id="my-input"
+                aria-describedby="my-helper-text"
+                required
+              />
+            </FormControl>
+          </div>
+          <div
+            class="inputFields"
+            style={{ display: "flex", justifyContent: "space-around" }}
+          >
+            <FormControl className="inputField" style={{ width: "40%" }}>
+              <InputLabel htmlFor="my-input">Enter Mobile Number</InputLabel>
+              <Input
+                name="number"
+                value={number}
+                onChange={onRegistration}
+                type="tel"
+                id="my-input"
+                aria-describedby="my-helper-text"
+                required
+              />
+            </FormControl>
+            <FormControl className="inputField" style={{ width: "40%" }}>
+              <InputLabel htmlFor="my-input">Enter Institute ID</InputLabel>
+              <Input
+                name="id"
+                value={id}
+                onChange={onRegistration}
+                type="text"
+                id="my-input"
+                aria-describedby="my-helper-text"
+                required
+              />
+            </FormControl>
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-around" }}>
+            <FormControl className="inputField" style={{ width: "90%" }}>
+              <InputLabel htmlFor="my-input">Enter your Address</InputLabel>
+              <Input
+                name="addr"
+                value={addr}
+                onChange={onRegistration}
+                type="text"
+                id="my-input"
+                aria-describedby="my-helper-text"
+                required
+              />
+            </FormControl>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              marginTop: "1rem",
+            }}
+          >
+            <FormControl className="inputField" style={{ width: "90%" }}>
+              <InputLabel htmlFor="my-input">
+                How did you come to know about us ?
+              </InputLabel>
+              <Input
+                name="suggestedBy"
+                value={suggestedBy}
+                onChange={onRegistration}
+                type="text"
+                id="my-input"
+                aria-describedby="my-helper-text"
+                required
+              />
+            </FormControl>
+          </div>
+          <div class="inputFieldsForDateAndBtn">
+            <div className="">
               <TextField
+                name="date"
+                value={date}
+                onChange={onRegistration}
+                className="datePicker"
+                style={{ width: "40%", marginLeft: "2rem", marginTop: "1rem" }}
                 name="date"
                 value={date}
                 onChange={onRegistration}
@@ -137,23 +164,32 @@ const Registration = () => {
                 label="Attempt Date"
                 type="date"
                 defaultValue="2017-05-24"
-                className={`${classes.textField} my-3`}
+                className={`${classes.textField}`}
                 InputLabelProps={{
                   shrink: true,
                 }}
+                required
               />
-
-              <div className="row">
-                <button
-                  type="submit"
-                  class="btn btn-primary col-3 my-md-2 mt-4 mx-auto"
-                >
-                  Register
-                </button>
-              </div>
             </div>
-          </form>
-        </div>
+            <div className="">
+              <Button
+                className="submit_btn"
+                type="submit"
+                style={{
+                  backgroundColor: " #455ff0",
+                  width: "30%",
+                  alignSelf: "center",
+                  marginTop: "1rem",
+                  marginLeft: "2rem",
+                }}
+                variant="contained"
+                color="primary"
+              >
+                Register
+              </Button>
+            </div>
+          </div>
+        </form>
       </div>
     </>
   );

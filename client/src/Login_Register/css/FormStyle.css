@@ -20,16 +20,15 @@
         height:350px;
         border:1px solid #fff;
         background-color: #ffffff;
-        margin:0rem 0; 
-        padding:0rem 0rem;
+        display:flex;
+        flex-direction:column;
+        justify-content:space-around;
+        flex-wrap:wrap;
     }
     .heading{
         font-size:2rem;
         color:white;
         margin-bottom: 20px;
-    }
-    .form-control,.form-check{
-        font-size:1.1rem;
     }
     .btn{
         font-size:1rem;
@@ -37,4 +36,35 @@
         padding:0.3rem 0.3rem;
         margin-bottom: 0;
         background-color: #0065d1!important;
+    }
+    .inputFields{
+        margin:1rem 0;
+    }
+    .inputFieldsForDateAndBtn{
+        margin-top:1rem;
+    }
+    @media(max-width:900px)
+    {
+        .form{
+            width:80%;
+        }
+        .inputFieldsForDateAndBtn{
+            margin-left: -1rem!important;
+            width: 100%;
+        }
+    }
+    @media(max-width:610px)
+    {
+        .form{
+            width:90%;
+        }
+    }
+    @media(max-width:512px)
+    {
+        .form{
+            width:93%;
+        }
+        .inputField{
+            width:50%;
+        }
     }

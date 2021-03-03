@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FormControl, Input, InputLabel, Button } from "@material-ui/core";
 import "./css/FormStyle.css";
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -15,43 +16,63 @@ const Login = () => {
   };
   return (
     <>
-      <h1 class="heading text-center" style={{ color: "#0065d1" }}>
+      <h1 className="heading" style={{ color: "#0065d1", textAlign: "center" }}>
         Login To your Account
       </h1>
-      <div className="row">
-        <div className="mainSection col-md-9 col-12">
-          <form className="my-5">
-            <div className="row">
-              <div class="mb-3 col-10 my-3 mx-auto ">
-                <input
-                  onChange={onLogin}
+      <div className="mainSection">
+        <form method="post" action="">
+          <div className="">
+            <div style={{ display: "flex", justifyContent: "space-around" }}>
+              <FormControl
+                className="inputField"
+                style={{ width: "90%", marginBottom: "1rem" }}
+              >
+                <InputLabel htmlFor="my-input">Enter Email address</InputLabel>
+                <Input
                   name="email"
                   value={email}
+                  onChange={onLogin}
                   type="email"
-                  class="form-control"
-                  id="exampleInputPassword1"
-                  placeholder="Enter Email Address"
-                  required
+                  id="my-input"
+                  aria-describedby="my-helper-text"
                 />
-              </div>
-              <div class="mb-3 col-10 my-3 mx-auto ">
-                <input
+              </FormControl>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-around" }}>
+              <FormControl
+                className="inputField"
+                style={{ width: "90%", marginTop: "1rem" }}
+              >
+                <InputLabel htmlFor="my-input">Enter Mobile Number</InputLabel>
+                <Input
                   name="number"
                   value={number}
                   onChange={onLogin}
                   type="tel"
-                  class="form-control"
-                  id="exampleInputPassword1"
-                  placeholder="Enter Mobile Number"
-                  required
+                  id="my-input"
+                  aria-describedby="my-helper-text"
                 />
-              </div>
-              <button type="submit" class="btn btn-primary col-3 mt-5 mx-auto">
-                Login
-              </button>
+              </FormControl>
             </div>
-          </form>
-        </div>
+            <div className="" style={{ marginTop: "1rem" }}>
+              <Button
+                className="submit_btn"
+                type="submit"
+                style={{
+                  backgroundColor: " #455ff0",
+                  width: "30%",
+                  alignSelf: "center",
+                  marginTop: "1rem",
+                  marginLeft: "2rem",
+                }}
+                variant="contained"
+                color="primary"
+              >
+                Login
+              </Button>
+            </div>
+          </div>
+        </form>
       </div>
     </>
   );
