@@ -19,9 +19,13 @@
     }
   },
   "lint-staged": {
-    "*": [
+    "src/**/*.ts": [
       "eslint . --ext .ts --fix",
       "prettier --config .prettierrc 'src/**/*.ts' --write"
+    ],
+    "../client/src/**/*.{js,jsx}": [
+      "eslint --config ../client/.eslintrc '../client/**/**/*.{js, jsx}' --fix",
+      "prettier --config ../client/.prettierrc '../client/**/**/*.{js, jsx}' --write"
     ]
   },
   "repository": {

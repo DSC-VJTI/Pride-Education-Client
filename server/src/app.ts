@@ -19,7 +19,7 @@ if (process.env.NODE_ENV !== "test") {
 
 app.use("/api", router);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
   console.log(`Server running at port ${port}`);
