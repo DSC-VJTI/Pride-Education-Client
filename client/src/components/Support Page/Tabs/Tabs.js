@@ -7,9 +7,9 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import SoftwareProblems from './Tabs/PageOne/SoftwareProblems'
-import ProductEnquiry from './Tabs/PageTwo/ProductEnquiry';
-import PersonalDiscussion from './Tabs/PageThree/PersonalDiscussion';
+import SoftwareProblems from './PageOne/SoftwareProblems'
+import ProductEnquiry from './PageTwo/ProductEnquiry';
+import PersonalDiscussion from './PageThree/PersonalDiscussion';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
-import { UseForm, Form } from '../../UseForm';
-import Button from '../../Button'
-import { DatePicker, AppointedTime } from '../../DatePicker';
+import { UseForm, Form } from '../../UI Elements/UseForm';
+import Button from '../../UI Elements/Button'
+import { DatePicker, AppointedTime } from '../../UI Elements/DatePicker';
 
 const getTime = () => {
     var today = new Date();

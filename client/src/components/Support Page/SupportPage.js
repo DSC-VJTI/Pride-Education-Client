@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Tabs from './UI Elements/Tabs'
+import Tabs from './Tabs/Tabs'
 
 
 const useStyles = makeStyles((theme) => ({

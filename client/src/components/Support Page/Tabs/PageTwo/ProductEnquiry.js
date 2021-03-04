@@ -1,9 +1,8 @@
-import React from 'react';
-import { Grid } from '@material-ui/core';
-import { UseForm, Form } from '../../UseForm';
-import { Input, MultiInput } from '../../Input'
-import Button from '../../Button'
-
+import React from 'react'
+import { Grid } from '@material-ui/core'
+import { UseForm, Form } from '../../../UI Elements/UseForm'
+import { Input, MultiInput } from '../../../UI Elements/Input'
+import Button from '../../../UI Elements/Button'
 
 
 const initialFValues = {
@@ -15,7 +14,7 @@ const initialFValues = {
 
 
 
-const SoftwareProblems = () => {
+const ProductEnquiry = () => {
     const { 
         values, 
         setValues, 
@@ -27,7 +26,7 @@ const SoftwareProblems = () => {
         let temp = {}
         temp.mobile = values.mobile.length>9?"":"Enter a valid number"
         temp.whatsapp = values.whatsapp.length>9?"":"Enter a valid number"
-        temp.email = (/$^|.*@.*..*/).test(values.email)?"":"Email is not valid"
+        temp.email = (/$|.*@.*..*/).test(values.email)?"":"Email is not valid"
         temp.query = values.query?"":"This field is required"
         setError({
             ...temp // What is this?
@@ -35,21 +34,19 @@ const SoftwareProblems = () => {
         
         return Object.values(temp).every(x => x === "")
     }
-
+    
     
     
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log("submitted")
         if(validate())
-            console.log("validated")
             window.alert('testing...')
     }
 
     return (
             <Form onSubmit={handleSubmit}>
                 <Grid container>
-                    <Grid item xs={12}>
+                <Grid item xs={12}>
                         <Input 
                             label="Mobile No."
                             name="mobile"
@@ -91,4 +88,4 @@ const SoftwareProblems = () => {
     )
 }
 
-export default SoftwareProblems;
+export default ProductEnquiry;
