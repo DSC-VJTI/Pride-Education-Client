@@ -51,7 +51,6 @@ export const AppointedTime = (props) => {
     })
     return (
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <h4> Please select the time when you're available </h4>
             <KeyboardTimePicker
                 margin="normal"
                 inputVariant="outlined"
