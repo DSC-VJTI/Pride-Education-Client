@@ -2,18 +2,22 @@ import OTPUtil = require("./../utility/otp");
 import User from "./../models/User/User";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import express from "express";
 
 dotenv.config();
 const JWT_AUTH_TOKEN = process.env.JWT_AUTH_TOKEN || "";
 
 const AuthController = {
-  sendOTP(req: any, res) {
+  sendOTP(req: express.Request, res: express.Response): express.Response {
     const [otp, hash] = OTPUtil.generateOtpHash(req.body.email);
     console.log("otp: ", otp); // Change this console.log to a nodemailer/twilio implementation
-    res.send({ hash: hash, email: req.body.email });
+    return res.send({ hash: hash, email: req.body.email });
   },
 
-  async register(req, res) {
+  async register(
+    req: express.Request,
+    res: express.Response
+  ): Promise<express.Response> {
     try {
       const user = await User.create(req.body);
 
@@ -31,12 +35,12 @@ const AuthController = {
         }
       );
 
-      res.status(201).json({
+      return res.status(201).json({
         name: user.name,
         token: token
       });
     } catch (err) {
-      res.status(500).json({
+      return res.status(500).json({
         error: err.message
       });
     }

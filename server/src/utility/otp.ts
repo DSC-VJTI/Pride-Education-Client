@@ -4,8 +4,13 @@ import dotenv from "dotenv";
 dotenv.config();
 const email_key = process.env.EMAIL_KEY || "";
 
+interface verifyOtpReturn {
+  code: number;
+  msg: string;
+}
+
 const OTPUtil = {
-  generateOtpHash(email: string) {
+  generateOtpHash(email: string): [number, string] {
     const otp = Math.floor(100000 + Math.random() * 900000);
     const ttl = 5 * 60 * 1000;
     const expires = Date.now() + ttl;
@@ -19,7 +24,7 @@ const OTPUtil = {
     return [otp, fullHash];
   },
 
-  verifyOTP(email: string, hash: string, otp: string): any {
+  verifyOTP(email: string, hash: string, otp: string): verifyOtpReturn {
     const [hashValue, expires] = hash.split(".");
 
     const now = Date.now();
