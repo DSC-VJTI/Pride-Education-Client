@@ -33,7 +33,7 @@ const AuthController = {
         },
         JWT_AUTH_TOKEN,
         {
-          expiresIn: "1m"
+          expiresIn: "5h"
         }
       );
 
@@ -76,7 +76,7 @@ const AuthController = {
           },
           JWT_AUTH_TOKEN,
           {
-            expiresIn: "1m"
+            expiresIn: "5h"
           }
         );
 
