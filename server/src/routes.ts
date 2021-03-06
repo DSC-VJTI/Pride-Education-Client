@@ -10,7 +10,13 @@ router.get("/", (_, res) => {
 });
 
 //Auth routes
-router.post("/sendOTP", auth.userExists, AuthController.sendOTP);
+router.post(
+  "/sendOtpRegister",
+  auth.userExists("register"),
+  AuthController.sendOTP
+);
 router.post("/register", auth.verifyOTP, AuthController.register);
+router.post("/sendOtpLogin", auth.userExists("login"), AuthController.sendOTP);
+router.post("/login", auth.verifyOTP, AuthController.login);
 
 export default router;

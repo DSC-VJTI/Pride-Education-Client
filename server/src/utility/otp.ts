@@ -29,7 +29,7 @@ const OTPUtil = {
 
     const now = Date.now();
     if (now > parseInt(expires)) {
-      return { code: 400, msg: "Timeout. Please try again" };
+      return { code: 401, msg: "OTP timeout. Please try again" };
     }
     const data = `${email}.${otp}.${expires}`;
     const newCalculatedHash = crypto
