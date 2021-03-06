@@ -3,7 +3,7 @@ import OTPUtil from "./../utility/otp";
 import express from "express";
 import jwt from "jsonwebtoken";
 
-const JWT_AUTH_TOKEN = process.env.JWT_AUTH_TOKEN || "";
+const JWT_AUTH_TOKEN = process.env.JWT_AUTH_TOKEN || "DSC_IS_GREAT";
 
 const auth = {
   // Checks whether user with same email exists, and depending on login/register method sends response

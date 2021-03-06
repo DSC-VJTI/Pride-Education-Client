@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import express from "express";
 import IUser from "src/models/User/IUser";
 
-const JWT_AUTH_TOKEN = process.env.JWT_AUTH_TOKEN || "";
+const JWT_AUTH_TOKEN = process.env.JWT_AUTH_TOKEN || "DSC_IS_GREAT";
 
 const AuthController = {
   // Sends Hash and OTP for login/register routes
