@@ -5,9 +5,7 @@ export const getProducts = async (_: any, res: Response) => {
   try {
     const data = await Product.find({});
 
-    return res
-      .status(200)
-      .json({ data, message: "Successfully found products" });
+    return res.status(201).json({ data });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -19,7 +17,7 @@ export const getProductById = async (req: Request, res: Response) => {
     const data = await Product.findById(id);
 
     if (data) {
-      return res.status(200).json({ data });
+      return res.status(201).json({ data });
     } else {
       return res.status(404).json({ message: "Product doesn't exists" });
     }
