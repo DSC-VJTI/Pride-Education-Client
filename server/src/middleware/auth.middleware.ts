@@ -2,9 +2,7 @@ import User from "./../models/User/User";
 import OTPUtil from "./../utility/otp";
 import express from "express";
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
 
-dotenv.config();
 const JWT_AUTH_TOKEN = process.env.JWT_AUTH_TOKEN || "";
 
 const auth = {
