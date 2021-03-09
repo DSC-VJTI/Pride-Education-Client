@@ -19,10 +19,7 @@ function dbConnect(): void {
   mongoose.connect(connectionString, mongooseOptions);
   mongoose.Promise = global.Promise;
   mongoose.connection.on("open", () => console.log(`MongoDB Connected`));
-  mongoose.connection.on(
-    "error",
-    console.error.bind(console, "Mongo Errordddd")
-  );
+  mongoose.connection.on("error", console.error.bind(console, "Mongo Error"));
 }
 
 export default dbConnect;
