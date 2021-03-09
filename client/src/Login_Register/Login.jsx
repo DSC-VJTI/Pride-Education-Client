@@ -42,13 +42,14 @@ const Login = () => {
       setNumber(value);
     }
   };
+  const onFormSubmit = () => {};
   return (
     <>
       <h1 className="heading" style={{ color: "#0065d1", textAlign: "center" }}>
         Login To your Account
       </h1>
       <div className="mainSection">
-        <form>
+        <form onSubmit={onFormSubmit}>
           <div className="">
             <div style={{ display: "flex", justifyContent: "space-around" }}>
               <FormControl

@@ -126,13 +126,14 @@ const Registration = () => {
       setDate(value);
     }
   };
+  const onFormSubmit = () => {};
   return (
     <>
       <h1 class="heading" style={{ color: "#0065d1", textAlign: "center" }}>
         Sign up for a free account
       </h1>
       <div className="mainSection">
-        <form>
+        <form onSubmit={onFormSubmit}>
           <div
             class="inputFields"
             style={{ display: "flex", justifyContent: "space-around" }}
