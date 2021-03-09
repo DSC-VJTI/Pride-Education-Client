@@ -1,6 +1,6 @@
 import express from "express";
 import AuthController from "./controllers/auth.controller";
-import { getProducts, getProductById } from "./controllers/product.controller";
+import ProductController from "./controllers/product.controller";
 import auth from "./middleware/auth.middleware";
 
 const router = express.Router();
@@ -21,8 +21,8 @@ router.post("/sendOtpLogin", auth.userExists("login"), AuthController.sendOTP);
 router.post("/login", auth.verifyOTP, AuthController.login);
 
 // Product routes
-router.get("/products", getProducts);
-router.get("/products/:id", getProductById);
-router.get("/products/filter/:id", getProductById);
+router.get("/products", ProductController.getProducts);
+router.get("/products/:id", ProductController.getProductById);
+router.get("/products/filter/:id", ProductController.getProductsByFilter);
 
 export default router;
