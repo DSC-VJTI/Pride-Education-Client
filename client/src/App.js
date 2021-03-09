@@ -1,11 +1,11 @@
 import logo from "./logo.svg";
-import FormTabs from "./Login_Register/FormTabs";
+import Login_Register from "./Login_Register/Login_Register";
 import "./App.css";
 
 function App() {
   return (
     <>
-      <FormTabs />
+      <Login_Register />
     </>
   );
 }

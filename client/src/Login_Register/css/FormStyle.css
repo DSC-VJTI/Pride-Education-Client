@@ -17,7 +17,7 @@
      
     .mainSection{
         width:100%;
-        height:350px;
+        height:auto;
         border:1px solid #fff;
         background-color: #ffffff;
         display:flex;
@@ -30,15 +30,8 @@
         color:white;
         margin-bottom: 20px;
     }
-    .btn{
-        font-size:1rem;
-        border-radius:10px;
-        padding:0.3rem 0.3rem;
-        margin-bottom: 0;
-        background-color: #0065d1!important;
-    }
     .inputFields{
-        margin:1rem 0;
+        margin:0.2rem 0;
     }
     .inputFieldsForDateAndBtn{
         margin-top:1rem;

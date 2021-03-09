@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FormTabs() {
+export default function Login_Register() {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);

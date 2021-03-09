@@ -23,28 +23,106 @@ const Registration = () => {
   const [addr, setAddr] = useState("");
   const [suggestedBy, setSuggestedBy] = useState("");
   const [date, setDate] = useState("");
+  //States Used for Validation Starts from Here
+  const [warningNumber, setWarningNumber] = useState("");
+  const [warningEmail, setWarningEmail] = useState("");
+  const [warningName, setWarningName] = useState("");
+  const [warningID, setWarningID] = useState("");
+  const [warningAddr, setWarningAddr] = useState("");
+  const [warningDate, setWarningDate] = useState("");
+  const [warningSuggested, setWarningSuggestedBy] = useState("");
+  const validateNumber = () => {
+    if (number.length !== 10 || isNaN(number)) {
+      setWarningNumber("Please enter a valid mobile number");
+    }
+    if (number.length === 10 && !isNaN(number)) {
+      setWarningNumber("");
+    }
+  };
+  const validateName = () => {
+    if (name.length === 0) {
+      setWarningName("Please enter your name");
+    }
+    if (name.length !== 0) {
+      setWarningName("");
+    }
+  };
+  const validateDate = () => {
+    if (date === "") {
+      setWarningDate("set attempt date");
+    }
+    if (date !== "") {
+      setWarningDate("");
+    }
+  };
+  const validateID = () => {
+    if (id.length === 0) {
+      setWarningID("Please enter  your Institute ID");
+    }
+    if (id.length !== 0) {
+      setWarningID("");
+    }
+  };
+  const validateEmail = () => {
+    if (
+      email.length > 0 &&
+      email.indexOf("@") > -1 &&
+      isNaN(email[0]) &&
+      email.indexOf(".") > -1
+    ) {
+      setWarningEmail("");
+    } else {
+      setWarningEmail("Please enter a valid email Address");
+    }
+  };
+  const validateAddr = () => {
+    if (addr.length === 0) {
+      setWarningAddr("Please enter your address");
+    }
+    if (addr.length !== 0) {
+      setWarningAddr("");
+    }
+  };
+  const validateSuggest = () => {
+    if (suggestedBy.length === 0) {
+      setWarningSuggestedBy("Please tell use who gave use our reference");
+    }
+    if (suggestedBy.length !== 0) {
+      setWarningSuggestedBy("");
+    }
+  };
+  const onBtnClick = (event) => {
+    event.preventDefault();
+    validateNumber();
+    validateName();
+    validateID();
+    validateAddr();
+    validateSuggest();
+    validateDate();
+    validateEmail();
+  };
   const onRegistration = (event) => {
     let name = event.target.name;
     let value = event.target.value;
-    if (name == "name") {
+    if (name === "name") {
       setName(value);
     }
-    if (name == "email") {
+    if (name === "email") {
       setEmail(value);
     }
-    if (name == "number") {
+    if (name === "number") {
       setNumber(value);
     }
-    if (name == "id") {
+    if (name === "id") {
       setID(value);
     }
-    if (name == "addr") {
+    if (name === "addr") {
       setAddr(value);
     }
-    if (name == "suggestedBy") {
+    if (name === "suggestedBy") {
       setSuggestedBy(value);
     }
-    if (name == "date") {
+    if (name === "date") {
       setDate(value);
     }
   };
@@ -54,7 +132,7 @@ const Registration = () => {
         Sign up for a free account
       </h1>
       <div className="mainSection">
-        <form method="post" action="">
+        <form>
           <div
             class="inputFields"
             style={{ display: "flex", justifyContent: "space-around" }}
@@ -68,8 +146,8 @@ const Registration = () => {
                 type="text"
                 id="my-input"
                 aria-describedby="my-helper-text"
-                required
               />
+              <small style={{ color: "red" }}>{warningName}</small>
             </FormControl>
             <FormControl className="inputField" style={{ width: "40%" }}>
               <InputLabel htmlFor="my-input">Enter Email address</InputLabel>
@@ -80,8 +158,8 @@ const Registration = () => {
                 type="email"
                 id="my-input"
                 aria-describedby="my-helper-text"
-                required
               />
+              <small style={{ color: "red" }}>{warningEmail}</small>
             </FormControl>
           </div>
           <div
@@ -94,11 +172,11 @@ const Registration = () => {
                 name="number"
                 value={number}
                 onChange={onRegistration}
-                type="tel"
+                type="text"
                 id="my-input"
                 aria-describedby="my-helper-text"
-                required
               />
+              <small style={{ color: "red" }}>{warningNumber}</small>
             </FormControl>
             <FormControl className="inputField" style={{ width: "40%" }}>
               <InputLabel htmlFor="my-input">Enter Institute ID</InputLabel>
@@ -109,12 +187,15 @@ const Registration = () => {
                 type="text"
                 id="my-input"
                 aria-describedby="my-helper-text"
-                required
               />
+              <small style={{ color: "red" }}>{warningID}</small>
             </FormControl>
           </div>
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <FormControl className="inputField" style={{ width: "90%" }}>
+          <div
+            className="inputField"
+            style={{ display: "flex", justifyContent: "space-around" }}
+          >
+            <FormControl className="inputFields" style={{ width: "90%" }}>
               <InputLabel htmlFor="my-input">Enter your Address</InputLabel>
               <Input
                 name="addr"
@@ -123,18 +204,20 @@ const Registration = () => {
                 type="text"
                 id="my-input"
                 aria-describedby="my-helper-text"
-                required
               />
+              <small style={{ color: "red" }}>{warningAddr}</small>
             </FormControl>
           </div>
           <div
             style={{
               display: "flex",
               justifyContent: "space-around",
-              marginTop: "1rem",
             }}
           >
-            <FormControl className="inputField" style={{ width: "90%" }}>
+            <FormControl
+              className="inputFields"
+              style={{ width: "90%", marginTop: "0.3rem" }}
+            >
               <InputLabel htmlFor="my-input">
                 How did you come to know about us ?
               </InputLabel>
@@ -145,18 +228,21 @@ const Registration = () => {
                 type="text"
                 id="my-input"
                 aria-describedby="my-helper-text"
-                required
               />
+              <small style={{ color: "red" }}>{warningSuggested}</small>
             </FormControl>
           </div>
           <div class="inputFieldsForDateAndBtn">
-            <div className="">
+            <div
+              className=""
+              style={{ display: "flex", flexDirection: "column" }}
+            >
               <TextField
                 name="date"
                 value={date}
                 onChange={onRegistration}
-                className="datePicker"
-                style={{ width: "40%", marginLeft: "2rem", marginTop: "1rem" }}
+                className="datePicker inputFields"
+                style={{ width: "40%", marginLeft: "2rem" }}
                 name="date"
                 value={date}
                 onChange={onRegistration}
@@ -168,18 +254,26 @@ const Registration = () => {
                 InputLabelProps={{
                   shrink: true,
                 }}
-                required
               />
+              <small
+                style={{
+                  color: "red",
+                  marginLeft: "2rem",
+                }}
+              >
+                {warningDate}
+              </small>
             </div>
             <div className="">
               <Button
+                onClick={onBtnClick}
                 className="submit_btn"
                 type="submit"
                 style={{
                   backgroundColor: " #455ff0",
                   width: "30%",
                   alignSelf: "center",
-                  marginTop: "1rem",
+                  marginTop: "1.3rem",
                   marginLeft: "2rem",
                 }}
                 variant="contained"
