@@ -6,6 +6,7 @@ import router from "./routes";
 import dbConnect from "./config/dbconnect";
 
 dotenv.config();
+console.log(process.env.MONGO_URI);
 const app = express();
 
 dbConnect();
@@ -19,7 +20,7 @@ if (process.env.NODE_ENV !== "test") {
 
 app.use("/api", router);
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
   console.log(`Server running at port ${port}`);
