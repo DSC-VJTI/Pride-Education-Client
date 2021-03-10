@@ -17,10 +17,13 @@ app.use(morgan("dev"));
 
 app.use("/api", router);
 
-const port = process.env.PORT || 8000;
+let port = process.env.PORT || 8000;
+if (process.env.NODE_ENV === "test") {
+  port = 8001;
+}
 
-app.listen(port, () => {
+const listen = app.listen(port, () => {
   console.log(`Server running at port ${port}`);
 });
 
-export default app;
+export default listen;
