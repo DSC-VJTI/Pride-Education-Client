@@ -11,6 +11,10 @@ const expect = chai.expect;
 
 describe("Auth tests", () => {
 
+    afterEach((done) => {
+        User.deleteMany().then(() => done());
+    })
+
     describe("Bypassing VerifyOTP middleware", () => {
         const email = "test-email@test.in";
 
@@ -118,106 +122,82 @@ describe("Auth tests", () => {
                 })
 
             });
-
-            it("sends 404 response on email not found", (done) => {
-                chai
-                    .request(app)
-                    .post("/api/login")
-                    .send({ email, otp, hash })
-                    .end((err, res) => {
-                        expect(err).to.be.null;
-                        expect(res.status).to.be.equal(404);
-                        expect(res.body).to.be.an("object");
-                        expect(res.body).to.have.property("error").not.equal("");
-                        done();
-                    });
-            });
         });
 
     })
 
     describe("Bypass userExists middleware", () => {
 
+        describe('/POST sendOtpLogin', () => {
+            it("sends OTP if user email is there", (done) => {
+                let user = new User({
+                    name: 'test user',
+                    email: 'dummy@dsc.com',
+                    mobileNumber: 9874563210,
+                    address: 'Chandni Chowk'
+                });
+                user.save().then((savedUser: IUser) => {
+                    chai
+                        .request(app)
+                        .post("/api/sendOtpLogin")
+                        .send(savedUser)
+                        .end((err, res) => {
+                            expect(err).to.be.null;
+                            expect(res.status).to.be.equal(200);
+                            expect(res.body).to.be.an("object");
+                            expect(res.body).to.have.property("hash").not.equal("");
+                            expect(res.body).to.have.property("email").equal(savedUser.email);
+                            done();
+                        });
+                })
+
+            });
+
+        });
+
+        describe('/POST sendOtpRegister', () => {
+            it("does not send OTP if user email is there", (done) => {
+                let user = new User({
+                    name: 'test user',
+                    email: 'dummy@dsc.com',
+                    mobileNumber: 9874563210,
+                    address: 'Chandni Chowk'
+                });
+                user.save().then((savedUser: IUser) => {
+                    chai
+                        .request(app)
+                        .post("/api/sendOtpRegister")
+                        .send({ email: savedUser.email })
+                        .end((err, res) => {
+                            expect(err).to.be.null;
+                            expect(res.status).to.be.equal(422);
+                            expect(res.body).to.be.an("object");
+                            expect(res.body).to.have.property("error").not.equal("");
+                            done();
+                        });
+                })
+
+            });
+
+
+            it("sends OTP if user email is not there", (done) => {
+                const email = "test@dsc.in";
+                chai
+                    .request(app)
+                    .post("/api/sendOtpRegister")
+                    .send({ email })
+                    .end((err, res) => {
+                        expect(err).to.be.null;
+                        expect(res.status).to.be.equal(200);
+                        expect(res.body).to.be.an("object");
+                        expect(res.body).to.have.property("hash").not.equal("");
+                        expect(res.body).to.have.property("email").equal(email);
+                        done();
+                    });
+
+            });
+
+        });
     })
-    // describe('/POST sendOtpLogin', () => {
 
-    //     before((done) => {
-    //         sandbox = sinon.createSandbox();
-    //         sandbox.stub(auth, "userExists").callsFake((_method) => async (_req, _res, next) => next());
-    //         app = require("../../src/app");
-    //         console.log("User exists OTP");
-    //         done();
-    //     });
-
-    //     after((done) => {
-    //         sandbox.restore();
-    //         done();
-    //     })
-
-    //     it("sends OTP if user email is there", (done) => {
-    //         let user = new User({
-    //             name: 'test user',
-    //             email: 'dummy@dsc.com',
-    //             mobileNumber: 9874563210,
-    //             address: 'Chandni Chowk'
-    //         });
-    //         user.save().then((savedUser: IUser) => {
-    //             chai
-    //                 .request(app)
-    //                 .post("/api/sendOtpLogin")
-    //                 .send(savedUser)
-    //                 .end((err, res) => {
-    //                     expect(err).to.be.null;
-    //                     expect(res.status).to.be.equal(200);
-    //                     expect(res.body).to.be.an("object");
-    //                     expect(res.body).to.have.property("hash").not.equal("");
-    //                     expect(res.body).to.have.property("email").equal(savedUser.email);
-    //                     done();
-    //                 });
-    //         })
-
-    //     });
-
-    // });
-
-    // describe('/POST sendOtpRegister', () => {
-
-    //     before((done) => {
-    //         sandbox = sinon.createSandbox();
-    //         sandbox.stub(auth, "userExists").callsFake((_method) => async (_req, _res, next) => next());
-    //         app = require("../../src/app");
-    //         console.log("User exists OTP");
-    //         done();
-    //     });
-
-    //     after((done) => {
-    //         sandbox.restore();
-    //         done();
-    //     })
-
-    //     it("sends OTP if user email is not there", (done) => {
-    //         let user = new User({
-    //             name: 'test user',
-    //             email: 'dummy@dsc.com',
-    //             mobileNumber: 9874563210,
-    //             address: 'Chandni Chowk'
-    //         });
-    //         user.save().then((savedUser: IUser) => {
-    //             chai
-    //                 .request(app)
-    //                 .post("/api/sendOtpRegister")
-    //                 .send(savedUser)
-    //                 .end((err, res) => {
-    //                     expect(err).to.be.null;
-    //                     expect(res.status).to.be.equal(200);
-    //                     expect(res.body).to.be.an("object");
-    //                     expect(res.body).to.have.property("hash").not.equal("");
-    //                     expect(res.body).to.have.property("email").equal(savedUser.email);
-    //                     done();
-    //                 });
-    //         })
-
-    //     });
-
-    // });
 });

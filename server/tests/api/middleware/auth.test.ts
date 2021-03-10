@@ -34,5 +34,4 @@ describe("middleware/auth tests", () => {
                 });
         });
     })
-
 });
