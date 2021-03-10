@@ -1,7 +1,7 @@
 import express from "express";
 import AuthController from "./controllers/auth.controller";
 import auth from "./middleware/auth.middleware";
-import * as admin from "./controllers/admin.controller";
+import admin from "./controllers/admin.controller";
 const router = express.Router();
 
 // Basic route

@@ -6,8 +6,7 @@ import express from "express";
 const AdminController = {
   async newProduct(
     req: express.Request,
-    res: express.Response,
-    next
+    res: express.Response
   ): Promise<express.Response> {
     try {
       const product = await Product.create({ ...req.body });
@@ -16,8 +15,7 @@ const AdminController = {
         product
       });
     } catch (err) {
-      return next({
-        status: 400,
+      return res.status(500).json({
         message: err.message
       });
     }
@@ -25,8 +23,7 @@ const AdminController = {
 
   async editProduct(
     req: express.Request,
-    res: express.Response,
-    next
+    res: express.Response
   ): Promise<express.Response> {
     try {
       const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
@@ -40,8 +37,7 @@ const AdminController = {
         message: "Product Updated Successfully"
       });
     } catch (err) {
-      return next({
-        status: 400,
+      return res.status(500).json({
         message: err.message
       });
     }
@@ -49,8 +45,7 @@ const AdminController = {
 
   async deleteProduct(
     req: express.Request,
-    res: express.Response,
-    next
+    res: express.Response
   ): Promise<express.Response> {
     try {
       await Product.findByIdAndDelete(req.params.id);
@@ -58,14 +53,13 @@ const AdminController = {
         message: "Successfully Deleted"
       });
     } catch (err) {
-      return next({
-        status: 400,
+      return res.status(500).json({
         message: err.message
       });
     }
   },
 
-  async allUsers(res: express.Response, next): Promise<express.Response> {
+  async allUsers(res: express.Response): Promise<express.Response> {
     try {
       const allUsers = await User.find({});
       return res.status(200).json({
@@ -74,8 +68,7 @@ const AdminController = {
         })
       });
     } catch (err) {
-      return next({
-        status: 400,
+      return res.status(500).json({
         message: err.message
       });
     }

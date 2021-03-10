@@ -6,7 +6,6 @@ import router from "./routes";
 import dbConnect from "./config/dbconnect";
 
 dotenv.config();
-console.log(process.env.MONGO_URI);
 const app = express();
 
 dbConnect();
