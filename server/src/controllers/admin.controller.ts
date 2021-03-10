@@ -10,7 +10,6 @@ const AdminController = {
   ): Promise<express.Response> {
     try {
       const product = await Product.create({ ...req.body });
-      product.save().catch((err) => console.log("Error saving product ", err));
       return res.status(200).json({
         product
       });
@@ -30,10 +29,9 @@ const AdminController = {
         upsert: true,
         new: true
       });
-      product
-        .save()
-        .catch((err) => console.log("Error updating product ", err));
+
       return res.status(200).json({
+        product,
         message: "Product Updated Successfully"
       });
     } catch (err) {
@@ -59,13 +57,11 @@ const AdminController = {
     }
   },
 
-  async allUsers(res: express.Response): Promise<express.Response> {
+  async getUsers(res: express.Response) {
     try {
-      const allUsers = await User.find({});
+      const allUsers = await User.find({}).lean();
       return res.status(200).json({
-        allUsers: allUsers.map((user) => {
-          return user.toObject();
-        })
+        allUsers
       });
     } catch (err) {
       return res.status(500).json({

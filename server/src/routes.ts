@@ -19,9 +19,9 @@ router.post("/register", auth.verifyOTP, AuthController.register);
 router.post("/sendOtpLogin", auth.userExists("login"), AuthController.sendOTP);
 router.post("/login", auth.verifyOTP, AuthController.login);
 
-router.post("/admin/product/", admin.newProduct);
-router.put("/admin/product/:id", admin.editProduct);
-router.delete("/admin/product/:id", admin.deleteProduct);
-router.get("/admin/users", admin.allUsers);
+router.post("/admin/product/:userId", auth.isAdmin, admin.newProduct);
+router.put("/admin/product/:userId/:id", auth.isAdmin, admin.editProduct);
+router.delete("/admin/product/:userId/:id", auth.isAdmin, admin.deleteProduct);
+router.get("/admin/users/:userId", auth.isAdmin, admin.getUsers);
 
 export default router;

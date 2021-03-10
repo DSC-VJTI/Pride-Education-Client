@@ -87,6 +87,38 @@ const auth = {
     } else {
       return res.status(400).json({ err: "Bad request header" });
     }
+  },
+
+  //Middleware to check if the user is admin
+
+  isAdmin(
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ): express.Response | void {
+    if (req.headers.authorization) {
+      const token = req.headers.authorization.split(" ")[1];
+      jwt.verify(
+        token,
+        JWT_AUTH_TOKEN,
+        async (err): Promise<express.Response | void> => {
+          const user = await User.findById(req.params.userId);
+          if (user != null && user.isAdmin == true) {
+            next();
+          } else if (err && err.message === "TokenExpiredError") {
+            return res.status(403).send({
+              success: false,
+              msg: "Access token expired"
+            });
+          } else {
+            console.log(err);
+            return res.status(403).send({ err, msg: "User not an Admin" });
+          }
+        }
+      );
+    } else {
+      return res.status(400).json({ err: "Bad request header" });
+    }
   }
 };
 
