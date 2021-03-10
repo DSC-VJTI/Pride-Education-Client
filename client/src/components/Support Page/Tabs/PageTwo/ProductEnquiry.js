@@ -1,6 +1,6 @@
 import React from 'react'
 import { Grid } from '@material-ui/core'
-import { UseForm, Form } from '../../../UI Elements/UseForm'
+import { useForm, Form } from '../../../UI Elements/UseForm'
 import { Input, MultiInput } from '../../../UI Elements/Input'
 import Button from '../../../UI Elements/Button'
 
@@ -20,7 +20,7 @@ const ProductEnquiry = () => {
         setValues, 
         handleInputChange,
         error,
-        setError } = UseForm(initialFValues);
+        setError } = useForm(initialFValues);
 
     const validate = () => {
         let temp = {}
@@ -29,7 +29,7 @@ const ProductEnquiry = () => {
         temp.email = (/$|.*@.*..*/).test(values.email)?"":"Email is not valid"
         temp.query = values.query?"":"This field is required"
         setError({
-            ...temp // What is this?
+            ...temp
         })
         
         return Object.values(temp).every(x => x === "")
@@ -39,8 +39,7 @@ const ProductEnquiry = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault()
-        if(validate())
-            window.alert('testing...')
+        validate()
     }
 
     return (

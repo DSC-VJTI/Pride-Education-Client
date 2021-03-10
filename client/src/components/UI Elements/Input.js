@@ -11,7 +11,7 @@ export const Input = (props) => {
             name={name}
             value={value}
             onChange={onChange}
-            {...(error && {error:true,helperText:error})} // What is this?
+            {...(error && {error:true,helperText:error})}
         />
     )
 }
@@ -28,7 +28,7 @@ export const MultiInput = (props) => {
             name={name}
             value={value}
             onChange={onChange}
-            {...(error && {error:true,helperText:error})} // What is this?
+            {...(error && {error:true,helperText:error})}
         />
     )
 }

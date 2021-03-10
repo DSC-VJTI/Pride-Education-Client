@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
-import { UseForm, Form } from '../../../UI Elements/UseForm';
+import { useForm, Form } from '../../../UI Elements/UseForm';
 import Button from '../../../UI Elements/Button';
 import { DatePicker, AppointedTime } from '../../../UI Elements/DatePicker';
 
@@ -15,7 +15,7 @@ const PersonalDiscussion = () => {
         values, 
         setValues, 
         handleInputChange,
-        } = UseForm(initialFValues);
+        } = useForm(initialFValues);
     
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -41,7 +41,8 @@ const PersonalDiscussion = () => {
                             variant="contained"
                             color="primary"
                             size="large"
-                            text="submit" />
+                            text="submit"
+                            type="submit" />
                     </Grid>
                 </Grid>
             </Form>

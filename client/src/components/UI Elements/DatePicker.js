@@ -40,8 +40,6 @@ export const DatePicker = (props) => {
 export const AppointedTime = (props) => {
 
     const { name, label, value, onChange } = props
-    console.log(value)
-    const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
 
     const convertToDefEventPara = (name, value) => ({
         

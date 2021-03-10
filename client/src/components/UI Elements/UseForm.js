@@ -4,8 +4,6 @@ import { makeStyles } from '@material-ui/core'
 const useStyles = makeStyles((theme) => (
     {
         root: {
-            // Specifically targets the MuiFormControl-root class
-            // Inspect the form and notice the name of the textfield from the element tag
             '& .MuiFormControl-root': {
                 backgroundColor: '#ffeead',
                 width: '80%',
@@ -16,7 +14,7 @@ const useStyles = makeStyles((theme) => (
     }
 ))
 
-export const UseForm = (initialFValues) => {
+export const useForm = (initialFValues) => {
     const [ values, setValues ] = useState(initialFValues);
     const [ error, setError ] = useState({});
 

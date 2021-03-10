@@ -76,7 +76,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NavTabs() {
   const classes = useStyles();
-  console.log(classes.pageContent)
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -91,7 +90,6 @@ export default function NavTabs() {
           value={value}
           onChange={handleChange}
           aria-label="nav tabs example"
-          // className={classes.tabcolor}
         >
           <LinkTab label="Software Problems" href="/drafts" {...a11yProps(0)} />
           <LinkTab label="Product Enquiry" href="/trash" {...a11yProps(1)} />

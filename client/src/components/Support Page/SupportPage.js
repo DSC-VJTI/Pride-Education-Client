@@ -7,9 +7,6 @@ import Tabs from './Tabs/Tabs'
 const useStyles = makeStyles((theme) => ({
     root: {
         background: '#ffcc5c',
-      // display: 'flex',
-      // flexDirection: 'column',
-      // alignItems: 'center',
       '& > *': {
         margin: theme.spacing(1),
       },
@@ -33,14 +30,12 @@ const SupportPage = () => {
     const classes = useStyles();
 
     return (
-        <div>
-            <Container maxWidth='sm'  >
-              <div className={classes.root}>
-              <Tabs />
-              </div>
-            </Container>
+      <Container maxWidth='sm'>
+        <div className={classes.root}>
+          <Tabs />
         </div>
-        )
+      </Container>
+    )
 }
 
 export default SupportPage
