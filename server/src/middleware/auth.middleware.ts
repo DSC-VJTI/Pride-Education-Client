@@ -76,7 +76,6 @@ const auth = {
               msg: "Access token expired"
             });
           } else {
-            console.log(err);
             return res.status(403).send({ err, msg: "User not authenticated" });
           }
         }
