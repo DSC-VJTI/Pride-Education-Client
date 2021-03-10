@@ -18,20 +18,17 @@ const auth = {
       const email = req.body.email;
 
       const user1 = await User.findOne({ email: email }).lean();
-      let pass = true;
       if (method === "login") {
-        if (user1) pass = true;
-      }
-      if (method === "register") {
-        if (user1) pass = false;
+        if (user1) next();
+        else return res.status(404).json({ error: "Email not found" });
       }
 
-      if (!pass) {
-        res.status(422).json({
-          error: "Email already exists"
-        });
-      } else {
-        next();
+      if (method === "register") {
+        if (user1)
+          return res.status(422).json({
+            error: "Email already exists"
+          });
+        else next();
       }
     };
   },
