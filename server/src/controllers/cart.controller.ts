@@ -7,9 +7,9 @@ const cartController = {
     res: express.Response
   ): Promise<express.Response | void> {
     try {
-      const userId = req.body.user._id;
-      const myCart = await Cart.findById({ userId });
-      return res.status(201).json({ myCart });
+      const { userId } = req.params;
+      const myCart = await Cart.findById({ user: userId });
+      return res.status(200).json({ myCart });
     } catch (err) {
       return res.status(500).json({
         error: err.message
@@ -22,10 +22,12 @@ const cartController = {
     res: express.Response
   ): Promise<express.Response | void> {
     try {
-      const { productId } = req.params;
-      const userId = req.body.user._id;
-      const myCart = (await Cart.findById(userId)) || new Cart();
-      myCart.user = userId;
+      const { userId, productId } = req.params;
+      let myCart;
+      myCart = await Cart.findById({ user: userId });
+      if (!myCart) {
+        myCart = await Cart.create({ user: userId, products: [] });
+      }
       myCart.products.push(productId);
       await myCart.save();
       return res.status(201).json({ myCart });
@@ -41,11 +43,13 @@ const cartController = {
     res: express.Response
   ): Promise<express.Response | void> {
     try {
-      const { productId } = req.params;
-      const userId = req.body.user._id;
-      const myCart = await Cart.findByIdAndUpdate(userId, {
-        $pull: { products: [productId] }
-      });
+      const { userId, productId } = req.params;
+      const myCart = await Cart.findByIdAndUpdate(
+        { user: userId },
+        {
+          $pull: { products: [productId] }
+        }
+      );
       return res.status(201).json({ myCart });
     } catch (err) {
       return res.status(500).json({
