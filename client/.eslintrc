@@ -6,7 +6,6 @@
         "codeFrame": false
     },
     "extends": [
-        "airbnb",
         "prettier"
     ],
     "env": {
