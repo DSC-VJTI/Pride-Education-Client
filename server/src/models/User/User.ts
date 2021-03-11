@@ -9,7 +9,7 @@ const UserSchema: Schema = new Schema({
   field: { type: String },
   level: { type: String },
   reference: { type: String },
-  isAdmin: { type: Boolean, required: true }
+  isAdmin: { type: Boolean, required: true, default: false }
 });
 
 export default model<IUser>("User", UserSchema);
