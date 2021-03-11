@@ -23,7 +23,7 @@ describe("Auth tests", () => {
             [otp, hash] = generateOtpHash(email);
         })
         afterEach((done: Mocha.Done) => {
-            User.remove().then(() => done());
+            User.deleteMany().then(() => done());
         })
 
         describe('/POST register', () => {
@@ -79,7 +79,6 @@ describe("Auth tests", () => {
                     mobileNumber: 9874563210,
                     address: 'Chandni Chowk'
                 });
-                // const app = require("../../src/app");
                 user.save().then((savedUser: IUser) => {
                     chai
                         .request(app)

@@ -13,7 +13,7 @@ dbConnect();
 app.use(express.json({ limit: "10mb" }));
 app.use(cors());
 
-app.use(morgan("dev"));
+app.use(morgan("dev", { skip: () => process.env.NODE_ENV === "test" }));
 
 app.use("/api", router);
 
