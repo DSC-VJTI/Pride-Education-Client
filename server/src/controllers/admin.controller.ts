@@ -57,7 +57,10 @@ const AdminController = {
     }
   },
 
-  async getUsers(res: express.Response): Promise<express.Response | void> {
+  async getUsers(
+    _: express.Request,
+    res: express.Response
+  ): Promise<express.Response | void> {
     try {
       const allUsers = await User.find({}).lean();
       return res.status(200).json({

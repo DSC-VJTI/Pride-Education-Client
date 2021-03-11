@@ -8,7 +8,7 @@ const admin = {
     res: express.Response,
     next: express.NextFunction
   ): Promise<express.Response | void> {
-    const user = await User.findById(req.params.userId);
+    const user = await User.findById(req.body.userId);
     if (user != null && user.isAdmin == true) {
       next();
     } else {

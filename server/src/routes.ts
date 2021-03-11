@@ -2,7 +2,7 @@ import express from "express";
 import AuthController from "./controllers/auth.controller";
 import auth from "./middleware/auth.middleware";
 import admin from "./controllers/admin.controller";
-import adminMinddleware from "./middleware/admin.middleware";
+import adminMiddleware from "./middleware/admin.middleware";
 const router = express.Router();
 
 // Basic route
@@ -21,27 +21,27 @@ router.post("/sendOtpLogin", auth.userExists("login"), AuthController.sendOTP);
 router.post("/login", auth.verifyOTP, AuthController.login);
 
 router.post(
-  "/admin/product/:userId",
+  "/admin/createProduct/",
   auth.isAuthenticated,
-  adminMinddleware.isAdmin,
+  adminMiddleware.isAdmin,
   admin.newProduct
 );
 router.put(
-  "/admin/product/:userId/:id",
+  "/admin/editProduct/:productId",
   auth.isAuthenticated,
-  adminMinddleware.isAdmin,
+  adminMiddleware.isAdmin,
   admin.editProduct
 );
 router.delete(
-  "/admin/product/:userId/:id",
+  "/admin/deleteProduct/:productId",
   auth.isAuthenticated,
-  adminMinddleware.isAdmin,
+  adminMiddleware.isAdmin,
   admin.deleteProduct
 );
-router.get(
-  "/admin/users/:userId",
+router.post(
+  "/admin/getUsers",
   auth.isAuthenticated,
-  adminMinddleware.isAdmin,
+  adminMiddleware.isAdmin,
   admin.getUsers
 );
 
