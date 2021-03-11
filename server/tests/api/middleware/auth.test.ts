@@ -63,6 +63,21 @@ describe("middleware/auth tests", () => {
                         done();
                     })
             })
+        });
+
+        it("returns 404 if user does not exist and wants to login", (done) => {
+            const email = 'test@dsc.in';
+            chai.request(app)
+                .post("/api/sendOtpLogin")
+                .send({ email })
+                .end((err, res) => {
+                    expect(err).to.be.null;
+                    expect(res.status).to.be.equal(404);
+                    expect(res.body).to.be.an("object");
+                    expect(res.body).to.have.property("error").equal("Email not found");
+                    done();
+                })
+
         })
     })
 
