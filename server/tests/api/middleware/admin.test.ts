@@ -4,12 +4,10 @@ import "mocha";
 
 chai.use(chaiHttp);
 const expect = chai.expect;
-
+import jwtHandler from "../../../src/utility/jwt";
 import app from "../../../src/app";
 import IUser from "../../../src/models/User/IUser";
 import User from "../../../src/models/User/User";
-import jwt from "jsonwebtoken";
-const JWT_AUTH_TOKEN = process.env.JWT_AUTH_TOKEN || "DSC_IS_GREAT";
 
 
 describe("middleware/admin tests", () => {
@@ -29,14 +27,7 @@ describe("middleware/admin tests", () => {
             address: "Test adress",
         }).then((savedUser: IUser) => {
             userId = savedUser._id.toString();
-            token = jwt.sign({
-                user: {
-                    _id: savedUser._id,
-                    name: savedUser.name,
-                    email: savedUser.email,
-                    mobileNumber: savedUser.mobileNumber
-                }
-            }, JWT_AUTH_TOKEN, { expiresIn: "5h" });
+            token = jwtHandler.setJwt(savedUser);
             done();
         });
     })
