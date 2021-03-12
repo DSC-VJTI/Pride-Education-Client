@@ -25,10 +25,14 @@ const AdminController = {
     res: express.Response
   ): Promise<express.Response> {
     try {
-      const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
-        upsert: true,
-        new: true
-      });
+      const product = await Product.findByIdAndUpdate(
+        req.params.productId,
+        req.body,
+        {
+          upsert: true,
+          new: true
+        }
+      );
 
       return res.status(200).json({
         product,
@@ -46,7 +50,7 @@ const AdminController = {
     res: express.Response
   ): Promise<express.Response> {
     try {
-      await Product.findByIdAndDelete(req.params.id);
+      await Product.findByIdAndDelete(req.params.porductId);
       return res.status(200).json({
         message: "Successfully Deleted"
       });
