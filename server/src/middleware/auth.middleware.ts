@@ -2,10 +2,8 @@ import User from "./../models/User/User";
 import OTPUtil from "./../utility/otp";
 import express from "express";
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
 
-dotenv.config();
-const JWT_AUTH_TOKEN = process.env.JWT_AUTH_TOKEN || "";
+const JWT_AUTH_TOKEN = process.env.JWT_AUTH_TOKEN || "DSC_IS_GREAT";
 
 const auth = {
   // Checks whether user with same email exists, and depending on login/register method sends response
@@ -18,20 +16,17 @@ const auth = {
       const email = req.body.email;
 
       const user1 = await User.findOne({ email: email }).lean();
-      let pass = true;
       if (method === "login") {
-        if (user1) pass = true;
-      }
-      if (method === "register") {
-        if (user1) pass = false;
+        if (user1) next();
+        else return res.status(404).json({ error: "Email not found" });
       }
 
-      if (!pass) {
-        res.status(422).json({
-          error: "Email already exists"
-        });
-      } else {
-        next();
+      if (method === "register") {
+        if (user1)
+          return res.status(422).json({
+            error: "Email already exists"
+          });
+        else next();
       }
     };
   },
@@ -79,7 +74,6 @@ const auth = {
               msg: "Access token expired"
             });
           } else {
-            console.log(err);
             return res.status(403).send({ err, msg: "User not authenticated" });
           }
         }

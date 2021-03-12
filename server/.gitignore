@@ -1,3 +1,4 @@
 /node_modules
 .env
 /compiled
+.nyc_output
