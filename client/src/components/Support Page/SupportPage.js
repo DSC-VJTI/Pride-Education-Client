@@ -38,4 +38,4 @@ const SupportPage = () => {
     )
 }
 
-export default SupportPage
+export default SupportPage;
