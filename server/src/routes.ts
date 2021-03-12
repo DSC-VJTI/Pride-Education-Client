@@ -21,7 +21,7 @@ router.post("/sendOtpLogin", auth.userExists("login"), AuthController.sendOTP);
 router.post("/login", auth.verifyOTP, AuthController.login);
 
 //cart routes
-router.get("/cart", CartController.showCart);
+router.post("/cart", CartController.showCart);
 router.post("/cart/:productId", CartController.addToCart);
 router.delete("/cart/:productId", CartController.removeFromCart);
 
