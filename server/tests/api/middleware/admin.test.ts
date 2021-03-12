@@ -39,10 +39,10 @@ describe("middleware/admin tests", () => {
             .set('Authorization', `Bearer ${token}`)
             .send({ userId })
             .end((err, res) => {
-                console.log(res.body)
                 expect(err).to.be.null;
                 expect(res.status).to.be.equal(403);
                 expect(res.body).to.be.an("object");
+                expect(res.body).to.have.property("error").equal("User not an Admin")
                 done();
             });
     })

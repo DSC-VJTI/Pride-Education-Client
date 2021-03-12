@@ -70,7 +70,7 @@ const auth = {
         });
       }
     } else {
-      return res.status(400).json({ err: "Bad request header" });
+      return res.status(400).json({ error: "Bad request header" });
     }
   }
 };

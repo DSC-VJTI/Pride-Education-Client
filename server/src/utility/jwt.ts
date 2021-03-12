@@ -4,12 +4,13 @@ const JWT_AUTH_TOKEN = process.env.JWT_AUTH_TOKEN || "DSC_IS_GREAT";
 
 export interface IJWTResponse {
   success: boolean;
-  jwtPayload?: IUser;
+  /* eslint-disable-next-line */
+  jwtPayload?: any;
   error?: string;
 }
 
 const jwtHandler = {
-  setJwt(user: IUser): string {
+  setJwt(user: IUser, expiresIn: string | number = "5h"): string {
     const token = jwt.sign(
       {
         user: {
@@ -21,20 +22,21 @@ const jwtHandler = {
       },
       JWT_AUTH_TOKEN,
       {
-        expiresIn: "5h"
+        expiresIn
       }
     );
     return token;
   },
 
   verifyJWT(token: string): IJWTResponse {
-    jwt.verify(token, JWT_AUTH_TOKEN, async (err, user) => {
-      if (user) {
-        return {
-          success: true,
-          jwtPayload: user
-        };
-      } else if (err && err.message === "TokenExpiredError") {
+    try {
+      const user = jwt.verify(token, JWT_AUTH_TOKEN);
+      return {
+        success: true,
+        jwtPayload: user
+      };
+    } catch (error) {
+      if (error instanceof jwt.TokenExpiredError) {
         return {
           success: false,
           error: "Access Token Expired"
@@ -45,11 +47,7 @@ const jwtHandler = {
           error: "User not authenticated"
         };
       }
-    });
-    return {
-      success: false,
-      error: "Panic: Undetectable state reached"
-    };
+    }
   }
 };
 
