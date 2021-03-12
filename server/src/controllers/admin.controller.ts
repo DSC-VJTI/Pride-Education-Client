@@ -50,7 +50,7 @@ const AdminController = {
     res: express.Response
   ): Promise<express.Response> {
     try {
-      await Product.findByIdAndDelete(req.params.porductId);
+      await Product.findByIdAndDelete(req.params.productId);
       return res.status(200).json({
         message: "Successfully Deleted"
       });
