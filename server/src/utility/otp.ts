@@ -39,7 +39,6 @@ const OTPUtil = {
     if (newCalculatedHash === hashValue) {
       return { code: 200, msg: "OTP verified" };
     } else {
-      console.log("not authenticated");
       return { code: 401, msg: "Incorrect OTP" };
     }
   }

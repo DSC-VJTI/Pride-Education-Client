@@ -8,4 +8,5 @@ export default interface IUser extends Document {
   field: string;
   level: string;
   reference: string;
+  isAdmin: boolean;
 }
