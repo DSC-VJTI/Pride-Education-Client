@@ -1,0 +1,54 @@
+#heroSection {
+  display: grid;
+  place-items: center;
+  background-image: url("./../../assets/images/landingImages/hero.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  text-align: center;
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+}
+.whiteText {
+  color: #ffffff;
+}
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0px auto;
+  overflow: hidden;
+}
+.centerText {
+  text-align: center;
+}
+
+#aboutSection {
+  background-color: #115293;
+}
+.grid {
+  display: grid;
+
+  align-items: center;
+  justify-content: center;
+}
+.twoCols {
+  grid-template-columns: repeat(2, 1fr);
+}
+.mkresponsive {
+  width: 100%;
+  height: 100%;
+}
+.addMarginTop {
+  margin-top: 40px;
+}
+#CardCarousel {
+  width: 100%;
+}
+@media (max-width: 700px) {
+  .twoCols {
+    grid-template-columns: 1fr;
+  }
+  .hideOnMobile {
+    display: none;
+  }
+}
