@@ -101,6 +101,7 @@ const Registration = () => {
     validateDate();
     validateEmail();
   };
+
   const onRegistration = (event) => {
     let name = event.target.name;
     let value = event.target.value;
@@ -126,6 +127,7 @@ const Registration = () => {
       setDate(value);
     }
   };
+
   const onFormSubmit = () => {};
   return (
     <>
