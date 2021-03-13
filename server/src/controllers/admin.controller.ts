@@ -15,7 +15,7 @@ const AdminController = {
       });
     } catch (err) {
       return res.status(500).json({
-        error: err.message
+        message: err.message
       });
     }
   },
@@ -25,19 +25,25 @@ const AdminController = {
     res: express.Response
   ): Promise<express.Response> {
     try {
-      const product = await Product.findByIdAndUpdate(
-        req.params.productId,
-        req.body,
-        {
-          upsert: true,
-          new: true
-        }
-      );
-
-      return res.status(200).json({
-        product,
-        message: "Product Updated Successfully"
+      const doesProductExist = await Product.exists({
+        _id: req.params.productId
       });
+      if (doesProductExist) {
+        const product = await Product.findByIdAndUpdate(
+          req.params.productId,
+          req.body,
+          {
+            upsert: true,
+            new: true
+          }
+        );
+        return res.status(200).json({
+          product,
+          message: "Product Updated Successfully"
+        });
+      } else {
+        return res.status(404).json({ message: "Invalid Product ID" });
+      }
     } catch (err) {
       return res.status(500).json({
         message: err.message
@@ -50,10 +56,17 @@ const AdminController = {
     res: express.Response
   ): Promise<express.Response> {
     try {
-      await Product.findByIdAndDelete(req.params.productId);
-      return res.status(200).json({
-        message: "Successfully Deleted"
+      const doesProductExist = await Product.exists({
+        _id: req.params.productId
       });
+      if (doesProductExist) {
+        await Product.findByIdAndDelete(req.params.productId);
+        return res.status(200).json({
+          message: "Successfully Deleted"
+        });
+      } else {
+        return res.status(404).json({ message: "Invalid Product ID" });
+      }
     } catch (err) {
       return res.status(500).json({
         message: err.message
