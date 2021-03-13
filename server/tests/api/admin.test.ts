@@ -4,199 +4,105 @@ import "mocha";
 import User from "../../src/models/User/User";
 import IUser from "../../src/models/User/IUser";
 import app from "../../src/app";
-import { generateOtpHash } from "../../src/utility/otp";
+// import { generateOtpHash } from "../../src/utility/otp";
+// import IProduct from "../../src/models/Product/IProduct";
+import Product from "../../src/models/Product/Product";
+import jwtHandler from "../../src/utility/jwt";
 
 chai.use(chaiHttp);
 const expect = chai.expect;
 
-describe("Auth tests", () => {
+describe("Admin tests", () => {
+
+    // let product: IProduct;
+    // let user: IUser;
+    let token: string, userId: string;
+    const productToSave = {
+        name: "Test product name",
+        type: "CA",
+        price: 768,
+        discount: 50,
+        courseDetails: {
+            level: "Basic",
+            subject: "Engineering Maths",
+            faculty: "Test faculty",
+            subtype: "Test subtype",
+            language: "Any language",
+            duration: 3600,
+            validity: 2500,
+            mode: "Online",
+            date: new Date(),
+        }
+    };
+
+    beforeEach((done) => {
+        User.create({
+            name: "test name",
+            email: "test-emal@dsc.in",
+            mobileNumber: 1236547890,
+            address: "Test adress",
+            isAdmin: true
+        }).then((savedUser: IUser) => {
+            // user = savedUser;
+            userId = savedUser._id.toString();
+            token = jwtHandler.setJwt(savedUser);
+            done();
+        });
+    })
 
     afterEach((done) => {
         User.deleteMany().then(() => done());
-    })
+    });
 
-    describe("Bypassing VerifyOTP middleware", () => {
-        const email = "test-email@test.in";
+    afterEach((done) => {
+        Product.deleteMany().then(() => done());
+    });
 
-        let otp: number, hash: string;
-        beforeEach(() => {
-            [otp, hash] = generateOtpHash(email);
-        })
-        afterEach((done: Mocha.Done) => {
-            User.deleteMany().then(() => done());
-        })
-
-        describe('/POST register', () => {
-
-            it("adds user on successful register", (done) => {
-                let user = {
-                    name: 'test user',
-                    email: email,
-                    mobileNumber: 9874563210,
-                    address: 'Chandni Chowk'
-                };
-                const body = { ...user, otp, hash };
-                chai
-                    .request(app)
-                    .post("/api/register")
-                    .send(body)
-                    .end((err, res) => {
-                        expect(err).to.be.null;
-                        expect(res.status).to.be.equal(201);
-                        expect(res.body).to.be.an("object");
-                        expect(res.body).to.have.property("name").equal(user.name);
-                        expect(res.body).to.have.property("token").not.equal("");
-                        done();
-                    });
-            });
-
-            it("sends 500 response on incomplete fields", (done) => {
-                const user = {
-                    name: 'test user',
-                    email,
-                    address: 'Chandni Chowk'
-                };
-                const body = { ...user, otp, hash };
-                chai
-                    .request(app)
-                    .post("/api/register")
-                    .send(body)
-                    .end((err, res) => {
-                        expect(err).to.be.null;
-                        expect(res.status).to.be.equal(500);
-                        expect(res.body).to.be.an("object");
-                        expect(res.body).to.have.property("error").not.equal("");
-                        done();
-                    });
-            });
-        })
-
-        describe('/POST login', () => {
-            it("logs in user correctly if user email is there", (done) => {
-                let user = new User({
-                    name: 'test user',
-                    email,
-                    mobileNumber: 9874563210,
-                    address: 'Chandni Chowk'
+    describe("POST /admin/createProduct/", () => {
+        it("creates a product when all details are given", (done) => {
+            chai
+                .request(app)
+                .post("/api/admin/createProduct")
+                .set('Authorization', `Bearer ${token}`)
+                .send({ userId, ...productToSave })
+                .end((err, res) => {
+                    expect(err).to.be.null;
+                    expect(res.status).to.be.equal(201);
+                    expect(res.body).to.be.an("object");
+                    expect(res.body).to.have.property("product");
+                    done();
                 });
-                user.save().then((savedUser: IUser) => {
-                    chai
-                        .request(app)
-                        .post("/api/login")
-                        .send({ email: savedUser.email, otp, hash })
-                        .end((err, res) => {
-                            expect(err).to.be.null;
-                            expect(res.status).to.be.equal(201);
-                            expect(res.body).to.be.an("object");
-                            expect(res.body).to.have.property("user");
-                            expect(res.body).to.have.property("token").not.equal("");
-                            done();
-                        });
-                })
-
-            });
-
-            it("has all desired fields", (done) => {
-                let user = new User({
-                    name: 'test user',
-                    email,
-                    mobileNumber: 9874563210,
-                    address: 'Chandni Chowk'
-                });
-                user.save().then((savedUser: IUser) => {
-                    chai
-                        .request(app)
-                        .post("/api/login")
-                        .send({ email: savedUser.email, otp, hash })
-                        .end((err, res) => {
-                            expect(err).to.be.null;
-                            expect(res.status).to.be.equal(201);
-                            expect(res.body).to.be.an("object");
-                            expect(res.body.user).to.have.property("_id").equal(savedUser._id.toString());
-                            expect(res.body.user).to.have.property("name").equal(savedUser.name);
-                            expect(res.body.user).to.have.property("email").equal(savedUser.email);
-                            expect(res.body.user).to.have.property("mobileNumber").equal(savedUser.mobileNumber);
-                            done();
-                        });
-                })
-
-            });
         });
 
-    })
-
-    describe("Bypass userExists middleware", () => {
-
-        describe('/POST sendOtpLogin', () => {
-            it("sends OTP if user email is there", (done) => {
-                let user = new User({
-                    name: 'test user',
-                    email: 'dummy@dsc.com',
-                    mobileNumber: 9874563210,
-                    address: 'Chandni Chowk'
+        it("returns 500 when all details are not given", (done) => {
+            const incompleteProduct = {
+                name: "Test product name",
+                type: "CA",
+                discount: 50,
+                courseDetails: {
+                    level: "Basic",
+                    subject: "Engineering Maths",
+                    faculty: "Test faculty",
+                    subtype: "Test subtype",
+                    language: "Any language",
+                    duration: 3600,
+                    validity: 2500,
+                    mode: "Online",
+                    date: new Date(),
+                }
+            };
+            chai
+                .request(app)
+                .post("/api/admin/createProduct")
+                .set('Authorization', `Bearer ${token}`)
+                .send({ userId, ...incompleteProduct })
+                .end((err, res) => {
+                    expect(err).to.be.null;
+                    expect(res.status).to.be.equal(500);
+                    expect(res.body).to.be.an("object");
+                    expect(res.body).to.have.property("error").not.equal("");
+                    done();
                 });
-                user.save().then((savedUser: IUser) => {
-                    chai
-                        .request(app)
-                        .post("/api/sendOtpLogin")
-                        .send(savedUser)
-                        .end((err, res) => {
-                            expect(err).to.be.null;
-                            expect(res.status).to.be.equal(200);
-                            expect(res.body).to.be.an("object");
-                            expect(res.body).to.have.property("hash").not.equal("");
-                            expect(res.body).to.have.property("email").equal(savedUser.email);
-                            done();
-                        });
-                })
-
-            });
-
-        });
-
-        describe('/POST sendOtpRegister', () => {
-            it("does not send OTP if user email is there", (done) => {
-                let user = new User({
-                    name: 'test user',
-                    email: 'dummy@dsc.com',
-                    mobileNumber: 9874563210,
-                    address: 'Chandni Chowk'
-                });
-                user.save().then((savedUser: IUser) => {
-                    chai
-                        .request(app)
-                        .post("/api/sendOtpRegister")
-                        .send({ email: savedUser.email })
-                        .end((err, res) => {
-                            expect(err).to.be.null;
-                            expect(res.status).to.be.equal(422);
-                            expect(res.body).to.be.an("object");
-                            expect(res.body).to.have.property("error").not.equal("");
-                            done();
-                        });
-                })
-
-            });
-
-
-            it("sends OTP if user email is not there", (done) => {
-                const email = "test@dsc.in";
-                chai
-                    .request(app)
-                    .post("/api/sendOtpRegister")
-                    .send({ email })
-                    .end((err, res) => {
-                        expect(err).to.be.null;
-                        expect(res.status).to.be.equal(200);
-                        expect(res.body).to.be.an("object");
-                        expect(res.body).to.have.property("hash").not.equal("");
-                        expect(res.body).to.have.property("email").equal(email);
-                        done();
-                    });
-
-            });
-
         });
     })
-
 });

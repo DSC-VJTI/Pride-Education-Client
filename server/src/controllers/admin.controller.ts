@@ -10,12 +10,12 @@ const AdminController = {
   ): Promise<express.Response> {
     try {
       const product = await Product.create({ ...req.body });
-      return res.status(200).json({
+      return res.status(201).json({
         product
       });
     } catch (err) {
       return res.status(500).json({
-        message: err.message
+        error: err.message
       });
     }
   },
