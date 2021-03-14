@@ -1,15 +1,15 @@
-import Paper from '@material-ui/core/Paper';
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import SoftwareProblems from './PageOne/SoftwareProblems'
-import ProductEnquiry from './PageTwo/ProductEnquiry';
-import PersonalDiscussion from './PageThree/PersonalDiscussion';
+import Paper from "@material-ui/core/Paper";
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import SoftwareProblems from "./PageOne/SoftwareProblems";
+import ProductEnquiry from "./PageTwo/ProductEnquiry";
+import PersonalDiscussion from "./PageThree/PersonalDiscussion";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -34,13 +34,13 @@ function TabPanel(props) {
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired
 };
 
 function a11yProps(index) {
   return {
     id: `nav-tab-${index}`,
-    'aria-controls': `nav-tabpanel-${index}`,
+    "aria-controls": `nav-tabpanel-${index}`
   };
 }
 
@@ -60,25 +60,42 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
-    border: '5px solid #ffcc5c'
+    border: "5px solid #ffcc5c"
   },
   tabcolor: {
-    background: '#ff6f69',
+    background: "#ff6f69"
   },
   tabpanel: {
-    background: '#ffeead'
+    background: "#ffeead"
   },
   pageContent: {
-    background: '#ffeead',
-    border: '1px solid #ffcc5c'
+    background: "#ffeead",
+    border: "1px solid #ffcc5c"
   }
 }));
 
-export default function NavTabs() {
+export default function NavTabs(props) {
+  const { match, history } = props;
+  const { params } = match;
+  const { page } = params;
+
+  const tabNameToIndex = {
+    0: "software",
+    1: "product",
+    2: "personal"
+  };
+
+  const indexToTabName = {
+    "software": 0,
+    "product": 1,
+    "personal": 2,
+  };
+
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(indexToTabName[page]);
 
   const handleChange = (event, newValue) => {
+    history.push(`/support/${tabNameToIndex[newValue]}`)
     setValue(newValue);
   };
 
@@ -97,25 +114,23 @@ export default function NavTabs() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0} className={classes.tabpanel}>
-        <Paper className={classes.pageContent} width='100%'>
-            {/* Imported from PageOne */}
-            <SoftwareProblems /> 
+        <Paper className={classes.pageContent} width="100%">
+          {/* Imported from PageOne */}
+          <SoftwareProblems />
         </Paper>
       </TabPanel>
       <TabPanel value={value} index={1} className={classes.tabpanel}>
-        <Paper className={classes.pageContent} width='100%'>
+        <Paper className={classes.pageContent} width="100%">
           {/* Imported from PageTwo */}
-          <ProductEnquiry /> 
+          <ProductEnquiry />
         </Paper>
       </TabPanel>
       <TabPanel value={value} index={2} className={classes.tabpanel}>
-        <Paper className={classes.pageContent} width='100%'>
+        <Paper className={classes.pageContent} width="100%">
           {/* Imported from PageTwo */}
-          <PersonalDiscussion /> 
+          <PersonalDiscussion />
         </Paper>
       </TabPanel>
     </div>
   );
 }
-
-
