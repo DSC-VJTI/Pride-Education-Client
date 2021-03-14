@@ -204,7 +204,6 @@ describe("Admin tests", () => {
                     }))
                 }
                 await User.insertMany(users);
-                console.log(await User.find({}));
             } catch (error) {
                 console.log(error);
             }
