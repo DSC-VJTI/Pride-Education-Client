@@ -15,11 +15,11 @@ import {
 
 const ComboBoxStyles = makeStyles({
   ClassesBox: {
-    background: "#90caf9",
-    width: "20rem",
-    padding: "10px",
+    background: "#3f51b5",
+    width: "40vw",
+    padding: "1vw 1vh",
     borderRadius: "1rem 0",
-    margin: "15px 5%",
+    margin: "2vh 5%",
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "space-around"
@@ -28,13 +28,13 @@ const ComboBoxStyles = makeStyles({
     background: "#e3f2fd",
     width: "fit-content",
     borderRadius: "8px",
+    margin:"auto",
   },
   title: {
-    margin: "10px",
-    color: "#283593",
+    margin: "auto",
+    color: "#ffffff",
     fontWeight: "800",
-    width: "fit-content"
-  },
+  }
 });
 
 
@@ -62,7 +62,7 @@ const ComboBox = ({course, CoursesList}) => {
               key={option.value}
               value={option.value}
               style={{
-                width:"5rem"
+                width:"5rem",
               }}
             >
               {option.label}

@@ -4,11 +4,12 @@ import ReactElasticCarousel from "react-elastic-carousel/dist/index";
 import Product from "./Product";
 import ComboBox from "./ComboBox";
 
+
 const ClassPaneStyles = makeStyles({
   slider: {
-    backgroundColor: "#90caf9",
+    backgroundColor: "#3f51b5",
     padding: "2rem",
-    width: "90%",
+    width: "90vw",
     margin: "auto",
     boxSizing: "border-box",
     borderRadius: "1rem",
@@ -27,12 +28,14 @@ const ClassPane = ({ Course, CoursesList }) => {
   return (
     <div>
       <ComboBox course={Course} CoursesList={CoursesList} />
-      <ReactElasticCarousel
-        breakPoints={breakPoints}
-        className={classes.slider}
-      >
-      {CoursesList.map(()=> <Product></Product>)}
-      </ReactElasticCarousel>
+        <ReactElasticCarousel
+          breakPoints={breakPoints}
+          className={classes.slider}
+        >
+          {CoursesList.map(() => (
+            <Product></Product>
+          ))}
+        </ReactElasticCarousel>
     </div>
   );
 };

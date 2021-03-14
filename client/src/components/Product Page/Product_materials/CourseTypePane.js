@@ -26,9 +26,6 @@ const mainPaneStyles = makeStyles({
     color: "white",
     boxShadow: "3px 3px #1c87e5"
   },
-  Enroll: {
-    background: "lightgrey"
-  }
 });
 
 const CourseTypePane = ({ Course, CourseContent }) => {

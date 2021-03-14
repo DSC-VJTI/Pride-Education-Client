@@ -29,7 +29,7 @@ const Navbar = () => {
           <Button color="inherit" className="hideOnMobile" href="/support">
             Support
           </Button>
-          <Button color="inherit" className="hideOnMobile">
+          <Button color="inherit" className="hideOnMobile" href="/classes">
             MarketPlace
           </Button>
           <Button color="inherit" className="hideOnMobile" href="/login">

@@ -4,7 +4,6 @@ import { makeStyles} from "@material-ui/core";
 
 const ClassesPaneStyles = makeStyles({
   root: {
-    background: "#42a5f4",
     margin:"0px",
     padding:"2% 5%"
   }
@@ -35,7 +34,7 @@ export default function ClassesPane() {
   return (
     <div className={classes.root}>
       {courseTypes.map((course) => (
-        <ClassPane Course={course.title} CoursesList={CoursesList} />
+          <ClassPane Course={course.title} CoursesList={CoursesList} />
       ))}
     </div>
   );
