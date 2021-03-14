@@ -40,21 +40,27 @@ function CoursePage() {
         { id: 4, Material: "Love Charts" }
       ]
     },
-    { title: "CHAPTER WISE CLASSES",
+    {
+      title: "CHAPTER WISE CLASSES",
       courseList: [
-      { id: 1, Material: "Question Bank" },
-      { id: 2, Material: "Hand Written Answer Book" },
-      { id: 3, Material: "Master Stroke Book" },
-      { id: 4, Material: "Love Charts" }
-    ] }
+        { id: 1, Material: "Question Bank" },
+        { id: 2, Material: "Hand Written Answer Book" },
+        { id: 3, Material: "Master Stroke Book" },
+        { id: 4, Material: "Love Charts" }
+      ]
+    }
   ];
 
   const classes = CoursePageStyles();
   return (
     <div className={classes.root}>
-      <CoursePageHeader />
+      <div data-aos="fade-right">
+        <CoursePageHeader />
+      </div>
       {TypeList.map((type) => (
-        <CourseTypePane Course={type.title} CourseContent = {type.courseList}/>
+        <div data-aos="zoom-in-up">
+          <CourseTypePane Course={type.title} CourseContent={type.courseList} />
+        </div>
       ))}
     </div>
   );

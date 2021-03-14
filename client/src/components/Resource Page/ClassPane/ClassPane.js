@@ -27,15 +27,21 @@ const ClassPane = ({ Course, CoursesList }) => {
   const classes = ClassPaneStyles();
   return (
     <div>
-      <ComboBox course={Course} CoursesList={CoursesList} />
+      <div data-aos="fade-left">
+        <ComboBox course={Course} CoursesList={CoursesList} />
+      </div>
+      <div data-aos="fade-up">
         <ReactElasticCarousel
           breakPoints={breakPoints}
           className={classes.slider}
         >
           {CoursesList.map(() => (
-            <Product></Product>
+            <div data-aos="flip-right">
+              <Product></Product>
+            </div>
           ))}
         </ReactElasticCarousel>
+      </div>
     </div>
   );
 };

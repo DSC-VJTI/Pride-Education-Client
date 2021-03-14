@@ -9,6 +9,7 @@ import SupportPage from "./components/Support Page/SupportPage";
 import Login from "./components/LoginRegister/Login";
 import Registration from "./components/LoginRegister/Registration";
 import LoginRegister from "./components/LoginRegister/LoginRegister";
+import Cart from "./components/Cart/Cart"
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
@@ -21,8 +22,8 @@ function App() {
     <Router>
       <Navbar />
       <Switch>
-
         <Route path="/classes" component={ClassesPane} />
+        <Route path="/cart" component={Cart} />
         <Route path="/product" component={CoursePage} />
         <Route path="/support" component={SupportPage} />
         <Route path="/login" component={Login} />

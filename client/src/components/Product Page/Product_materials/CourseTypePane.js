@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import { makeStyles } from "@material-ui/core";
 import ReactPlayer from "react-player";
 import CourseContents from "./CourseContents";
@@ -25,14 +25,18 @@ const mainPaneStyles = makeStyles({
     justifyContent: "center",
     color: "white",
     boxShadow: "3px 3px #1c87e5"
-  },
+  }
 });
 
 const CourseTypePane = ({ Course, CourseContent }) => {
   const classes = mainPaneStyles();
   return (
     <div>
-      <h2 className={classes.CourseType}>{Course}</h2>
+      <div >
+      <h2 className={classes.CourseType}>
+        {Course}
+      </h2>
+      </div>
       <div className={classes.mainHolder}>
         <ReactPlayer
           url="https://www.youtube.com/watch?v=UVCP4bKy9Iw"

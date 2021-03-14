@@ -59,7 +59,7 @@ const CourseListStyles = makeStyles((theme) => ({
     color: "white",
     margin: "1rem auto",
     borderRadius: "2rem",
-    border:"1px outset",
+    border: "1px outset",
     width: "12rem"
   }
 }));
@@ -72,26 +72,30 @@ function CourseContents({ Content }) {
       <Typography className={classes.Duration}>
         Duration: Will be passed through props
       </Typography>
-      <List
-        subheader={
-          <ListSubheader className={classes.ListSubBack}>
-            Course Material
-          </ListSubheader>
-        }
-        className={classes.CourseContentList}
-      >
-        {Content.map((course) => (
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar className={`${classes.smallAvatar} ${classes.blue}`}>
-                <ImageIcon className={classes.fontSizeIcon} />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary={course.Material} />
-          </ListItem>
-        ))}
-      </List>
-      <Button className={classes.Enroll}>Enroll Now!!</Button>
+      <div data-aos="flip-right">
+        <List
+          subheader={
+            <ListSubheader className={classes.ListSubBack}>
+              Course Material
+            </ListSubheader>
+          }
+          className={classes.CourseContentList}
+        >
+          {Content.map((course) => (
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar className={`${classes.smallAvatar} ${classes.blue}`}>
+                  <ImageIcon className={classes.fontSizeIcon} />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary={course.Material} />
+            </ListItem>
+          ))}
+        </List>
+      </div>
+      <Button className={classes.Enroll} href="/cart">
+        Enroll Now!!
+      </Button>
     </div>
   );
 }
