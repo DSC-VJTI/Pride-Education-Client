@@ -1,9 +1,7 @@
 import User from "./../models/User/User";
 import OTPUtil from "./../utility/otp";
 import express from "express";
-import jwt from "jsonwebtoken";
-
-const JWT_AUTH_TOKEN = process.env.JWT_AUTH_TOKEN || "DSC_IS_GREAT";
+import jwtHandler, { IJWTResponse } from "../utility/jwt";
 
 const auth = {
   // Checks whether user with same email exists, and depending on login/register method sends response
@@ -60,26 +58,19 @@ const auth = {
   ): express.Response | void {
     if (req.headers.authorization) {
       const token = req.headers.authorization.split(" ")[1];
-
-      jwt.verify(
-        token,
-        JWT_AUTH_TOKEN,
-        async (err, user): Promise<express.Response | void> => {
-          if (user) {
-            req.body.user = user;
-            next();
-          } else if (err && err.message === "TokenExpiredError") {
-            return res.status(403).send({
-              success: false,
-              msg: "Access token expired"
-            });
-          } else {
-            return res.status(403).send({ err, msg: "User not authenticated" });
-          }
-        }
-      );
+      const response: IJWTResponse = jwtHandler.verifyJWT(token);
+      if (response.success) {
+        req.body.user = response.jwtPayload;
+        next();
+      } else {
+        const { success, error } = response;
+        return res.status(403).send({
+          success,
+          error
+        });
+      }
     } else {
-      return res.status(400).json({ err: "Bad request header" });
+      return res.status(400).json({ error: "Bad request header" });
     }
   }
 };
