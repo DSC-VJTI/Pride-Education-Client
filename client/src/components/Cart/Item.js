@@ -14,13 +14,6 @@ import Fab from "@material-ui/core/Fab";
 import DeleteIcon from "@material-ui/icons/Delete";
 const useStyles = makeStyles((theme) => ({
   root: {
-    "& .MuiPaper-root": {
-      flexGrow: 1,
-      padding: theme.spacing(2),
-      margin: "auto",
-      maxWidth: "500px",
-      textAlign: "center"
-    },
     "& img": {
       margin: "auto",
       display: "block",
@@ -28,17 +21,15 @@ const useStyles = makeStyles((theme) => ({
       height: "auto",
       maxWidth: "300px"
     },
-    "& div": {
-      // textAlign: "center"
-    }
   }
 }));
 
-const Item = () => {
+
+const Item = ({ title, content, views, validity, price, instructor }) => {
   const classes = useStyles();
   return (
-    <Paper className={classes.root}>
-      <Grid container spacing={2}>
+    // <Paper className={classes.root}>
+      <Grid container spacing={2} className={classes.root}>
         <Grid item xs={12} sm={5} style={{ paddingLeft: "10px" }}>
           <div>
             <img src={download} />
@@ -48,34 +39,34 @@ const Item = () => {
         <Grid item xs={12} container sm={7} style={{ paddingLeft: "40px" }}>
           <Grid item xs={8}>
             <Typography gutterBottom variant="h6" color="primary">
-              SCMPE Full Course
+              {title}
             </Typography>
             <Typography gutterBottom variant="subtitle2">
               <ul>
-                <li>Content Type: Classes</li>
+                <li>Content Type: {content}</li>
                 <li>Duration: 100 Hours</li>
-                <li>1.7 Views</li>
-                <li>Validity</li>
+                <li>{views} Views</li>
+                <li>Validity {validity} </li>
               </ul>
             </Typography>
           </Grid>
 
           <Grid item xs={4}>
             <Typography gutterBottom variant="h6">
-              Rs. 15,000
+              {price}
             </Typography>
 
             <Divider />
 
             <Typography gutterbottom variant="subtitle2">
-              By CA. Abhishek Khilwani
+              By {instructor}
             </Typography>
 
             <div
               style={{
-                paddingTop: "35px",
+                paddingTop: "38px",
                 textAlign: "right",
-                paddingRight: "20px"
+                paddingRight: "16px"
               }}
             >
               <Fab color="primary" aria-label="add">
@@ -85,7 +76,7 @@ const Item = () => {
           </Grid>
         </Grid>
         </Grid>
-    </Paper>
+    // </Paper>
   );
 };
 
