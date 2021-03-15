@@ -1,94 +1,89 @@
 import React from "react";
-import {
-  Container,
-  Grid,
-  Card,
-  makeStyles,
-  CardContent,
-  Typography,
-  CardActions,
-  Button,
-  Checkbox,
-  FormControlLabel,
-  Link
-} from "@material-ui/core";
+import { Container, Grid, makeStyles, Paper } from "@material-ui/core";
 import Item from "./Item";
+import Total from "./Total";
 
-const CartStyles = makeStyles({
-  TotalCard: {
-    background: "white"
+const CartStyles = makeStyles((theme) => ({
+  style: {
+    background: "blue",
+    padding: "20px",
+    minWidth: "100px",
+    margin: "15px",
+   },
+   paper:{
+     "& .MuiPaper-root": {
+      flexGrow: 1,
+      padding: theme.spacing(2),
+      marginBottom: "10px",
+      },
+    },
+}));
+
+const initialFValues = [
+  {
+    title: "SCMPE Full Course",
+    content: "Books",
+    views: "1.7",
+    validity: "6 Months",
+    price: "Rs. 15,000",
+    instructor: "CA Abhishek Khilwani"
   },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)"
+  {
+    title: "SCMPE Full Course",
+    content: "Books",
+    views: "1.7",
+    validity: "6 Months",
+    price: "Rs. 15,000",
+    instructor: "CA Abhishek Khilwani"
   },
-  title: {
-    color: "#3f51b5",
-    fontWeight: "600",
-    lineHeight: "16px"
+  {
+    title: "SCMPE Full Course",
+    content: "Books",
+    views: "1.7",
+    validity: "6 Months",
+    price: "Rs. 15,000",
+    instructor: "CA Abhishek Khilwani"
   },
-  pos: {
-    marginBottom: 12
-  },
-  totalButton: {
-    background: "#3f51b5",
-    color: "white",
-    margin: "auto",
-    borderRadius: "2rem"
-  }
-});
+];
 
 const Cart = () => {
-  const items = 5.00;
-  const title = `($${items})`;
   const classes = CartStyles();
   return (
-    <div>
-      <Container
-        style={{
-          background: "blue",
-          padding: "20px",
-          minWidth: "100px",
-          margin: "15px"
-        }}
+    <Grid container spacing={3} direction={"row"}>
+      <Grid item xs={0} md={1}></Grid>
+      <Grid
+        container
+        item
+        sm={12}
+        xs={12}
+        md={7}
+        direction="column"
+        spacing={4}
       >
-        <Grid container spacing={2} direction={"row"}>
-          <Grid xs={7}>
-            <Item />
-          </Grid>
-          <Grid xs={4}>
-            <Card className={classes.TotalCard}>
-              <CardContent>
-                <Typography className={classes.title} component="h5">
-                  Your order is eligible for free order
-                </Typography>
-
-                <Typography
-                  color="textSecondary"
-                  gutterBottom
-                  variant
-                  component="h5"
-                >
-                  Select this option at checkout &nbsp;
-                  <Link color="textPrimary">Details</Link>
-                </Typography>
-                <Typography variant component="h4">
-                  {`Subtotal (${items} items) : ${title}`}
-                </Typography>
-                <FormControlLabel
-                  control={<Checkbox color="primary" />}
-                  label="This order contains a gift"
+        <Container className={classes.style}>
+          {initialFValues.map((item) => (
+            <Grid item xs={12} spacing={2} className={classes.paper}>
+              <Paper>
+                <Item
+                  title={item.title}
+                  content={item.content}
+                  views={item.views}
+                  validity={item.validity}
+                  price={item.price}
+                  instructor={item.instructor}
                 />
-              </CardContent>
-              <CardActions>
-                <Button className={classes.totalButton}>Proceed to Buy</Button>
-              </CardActions>
-            </Card>
-          </Grid>
-        </Grid>
-      </Container>
-    </div>
+              </Paper>
+            </Grid>
+          ))}
+        </Container>
+      </Grid>
+      <Grid item sm={5} xs={12} md={3}>
+        <Container className={classes.style}>
+          <Total items={5} price={100} />
+        </Container>
+      </Grid>
+      <Grid item xs={0} md={1}></Grid>
+    </Grid>
   );
 };
 
