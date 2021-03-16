@@ -1,5 +1,6 @@
 import chai from "chai";
 import chaiHttp from "chai-http";
+import sinon from "sinon";
 import "mocha";
 import mongoose from "mongoose";
 import app from "../../src/app";
@@ -92,6 +93,22 @@ describe("Product tests", () => {
                     done();
                 });
         });
+
+        it("returns 500 if something bad happens", (done) => {
+            const errorStatement = "Something bad happened"
+            sinon.stub(Product, "find").callsFake(() => { throw Error(errorStatement) });
+            chai
+                .request(app)
+                .get("/api/products")
+                .end((err, res) => {
+                    expect(err).to.be.null;
+                    expect(res.status).to.be.equal(500);
+                    expect(res.body).to.be.an("object");
+                    expect(res.body).to.have.property("message").equal(errorStatement);
+                    sinon.restore();
+                    done();
+                });
+        })
     });
 
     describe("GET /products/:id", () => {
@@ -143,5 +160,24 @@ describe("Product tests", () => {
                     done();
                 });
         });
+
+        it("returns 500 if something bad happens", (done) => {
+            const errorStatement = "Something bad happened"
+            sinon.stub(Product, "findById").callsFake(() => { throw Error(errorStatement) });
+            Product.create(productToSave)
+                .then((value: IProduct) => {
+                    chai
+                        .request(app)
+                        .get(`/api/products/${value._id.toString()}`)
+                        .end((err, res) => {
+                            expect(err).to.be.null;
+                            expect(res.status).to.be.equal(500);
+                            expect(res.body).to.be.an("object");
+                            expect(res.body).to.have.property("message").equal(errorStatement);
+                            sinon.restore();
+                            done();
+                        });
+                })
+        })
     });
 });
