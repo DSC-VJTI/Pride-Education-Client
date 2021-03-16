@@ -9,7 +9,7 @@
     "start": "node compiled/app.js",
     "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/app.ts",
     "pretest": "eslint . --ext .ts --fix",
-    "test": "cross-env NODE_ENV=test mocha -r ts-node/register 'tests/**/*.ts' --timeout 24000 --exit",
+    "test": "cross-env NODE_ENV=test mocha 'tests/**/*.ts'",
     "coverage": "nyc npm test",
     "production": "cross-env NODE_ENV=production node .",
     "preproduction": "tsc"
@@ -29,19 +29,6 @@
       "prettier --config ../client/.prettierrc '../client/**/**/*.{js, jsx}' --write"
     ]
   },
-  "nyc": {
-    "extension": [
-      ".ts",
-      ".tsx"
-    ],
-    "exclude": [
-      "**/*.d.ts"
-    ],
-    "reporter": [
-      "text"
-    ],
-    "all": true
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DSC-VJTI/CA-Client.git"
@@ -53,6 +40,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@types/chai": "^4.2.14",
     "@types/cors": "^2.8.10",
     "@types/express": "^4.16.1",
