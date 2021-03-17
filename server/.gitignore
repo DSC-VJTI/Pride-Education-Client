@@ -2,3 +2,4 @@
 .env
 /compiled
 .nyc_output
+/coverage
