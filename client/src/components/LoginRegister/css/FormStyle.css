@@ -1,0 +1,63 @@
+
+    *{
+        margin:0;
+        padding:0;
+        box-sizing: border-box;
+    }
+    .form{
+        height:auto;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        padding:2rem 2rem;
+        width:50%;
+        background-image: linear-gradient(to right, rgb(14, 35, 219), rgb(8, 186, 240));
+    }
+     
+    .mainSection{
+        width:100%;
+        height:auto;
+        border:1px solid #fff;
+        background-color: #ffffff;
+        display:flex;
+        flex-direction:column;
+        justify-content:space-around;
+        flex-wrap:wrap;
+    }
+    .heading{
+        font-size:2rem;
+        color:white;
+        margin-bottom: 20px;
+    }
+    .inputFields{
+        margin:0.2rem 0;
+    }
+    .inputFieldsForDateAndBtn{
+        margin-top:1rem;
+    }
+    @media(max-width:900px)
+    {
+        .form{
+            width:80%;
+        }
+        .inputFieldsForDateAndBtn{
+            margin-left: -1rem!important;
+            width: 100%;
+        }
+    }
+    @media(max-width:610px)
+    {
+        .form{
+            width:90%;
+        }
+    }
+    @media(max-width:512px)
+    {
+        .form{
+            width:93%;
+        }
+        .inputField{
+            width:50%;
+        }
+    }

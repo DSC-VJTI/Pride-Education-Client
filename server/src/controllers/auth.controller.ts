@@ -1,10 +1,8 @@
 import OTPUtil = require("./../utility/otp");
 import User from "./../models/User/User";
-import jwt from "jsonwebtoken";
 import express from "express";
 import IUser from "src/models/User/IUser";
-
-const JWT_AUTH_TOKEN = process.env.JWT_AUTH_TOKEN || "DSC_IS_GREAT";
+import jwtHandler from "../utility/jwt";
 
 const AuthController = {
   // Sends Hash and OTP for login/register routes
@@ -21,21 +19,7 @@ const AuthController = {
     try {
       const user = await User.create(req.body);
 
-      const token = jwt.sign(
-        {
-          user: {
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            mobileNumber: user.mobileNumber
-          }
-        },
-        JWT_AUTH_TOKEN,
-        {
-          expiresIn: "5h"
-        }
-      );
-
+      const token = jwtHandler.setJwt(user);
       return res.status(201).json({
         name: user.name,
         token: token
@@ -64,21 +48,7 @@ const AuthController = {
         .lean();
 
       if (user) {
-        const token = jwt.sign(
-          {
-            user: {
-              _id: user._id,
-              name: user.name,
-              email: user.email,
-              mobileNumber: user.mobileNumber
-            }
-          },
-          JWT_AUTH_TOKEN,
-          {
-            expiresIn: "5h"
-          }
-        );
-
+        const token = jwtHandler.setJwt(user);
         return res.status(201).json({
           user: user,
           token: token

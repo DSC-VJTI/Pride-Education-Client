@@ -20,7 +20,7 @@ const ProductController = {
       if (data) {
         return res.status(200).json({ data });
       } else {
-        return res.status(404).json({ message: "Product doesn't exists" });
+        return res.status(404).json({ message: "Product doesn't exist" });
       }
     } catch (error) {
       return res.status(500).json({ message: error.message });
