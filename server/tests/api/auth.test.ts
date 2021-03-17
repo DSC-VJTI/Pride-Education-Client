@@ -5,7 +5,7 @@ import sinon from "sinon";
 import User from "../../src/models/User/User";
 import IUser from "../../src/models/User/IUser";
 import app from "../../src/app";
-import { generateOtpHash } from "../../src/utility/otp";
+import OTPUtil, { generateOtpHash } from "../../src/utility/otp";
 
 chai.use(chaiHttp);
 const expect = chai.expect;
@@ -148,6 +148,21 @@ describe("Auth tests", () => {
                 });
             });
 
+            it("returns 404 if you bypass otp but don't have email", (done) => {
+                sinon.stub(OTPUtil, "verifyOTP").callsFake(() => ({ code: 200, msg: "OTP verified" }))
+                chai
+                    .request(app)
+                    .post("/api/login")
+                    .send({ email: "hacked@company.com", otp, hash })
+                    .end((err, res) => {
+                        expect(err).to.be.null;
+                        expect(res.status).to.be.equal(404);
+                        expect(res.body).to.be.an("object");
+                        expect(res.body).to.have.property("error").equal("Requested user not found");
+                        sinon.restore();
+                        done();
+                    });
+            });
 
         });
 
