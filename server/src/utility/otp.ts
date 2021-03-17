@@ -10,9 +10,11 @@ interface verifyOtpReturn {
 }
 
 const OTPUtil = {
-  generateOtpHash(email: string): [number, string] {
+  generateOtpHash(
+    email: string,
+    ttl: number = 5 * 60 * 1000
+  ): [number, string] {
     const otp = Math.floor(100000 + Math.random() * 900000);
-    const ttl = 5 * 60 * 1000;
     const expires = Date.now() + ttl;
     const data = `${email}.${otp}.${expires}`;
     const hash = crypto

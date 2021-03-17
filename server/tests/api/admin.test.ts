@@ -42,7 +42,6 @@ describe("Admin tests", () => {
             address: "Test adress",
             isAdmin: true
         }).then((savedUser: IUser) => {
-            // user = savedUser;
             userId = savedUser._id.toString();
             token = jwtHandler.setJwt(savedUser);
             done();

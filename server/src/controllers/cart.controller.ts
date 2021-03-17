@@ -7,8 +7,13 @@ const cartController = {
     res: express.Response
   ): Promise<express.Response | void> {
     try {
-      const { userId } = req.body.user._id;
-      const myCart = await Cart.find({ user: userId });
+      const userId = req.body.user._id;
+      const myCart = await Cart.find({ user: userId })
+        .populate({
+          path: "products",
+          select: ["_id", "name", "price", "discount"]
+        })
+        .lean();
       return res.status(200).json({ myCart });
     } catch (err) {
       return res.status(500).json({
@@ -23,7 +28,7 @@ const cartController = {
   ): Promise<express.Response | void> {
     try {
       const { productId } = req.params;
-      const { userId } = req.body.user._id;
+      const userId = req.body.user._id;
       let myCart;
       myCart = await Cart.findOne({ user: userId });
       if (!myCart) {
@@ -31,6 +36,12 @@ const cartController = {
       }
       myCart.products.push(productId);
       await myCart.save();
+      myCart = await Cart.findOne({ user: userId })
+        .populate({
+          path: "products",
+          select: ["_id", "name", "price", "discount"]
+        })
+        .lean();
       return res.status(201).json({ myCart });
     } catch (err) {
       return res.status(500).json({
@@ -45,7 +56,7 @@ const cartController = {
   ): Promise<express.Response | void> {
     try {
       const { productId } = req.params;
-      const { userId } = req.body.user._id;
+      const userId = req.body.user._id;
       const myCart = await Cart.findOne({ user: userId });
 
       if (myCart) {
@@ -59,7 +70,7 @@ const cartController = {
         );
         return res.status(201).json({ newCart });
       } else {
-        return res.status(404).json({ message: "User cart doesn't exists" });
+        return res.status(404).json({ message: "User cart doesn't exist" });
       }
     } catch (error) {
       return res.status(500).json({ message: error.message });
