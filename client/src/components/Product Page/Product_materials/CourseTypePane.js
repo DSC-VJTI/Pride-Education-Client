@@ -7,7 +7,8 @@ const mainPaneStyles = makeStyles({
   mainHolder: {
     display: "flex",
     flexWrap: "wrap",
-    background: "#90caf9",
+    // background: "#90caf9",
+    background: "#42a5f4",
     width: "80%",
     margin: "auto",
     borderRadius: "15px",
@@ -32,10 +33,8 @@ const CourseTypePane = ({ Course, CourseContent }) => {
   const classes = mainPaneStyles();
   return (
     <div>
-      <div >
-      <h2 className={classes.CourseType}>
-        {Course}
-      </h2>
+      <div>
+        <h2 className={classes.CourseType}>{Course}</h2>
       </div>
       <div className={classes.mainHolder}>
         <ReactPlayer

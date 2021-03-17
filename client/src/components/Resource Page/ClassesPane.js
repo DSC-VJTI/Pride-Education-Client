@@ -1,14 +1,14 @@
 import React from "react";
 import ClassPane from "./ClassPane/ClassPane";
-import { makeStyles} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 
 const ClassesPaneStyles = makeStyles({
   root: {
-    margin:"0px",
-    padding:"2% 5%"
+    margin: "0px",
+    padding: "2% 5%",
+    background: "#E7E7E7"
   }
 });
-
 
 export default function ClassesPane() {
   const courseTypes = [
@@ -34,7 +34,7 @@ export default function ClassesPane() {
   return (
     <div className={classes.root}>
       {courseTypes.map((course) => (
-          <ClassPane Course={course.title} CoursesList={CoursesList} />
+        <ClassPane Course={course.title} CoursesList={CoursesList} />
       ))}
     </div>
   );
