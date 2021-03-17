@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Grid, makeStyles, Paper } from "@material-ui/core";
 import Item from "./Item";
 import Total from "./Total";
@@ -48,6 +48,7 @@ const initialFValues = [
 
 const Cart = () => {
   const classes = CartStyles();
+  const [items, setItems] = useState(initialFValues);
   return (
     <Grid container spacing={3} direction={"row"}>
       <Grid item xs={0} md={1}></Grid>
@@ -61,7 +62,7 @@ const Cart = () => {
         spacing={4}
       >
         <Container className={classes.style}>
-          {initialFValues.map((item) => (
+          {items.map((item) => (
             <Grid item xs={12} spacing={2} className={classes.paper}>
               <Paper>
                 <Item
