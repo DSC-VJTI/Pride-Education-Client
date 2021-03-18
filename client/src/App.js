@@ -9,6 +9,7 @@ import LoginRegister from "./components/LoginRegister/LoginRegister";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import AddProduct from "./components/Products/AddProduct";
 
 function App() {
   useEffect(() => {
@@ -22,6 +23,9 @@ function App() {
         <Route path="/support" component={SupportPage} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={LoginRegister} />
+
+        {/* Protected routes go here */}
+        <Route path="/product/add" component={AddProduct} />
       </Switch>
     </Router>
   );
