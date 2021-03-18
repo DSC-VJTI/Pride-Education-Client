@@ -3,19 +3,28 @@ import IProduct from "./IProduct";
 
 const ProductSchema: Schema = new Schema({
   name: { type: String, required: true },
-  type: { type: String, required: true },
   price: { type: Number, required: true },
   discount: { type: Number, required: true },
   courseDetails: {
-    level: { type: String, required: true },
-    subject: { type: String, required: true },
-    faculty: { type: String, required: true },
-    subtype: { type: String, required: true },
+    level: { type: String },
+    subject: { type: String },
+    faculty: { type: String },
+    type: { type: String },
     date: { type: Date, default: Date.now, required: true },
-    language: { type: String, required: true },
-    duration: { type: Number, required: true },
-    validity: { type: Number, required: true },
-    mode: { type: String, required: true }
+    language: { type: String },
+    duration: { type: Number },
+    validity: { type: Number },
+    mode: { type: String },
+    applicableExamDate: { type: Date, required: true, default: Date.now },
+    sysReq: { type: String },
+    views: { type: Number, required: true, default: 0 }
+  },
+  testDetails: {
+    subject: { type: String },
+    contents: { type: String }
+  },
+  bookDetails: {
+    url: { type: String }
   }
 });
 
