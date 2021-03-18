@@ -1,7 +1,7 @@
 import { Document } from "mongoose";
 
 export default interface IProduct extends Document {
-  name: number;
+  name: string;
   price: number;
   discount: number;
   courseDetails: {
