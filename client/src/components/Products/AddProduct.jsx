@@ -1,23 +1,24 @@
-import React from "react";
-import { Formik, useField, Form } from "formik";
-import { useState } from "react";
-import * as yup from "yup";
+import DateFnsUtils from "@date-io/date-fns";
 import {
-  TextField,
   Button,
   Container,
   Grid,
-  Paper,
-  Typography,
+  InputLabel,
   MenuItem,
+  Paper,
   Select,
-  InputLabel
+  TextField,
+  Typography
 } from "@material-ui/core";
 import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider
 } from "@material-ui/pickers";
-import DateFnsUtils from "@date-io/date-fns";
+import axios from "axios";
+import { Form, Formik, useField } from "formik";
+import React, { useState } from "react";
+import * as yup from "yup";
+import { BASE_URL } from "../../constants";
 
 const MyTextField = ({
   placeholder,
@@ -66,21 +67,34 @@ export default function AddProduct() {
     }
   };
 
+  // Validator schema for Formik
   const validationSchema = yup.object({
     name: yup.string().required(),
-    type: yup.string().required(),
     price: yup.number().required().positive(),
     discount: yup.number().required().positive(),
-    courseDetails: yup.object({
-      level: yup.string().required(),
-      subject: yup.string().required(),
-      faculty: yup.string().required(),
-      subtype: yup.string().required(),
-      language: yup.string().required(),
-      duration: yup.number().required().positive(),
-      validity: yup.number().required().positive(),
-      mode: yup.string().required()
-    })
+    course: yup
+      .object({
+        level: yup.string().optional(),
+        subject: yup.string().optional(),
+        faculty: yup.string().optional(),
+        subtype: yup.string().optional(),
+        language: yup.string().optional(),
+        duration: yup.number().optional().positive(),
+        validity: yup.number().optional().positive(),
+        mode: yup.string().optional()
+      })
+      .optional(),
+    test: yup
+      .object({
+        subject: yup.string().optional(),
+        contents: yup.string().optional()
+      })
+      .optional(),
+    book: yup
+      .object({
+        url: yup.string().optional()
+      })
+      .optional()
   });
 
   return (
@@ -121,10 +135,31 @@ export default function AddProduct() {
           }
         }}
         validationSchema={validationSchema}
-        onSubmit={(data, { setSubmitting }) => {
+        onSubmit={async (data, { setSubmitting }) => {
           setSubmitting(true);
-          // make async call
-          console.log("submit: ", data);
+          // Preprocess Data
+          let reqBody = { ...data };
+          switch (productType) {
+            case "course":
+              delete reqBody["test"];
+              delete reqBody["book"];
+              reqBody["applicableDate"] = selectedDate;
+              break;
+            case "test":
+              delete reqBody["course"];
+              delete reqBody["book"];
+              break;
+            case "book":
+              delete reqBody["test"];
+              delete reqBody["course"];
+              break;
+          }
+          reqBody["type"] = productType;
+          // Finish preprocessing
+          const response = await axios.post(BASE_URL + "admin/createProduct/", {
+            ...reqBody
+          });
+          console.log("submit: Done ", response.data);
           setSubmitting(false);
         }}
       >
