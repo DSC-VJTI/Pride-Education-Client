@@ -315,8 +315,6 @@ export default function AddProduct() {
                 </Grid>
               </Paper>
             </Container>
-            <pre>{JSON.stringify(values, null, 2)}</pre>
-            <pre>{JSON.stringify(errors, null, 2)}</pre>
           </Form>
         )}
       </Formik>
