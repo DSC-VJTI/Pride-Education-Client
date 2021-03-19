@@ -5,20 +5,24 @@ const ProductSchema: Schema = new Schema({
   name: { type: String, required: true },
   price: { type: Number, required: true },
   discount: { type: Number, required: true },
-  courseDetails: {
-    level: { type: String },
-    subject: { type: String },
-    faculty: { type: String },
-    type: { type: String },
-    date: { type: Date, default: Date.now, required: true },
-    language: { type: String },
-    duration: { type: Number },
-    validity: { type: Number },
-    mode: { type: String },
-    applicableExamDate: { type: Date, required: true, default: Date.now },
-    sysReq: { type: String },
-    views: { type: Number, required: true, default: 0 }
-  },
+  courses: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Course"
+    }
+  ],
+  products: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Product"
+    }
+  ],
+  books: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Book"
+    }
+  ],
   testDetails: {
     subject: { type: String },
     contents: { type: String }
