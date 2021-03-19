@@ -7,7 +7,7 @@ export default interface IProduct extends Document {
   name: string;
   price: number;
   discount: number;
-  courses: Array<ICourse["_id"]>;
-  tests: Array<ITest["_id"]>;
-  books: Array<IBook["_id"]>;
+  course: ICourse["_id"];
+  test: ITest["_id"];
+  book: IBook["_id"];
 }
