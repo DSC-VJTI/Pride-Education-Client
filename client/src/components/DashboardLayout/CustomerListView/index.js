@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Container, makeStyles } from "@material-ui/core";
 import Page from "../../UI Elements/Page";
 import Results from "./Results";
 import Toolbar from "./Toolbar";
-import data from "./data";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,14 +16,24 @@ const useStyles = makeStyles((theme) => ({
 
 const CustomerListView = () => {
   const classes = useStyles();
-  const [customers] = useState(data);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    axios
+      .post("http://localhost:8000/api/admin/getUsers")
+      .then((res) => {
+        setUsers(res.data.allUsers);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <Page className={classes.root} title="Customers">
       <Container maxWidth={false}>
-        <Toolbar />
         <Box mt={3}>
-          <Results customers={customers} />
+          <Results customers={users} />
         </Box>
       </Container>
     </Page>
