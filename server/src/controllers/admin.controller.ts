@@ -109,8 +109,13 @@ const AdminController = {
                 "Any one out of course, test or book expected in res.body.type"
             });
         }
+        const newProduct = await Product.findByIdAndUpdate(
+          req.params.productId,
+          req.body,
+          { upsert: true, new: true }
+        );
         return res.status(200).json({
-          product,
+          product: newProduct,
           message: "Product Updated Successfully"
         });
       } else {

@@ -26,6 +26,7 @@ function App() {
 
         {/* Protected routes go here */}
         <Route path="/product/add" component={AddProduct} />
+        <Route path="/product/edit/:productId" component={AddProduct} />
       </Switch>
     </Router>
   );

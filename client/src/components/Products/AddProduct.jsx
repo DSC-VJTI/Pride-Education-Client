@@ -1,9 +1,11 @@
 import DateFnsUtils from "@date-io/date-fns";
 import {
   Button,
+  CircularProgress,
   Container,
   Grid,
   InputLabel,
+  makeStyles,
   MenuItem,
   Paper,
   Select,
@@ -16,9 +18,11 @@ import {
 } from "@material-ui/pickers";
 import axios from "axios";
 import { Form, Formik, useField } from "formik";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as yup from "yup";
+import { useParams } from "react-router-dom";
 import { BASE_URL } from "../../constants";
+import { green } from "@material-ui/core/colors";
 
 const MyTextField = ({
   placeholder,
@@ -42,9 +46,68 @@ const MyTextField = ({
   );
 };
 
+const useStyles = makeStyles((theme) => ({
+  buttonProgress: {
+    color: green[500],
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    marginTop: -12,
+    marginLeft: -12
+  }
+}));
+
 export default function AddProduct() {
+  const classes = useStyles();
   const [productType, setProductType] = useState("course");
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [product, setProduct] = useState({
+    name: "",
+    price: 0,
+    discount: 0,
+    course: {
+      level: "",
+      subject: "",
+      faculty: "",
+      type: "",
+      language: "",
+      sysReq: "",
+      duration: 3500,
+      validity: 3600,
+      mode: ""
+    },
+    test: {
+      subject: "",
+      contents: ""
+    },
+    book: {
+      url: ""
+    }
+  });
+  const [isLoading, setIsLoading] = useState(true);
+
+  const productId = useParams().productId;
+  const isEditPage = !!productId;
+
+  const checkType = (response) => {
+    if ("test" in response) return "test";
+    else if ("course" in response) return "course";
+    else if ("book" in response) return "book";
+  };
+
+  useEffect(() => {
+    if (isEditPage) {
+      axios
+        .get(BASE_URL + `products/${productId}`)
+        .then((res) => {
+          console.log(res.data);
+          setProduct(res.data.data);
+          setProductType(checkType(res.data.data));
+        })
+        .catch((err) => console.log(err))
+        .finally(() => setIsLoading(false));
+    }
+  }, [isEditPage]);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -109,215 +172,211 @@ export default function AddProduct() {
           </Typography>
         </div>
       </header>
-      <Formik
-        validateOnChange={true}
-        initialValues={{
-          name: "",
-          price: 0,
-          discount: 0,
-          course: {
-            level: "",
-            subject: "",
-            faculty: "",
-            type: "",
-            language: "",
-            sysReq: "",
-            duration: 3500,
-            validity: 3600,
-            mode: ""
-          },
-          test: {
-            subject: "",
-            contents: ""
-          },
-          book: {
-            url: ""
-          }
-        }}
-        validationSchema={validationSchema}
-        onSubmit={async (data, { setSubmitting }) => {
-          setSubmitting(true);
-          // Preprocess Data
-          let reqBody = { ...data };
-          switch (productType) {
-            case "course":
-              delete reqBody["test"];
-              delete reqBody["book"];
-              reqBody["applicableDate"] = selectedDate;
-              break;
-            case "test":
-              delete reqBody["course"];
-              delete reqBody["book"];
-              break;
-            case "book":
-              delete reqBody["test"];
-              delete reqBody["course"];
-              break;
-          }
-          reqBody["type"] = productType;
-          // Finish preprocessing
-          const response = await axios.post(BASE_URL + "admin/createProduct/", {
-            ...reqBody
-          });
-          console.log("submit: Done ", response.data);
-          setSubmitting(false);
-        }}
-      >
-        {({ values, errors, isSubmitting }) => (
-          <Form>
-            <Container maxWidth="sm">
-              <Paper style={{ padding: 16 }} elevation={2}>
-                <Grid container alignItems="flex-start" spacing={4}>
-                  <Grid item xs={12}>
-                    <MyTextField placeholder="Name of Product" name="name" />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <MyTextField
-                      placeholder="Price of Product"
-                      name="price"
-                      type="number"
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <MyTextField
-                      placeholder="Discount"
-                      name="discount"
-                      type="number"
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <InputLabel id="product-select-label">
-                      Type of Product
-                    </InputLabel>
-                    <Select
-                      value={productType}
-                      defaultValue="course"
-                      onChange={handleChange}
-                      labelId="product-select-label"
-                    >
-                      <MenuItem value="course">Course</MenuItem>
-                      <MenuItem value="test">Test</MenuItem>
-                      <MenuItem value="book">Book</MenuItem>
-                    </Select>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Typography
-                      variant="h5"
-                      style={{ color: "green", textAlign: "center" }}
-                    >
-                      <u>{getCurrentString(productType)}</u>
-                    </Typography>
-                  </Grid>
-                  {productType === "course" && (
-                    <>
-                      <Grid item xs={12}>
-                        <MyTextField placeholder="Level" name="course.level" />
-                      </Grid>
-                      <Grid item xs={12} md={6}>
-                        <MyTextField
-                          placeholder="Subject"
-                          name="course.subject"
-                        />
-                      </Grid>
-                      <Grid item xs={12} md={6}>
-                        <MyTextField
-                          placeholder="Faculty"
-                          name="course.faculty"
-                        />
-                      </Grid>
-                      <Grid item xs={12} md={6}>
-                        <MyTextField
-                          placeholder="Type of Course"
-                          name="course.type"
-                        />
-                      </Grid>
-                      <Grid item xs={12} md={6}>
-                        <MyTextField
-                          placeholder="Language"
-                          name="course.language"
-                        />
-                      </Grid>
-                      <Grid item xs={12} md={6}>
-                        <MyTextField
-                          placeholder="System Requirements"
-                          name="course.sysReq"
-                        />
-                      </Grid>
-                      <Grid item xs={12} md={6}>
-                        <MyTextField placeholder="Mode" name="course.mode" />
-                      </Grid>
-                      <Grid item xs={12}>
-                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                          <KeyboardDatePicker
-                            margin="normal"
-                            id="date-picker-dialog"
-                            label="Date picker dialog"
-                            format="dd/MM/yyyy"
-                            value={selectedDate}
-                            onChange={handleDateChange}
-                            KeyboardButtonProps={{
-                              "aria-label": "change date"
-                            }}
+      {isLoading ? (
+        <CircularProgress size={42} className={classes.buttonProgress} />
+      ) : (
+        <Formik
+          validateOnChange={true}
+          initialValues={product}
+          validationSchema={validationSchema}
+          onSubmit={async (data, { setSubmitting }) => {
+            setSubmitting(true);
+            // Preprocess Data
+            let reqBody = { ...data };
+            switch (productType) {
+              case "course":
+                delete reqBody["test"];
+                delete reqBody["book"];
+                reqBody["applicableDate"] = selectedDate;
+                break;
+              case "test":
+                delete reqBody["course"];
+                delete reqBody["book"];
+                break;
+              case "book":
+                delete reqBody["test"];
+                delete reqBody["course"];
+                break;
+            }
+            reqBody["type"] = productType;
+            // Finish preprocessing
+            let response;
+            if (isEditPage) {
+              response = await axios.put(
+                BASE_URL + "admin/editProduct/" + productId,
+                {
+                  ...reqBody
+                }
+              );
+            } else {
+              response = await axios.post(BASE_URL + "admin/createProduct/", {
+                ...reqBody
+              });
+            }
+            console.log("submit: Done ", response.data);
+            setSubmitting(false);
+          }}
+        >
+          {({ values, errors, isSubmitting }) => (
+            <Form>
+              <Container maxWidth="sm">
+                <Paper style={{ padding: 16 }} elevation={2}>
+                  <Grid container alignItems="flex-start" spacing={4}>
+                    <Grid item xs={12}>
+                      <MyTextField placeholder="Name of Product" name="name" />
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <MyTextField
+                        placeholder="Price of Product"
+                        name="price"
+                        type="number"
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <MyTextField
+                        placeholder="Discount"
+                        name="discount"
+                        type="number"
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <InputLabel id="product-select-label">
+                        Type of Product
+                      </InputLabel>
+                      <Select
+                        value={productType}
+                        defaultValue="course"
+                        onChange={handleChange}
+                        labelId="product-select-label"
+                        disabled={isEditPage}
+                      >
+                        <MenuItem value="course">Course</MenuItem>
+                        <MenuItem value="test">Test</MenuItem>
+                        <MenuItem value="book">Book</MenuItem>
+                      </Select>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Typography
+                        variant="h5"
+                        style={{ color: "green", textAlign: "center" }}
+                      >
+                        <u>{getCurrentString(productType)}</u>
+                      </Typography>
+                    </Grid>
+                    {productType === "course" && (
+                      <>
+                        <Grid item xs={12}>
+                          <MyTextField
+                            placeholder="Level"
+                            name="course.level"
                           />
-                        </MuiPickersUtilsProvider>
-                      </Grid>
-                      <Grid item xs={12} md={6}>
-                        <MyTextField
-                          placeholder="Duration"
-                          name="course.duration"
-                          type="number"
-                        />
-                      </Grid>
-                      <Grid item xs={12} md={6}>
-                        <MyTextField
-                          placeholder="Validity"
-                          name="course.validity"
-                          type="number"
-                        />
-                      </Grid>
-                    </>
-                  )}
-                  {productType === "test" && (
-                    <>
-                      <Grid item xs={12}>
-                        <MyTextField
-                          placeholder="Subject"
-                          name="test.subject"
-                        />
-                      </Grid>
-                      <Grid item xs={12}>
-                        <MyTextField
-                          placeholder="Contents"
-                          name="test.contents"
-                          multiline={true}
-                        />
-                      </Grid>
-                    </>
-                  )}
-                  {productType === "book" && (
-                    <>
-                      <Grid item xs={12}>
-                        <MyTextField placeholder="Book URL" name="book.url" />
-                      </Grid>
-                    </>
-                  )}
+                        </Grid>
+                        <Grid item xs={12} md={6}>
+                          <MyTextField
+                            placeholder="Subject"
+                            name="course.subject"
+                          />
+                        </Grid>
+                        <Grid item xs={12} md={6}>
+                          <MyTextField
+                            placeholder="Faculty"
+                            name="course.faculty"
+                          />
+                        </Grid>
+                        <Grid item xs={12} md={6}>
+                          <MyTextField
+                            placeholder="Type of Course"
+                            name="course.type"
+                          />
+                        </Grid>
+                        <Grid item xs={12} md={6}>
+                          <MyTextField
+                            placeholder="Language"
+                            name="course.language"
+                          />
+                        </Grid>
+                        <Grid item xs={12} md={6}>
+                          <MyTextField
+                            placeholder="System Requirements"
+                            name="course.sysReq"
+                          />
+                        </Grid>
+                        <Grid item xs={12} md={6}>
+                          <MyTextField placeholder="Mode" name="course.mode" />
+                        </Grid>
+                        <Grid item xs={12}>
+                          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <KeyboardDatePicker
+                              margin="normal"
+                              id="date-picker-dialog"
+                              label="Date picker dialog"
+                              format="dd/MM/yyyy"
+                              value={selectedDate}
+                              onChange={handleDateChange}
+                              KeyboardButtonProps={{
+                                "aria-label": "change date"
+                              }}
+                            />
+                          </MuiPickersUtilsProvider>
+                        </Grid>
+                        <Grid item xs={12} md={6}>
+                          <MyTextField
+                            placeholder="Duration"
+                            name="course.duration"
+                            type="number"
+                          />
+                        </Grid>
+                        <Grid item xs={12} md={6}>
+                          <MyTextField
+                            placeholder="Validity"
+                            name="course.validity"
+                            type="number"
+                          />
+                        </Grid>
+                      </>
+                    )}
+                    {productType === "test" && (
+                      <>
+                        <Grid item xs={12}>
+                          <MyTextField
+                            placeholder="Subject"
+                            name="test.subject"
+                          />
+                        </Grid>
+                        <Grid item xs={12}>
+                          <MyTextField
+                            placeholder="Contents"
+                            name="test.contents"
+                            multiline={true}
+                          />
+                        </Grid>
+                      </>
+                    )}
+                    {productType === "book" && (
+                      <>
+                        <Grid item xs={12}>
+                          <MyTextField placeholder="Book URL" name="book.url" />
+                        </Grid>
+                      </>
+                    )}
 
-                  <Grid item xs={12}>
-                    <Button
-                      color="secondary"
-                      variant="contained"
-                      disabled={isSubmitting}
-                      type="submit"
-                    >
-                      submit
-                    </Button>
+                    <Grid item xs={12}>
+                      <Button
+                        color="secondary"
+                        variant="contained"
+                        disabled={isSubmitting}
+                        type="submit"
+                      >
+                        submit
+                      </Button>
+                    </Grid>
                   </Grid>
-                </Grid>
-              </Paper>
-            </Container>
-          </Form>
-        )}
-      </Formik>
+                </Paper>
+              </Container>
+            </Form>
+          )}
+        </Formik>
+      )}
     </Container>
   );
 }
