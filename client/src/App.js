@@ -10,6 +10,7 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
 import AddProduct from "./components/Products/AddProduct";
+import DashboardLayout from "./components/DashboardLayout";
 
 function App() {
   useEffect(() => {
@@ -19,7 +20,6 @@ function App() {
     <Router>
       <Navbar />
       <Switch>
-        <Route path="/" exact component={Landing} />
         <Route path="/support" component={SupportPage} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={LoginRegister} />
@@ -27,6 +27,8 @@ function App() {
         {/* Protected routes go here */}
         <Route path="/product/add" component={AddProduct} />
         <Route path="/product/edit/:productId" component={AddProduct} />
+        <Route path="/admin" component={DashboardLayout} />
+        <Route path="/" exact component={Landing} />
       </Switch>
     </Router>
   );
