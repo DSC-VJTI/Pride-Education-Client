@@ -14,8 +14,6 @@ import {
   Typography,
   makeStyles
 } from "@material-ui/core";
-import { DeleteOutlined, EditOutlined } from "@material-ui/icons";
-import { green, red } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -70,10 +68,6 @@ const Results = ({ className, customers, ...rest }) => {
                     <TableCell>{customer.mobileNumber}</TableCell>
                     <TableCell>{customer.field}</TableCell>
                     <TableCell>{customer.reference}</TableCell>
-                    <TableCell>
-                      <EditOutlined style={{ color: green[500] }} />
-                      <DeleteOutlined style={{ color: red[500] }} />
-                    </TableCell>
                   </TableRow>
                 ))}
             </TableBody>

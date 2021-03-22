@@ -45,17 +45,17 @@ const items = [
     href: "/app/products",
     icon: ShoppingBagIcon,
     title: "Products"
-  },
-  {
-    href: "/app/account",
-    icon: UserIcon,
-    title: "Account"
-  },
-  {
-    href: "/app/settings",
-    icon: SettingsIcon,
-    title: "Settings"
   }
+  // {
+  //   href: "/app/account",
+  //   icon: UserIcon,
+  //   title: "Account"
+  // },
+  // {
+  //   href: "/app/settings",
+  //   icon: SettingsIcon,
+  //   title: "Settings"
+  // }
 ];
 
 const useStyles = makeStyles(() => ({

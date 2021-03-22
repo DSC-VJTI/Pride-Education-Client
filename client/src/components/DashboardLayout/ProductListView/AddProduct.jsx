@@ -21,7 +21,7 @@ import { Form, Formik, useField } from "formik";
 import React, { useEffect, useState } from "react";
 import * as yup from "yup";
 import { useParams } from "react-router-dom";
-import { BASE_URL } from "../../constants";
+import { BASE_URL } from "../../../constants";
 import { green } from "@material-ui/core/colors";
 
 const MyTextField = ({
@@ -84,10 +84,10 @@ export default function AddProduct() {
       url: ""
     }
   });
-  const [isLoading, setIsLoading] = useState(true);
-
   const productId = useParams().productId;
   const isEditPage = !!productId;
+
+  const [isLoading, setIsLoading] = useState(isEditPage);
 
   const checkType = (response) => {
     if ("test" in response) return "test";

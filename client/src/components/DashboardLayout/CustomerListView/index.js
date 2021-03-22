@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box, Container, makeStyles } from "@material-ui/core";
 import Page from "../../UI Elements/Page";
 import Results from "./Results";
-import Toolbar from "./Toolbar";
+import Toolbar from "../Toolbar";
 import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
@@ -32,6 +32,7 @@ const CustomerListView = () => {
   return (
     <Page className={classes.root} title="Customers">
       <Container maxWidth={false}>
+        <Toolbar title="customer" isButtonHidden={true} />
         <Box mt={3}>
           <Results customers={users} />
         </Box>

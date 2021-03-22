@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Box, Container, Grid, makeStyles } from "@material-ui/core";
 import { Pagination } from "@material-ui/lab";
 import Page from "../../UI Elements/Page";
-import Toolbar from "./Toolbar";
 import ProductCard from "./ProductCard";
 import data from "./data";
+import Toolbar from "../Toolbar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,7 +25,7 @@ const ProductList = () => {
   return (
     <Page className={classes.root} title="Products">
       <Container maxWidth={false}>
-        <Toolbar />
+        <Toolbar title="product" link="/product/add" />
         <Box mt={3}>
           <Grid container spacing={3}>
             {products.map((product) => (

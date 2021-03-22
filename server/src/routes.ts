@@ -35,8 +35,8 @@ router.post(
 );
 router.put(
   "/admin/editProduct/:productId",
-  // auth.isAuthenticated,
-  // adminMiddleware.isAdmin,
+  auth.isAuthenticated,
+  adminMiddleware.isAdmin,
   admin.editProduct
 );
 router.delete(

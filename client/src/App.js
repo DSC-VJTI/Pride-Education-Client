@@ -9,7 +9,7 @@ import LoginRegister from "./components/LoginRegister/LoginRegister";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
-import AddProduct from "./components/Products/AddProduct";
+import AddProduct from "./components/DashboardLayout/ProductListView/AddProduct";
 import DashboardLayout from "./components/DashboardLayout";
 
 function App() {

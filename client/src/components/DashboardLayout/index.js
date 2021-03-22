@@ -54,8 +54,8 @@ const DashboardLayout = () => {
             {contents === 0 && <AdminDashboard />}
             {contents === 1 && <Customer />}
             {contents === 2 && <Products />}
-            {contents === 3 && <Account />}
-            {contents === 4 && <Settings />}
+            {/* {contents === 3 && <Account />}
+            {contents === 4 && <Settings />} */}
           </div>
         </div>
       </div>
