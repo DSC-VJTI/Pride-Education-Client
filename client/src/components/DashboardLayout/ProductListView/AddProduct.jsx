@@ -84,6 +84,7 @@ export default function AddProduct() {
       url: ""
     }
   });
+  const [file, setFile] = useState();
   const productId = useParams().productId;
   const isEditPage = !!productId;
 
@@ -182,23 +183,31 @@ export default function AddProduct() {
           onSubmit={async (data, { setSubmitting }) => {
             setSubmitting(true);
             // Preprocess Data
+            let formData = new FormData();
             let reqBody = { ...data };
+            formData.append("name", reqBody["name"]);
+            formData.append("price", reqBody["price"]);
+            formData.append("discount", reqBody["discount"]);
             switch (productType) {
               case "course":
-                delete reqBody["test"];
-                delete reqBody["book"];
-                reqBody["applicableDate"] = selectedDate;
+                // delete reqBody["test"];
+                // delete reqBody["book"];
+                reqBody["course"]["applicableDate"] = selectedDate;
+                formData.append("course", reqBody["course"]);
                 break;
               case "test":
-                delete reqBody["course"];
-                delete reqBody["book"];
+                // delete reqBody["course"];
+                // delete reqBody["book"];
+                formData.append("test", reqBody["test"]);
                 break;
               case "book":
-                delete reqBody["test"];
-                delete reqBody["course"];
+                // delete reqBody["test"];
+                // delete reqBody["course"];
+                formData.append("book", file);
                 break;
             }
-            reqBody["type"] = productType;
+            // reqBody["type"] = productType;
+            formData.append("type", productType);
             // Finish preprocessing
             let response;
             if (isEditPage) {
@@ -209,9 +218,10 @@ export default function AddProduct() {
                 }
               );
             } else {
-              response = await axios.post(BASE_URL + "admin/createProduct/", {
-                ...reqBody
-              });
+              response = await axios.post(
+                BASE_URL + "admin/createProduct/",
+                formData
+              );
             }
             console.log("submit: Done ", response.data);
             setSubmitting(false);
@@ -352,13 +362,26 @@ export default function AddProduct() {
                         </Grid>
                       </>
                     )}
-                    {productType === "book" && (
-                      <>
-                        <Grid item xs={12}>
-                          <MyTextField placeholder="Book URL" name="book.url" />
-                        </Grid>
-                      </>
-                    )}
+                    {productType === "book" &&
+                      (isEditPage ? (
+                        <>
+                          <Typography variant="body1">
+                            Books cannot be edited!
+                          </Typography>
+                        </>
+                      ) : (
+                        <>
+                          <Grid item xs={12}>
+                            {/* <MyTextField placeholder="Book URL" name="book.url" /> */}
+                            <input
+                              type="file"
+                              name="Book"
+                              id="book"
+                              onChange={(e) => setFile(e.target.files[0])}
+                            />
+                          </Grid>
+                        </>
+                      ))}
 
                     <Grid item xs={12}>
                       <Button

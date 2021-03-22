@@ -58,6 +58,11 @@ const AdminController = {
           // Create new blob in the bucket referencing the file
           const blob = bucket.file(req.file.originalname);
 
+          const url = `https://firebasestorage.googleapis.com/v0/b/${
+            bucket.name
+          }/o/${encodeURI(blob.name)}?alt=media`;
+          const book = await Book.create({ url }); // Did not work
+
           // Create writable stream and specifying file mimetype
           const blobWriter = blob.createWriteStream({
             metadata: {
@@ -69,15 +74,8 @@ const AdminController = {
             res.status(500).json({ error: err.message })
           );
 
-          blobWriter.on("finish", async () => {
-            // Assembling public URL for accessing the file via HTTP
-            const url = `https://firebasestorage.googleapis.com/v0/b/${
-              bucket.name
-            }/o/${encodeURI(blob.name)}?alt=media`;
-            product.book = await Book.create({ url });
-          });
-          // When there is no more data to be consumed from the stream
           blobWriter.end(req.file.buffer);
+          product.book = book;
           break;
         }
         case "test":
