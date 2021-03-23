@@ -39,19 +39,19 @@ const CartStyles = makeStyles({
 });
 const Total = (props) => {
   const items = props.items;
-  const title = `($${props.price})`;
+  const title = `(Rs.${props.price})`;
   const classes = CartStyles();
   return (
     <Grid direction="column">
       <Card className={classes.TotalCard}>
         <CardContent>
-          <Grid xs={12}>
-            <Grid xs={12}>
+          <Grid container direction="column" xs={12} spacing={2}>
+            <Grid item xs={12}>
               <Typography className={classes.title} component="h5">
                 Your order is eligible for free order
               </Typography>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Typography
                 color="textSecondary"
                 gutterBottom
@@ -62,12 +62,12 @@ const Total = (props) => {
                 <Link color="textPrimary">Details</Link>
               </Typography>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Typography variant component="h4">
                 {`Subtotal (${items} items) : ${title}`}
               </Typography>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox color="primary" />}
                 label="This order contains a gift"
@@ -75,11 +75,9 @@ const Total = (props) => {
             </Grid>
           </Grid>
         </CardContent>
-        <Grid xs={12}>
-          <CardActions>
-            <Button className={classes.totalButton}>Proceed to Buy</Button>
-          </CardActions>
-        </Grid>
+        <CardActions>
+          <Button className={classes.totalButton}>Proceed to Buy</Button>
+        </CardActions>
       </Card>
     </Grid>
   );

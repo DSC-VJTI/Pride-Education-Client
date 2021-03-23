@@ -25,7 +25,6 @@ const Navbar = () => {
           >
             Pride Education
           </Typography>
-
           <Button color="inherit" className="hideOnMobile" href="/support">
             Support
           </Button>

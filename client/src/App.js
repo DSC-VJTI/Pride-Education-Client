@@ -9,10 +9,12 @@ import SupportPage from "./components/Support Page/SupportPage";
 import Login from "./components/LoginRegister/Login";
 import Registration from "./components/LoginRegister/Registration";
 import LoginRegister from "./components/LoginRegister/LoginRegister";
-import Cart from "./components/Cart/Cart"
+import Cart from "./components/Cart/Cart";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import PaymentPage from "./components/PaymentPage/PaymentPage";
+import MyOrders from "./components/MyOrders/MyOrders";
 
 function App() {
   useEffect(() => {
@@ -23,12 +25,14 @@ function App() {
       <Navbar />
       <Switch>
         <Route path="/classes" component={ClassesPane} />
+        <Route path="/payment" component={PaymentPage} />
         <Route path="/cart" component={Cart} />
         <Route path="/product" component={CoursePage} />
         <Route path="/support" component={SupportPage} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={LoginRegister} />
         <Route path="/" exact component={Landing} />
+        <Route path="/orders" component={MyOrders} />
       </Switch>
     </Router>
   );

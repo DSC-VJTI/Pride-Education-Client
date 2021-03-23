@@ -8,10 +8,13 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@material-ui/pickers": "^3.2.10",
+    "@stripe/react-stripe-js": "^1.4.0",
+    "@stripe/stripe-js": "^1.13.1",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.2",
     "aos": "^2.3.4",
+    "axios": "^0.21.1",
     "date-fns": "^2.19.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
@@ -54,6 +57,7 @@
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-react": "^7.22.0",
+    "nodemon": "^2.0.7",
     "prettier": "^2.2.1"
   }
 }

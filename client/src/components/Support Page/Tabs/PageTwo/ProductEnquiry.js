@@ -73,6 +73,7 @@ const ProductEnquiry = () => {
             size="large"
             text="submit"
             type="submit"
+            style={{ borderRadius: "99999px" }}
           />
         </Grid>
       </Grid>

@@ -5,7 +5,6 @@ export const Input = (props) => {
   const { label, name, value, error = null, onChange } = props;
   return (
     <TextField
-      // variant="outlined"
       label={label}
       name={name}
       value={value}
@@ -21,7 +20,6 @@ export const MultiInput = (props) => {
     <TextField
       multiline
       rowsMax={5}
-      variant="outlined"
       label={label}
       name={name}
       value={value}

@@ -59,18 +59,16 @@ function LinkTab(props) {
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-    border: "5px solid #ffcc5c"
+    backgroundColor: theme.palette.background.paper
   },
   tabcolor: {
-    background: "#ff6f69"
+    background: "#f6f6f6"
   },
   tabpanel: {
-    background: "#ffeead"
+    background: "#f6f6f6"
   },
   pageContent: {
-    background: "#ffeead",
-    border: "1px solid #ffcc5c"
+    background: "#f6f6f6"
   }
 }));
 
@@ -86,16 +84,16 @@ export default function NavTabs(props) {
   };
 
   const indexToTabName = {
-    "software": 0,
-    "product": 1,
-    "personal": 2,
+    software: 0,
+    product: 1,
+    personal: 2
   };
 
   const classes = useStyles();
   const [value, setValue] = React.useState(indexToTabName[page]);
 
   const handleChange = (event, newValue) => {
-    history.push(`/support/${tabNameToIndex[newValue]}`)
+    history.push(`/support/${tabNameToIndex[newValue]}`);
     setValue(newValue);
   };
 
@@ -114,19 +112,19 @@ export default function NavTabs(props) {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0} className={classes.tabpanel}>
-        <Paper className={classes.pageContent} width="100%">
+        <Paper className={classes.pageContent} width="100%" elevation={4}>
           {/* Imported from PageOne */}
           <SoftwareProblems />
         </Paper>
       </TabPanel>
       <TabPanel value={value} index={1} className={classes.tabpanel}>
-        <Paper className={classes.pageContent} width="100%">
+        <Paper className={classes.pageContent} width="100%" elevation={4}>
           {/* Imported from PageTwo */}
           <ProductEnquiry />
         </Paper>
       </TabPanel>
       <TabPanel value={value} index={2} className={classes.tabpanel}>
-        <Paper className={classes.pageContent} width="100%">
+        <Paper className={classes.pageContent} width="100%" elevation={4}>
           {/* Imported from PageTwo */}
           <PersonalDiscussion />
         </Paper>
