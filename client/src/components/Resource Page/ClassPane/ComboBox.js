@@ -75,28 +75,6 @@ const ComboBox = ({ course, CoursesList }) => {
           ))}
         </Select>
       </FormControl>
-      {/* <TextField
-        select
-        label="Instructor"
-        value={courses}
-        onChange={handleChange}
-        SelectProps={{
-          native: true
-        }}
-        className={classes.searchBox}
-      >
-        {CoursesList.map((option) => (
-          <option
-            key={option.value}
-            value={option.value}
-            style={{
-              width: "5rem"
-            }}
-          >
-            <p>Hello</p>
-          </option>
-        ))}
-      </TextField> */}
     </div>
   );
 };
