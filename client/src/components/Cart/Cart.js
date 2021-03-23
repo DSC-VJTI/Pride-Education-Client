@@ -8,15 +8,15 @@ const CartStyles = makeStyles((theme) => ({
     background: "blue",
     padding: "20px",
     minWidth: "100px",
-    margin: "15px",
-   },
-   paper:{
-     "& .MuiPaper-root": {
+    margin: "15px"
+  },
+  paper: {
+    "& .MuiPaper-root": {
       flexGrow: 1,
       padding: theme.spacing(2),
-      marginBottom: "10px",
-      },
-    },
+      marginBottom: "10px"
+    }
+  }
 }));
 
 const initialFValues = [
@@ -43,7 +43,7 @@ const initialFValues = [
     validity: "6 Months",
     price: "Rs. 15,000",
     instructor: "CA Abhishek Khilwani"
-  },
+  }
 ];
 
 const Cart = () => {

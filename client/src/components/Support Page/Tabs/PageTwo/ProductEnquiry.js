@@ -1,8 +1,8 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
-import { useForm, Form } from "../../../UI Elements/UseForm";
-import { Input, MultiInput } from "../../../UI Elements/Input";
-import Button from "../../../UI Elements/Button";
+import { useForm, Form } from "../../UI Elements/UseForm";
+import { Input, MultiInput } from "../../UI Elements/Input";
+import Button from "../../UI Elements/Button";
 
 const initialFValues = {
   mobile: "",

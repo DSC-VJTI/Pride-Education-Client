@@ -4,8 +4,9 @@ import { makeStyles } from "@material-ui/core";
 
 const ClassesPaneStyles = makeStyles({
   root: {
-    margin: "0px",
-    padding: "2% 5%",
+    // margin: "auto",
+    // padding: "2% 5%",
+    // boxSizing:"border-box",
     background: "#E7E7E7"
   }
 });

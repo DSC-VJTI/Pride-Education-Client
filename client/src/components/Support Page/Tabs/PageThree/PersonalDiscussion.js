@@ -1,8 +1,8 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
-import { useForm, Form } from "../../../UI Elements/UseForm";
-import Button from "../../../UI Elements/Button";
-import { DatePicker, AppointedTime } from "../../../UI Elements/DatePicker";
+import { useForm, Form } from "../../UI Elements/UseForm";
+import Button from "../../UI Elements/Button";
+import { DatePicker, AppointedTime } from "../../UI Elements/DatePicker";
 
 const initialFValues = {
   pickedDate: new Date(),

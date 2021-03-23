@@ -7,7 +7,7 @@
     "build": "tsc",
     "prestart": "npm run build",
     "start": "node compiled/app.js",
-    "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/app.ts",
+    "dev": "nodemon --watch 'src/**/*.ts' --exec ts-node src/app.ts",
     "pretest": "eslint . --ext .ts --fix",
     "test": "cross-env NODE_ENV=test mocha 'tests/**/*.ts'",
     "coverage": "nyc npm test",

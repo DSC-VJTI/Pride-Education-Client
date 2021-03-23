@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import "./css/FormStyle.css";
-import { FormControl, Input, InputLabel, Button } from "@material-ui/core";
+import {
+  FormControl,
+  Input,
+  InputLabel,
+  Button,
+  Container
+} from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary
+    height: "fit-content"
   }
 }));
 
@@ -130,7 +131,7 @@ const Registration = () => {
 
   const onFormSubmit = () => {};
   return (
-    <>
+    <Container className={classes.root}>
       <h1 className="heading" style={{ color: "#0065d1", textAlign: "center" }}>
         Sign up for a free account
       </h1>
@@ -288,7 +289,7 @@ const Registration = () => {
           </div>
         </form>
       </div>
-    </>
+    </Container>
   );
 };
 export default Registration;
