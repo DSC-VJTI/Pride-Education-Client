@@ -61,7 +61,7 @@ const AdminController = {
           const url = `https://firebasestorage.googleapis.com/v0/b/${
             bucket.name
           }/o/${encodeURI(blob.name)}?alt=media`;
-          const book = await Book.create({ url }); // Did not work
+          const book = await Book.create({ url, file: req.file.originalname });
 
           // Create writable stream and specifying file mimetype
           const blobWriter = blob.createWriteStream({
@@ -115,12 +115,9 @@ const AdminController = {
             );
             break;
           case "book":
-            product.book = await Book.findByIdAndUpdate(
-              product.book._id,
-              req.body.book,
-              { upsert: true, new: true }
-            );
-            break;
+            return res
+              .status(400)
+              .json({ error: "Books cannot be edited at this time" });
           case "test":
             product.test = await Test.findByIdAndUpdate(
               product.test._id,
@@ -165,6 +162,12 @@ const AdminController = {
         } else if (product.test) {
           await Test.findByIdAndDelete(product.test._id);
         } else {
+          // Delete book from firebase first
+          const book = await Book.findOne(product.book._id);
+          if (book) {
+            const file = book.file;
+            await bucket.file(file).delete();
+          }
           await Book.findByIdAndDelete(product.book._id);
         }
         await Product.findByIdAndDelete(req.params.productId);
