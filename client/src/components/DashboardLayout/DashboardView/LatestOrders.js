@@ -101,7 +101,7 @@ const LatestOrders = ({ className, ...rest }) => {
       <CardHeader title="Latest Orders" />
       <Divider />
       <PerfectScrollbar>
-        <Box minWidth={800}>
+        <Box>
           <Table>
             <TableHead>
               <TableRow>

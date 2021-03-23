@@ -4,6 +4,7 @@ import Page from "../../UI Elements/Page";
 import Results from "./Results";
 import Toolbar from "../Toolbar";
 import axios from "axios";
+import { BASE_URL } from "../../../constants";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,7 +21,7 @@ const CustomerListView = () => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:8000/api/admin/getUsers")
+      .post(BASE_URL + "admin/getUsers")
       .then((res) => {
         setUsers(res.data.allUsers);
       })

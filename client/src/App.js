@@ -25,7 +25,7 @@ function App() {
       <Switch>
         <Route path="/classes" component={ClassesPane} />
         <Route path="/cart" component={Cart} />
-        <Route path="/product" component={CoursePage} />
+        <Route exact path="/product" component={CoursePage} />
         <Route path="/support" component={SupportPage} />
         <Route path="/register" component={LoginRegister} />
 
