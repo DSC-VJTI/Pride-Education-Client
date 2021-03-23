@@ -22,7 +22,7 @@ describe("middleware/auth tests", () => {
         let otp: number;
         let hash: string;
         const email = "test@dsc.in";
-        before(() => {
+        beforeEach(() => {
             [otp, hash] = generateOtpHash(email);
         })
 
@@ -40,6 +40,21 @@ describe("middleware/auth tests", () => {
                     done();
                 });
         });
+
+        it("returns 401 if OTP has expired", (done) => {
+            [otp, hash] = generateOtpHash(email, -20);
+            chai
+                .request(app)
+                .post("/api/register")
+                .send({ otp, hash, email })
+                .end((err, res) => {
+                    expect(err).to.be.null;
+                    expect(res.status).to.be.equal(401);
+                    expect(res.body).to.be.an("object");
+                    expect(res.body).to.have.property("error").equal("OTP timeout. Please try again");
+                    done();
+                });
+        })
     });
 
     describe('userExists', () => {
