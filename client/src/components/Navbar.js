@@ -17,25 +17,18 @@ const Navbar = () => {
           <IconButton color="inherit" edge="start" aria-label="menu">
             <Menu />
           </IconButton>
-          <Typography
-            variant="h6"
-            style={{
-              flexGrow: 1
-            }}
-          >
-            Pride Education
-          </Typography>
+          <Typography variant="h6">Pride Education</Typography>
 
           <Button color="inherit" className="hideOnMobile" href="/support">
             Support
           </Button>
-          <Button color="inherit" className="hideOnMobile">
+          <Button color="inherit" className="hideOnMobile" href="/classes">
             MarketPlace
           </Button>
           <Button color="inherit" className="hideOnMobile" href="/login">
             Login
           </Button>
-          <Button color="inherit" className="hideOnMobile" href="/register">
+          <Button color="inherit" className="hideOnMobile" href="/login">
             Register
           </Button>
         </Toolbar>
