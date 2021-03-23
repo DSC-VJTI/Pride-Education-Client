@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
-import img1 from "../../../Resources/img1.jpeg";
+import img1 from "../../../assets/images/resourceImages/img1.jpeg";
 
 const CoursePageHeaderStyles = makeStyles({
   root: {

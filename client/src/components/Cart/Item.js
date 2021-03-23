@@ -8,7 +8,7 @@ import {
   Card,
   CardHeader
 } from "@material-ui/core";
-import download from "../../Resources/img1.jpeg";
+import download from "../../assets/images/resourceImages/img1.jpeg";
 
 import Fab from "@material-ui/core/Fab";
 import DeleteIcon from "@material-ui/icons/Delete";

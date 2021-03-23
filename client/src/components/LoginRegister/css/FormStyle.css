@@ -1,24 +1,23 @@
 
     *{
-        margin:auto;
+        margin:0;
         padding:0;
         box-sizing: border-box;
     }
     .form{
-        height:fit-content;
+        height:auto;
         position: absolute;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
         padding:2rem 2rem;
         width:50%;
-        font-size: 30%;
         background-image: linear-gradient(to right, rgb(14, 35, 219), rgb(8, 186, 240));
     }
      
     .mainSection{
         width:100%;
-        height:fit-content;
+        height:auto;
         border:1px solid #fff;
         background-color: #ffffff;
         display:flex;
@@ -33,11 +32,9 @@
     }
     .inputFields{
         margin:0.2rem 0;
-        height: fit-content;
     }
     .inputFieldsForDateAndBtn{
         margin-top:1rem;
-        font-size: small;
     }
     @media(max-width:900px)
     {
