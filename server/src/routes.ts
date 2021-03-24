@@ -6,6 +6,7 @@ import admin from "./controllers/admin.controller";
 import adminMiddleware from "./middleware/admin.middleware";
 import CartController from "./controllers/cart.controller";
 import OrderController from "./controllers/order.controller";
+import uploader from "./utility/uploader";
 const router = express.Router();
 
 // Basic route
@@ -32,6 +33,7 @@ router.post(
   "/admin/createProduct/",
   auth.isAuthenticated,
   adminMiddleware.isAdmin,
+  uploader.single("book"),
   admin.newProduct
 );
 router.put(

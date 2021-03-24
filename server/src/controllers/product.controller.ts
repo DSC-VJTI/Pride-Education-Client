@@ -15,7 +15,7 @@ const ProductController = {
         })
         .populate({
           path: "book",
-          select: ["url"]
+          select: ["url", "_id"]
         });
       return res.status(200).json({ data });
     } catch (error) {

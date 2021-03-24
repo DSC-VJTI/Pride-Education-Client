@@ -1,0 +1,38 @@
+
+.main_footer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+.footer{
+    width:100%;
+    margin-top: 50px;
+    padding:7px 0;
+    display:block;
+    height:auto;
+    background-color: #3f51b5;
+}
+.pageLinks{
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    width:75%;
+}
+.pageLinks a{
+    color: #fff;
+    font-size:17.5px;
+    text-decoration:none;
+}
+.socialHandles{
+    width:25%;
+}
+.firstPart,.secondPart{
+    display:flex;
+    justify-content: center;
+}
+.logo{
+    margin:5px 15px;
+    color:#fff;
+}
