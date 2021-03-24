@@ -31,8 +31,8 @@ function App() {
           <Route path="/login" component={LoginRegister} />
           <Route path="/" exact component={Landing} />
         </Switch>
+        <Footer />
       </Router>
-      <Footer />
     </>
   );
 }
