@@ -12,24 +12,28 @@ import Cart from "./components/Cart/Cart";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
   return (
-    <Router>
-      <Navbar />
-      <Switch>
-        <Route path="/classes" component={ClassesPane} />
-        <Route path="/cart" component={Cart} />
-        <Route path="/product" component={CoursePage} />
-        <Route path="/support" component={SupportPage} />
-        <Route path="/register" component={LoginRegister} />
-        <Route path="/login" component={LoginRegister} />
-        <Route path="/" exact component={Landing} />
-      </Switch>
-    </Router>
+    <>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route path="/classes" component={ClassesPane} />
+          <Route path="/cart" component={Cart} />
+          <Route path="/product" component={CoursePage} />
+          <Route path="/support" component={SupportPage} />
+          <Route path="/register" component={LoginRegister} />
+          <Route path="/login" component={LoginRegister} />
+          <Route path="/" exact component={Landing} />
+        </Switch>
+        <Footer />
+      </Router>
+    </>
   );
 }
 
