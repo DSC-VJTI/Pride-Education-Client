@@ -14,6 +14,7 @@ import "aos/dist/aos.css";
 import { useEffect } from "react";
 import AddProduct from "./components/DashboardLayout/ProductListView/AddProduct";
 import DashboardLayout from "./components/DashboardLayout";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   useEffect(() => {
@@ -36,6 +37,7 @@ function App() {
         <Route path="/login" component={LoginRegister} />
         <Route path="/" exact component={Landing} />
       </Switch>
+      <Footer />
     </Router>
   );
 }
