@@ -12,6 +12,8 @@ import Cart from "./components/Cart/Cart";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import AddProduct from "./components/DashboardLayout/ProductListView/AddProduct";
+import DashboardLayout from "./components/DashboardLayout";
 import Footer from "./components/Footer/Footer";
 
 function App() {
@@ -19,21 +21,24 @@ function App() {
     Aos.init({ duration: 2000 });
   }, []);
   return (
-    <>
-      <Router>
-        <Navbar />
-        <Switch>
-          <Route path="/classes" component={ClassesPane} />
-          <Route path="/cart" component={Cart} />
-          <Route path="/product" component={CoursePage} />
-          <Route path="/support" component={SupportPage} />
-          <Route path="/register" component={LoginRegister} />
-          <Route path="/login" component={LoginRegister} />
-          <Route path="/" exact component={Landing} />
-        </Switch>
-        <Footer />
-      </Router>
-    </>
+    <Router>
+      <Navbar />
+      <Switch>
+        <Route path="/classes" component={ClassesPane} />
+        <Route path="/cart" component={Cart} />
+        <Route exact path="/product" component={CoursePage} />
+        <Route path="/support" component={SupportPage} />
+        <Route path="/register" component={LoginRegister} />
+
+        {/* Protected routes go here */}
+        <Route path="/product/add" component={AddProduct} />
+        <Route path="/product/edit/:productId" component={AddProduct} />
+        <Route path="/admin" component={DashboardLayout} />
+        <Route path="/login" component={LoginRegister} />
+        <Route path="/" exact component={Landing} />
+      </Switch>
+      <Footer />
+    </Router>
   );
 }
 
