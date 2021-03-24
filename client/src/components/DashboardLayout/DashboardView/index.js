@@ -1,14 +1,10 @@
 import React from "react";
 import { Container, Grid, makeStyles } from "@material-ui/core";
 import Page from "../../UI Elements/Page";
-import Budget from "./Budget";
 import LatestOrders from "./LatestOrders";
 import LatestProducts from "./LatestProducts";
 import Sales from "./Sales";
-import TasksProgress from "./TasksProgress";
 import TotalCustomers from "./TotalCustomers";
-import TotalProfit from "./TotalProfit";
-import TrafficByDevice from "./TrafficByDevice";
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -23,39 +23,27 @@ import {
   Users as UsersIcon
 } from "react-feather";
 import NavItem from "./NavItem";
+import UserAvatar from "../../../assets/images/adminimages/avatar_6.png";
 
 const user = {
-  avatar: "/static/images/avatars/avatar_6.png",
+  avatar: UserAvatar,
   jobTitle: "Senior Developer",
   name: "Katarina Smith"
 };
 
 const items = [
   {
-    href: "/app/dashboard",
     icon: BarChartIcon,
     title: "Dashboard"
   },
   {
-    href: "/app/customers",
     icon: UsersIcon,
     title: "Customers"
   },
   {
-    href: "/app/products",
     icon: ShoppingBagIcon,
     title: "Products"
   }
-  // {
-  //   href: "/app/account",
-  //   icon: UserIcon,
-  //   title: "Account"
-  // },
-  // {
-  //   href: "/app/settings",
-  //   icon: SettingsIcon,
-  //   title: "Settings"
-  // }
 ];
 
 const useStyles = makeStyles(() => ({
@@ -76,24 +64,11 @@ const useStyles = makeStyles(() => ({
 
 const NavBar = ({ onMobileClose, openMobile, setContents }) => {
   const classes = useStyles();
-  // const location = useLocation();
-
-  // useEffect(() => {
-  //   if (openMobile && onMobileClose) {
-  //     onMobileClose();
-  //   }
-  //   // eslint-disable-next-line
-  // }, [location.pathname]);
 
   const content = (
     <Box height="100%" display="flex" flexDirection="column">
       <Box alignItems="center" display="flex" flexDirection="column" p={2}>
-        <Avatar
-          className={classes.avatar}
-          component={RouterLink}
-          src={user.avatar}
-          to="/app/account"
-        />
+        <Avatar className={classes.avatar} src={user.avatar} />
         <Typography className={classes.name} color="textPrimary" variant="h5">
           {user.name}
         </Typography>
@@ -106,7 +81,6 @@ const NavBar = ({ onMobileClose, openMobile, setContents }) => {
         <List>
           {items.map((item, idx) => (
             <NavItem
-              href={item.href}
               key={item.title}
               title={item.title}
               icon={item.icon}

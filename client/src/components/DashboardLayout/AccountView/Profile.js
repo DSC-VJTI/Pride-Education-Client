@@ -13,9 +13,10 @@ import {
   Typography,
   makeStyles
 } from "@material-ui/core";
+import UserAvatar from "../../../assets/images/adminimages/avatar_6.png";
 
 const user = {
-  avatar: "/static/images/avatars/avatar_6.png",
+  avatar: UserAvatar,
   city: "Los Angeles",
   country: "USA",
   jobTitle: "Senior Developer",

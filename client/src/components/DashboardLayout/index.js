@@ -3,9 +3,7 @@ import { makeStyles } from "@material-ui/core";
 import NavBar from "./NavBar";
 import AdminDashboard from "./DashboardView";
 import Customer from "./CustomerListView";
-import Account from "./AccountView";
 import Products from "./ProductListView";
-import Settings from "./SettingsView";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,8 +52,6 @@ const DashboardLayout = () => {
             {contents === 0 && <AdminDashboard />}
             {contents === 1 && <Customer />}
             {contents === 2 && <Products />}
-            {/* {contents === 3 && <Account />}
-            {contents === 4 && <Settings />} */}
           </div>
         </div>
       </div>
