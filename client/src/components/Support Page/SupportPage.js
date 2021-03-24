@@ -28,7 +28,7 @@ const SupportPage = () => {
 
   return (
     <Container maxWidth="sm">
-      <div style={{ marginTop: "100px" }} className={classes.root}>
+      <div style={{ marginTop: "120px" }} className={classes.root}>
         <Tabs />
       </div>
     </Container>
