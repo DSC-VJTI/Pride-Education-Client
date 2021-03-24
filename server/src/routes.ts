@@ -5,6 +5,7 @@ import auth from "./middleware/auth.middleware";
 import admin from "./controllers/admin.controller";
 import adminMiddleware from "./middleware/admin.middleware";
 import CartController from "./controllers/cart.controller";
+import OrderController from "./controllers/order.controller";
 import uploader from "./utility/uploader";
 const router = express.Router();
 
@@ -58,5 +59,11 @@ router.post(
 router.post("/cart", CartController.showCart);
 router.post("/cart/:productId", CartController.addToCart);
 router.delete("/cart/:productId", CartController.removeFromCart);
+
+// Order routes
+router.get("/orders", OrderController.getOrders);
+router.get("/orders/:id", OrderController.getOrderById);
+router.get("/orders/user/:user_id", OrderController.getOrdersByUserId);
+router.post("/orders", OrderController.addOrder);
 
 export default router;
