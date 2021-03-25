@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import { useForm, Form } from "../../../UI Elements/UseForm";
 import { Input, MultiInput } from "../../../UI Elements/Input";
 import Button from "../../../UI Elements/Button";
@@ -38,6 +38,10 @@ const ProductEnquiry = () => {
     <Form onSubmit={handleSubmit}>
       <Grid container>
         <Grid item xs={12}>
+          <Typography variant="body">
+            If you've any doubts regarding the product and it's plan, you can
+            contact us here.
+          </Typography>
           <Input
             label="Mobile No."
             name="mobile"

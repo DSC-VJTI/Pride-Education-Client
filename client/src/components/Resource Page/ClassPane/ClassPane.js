@@ -4,7 +4,6 @@ import ReactElasticCarousel from "react-elastic-carousel/dist/index";
 import Product from "./Product";
 import ComboBox from "./ComboBox";
 
-
 const ClassPaneStyles = makeStyles({
   slider: {
     backgroundColor: "#3f51b5",

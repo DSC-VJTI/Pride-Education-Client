@@ -1,17 +1,12 @@
-import React from 'react';
+import React from "react";
 
-import {
-    TextField,
-    Typography, 
-    makeStyles
-  } from "@material-ui/core";
+import { TextField, Typography, makeStyles } from "@material-ui/core";
 
 // import { keyframes } from "styled-components";
 
 // const  blinker =keyframes`
 //   0%{color:} 25%{color:} 50%{color:} 75%{color:}
-//  `//  
-
+//  `//
 
 const ComboBoxStyles = makeStyles({
   ClassesBox: {
@@ -28,49 +23,48 @@ const ComboBoxStyles = makeStyles({
     background: "#e3f2fd",
     width: "fit-content",
     borderRadius: "8px",
-    margin:"auto",
+    margin: "auto"
   },
   title: {
     margin: "auto",
     color: "#ffffff",
-    fontWeight: "800",
+    fontWeight: "800"
   }
 });
 
-
-const ComboBox = ({course, CoursesList}) => {
-    const [courses, setCourses] = React.useState("");
-    const classes = ComboBoxStyles();
-    const handleChange = (event) => {
-      setCourses(event.target.value);
-    };
-    return (
-      <div className={classes.ClassesBox}>
-        <Typography className={classes.title}>{course}</Typography>
-        <TextField
-          select
-          label="Instructor"
-          value={courses}
-          onChange={handleChange}
-          SelectProps={{
-            native: true
-          }}
-          className={classes.searchBox}
-        >
-          {CoursesList.map((option) => (
-            <option
-              key={option.value}
-              value={option.value}
-              style={{
-                width:"5rem",
-              }}
-            >
-              {option.label}
-            </option>
-          ))}
-        </TextField>
-      </div>
-    );
-  }
+const ComboBox = ({ course, CoursesList }) => {
+  const [courses, setCourses] = React.useState("");
+  const classes = ComboBoxStyles();
+  const handleChange = (event) => {
+    setCourses(event.target.value);
+  };
+  return (
+    <div className={classes.ClassesBox}>
+      <Typography className={classes.title}>{course}</Typography>
+      <TextField
+        select
+        label="Instructor"
+        value={courses}
+        onChange={handleChange}
+        SelectProps={{
+          native: true
+        }}
+        className={classes.searchBox}
+      >
+        {CoursesList.map((option) => (
+          <option
+            key={option.value}
+            value={option.value}
+            style={{
+              width: "5rem"
+            }}
+          >
+            {option.label}
+          </option>
+        ))}
+      </TextField>
+    </div>
+  );
+};
 
 export default ComboBox;

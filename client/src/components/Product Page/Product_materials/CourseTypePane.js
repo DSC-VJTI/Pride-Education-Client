@@ -32,10 +32,8 @@ const CourseTypePane = ({ Course, CourseContent }) => {
   const classes = mainPaneStyles();
   return (
     <div>
-      <div >
-      <h2 className={classes.CourseType}>
-        {Course}
-      </h2>
+      <div>
+        <h2 className={classes.CourseType}>{Course}</h2>
       </div>
       <div className={classes.mainHolder}>
         <ReactPlayer

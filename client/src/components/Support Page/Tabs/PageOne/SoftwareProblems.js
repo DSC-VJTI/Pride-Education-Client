@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, Typography, makeStyles } from "@material-ui/core";
 import { useForm, Form } from "../../../UI Elements/UseForm";
 import { Input, MultiInput } from "../../../UI Elements/Input";
 import Button from "../../../UI Elements/Button";
@@ -38,6 +38,10 @@ const SoftwareProblems = () => {
     <Form onSubmit={handleSubmit}>
       <Grid container>
         <Grid item xs={12}>
+          <Typography variant="body">
+            After purchasing a product from us, if you're facing any software
+            issues, contact us here.
+          </Typography>
           <Input
             label="Mobile No."
             name="mobile"
@@ -66,7 +70,6 @@ const SoftwareProblems = () => {
             onChange={handleInputChange}
             error={error.query}
           />
-
           <Button
             variant="contained"
             color="primary"

@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Divider,
-  Grid,
-  Paper,
-  Typography,
-  makeStyles,
-  Card,
-  CardHeader
-} from "@material-ui/core";
+import { Divider, Grid, Typography, makeStyles } from "@material-ui/core";
 import download from "../../Resources/img1.jpeg";
 
 import Fab from "@material-ui/core/Fab";
@@ -21,6 +13,11 @@ const useStyles = makeStyles((theme) => ({
       height: "auto",
       maxWidth: "300px"
     }
+  },
+  button: {
+    paddingTop: "74px",
+    textAlign: "right",
+    paddingRight: "14px"
   }
 }));
 
@@ -42,7 +39,7 @@ const Item = ({
     console.log(id);
   };
   return (
-    <Grid container spacing={2} className={classes.root}>
+    <Grid container spacing={4} className={classes.root}>
       <Grid item xs={12} sm={5} style={{ paddingLeft: "10px" }}>
         <div>
           <img src={download} />
@@ -50,12 +47,12 @@ const Item = ({
       </Grid>
       <Grid item xs={12} container sm={7} style={{ paddingLeft: "40px" }}>
         <Grid item xs={8}>
-          <Typography gutterBottom variant="h6" color="primary">
+          <Typography gutterBottom variant="h5" color="primary">
             {title}
           </Typography>
           <Typography gutterBottom variant="subtitle2">
             <ul>
-              <li>{`Content Type: ${content} ${id}`}</li>
+              <li>{`Content Type: ${content}`}</li>
               <li>{`Duration: ${duration} Hours`}</li>
               <li>{`${views} Views`}</li>
               <li>{`Validity ${validity}`}</li>
@@ -73,13 +70,7 @@ const Item = ({
             By {instructor}
           </Typography>
 
-          <div
-            style={{
-              paddingTop: "54px",
-              textAlign: "right",
-              paddingRight: "10px"
-            }}
-          >
+          <div className={classes.button}>
             <Fab color="primary" aria-label="add" onClick={handleOnClick}>
               <DeleteIcon />
             </Fab>

@@ -29,10 +29,10 @@ function CoursePageHeader() {
     <div className={classes.root}>
       <div className={classes.Desc}>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.Mollitia
-           eatae harum quis sunt repellat aspernatur fugit earum minima corrupti
-           uidem sequi explicabo quia laborum repellendus, tempore laboriosam,
-          tempora, id vitae?
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.Mollitia eatae
+          harum quis sunt repellat aspernatur fugit earum minima corrupti uidem
+          sequi explicabo quia laborum repellendus, tempore laboriosam, tempora,
+          id vitae?
         </p>
       </div>
       <img src={img1} className={classes.instructImg} alt="Instructor" />

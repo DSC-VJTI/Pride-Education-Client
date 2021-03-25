@@ -6,6 +6,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     "& .MuiButton-root": {
       textAlign: "center",
+      marginTop: "20px",
       marginBottom: "10px"
     }
   }

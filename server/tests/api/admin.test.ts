@@ -1,6 +1,7 @@
 import chai from "chai";
 import chaiHttp from "chai-http";
 import "mocha";
+import sinon from "sinon";
 import mongoose from "mongoose";
 import app from "../../src/app";
 import IProduct from "../../src/models/Product/IProduct";
@@ -41,7 +42,6 @@ describe("Admin tests", () => {
             address: "Test adress",
             isAdmin: true
         }).then((savedUser: IUser) => {
-            // user = savedUser;
             userId = savedUser._id.toString();
             token = jwtHandler.setJwt(savedUser);
             done();
@@ -148,6 +148,32 @@ describe("Admin tests", () => {
                 });
         });
 
+        it("returns 500 if something bad happens", (done) => {
+            const errorStatement = "Something bad happened"
+            sinon.stub(Product, "findByIdAndUpdate").callsFake(() => { throw Error(errorStatement) });
+            const updatedProduct = {
+                name: "Test updated product name",
+                courseDetails: {
+                    level: "Intermediate",
+                }
+            }
+            Product.create(productToSave)
+                .then((value: IProduct) => {
+                    chai
+                        .request(app)
+                        .put(`/api/admin/editProduct/${value._id.toString()}`)
+                        .set('Authorization', `Bearer ${token}`)
+                        .send({ userId, ...updatedProduct })
+                        .end((err, res) => {
+                            expect(err).to.be.null;
+                            expect(res.status).to.be.equal(500);
+                            expect(res.body).to.be.an("object");
+                            expect(res.body).to.have.property("message").equal(errorStatement);
+                            sinon.restore();
+                            done();
+                        });
+                })
+        })
 
     });
 
@@ -185,6 +211,27 @@ describe("Admin tests", () => {
                     done();
                 });
         });
+
+        it("returns 500 if something bad happens", (done) => {
+            const errorStatement = "Something bad happened"
+            sinon.stub(Product, "findByIdAndDelete").callsFake(() => { throw Error(errorStatement) });
+            Product.create(productToSave)
+                .then((value: IProduct) => {
+                    chai
+                        .request(app)
+                        .delete(`/api/admin/deleteProduct/${value._id.toString()}`)
+                        .set('Authorization', `Bearer ${token}`)
+                        .send({ userId })
+                        .end((err, res) => {
+                            expect(err).to.be.null;
+                            expect(res.status).to.be.equal(500);
+                            expect(res.body).to.be.an("object");
+                            expect(res.body).to.have.property("message").equal(errorStatement);
+                            sinon.restore();
+                            done();
+                        });
+                });
+        })
     });
 
     describe("POST /admin/getUsers/", () => {
@@ -249,5 +296,23 @@ describe("Admin tests", () => {
                     done();
                 });
         });
+
+        it("returns 500 if something bad happens", (done) => {
+            const errorStatement = "Something bad happened"
+            sinon.stub(User, "find").callsFake(() => { throw Error(errorStatement) });
+            chai
+                .request(app)
+                .post("/api/admin/getUsers")
+                .set('Authorization', `Bearer ${token}`)
+                .send({ userId })
+                .end((err, res) => {
+                    expect(err).to.be.null;
+                    expect(res.status).to.be.equal(500);
+                    expect(res.body).to.be.an("object");
+                    expect(res.body).to.have.property("message").equal(errorStatement);
+                    sinon.restore();
+                    done();
+                });
+        })
     });
 });

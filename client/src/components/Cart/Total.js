@@ -5,17 +5,21 @@ import {
   CardContent,
   Typography,
   CardActions,
-  Button,
+  // Button,
   Checkbox,
   FormControlLabel,
   Link,
   Grid
 } from "@material-ui/core";
-import Cart from "./Cart";
+import Button from "../UI Elements/Button";
 
 const CartStyles = makeStyles({
   TotalCard: {
-    background: "white"
+    background: "white",
+    textAlign: "left",
+    "& .MuiBox-root": {
+      width: "100%"
+    }
   },
   bullet: {
     display: "inline-block",
@@ -31,10 +35,10 @@ const CartStyles = makeStyles({
     marginBottom: 12
   },
   totalButton: {
-    background: "#3f51b5",
-    color: "white",
     margin: "auto",
-    borderRadius: "2rem"
+    width: "100%",
+    // borderRadius: "2rem",
+    padding: "10px 20px"
   }
 });
 const Total = (props) => {
@@ -76,7 +80,15 @@ const Total = (props) => {
           </Grid>
         </CardContent>
         <CardActions>
-          <Button className={classes.totalButton}>Proceed to Buy</Button>
+          {/* <Button className={classes.totalButton}>Proceed to Buy</Button> */}
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            text="Proceed to buy"
+            type="submit"
+            className={classes.totalButton}
+          />
         </CardActions>
       </Card>
     </Grid>

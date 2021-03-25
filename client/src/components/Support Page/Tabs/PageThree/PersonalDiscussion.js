@@ -1,8 +1,19 @@
 import React from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, makeStyles } from "@material-ui/core";
 import { useForm, Form } from "../../../UI Elements/UseForm";
 import Button from "../../../UI Elements/Button";
 import { DatePicker, AppointedTime } from "../../../UI Elements/DatePicker";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& .MuiBox-root": {
+      marginTop: "153px"
+    },
+    "& .MuiButton-root": {
+      borderRadius: "99999px"
+    }
+  }
+}));
 
 const initialFValues = {
   pickedDate: new Date(),
@@ -15,6 +26,8 @@ const PersonalDiscussion = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+
+  const classes = useStyles();
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -32,14 +45,16 @@ const PersonalDiscussion = () => {
             value={values.pickedTime}
             onChange={handleInputChange}
           />
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            text="submit"
-            type="submit"
-            style={{ borderRadius: "99999px" }}
-          />
+          <div className={classes.root}>
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              text="submit"
+              type="submit"
+              // style={{ }}
+            />
+          </div>
         </Grid>
       </Grid>
     </Form>

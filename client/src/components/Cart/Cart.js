@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { Container, Grid, makeStyles, Paper } from "@material-ui/core";
+import {
+  Container,
+  Grid,
+  makeStyles,
+  Paper,
+  Typography,
+  Divider,
+  Card,
+  CardActions
+} from "@material-ui/core";
 import Item from "./Item";
 import Total from "./Total";
 import axios from "axios";
 
 const CartStyles = makeStyles((theme) => ({
   style: {
-    background: "blue",
+    marginTop: "30px",
+    background: "#f6f6f6",
     padding: "20px",
     minWidth: "100px",
     margin: "15px"
@@ -17,10 +27,15 @@ const CartStyles = makeStyles((theme) => ({
       padding: theme.spacing(2),
       marginBottom: "10px"
     }
+  },
+  header: {
+    "& .MuiTypography-root": {
+      padding: "20px"
+    }
   }
 }));
 
-var initialFValues = [
+const initialFValues = [
   {
     title: "SCMPE Full Course",
     content: "Books",
@@ -54,6 +69,16 @@ var initialFValues = [
 ];
 
 const Cart = () => {
+  const [elevation, setElevation] = useState(2);
+
+  const handleOnHover = (e) => {
+    console.log(e.target);
+    setElevation(10);
+  };
+
+  const handleonMouseLeave = () => {
+    setElevation(2);
+  };
   const [value, setValue] = useState(initialFValues);
   const classes = CartStyles();
 
@@ -65,6 +90,7 @@ const Cart = () => {
   const TotalAmount = (item) => {
     total += item.price;
   };
+
   useEffect(() => {
     axios
       .get("http://127.0.0.1:8000/api/cart/")
@@ -90,26 +116,41 @@ const Cart = () => {
         spacing={4}
       >
         <Container className={classes.style}>
+          <div className={classes.header}>
+            <Typography variant="h3" color="primary">
+              Shopping Cart
+            </Typography>
+            <Divider />
+          </div>
           {value.map((cartItem) => (
             <Grid item xs={12} spacing={2} className={classes.paper}>
-              <Paper>
-                <Item
-                  id={cartItem.id}
-                  title={cartItem.title}
-                  content={cartItem.content}
-                  views={cartItem.views}
-                  validity={cartItem.validity}
-                  price={cartItem.price}
-                  instructor={cartItem.instructor}
-                  duration={cartItem.duration}
-                  onClick={handleOnClick}
-                />
-              </Paper>
+              <Card
+                elevation={`${elevation}`}
+                onMouseEnter={handleOnHover}
+                onMouseLeave={handleonMouseLeave}
+              >
+                {/* <Paper> */}
+                <CardActions>
+                  <Item
+                    id={cartItem.id}
+                    title={cartItem.title}
+                    content={cartItem.content}
+                    views={cartItem.views}
+                    validity={cartItem.validity}
+                    price={cartItem.price}
+                    instructor={cartItem.instructor}
+                    duration={cartItem.duration}
+                    onClick={handleOnClick}
+                  />
+                </CardActions>
+
+                {/* </Paper> */}
+              </Card>
             </Grid>
           ))}
         </Container>
       </Grid>
-      <Grid item sm={7} xs={12} md={4} lg={3}>
+      <Grid item sm={7} xs={12} md={4} lg={3} spacing={4}>
         <Container className={classes.style}>
           <Total items={value.length} price={total} />
         </Container>

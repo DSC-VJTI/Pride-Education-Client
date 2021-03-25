@@ -58,17 +58,32 @@ function LinkTab(props) {
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    width: "900px",
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper
+    // backgroundColor: theme.palette.background.paper,
+    "& .MuiTab-root": {
+      background: "#3d3d3d"
+    },
+    "& .MuiTypography-root": {
+      textAlign: "center"
+    }
+    // '@media and all(min-width: 500px)': {
+    //   width: '800px',
+    // }
   },
   tabcolor: {
-    background: "#f6f6f6"
+    // background: "#3d3d3d"
   },
   tabpanel: {
-    background: "#f6f6f6"
+    background: "#DCDCDC",
+    "& .MuiPaper-root": {
+      padding: "20px 0px",
+      height: "420px"
+    }
   },
   pageContent: {
-    background: "#f6f6f6"
+    background: "#f6f6f6",
+    height: "100%"
   }
 }));
 
@@ -98,7 +113,7 @@ export default function NavTabs(props) {
   };
 
   return (
-    <div className={classes.root}>
+    <Box className={classes.root}>
       <AppBar position="static">
         <Tabs
           variant="fullWidth"
@@ -129,6 +144,6 @@ export default function NavTabs(props) {
           <PersonalDiscussion />
         </Paper>
       </TabPanel>
-    </div>
+    </Box>
   );
 }
