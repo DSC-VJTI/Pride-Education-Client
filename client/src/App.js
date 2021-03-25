@@ -10,7 +10,6 @@ import Registration from "./components/LoginRegister/Registration";
 import Login from "./components/LoginRegister/Login";
 import OtpPage from "./components/LoginRegister/inputOTP";
 
-// import LoginRegister from "./components/LoginRegister/LoginRegister";
 import Cart from "./components/Cart/Cart";
 import Aos from "aos";
 import "aos/dist/aos.css";
@@ -40,7 +39,7 @@ function App() {
         <Route path="/admin" component={DashboardLayout} />
         <Route path="/" exact component={Landing} />
       </Switch>
-      <Footer />
+      {/* <Footer /> */}
     </Router>
   );
 }

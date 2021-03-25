@@ -19,18 +19,38 @@ const Navbar = () => {
           </IconButton>
           <Typography variant="h6">Pride Education</Typography>
 
-          <Button color="inherit" className="hideOnMobile" href="/support">
-            Support
-          </Button>
-          <Button color="inherit" className="hideOnMobile" href="/classes">
-            MarketPlace
-          </Button>
-          <Button color="inherit" className="hideOnMobile" href="/login">
-            Login
-          </Button>
-          <Button color="inherit" className="hideOnMobile" href="/login">
-            Register
-          </Button>
+          <Link
+            to="/support"
+            style={{ color: "inherit", textDecoration: "none" }}
+          >
+            <Button color="inherit" className="hideOnMobile">
+              Support
+            </Button>
+          </Link>
+          <Link
+            to="/classes"
+            style={{ color: "inherit", textDecoration: "none" }}
+          >
+            <Button color="inherit" className="hideOnMobile">
+              MarketPlace
+            </Button>
+          </Link>
+          <Link
+            to="/login"
+            style={{ color: "inherit", textDecoration: "none" }}
+          >
+            <Button color="inherit" className="hideOnMobile">
+              Login
+            </Button>
+          </Link>
+          <Link
+            to="/register"
+            style={{ color: "inherit", textDecoration: "none" }}
+          >
+            <Button color="inherit" className="hideOnMobile">
+              Register
+            </Button>
+          </Link>
         </Toolbar>
       </AppBar>
     </div>

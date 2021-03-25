@@ -1,44 +1,45 @@
 import React, { useState } from "react";
-import {
-  FormControl,
-  Input,
-  InputLabel,
-  Button,
-  Link
-} from "@material-ui/core";
+import { FormControl, Input, InputLabel, Button } from "@material-ui/core";
 import "./css/FormStyle.css";
+import { sendOTP } from "../../actions/authActions";
+import { Redirect } from "react-router-dom";
+import OtpPage from "./inputOTP";
 
 const Login = () => {
   const [email, setEmail] = useState("");
-  const [number, setNumber] = useState("");
+  // const [redirect, setRedirect] = useState(null);
+  const [data, setData] = useState(null);
+  const [alert, setAlert] = useState(null);
+
   //States Used for Validation Starts from Here
-  const [warningNumber, setWarningNumber] = useState("");
   const [warningEmail, setWarningEmail] = useState("");
-  const validateNumber = () => {
-    if (number.length !== 10 || isNaN(number)) {
-      setWarningNumber("Please enter a valid mobile number");
-    }
-    if (number.length === 10 && !isNaN(number)) {
-      setWarningNumber("");
-    }
-  };
+
   const validateEmail = () => {
-    if (
-      email.length > 0 &&
-      email.indexOf("@") > -1 &&
-      isNaN(email[0]) &&
-      email.indexOf(".") > -1
-    ) {
-      setWarningEmail("");
-    } else {
+    let isEmailValidated = true;
+    let pattern = new RegExp(
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+    if (!pattern.test(email)) {
       setWarningEmail("Please enter a valid email Address");
+      isEmailValidated = false;
+    } else {
+      setWarningEmail("");
     }
+
+    return isEmailValidated;
   };
+
   const onBtnClick = (event) => {
     event.preventDefault();
-    validateNumber();
-    validateEmail();
+    if (validateEmail()) {
+      sendOTP({ email }).then((res) => {
+        if (res.status === 200) setData(res);
+        else if (res.status === 404)
+          setAlert("Email not found. Please register first.");
+      });
+    }
   };
+
   const onLogin = (event) => {
     let name = event.target.name;
     let value = event.target.value;
@@ -49,8 +50,10 @@ const Login = () => {
       setNumber(value);
     }
   };
+
   const onFormSubmit = () => {};
-  return (
+
+  return !data ? (
     <>
       <div className="form">
         <div className="mainSection">
@@ -58,7 +61,7 @@ const Login = () => {
             className="heading"
             style={{ color: "#0065d1", textAlign: "center" }}
           >
-            Login To your Account
+            Login
           </h1>
           <form onSubmit={onFormSubmit}>
             <div className="">
@@ -81,26 +84,6 @@ const Login = () => {
                   <small style={{ color: "red" }}>{warningEmail}</small>
                 </FormControl>
               </div>
-              <div style={{ display: "flex", justifyContent: "space-around" }}>
-                <FormControl
-                  className="inputField"
-                  style={{ width: "90%", marginTop: "0.3rem" }}
-                >
-                  <InputLabel htmlFor="my-input">
-                    Enter Mobile Number
-                  </InputLabel>
-                  <Input
-                    id="number"
-                    name="number"
-                    value={number}
-                    onChange={onLogin}
-                    type="text"
-                    id="my-input"
-                    aria-describedby="my-helper-text"
-                  />
-                  <small style={{ color: "red" }}>{warningNumber}</small>
-                </FormControl>
-              </div>
               <div className="" style={{ marginTop: "0.3rem" }}>
                 <Button
                   onClick={onBtnClick}
@@ -109,14 +92,14 @@ const Login = () => {
                   style={{
                     backgroundColor: " #455ff0",
                     width: "30%",
-                    alignSelf: "center",
+                    alignSelf: "left",
                     marginTop: "1rem",
                     marginLeft: "2rem"
                   }}
                   variant="contained"
                   color="primary"
                 >
-                  Login
+                  Send OTP
                 </Button>
               </div>
             </div>
@@ -124,6 +107,11 @@ const Login = () => {
         </div>
       </div>
     </>
+  ) : (
+    <OtpPage
+      action="login"
+      data={{ email: data.data.email, hash: data.data.hash }}
+    />
   );
 };
 export default Login;
