@@ -5,7 +5,7 @@ import Total from "./Total";
 
 const CartStyles = makeStyles((theme) => ({
   style: {
-    background: "blue",
+    // background: "#f1f1f1",
     padding: "20px",
     minWidth: "100px",
     margin: "15px"
@@ -15,6 +15,7 @@ const CartStyles = makeStyles((theme) => ({
       flexGrow: 1,
       padding: theme.spacing(2),
       marginBottom: "10px"
+      // color: "#f26522"
     }
   }
 }));
@@ -25,7 +26,7 @@ const initialFValues = [
     content: "Books",
     views: "1.7",
     validity: "6 Months",
-    price: "Rs. 15,000",
+    price: "15,000",
     instructor: "CA Abhishek Khilwani"
   },
   {
@@ -33,7 +34,7 @@ const initialFValues = [
     content: "Books",
     views: "1.7",
     validity: "6 Months",
-    price: "Rs. 15,000",
+    price: "15,000",
     instructor: "CA Abhishek Khilwani"
   },
   {
@@ -41,7 +42,7 @@ const initialFValues = [
     content: "Books",
     views: "1.7",
     validity: "6 Months",
-    price: "Rs. 15,000",
+    price: "15,000",
     instructor: "CA Abhishek Khilwani"
   }
 ];

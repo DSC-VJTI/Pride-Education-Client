@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
       width: "100%",
       height: "auto",
       maxWidth: "300px"
+    },
+    "& .MuiFab-root": {
+      background: "#f26522"
     }
   }
 }));
@@ -37,7 +40,7 @@ const Item = ({ title, content, views, validity, price, instructor }) => {
 
       <Grid item xs={12} container sm={7} style={{ paddingLeft: "40px" }}>
         <Grid item xs={8}>
-          <Typography gutterBottom variant="h6" color="primary">
+          <Typography gutterBottom variant="h6" style={{ color: "#f26522" }}>
             {title}
           </Typography>
           <Typography gutterBottom variant="subtitle2">
@@ -51,13 +54,17 @@ const Item = ({ title, content, views, validity, price, instructor }) => {
         </Grid>
 
         <Grid item xs={4}>
-          <Typography gutterBottom variant="h6">
-            {price}
+          <Typography gutterBottom variant="h6" style={{ color: "#f26522" }}>
+            ₹{price}
           </Typography>
 
           <Divider />
 
-          <Typography gutterbottom variant="subtitle2">
+          <Typography
+            gutterbottom
+            variant="subtitle2"
+            style={{ margin: "1rem 0rem" }}
+          >
             By {instructor}
           </Typography>
 
@@ -68,7 +75,7 @@ const Item = ({ title, content, views, validity, price, instructor }) => {
               paddingRight: "16px"
             }}
           >
-            <Fab color="primary" aria-label="add">
+            <Fab aria-label="add" color="primary">
               <DeleteIcon />
             </Fab>
           </div>

@@ -5,12 +5,12 @@ import img1 from "../../../assets/images/resourceImages/img1.jpeg";
 
 const ProductStyles = makeStyles({
   classHolder: {
-    border: "30px solid #90caf9",
-    borderRadius: "0px 20px",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-around",
-    boxSizing: "border-box"
+    padding: "1rem",
+    margin: "2px 0px"
+    // border:"2px",
   },
   CardImage: {
     width: "200px",
@@ -19,7 +19,7 @@ const ProductStyles = makeStyles({
     boxSizing: "border-box"
   },
   classButton: {
-    backgroundColor: "#311b92",
+    backgroundColor: "#f26522",
     color: "white",
     fontWeight: "500",
     margin: "8%",
@@ -43,7 +43,7 @@ function Product() {
       <CardHeader title="Abhishek Khilwani" subheader="Head of the SCMPREM" />
       <Button className={classes.classButton}>
         <Link style={{ textDecoration: "none", color: "white" }} to="/product">
-          Go to the Course Page
+          View Courses
         </Link>
       </Button>
     </Card>

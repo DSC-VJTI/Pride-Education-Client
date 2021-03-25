@@ -1,13 +1,14 @@
 import React from "react";
 import ClassPane from "./ClassPane/ClassPane";
 import { makeStyles } from "@material-ui/core";
+// import { Product } from "./ProductsFetcher";
 
 const ClassesPaneStyles = makeStyles({
   root: {
     margin: "auto",
     padding: "2% 5%",
     boxSizing: "border-box",
-    background: "#E7E7E7"
+    background: "#ffffff"
   }
 });
 

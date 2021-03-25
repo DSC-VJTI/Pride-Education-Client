@@ -5,11 +5,9 @@
         box-sizing: border-box;
     }
     .form{
+        margin:2rem auto;
         height:auto;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
+        display:block;
         padding:2rem 2rem;
         width:50%;
         background-image: linear-gradient(to right, rgb(14, 35, 219), rgb(8, 186, 240));
@@ -20,10 +18,6 @@
         height:auto;
         border:1px solid #fff;
         background-color: #ffffff;
-        display:flex;
-        flex-direction:column;
-        justify-content:space-around;
-        flex-wrap:wrap;
     }
     .heading{
         font-size:2rem;

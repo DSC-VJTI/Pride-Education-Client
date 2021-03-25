@@ -10,16 +10,10 @@ import {
   Select
 } from "@material-ui/core";
 
-// import { keyframes } from "styled-components";
-
-// const  blinker =keyframes`
-//   0%{color:} 25%{color:} 50%{color:} 75%{color:}
-//  `//
-
 const ComboBoxStyles = makeStyles((theme) => ({
   ClassesBox: {
-    background: "#3f51b5",
-    width: "40vw",
+    background: "#f1f1f1",
+    width: "80vw",
     padding: "1vw 1vh",
     borderRadius: "1rem 0",
     margin: "2vh 5%",
@@ -30,19 +24,19 @@ const ComboBoxStyles = makeStyles((theme) => ({
   searchBox: {
     margin: theme.spacing(1),
     minWidth: 120,
-    background: "#e3f2fd",
+    background: "#f1f1f1",
     width: "fit-content",
     borderRadius: "8px",
     margin: "auto"
   },
   title: {
     margin: "auto",
-    color: "#ffffff",
+    color: "#f26522",
     fontWeight: "800"
   },
   option: {
     background: "#E7E7E7",
-    color: "#311b92",
+    color: "#f26522",
     fontWeight: "bold",
     margin: "2px"
   }

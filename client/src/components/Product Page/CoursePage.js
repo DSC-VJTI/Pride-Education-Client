@@ -7,7 +7,6 @@ const CoursePageStyles = makeStyles({
   root: {
     // background: "#42a5f4",
     // background: "white",
-    background: "#E7E7E7",
     margin: "0px",
     padding: "2% 5%"
   }

@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <div>
-      <AppBar position="static">
+      <AppBar position="static" style={{ background: "#3d3d3d" }}>
         <Toolbar>
           <IconButton color="inherit" edge="start" aria-label="menu">
             <Menu />

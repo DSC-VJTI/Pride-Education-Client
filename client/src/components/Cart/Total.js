@@ -15,7 +15,10 @@ import Cart from "./Cart";
 
 const CartStyles = makeStyles({
   TotalCard: {
-    background: "white"
+    background: "white",
+    "& .MuiCheckbox-colorSecondary.Mui-checked": {
+      color: "#f26522"
+    }
   },
   bullet: {
     display: "inline-block",
@@ -23,7 +26,7 @@ const CartStyles = makeStyles({
     transform: "scale(0.8)"
   },
   title: {
-    color: "#3f51b5",
+    color: "#f26522",
     fontWeight: "600",
     lineHeight: "16px"
   },
@@ -31,7 +34,7 @@ const CartStyles = makeStyles({
     marginBottom: 12
   },
   totalButton: {
-    background: "#3f51b5",
+    background: "#f26522",
     color: "white",
     margin: "auto",
     borderRadius: "2rem"
@@ -69,7 +72,7 @@ const Total = (props) => {
             </Grid>
             <Grid xs={12}>
               <FormControlLabel
-                control={<Checkbox color="primary" />}
+                control={<Checkbox />}
                 label="This order contains a gift"
               />
             </Grid>
