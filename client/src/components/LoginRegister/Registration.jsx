@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import "./css/FormStyle.css";
 import { FormControl, Input, InputLabel, Button } from "@material-ui/core";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1
@@ -130,11 +131,14 @@ const Registration = () => {
 
   const onFormSubmit = () => {};
   return (
-    <>
-      <h1 className="heading" style={{ color: "#0065d1", textAlign: "center" }}>
-        Sign up for a free account
-      </h1>
+    <div className="form">
       <div className="mainSection">
+        <h1
+          className="heading"
+          style={{ color: "#0065d1", textAlign: "center" }}
+        >
+          Sign up for a free account
+        </h1>
         <form onSubmit={onFormSubmit}>
           <div
             className="inputFields"
@@ -288,7 +292,7 @@ const Registration = () => {
           </div>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 export default Registration;

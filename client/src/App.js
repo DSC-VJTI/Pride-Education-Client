@@ -5,7 +5,8 @@ import Landing from "./components/LandingPage/Landing";
 import SupportPage from "./components/Support Page/SupportPage";
 import Login from "./components/LoginRegister/Login";
 import Registration from "./components/LoginRegister/Registration";
-import LoginRegister from "./components/LoginRegister/LoginRegister";
+import OtpPage from "./components/LoginRegister/inputOTP";
+
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
@@ -21,7 +22,7 @@ function App() {
         <Route path="/" exact component={Landing} />
         <Route path="/support" component={SupportPage} />
         <Route path="/login" component={Login} />
-        <Route path="/register" component={LoginRegister} />
+        <Route path="/register" component={OtpPage} />
       </Switch>
     </Router>
   );

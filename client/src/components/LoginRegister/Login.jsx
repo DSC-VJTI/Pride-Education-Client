@@ -1,6 +1,13 @@
 import React, { useState } from "react";
-import { FormControl, Input, InputLabel, Button } from "@material-ui/core";
+import {
+  FormControl,
+  Input,
+  InputLabel,
+  Button,
+  Link
+} from "@material-ui/core";
 import "./css/FormStyle.css";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
@@ -45,67 +52,76 @@ const Login = () => {
   const onFormSubmit = () => {};
   return (
     <>
-      <h1 className="heading" style={{ color: "#0065d1", textAlign: "center" }}>
-        Login To your Account
-      </h1>
-      <div className="mainSection">
-        <form onSubmit={onFormSubmit}>
-          <div className="">
-            <div style={{ display: "flex", justifyContent: "space-around" }}>
-              <FormControl
-                className="inputField"
-                style={{ width: "90%", marginBottom: "0.4rem" }}
-              >
-                <InputLabel htmlFor="my-input">Enter Email address</InputLabel>
-                <Input
-                  name="email"
-                  value={email}
-                  onChange={onLogin}
-                  type="text"
-                  id="my-input"
-                  aria-describedby="my-helper-text"
-                />
-                <small style={{ color: "red" }}>{warningEmail}</small>
-              </FormControl>
+      <div className="form">
+        <div className="mainSection">
+          <h1
+            className="heading"
+            style={{ color: "#0065d1", textAlign: "center" }}
+          >
+            Login To your Account
+          </h1>
+          <form onSubmit={onFormSubmit}>
+            <div className="">
+              <div style={{ display: "flex", justifyContent: "space-around" }}>
+                <FormControl
+                  className="inputField"
+                  style={{ width: "90%", marginBottom: "0.4rem" }}
+                >
+                  <InputLabel htmlFor="my-input">
+                    Enter Email address
+                  </InputLabel>
+                  <Input
+                    name="email"
+                    value={email}
+                    onChange={onLogin}
+                    type="text"
+                    id="my-input"
+                    aria-describedby="my-helper-text"
+                  />
+                  <small style={{ color: "red" }}>{warningEmail}</small>
+                </FormControl>
+              </div>
+              <div style={{ display: "flex", justifyContent: "space-around" }}>
+                <FormControl
+                  className="inputField"
+                  style={{ width: "90%", marginTop: "0.3rem" }}
+                >
+                  <InputLabel htmlFor="my-input">
+                    Enter Mobile Number
+                  </InputLabel>
+                  <Input
+                    id="number"
+                    name="number"
+                    value={number}
+                    onChange={onLogin}
+                    type="text"
+                    id="my-input"
+                    aria-describedby="my-helper-text"
+                  />
+                  <small style={{ color: "red" }}>{warningNumber}</small>
+                </FormControl>
+              </div>
+              <div className="" style={{ marginTop: "0.3rem" }}>
+                <Button
+                  onClick={onBtnClick}
+                  className="submit_btn"
+                  type="submit"
+                  style={{
+                    backgroundColor: " #455ff0",
+                    width: "30%",
+                    alignSelf: "center",
+                    marginTop: "1rem",
+                    marginLeft: "2rem"
+                  }}
+                  variant="contained"
+                  color="primary"
+                >
+                  Login
+                </Button>
+              </div>
             </div>
-            <div style={{ display: "flex", justifyContent: "space-around" }}>
-              <FormControl
-                className="inputField"
-                style={{ width: "90%", marginTop: "0.3rem" }}
-              >
-                <InputLabel htmlFor="my-input">Enter Mobile Number</InputLabel>
-                <Input
-                  id="number"
-                  name="number"
-                  value={number}
-                  onChange={onLogin}
-                  type="text"
-                  id="my-input"
-                  aria-describedby="my-helper-text"
-                />
-                <small style={{ color: "red" }}>{warningNumber}</small>
-              </FormControl>
-            </div>
-            <div className="" style={{ marginTop: "0.3rem" }}>
-              <Button
-                onClick={onBtnClick}
-                className="submit_btn"
-                type="submit"
-                style={{
-                  backgroundColor: " #455ff0",
-                  width: "30%",
-                  alignSelf: "center",
-                  marginTop: "1rem",
-                  marginLeft: "2rem"
-                }}
-                variant="contained"
-                color="primary"
-              >
-                Login
-              </Button>
-            </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </>
   );
