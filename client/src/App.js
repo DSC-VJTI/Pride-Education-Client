@@ -7,7 +7,9 @@ import Navbar from "./components/Navbar";
 import Landing from "./components/LandingPage/Landing";
 import SupportPage from "./components/Support Page/SupportPage";
 import Registration from "./components/LoginRegister/Registration";
-import LoginRegister from "./components/LoginRegister/LoginRegister";
+import Login from "./components/LoginRegister/Login";
+import OtpPage from "./components/LoginRegister/inputOTP";
+
 import Cart from "./components/Cart/Cart";
 import Aos from "aos";
 import "aos/dist/aos.css";
@@ -28,13 +30,13 @@ function App() {
         <Route path="/cart" component={Cart} />
         <Route exact path="/product" component={CoursePage} />
         <Route path="/support" component={SupportPage} />
-        <Route path="/register" component={LoginRegister} />
+        <Route path="/register" component={Registration} />
+        <Route path="/login" component={Login} />
 
         {/* Protected routes go here */}
         <Route path="/product/add" component={AddProduct} />
         <Route path="/product/edit/:productId" component={AddProduct} />
         <Route path="/admin" component={DashboardLayout} />
-        <Route path="/login" component={LoginRegister} />
         <Route path="/" exact component={Landing} />
       </Switch>
       <Footer />
