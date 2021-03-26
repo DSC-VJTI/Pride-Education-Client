@@ -46,7 +46,6 @@ const ClassPane = ({ Course, CoursesList }) => {
         <ReactElasticCarousel
           breakPoints={breakPoints}
           className={classes.slider}
-          style={{}}
         >
           {CoursesList.map(() => (
             <div data-aos="flip-right">

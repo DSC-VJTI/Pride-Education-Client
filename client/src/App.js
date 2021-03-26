@@ -22,7 +22,7 @@ function App() {
   }, []);
   return (
     <Router>
-      <Navbar />
+     <Navbar/>
       <Switch>
         <Route path="/classes" component={ClassesPane} />
         <Route path="/cart" component={Cart} />

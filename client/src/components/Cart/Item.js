@@ -58,7 +58,6 @@ const Item = ({ title, content, views, validity, price, instructor }) => {
           </Typography>
 
           <Divider />
-
           <Typography
             gutterbottom
             variant="subtitle2"

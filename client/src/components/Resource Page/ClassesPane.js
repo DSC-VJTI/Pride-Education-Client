@@ -1,7 +1,6 @@
 import React from "react";
 import ClassPane from "./ClassPane/ClassPane";
 import { makeStyles } from "@material-ui/core";
-// import { Product } from "./ProductsFetcher";
 
 const ClassesPaneStyles = makeStyles({
   root: {
