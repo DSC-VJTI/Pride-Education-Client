@@ -61,6 +61,9 @@ export default function AniCard({ number }) {
         <Button
           size="small"
           className={classes.adjust}
+          style={{backgroundColor:"#f26522",
+        borderRadius:"999999999999999999999999999px"
+        }}
           color="primary"
           variant="contained"
         >

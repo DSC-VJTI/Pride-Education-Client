@@ -12,6 +12,10 @@
 .whiteText {
   color: #ffffff;
 }
+.showOnMobile
+{
+  display: none;
+}
 .container {
   width: 90%;
   max-width: 1200px;
@@ -23,7 +27,11 @@
 }
 
 #aboutSection {
-  background-color: #115293;
+  /* background-color: #115293; */
+  /* background-color: #f26522; */
+  background-color: #e7e7e7;
+  color: #000000;
+  font-family: 'Work Sans', sans-serif;
 }
 .grid {
   display: grid;
@@ -44,6 +52,11 @@
 #CardCarousel {
   width: 100%;
 }
+.fixLinks
+{
+  text-decoration: none;
+  color: black;
+}
 @media (max-width: 700px) {
   .twoCols {
     grid-template-columns: 1fr;
@@ -51,4 +64,8 @@
   .hideOnMobile {
     display: none;
   }
+  .showOnMobile
+{
+  display: block;
+}
 }
