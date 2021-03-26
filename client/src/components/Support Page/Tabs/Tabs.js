@@ -44,25 +44,13 @@ function a11yProps(index) {
   };
 }
 
-function LinkTab(props) {
-  return (
-    <Tab
-      component="a"
-      onClick={(event) => {
-        event.preventDefault();
-      }}
-      {...props}
-    />
-  );
-}
-
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "900px",
+    // width: "900px",
     flexGrow: 1,
     // backgroundColor: theme.palette.background.paper,
     "& .MuiTab-root": {
-      background: "#3d3d3d"
+      background: "#f1f1f1"
     },
     "& .MuiTypography-root": {
       textAlign: "center"
@@ -75,14 +63,14 @@ const useStyles = makeStyles((theme) => ({
     // background: "#3d3d3d"
   },
   tabpanel: {
-    background: "#DCDCDC",
+    background: "#f1f1f1",
     "& .MuiPaper-root": {
       padding: "20px 0px",
       height: "420px"
     }
   },
   pageContent: {
-    background: "#f6f6f6",
+    background: "#f1f1f1",
     height: "100%"
   }
 }));
@@ -114,18 +102,6 @@ export default function NavTabs(props) {
 
   return (
     <Box className={classes.root}>
-      <AppBar position="static">
-        <Tabs
-          variant="fullWidth"
-          value={value}
-          onChange={handleChange}
-          aria-label="nav tabs example"
-        >
-          <LinkTab label="Software Problems" href="/drafts" {...a11yProps(0)} />
-          <LinkTab label="Product Enquiry" href="/trash" {...a11yProps(1)} />
-          <LinkTab label="Personal Discussion" href="/spam" {...a11yProps(2)} />
-        </Tabs>
-      </AppBar>
       <TabPanel value={value} index={0} className={classes.tabpanel}>
         <Paper className={classes.pageContent} width="100%" elevation={4}>
           {/* Imported from PageOne */}

@@ -1,5 +1,11 @@
 import React from "react";
-import { Container, Grid } from "@material-ui/core";
+import {
+  Container,
+  Grid,
+  Tabs as MuiTabs,
+  Tab,
+  AppBar
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Tabs from "./Tabs/Tabs";
 import { Route, Switch, Redirect } from "react-router-dom";
@@ -27,11 +33,38 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+function LinkTab(props) {
+  return (
+    <Tab
+      component="a"
+      onClick={(event) => {
+        event.preventDefault();
+      }}
+      {...props}
+    />
+  );
+}
+
 const SupportPage = () => {
   const classes = useStyles();
+  const [value, setValue] = React.useState(0);
 
   return (
-    <main style={{ height: "70vh", display: "grid", placeItems: "center" }}>
+    <div>
+      {/* // <main style={{ height: "70vh", display: "grid", placeItems: "center" }}> */}
+      <AppBar position="static">
+        <MuiTabs
+          // variant="fullWidth"
+          value={value}
+          // onChange={handleChange}
+          aria-label="nav tabs example"
+          style={{ background: "#f1f1f1", color: "#f26522" }}
+        >
+          <LinkTab label="Software Problems" href="/drafts" />
+          <LinkTab label="Product Enquiry" href="/trash" />
+          <LinkTab label="Personal Discussion" href="/spam" />
+        </MuiTabs>
+      </AppBar>
       <Switch>
         <Redirect exact from="/support" to="/support/software" />
         <Route
@@ -43,13 +76,13 @@ const SupportPage = () => {
             //   <Grid item md={8} xs={12}>
             // <div className={classes.root}>
             <div
-              style={{
-                display: "grid",
-                placeItems: "center",
-                marginTop: "auto"
-              }}
+            // style={{
+            //   display: "grid",
+            //   placeItems: "center",
+            //   marginTop: "auto"
+            // }}
             >
-              <Tabs {...props} />
+              {<Tabs {...props} />}
             </div>
             // </Grid>
             // <Grid item md={2} xs={0}></Grid>
@@ -57,7 +90,7 @@ const SupportPage = () => {
           )}
         />
       </Switch>
-    </main>
+    </div>
   );
 };
 
