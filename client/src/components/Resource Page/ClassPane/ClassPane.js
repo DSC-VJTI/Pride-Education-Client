@@ -39,7 +39,6 @@ const ClassPane = ({ Course, CoursesList }) => {
     { width: 1100, itemsToShow: 4 }
   ];
   const classes = ClassPaneStyles();
-
   return (
     <div>
       <ComboBox course={Course} CoursesList={CoursesList} />

@@ -21,6 +21,7 @@ import { Link } from "react-router-dom";
 
 const NavbarStyles = makeStyles({
   list: {
+    width: "250px",
     "& .MuiPaper-root": {
       justifyContent: "center",
       // backgroundColor: "#f1f1f1",

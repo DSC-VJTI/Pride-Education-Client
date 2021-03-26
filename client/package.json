@@ -13,9 +13,9 @@
     "@testing-library/user-event": "^12.6.2",
     "aos": "^2.3.4",
     "axios": "^0.21.1",
-    "chart.js": "^2.9.4",
     "date-fns": "^2.19.0",
     "formik": "^2.2.6",
+    "chart.js": "^2.9.4",
     "moment": "^2.29.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
@@ -31,9 +31,9 @@
     "react-swipeable-views": "^0.13.9",
     "recharts": "^2.0.8",
     "styled-components": "^5.2.1",
-    "uuid": "^8.3.2",
     "web-vitals": "^0.2.4",
-    "yup": "^0.32.9"
+    "yup": "^0.32.9",
+    "uuid": "^8.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
