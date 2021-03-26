@@ -5,7 +5,6 @@ import Total from "./Total";
 
 const CartStyles = makeStyles((theme) => ({
   style: {
-    // background: "#f1f1f1",
     padding: "20px",
     minWidth: "100px",
     margin: "15px"
@@ -15,7 +14,6 @@ const CartStyles = makeStyles((theme) => ({
       flexGrow: 1,
       padding: theme.spacing(2),
       marginBottom: "10px"
-      // color: "#f26522"
     }
   }
 }));

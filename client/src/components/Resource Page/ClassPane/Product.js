@@ -10,7 +10,6 @@ const ProductStyles = makeStyles({
     justifyContent: "space-around",
     padding: "1rem",
     margin: "2px 0px"
-    // border:"2px",
   },
   CardImage: {
     width: "200px",

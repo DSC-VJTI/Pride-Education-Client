@@ -24,13 +24,9 @@ const CourseListStyles = makeStyles((theme) => ({
   },
   CourseContentList: {
     width: "fit-content",
-    // background: "#64b5f6",
     background: "#f1f1f1",
-    // background: "#42a5f4",
-
     padding: "5px",
     borderRadius: "10px",
-    // boxShadow: "1px 1px #3949ab",
     margin: "auto"
   },
   fontSizeIcon: {
@@ -45,10 +41,6 @@ const CourseListStyles = makeStyles((theme) => ({
     backgroundColor: "#f1f1f1"
   },
   ListSubBack: {
-    // background: "#f1f1f1",
-    // borderRadius: "10px",
-    // boxShadow: "1px 1px #3949ab",
-    // position: "static",
     color: "#f26522",
     fontWeight: "600",
     margin: "auto",
@@ -65,7 +57,6 @@ const CourseListStyles = makeStyles((theme) => ({
     color: "#ffffff",
     margin: "1rem auto",
     borderRadius: "2rem",
-    // border: "1px outset",
     width: "12rem"
   }
 }));

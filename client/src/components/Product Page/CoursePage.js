@@ -2,11 +2,9 @@ import React from "react";
 import CoursePageHeader from "./Product_materials/CoursePageHeader";
 import CourseTypePane from "./Product_materials/CourseTypePane";
 import { makeStyles } from "@material-ui/core";
-
+import Products from "./ProductFeatures";
 const CoursePageStyles = makeStyles({
   root: {
-    // background: "#42a5f4",
-    // background: "white",
     margin: "0px",
     padding: "2% 5%"
   }

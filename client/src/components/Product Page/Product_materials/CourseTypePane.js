@@ -21,7 +21,6 @@ const mainPaneStyles = makeStyles({
     display: "flex",
     justifyContent: "center",
     color: "#f26522"
-    // boxShadow: "3px 3px"
   }
 });
 

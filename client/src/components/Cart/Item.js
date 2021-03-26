@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
 const Item = ({ title, content, views, validity, price, instructor }) => {
   const classes = useStyles();
   return (
-    // <Paper className={classes.root}>
     <Grid container spacing={2} className={classes.root}>
       <Grid item xs={12} sm={5} style={{ paddingLeft: "10px" }}>
         <div>
@@ -82,7 +81,6 @@ const Item = ({ title, content, views, validity, price, instructor }) => {
         </Grid>
       </Grid>
     </Grid>
-    // </Paper>
   );
 };
 
