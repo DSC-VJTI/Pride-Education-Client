@@ -1,9 +1,10 @@
 import axios from "axios";
+import { BASE_URL } from "../constants";
 
 export const sendOTP = ({ dispatch, email }) => {
   dispatch({ type: "REQUEST_LOGIN" });
   return axios
-    .post(process.env.REACT_APP_SERVER_URL + "/sendOtpLogin", { email: email })
+    .post(BASE_URL + "/sendOtpLogin", { email: email })
     .then((res) => {
       return {
         data: res.data,
@@ -22,7 +23,7 @@ export const sendOTP = ({ dispatch, email }) => {
 export const login = ({ dispatch, hash, otp, email }) => {
   dispatch({ type: "REQUEST_LOGIN" });
   return axios
-    .post(process.env.REACT_APP_SERVER_URL + "/login", {
+    .post(BASE_URL + "/login", {
       email: email,
       hash: hash,
       otp: otp
@@ -36,7 +37,7 @@ export const login = ({ dispatch, hash, otp, email }) => {
     })
     .catch((err) => {
       return {
-        error: res.response.data.error,
+        error: err.response.data.error,
         status: err.response.status
       };
     });

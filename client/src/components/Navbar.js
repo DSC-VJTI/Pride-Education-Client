@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import Drawer from "@material-ui/core/Drawer";
 import { Menu } from "@material-ui/icons";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import HomeIcon from "@material-ui/icons/Home";
 import ShopIcon from "@material-ui/icons/Shop";
 
@@ -48,9 +48,16 @@ const Navbar = () => {
               flexGrow: 1
             }}
           >
-            Pride Education
+            <Link
+              to="/"
+              style={{
+                textDecoration: "none",
+                color: "#f26522"
+              }}
+            >
+              Pride Education
+            </Link>
           </Typography>
-
           <NavLink
             to="/support"
             className="hideOnMobile"

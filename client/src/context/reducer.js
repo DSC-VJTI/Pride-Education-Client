@@ -1,15 +1,13 @@
-import React, { useState, useReducer } from "react";
-
-let user = localStorage.getItem("currentUser")
-  ? JSON.parse(localStorage.getItem("currentUser")).user
+let user = localStorage.getItem("user")
+  ? JSON.parse(localStorage.getItem("user"))
   : "";
-let token = localStorage.getItem("currentUser")
-  ? JSON.parse(localStorage.getItem("currentUser")).token
-  : "";
+let token = localStorage.getItem("token");
+let isAuthenticated = localStorage.getItem("isAuthenticated") ? true : false;
 
 export const initialState = {
-  user: user || "",
-  token: token || "",
+  user: "" || user,
+  token: "" || token,
+  isAuthenticated: isAuthenticated,
   loading: false,
   errorMessage: null
 };
@@ -23,13 +21,18 @@ export const AuthReducer = (initialState, action) => {
       };
     case "LOGIN_SUCCESS":
       // TODO: Add userdetails to local storage
+      localStorage.setItem("user", JSON.stringify(action.payload.user));
+      localStorage.setItem("token", action.payload.token);
+      localStorage.setItem("isAuthenticated", true);
       return {
         ...initialState,
         user: action.payload.user,
         token: action.payload.token,
+        isAuthenticated: true,
         loading: false
       };
     case "LOGOUT":
+      localStorage.clear();
       return {
         ...initialState,
         user: "",
