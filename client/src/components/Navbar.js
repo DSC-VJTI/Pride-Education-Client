@@ -73,9 +73,16 @@ const Navbar = () => {
               flexGrow: 1
             }}
           >
-            Pride Education
+            <NavLink
+              to="/"
+              style={{
+                textDecoration: "none",
+                color: "#f26522"
+              }}
+            >
+              Pride Education
+            </NavLink>
           </Typography>
-
           <NavLink
             to="/support"
             className="hideOnMobile"
@@ -83,7 +90,7 @@ const Navbar = () => {
               textDecoration: "none",
               color: "#f26522",
               textTransform: "uppercase",
-              marginRight: "10px"
+              marginRight: "15px"
             }}
           >
             Support
@@ -95,7 +102,7 @@ const Navbar = () => {
               textDecoration: "none",
               color: "#f26522",
               textTransform: "uppercase",
-              marginRight: "10px"
+              marginRight: "15px"
             }}
           >
             MarketPlace
@@ -107,10 +114,22 @@ const Navbar = () => {
               textDecoration: "none",
               color: "#f26522",
               textTransform: "uppercase",
-              marginRight: "10px"
+              marginRight: "15px"
             }}
           >
             Login
+          </NavLink>
+          <NavLink
+            to="/register"
+            className="hideOnMobile"
+            style={{
+              textDecoration: "none",
+              color: "#f26522",
+              textTransform: "uppercase",
+              marginRight: "15px"
+            }}
+          >
+            Register
           </NavLink>
         </Toolbar>
       </AppBar>

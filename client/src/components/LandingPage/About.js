@@ -16,7 +16,7 @@ const About = () => {
         <div className="grid twoCols">
           <div className="aboutLeft">
             <Typography
-              variant="p"
+              variant="body1"
               className="centerText "
               data-aos="fade-left"
             >
