@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
-import img1 from "../../../Resources/img1.jpeg";
+import img1 from "../../../assets/images/resourceImages/img1.jpeg";
 
 const CoursePageHeaderStyles = makeStyles({
   root: {
@@ -8,18 +8,23 @@ const CoursePageHeaderStyles = makeStyles({
     flexWrap: "wrap",
     justifyContent: "space-around",
     margin: "10px 10%",
-    background: "#90caf9",
+    // background: "#90caf9",
+    background: "#42a5f4",
     borderRadius: "20px",
     boxShadow: "4px 4px #1565c0",
     padding: "20px 0px"
   },
   instructImg: {
-    width: "250px"
+    width: "250px",
+    margin: "auto"
   },
   Desc: {
     display: "inline-block",
     width: "50%",
-    fontWeight: "400"
+    fontWeight: "400",
+    margin: "auto",
+    color: "white",
+    fontWeight: "600"
   }
 });
 

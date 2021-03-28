@@ -7,7 +7,7 @@ const About = () => {
     <section id="aboutSection">
       <Typography
         variant="h2"
-        className="centerText headingText whiteText"
+        className="centerText headingText "
         data-aos="fade-up"
       >
         About Us
@@ -17,7 +17,7 @@ const About = () => {
           <div className="aboutLeft">
             <Typography
               variant="p"
-              className="centerText whiteText"
+              className="centerText "
               data-aos="fade-left"
             >
               Lorem ipsum dolor sit amet consectetur adipis icing elit. Sequi

@@ -3,12 +3,11 @@ import Cart from "../models/Cart/Cart";
 
 const cartController = {
   async showCart(
-    _: express.Request,
+    req: express.Request,
     res: express.Response
   ): Promise<express.Response | void> {
     try {
-      // const userId = req.body.user._id;
-      const userId = "6048d9df1d889240309fb38b";
+      const userId = req.body.user._id;
       const myCart = await Cart.find({ user: userId })
         .populate({
           path: "products",

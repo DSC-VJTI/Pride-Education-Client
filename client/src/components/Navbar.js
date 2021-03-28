@@ -1,22 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AppBar,
   Toolbar,
   IconButton,
   Typography,
-  Button
+  Button,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Divider
 } from "@material-ui/core";
+import Drawer from "@material-ui/core/Drawer";
 import { Menu } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import HomeIcon from "@material-ui/icons/Home";
+import ShopIcon from "@material-ui/icons/Shop";
 
 const Navbar = () => {
+  const [open, setOpen] = useState(false);
+  const handleDrawer = () => {
+    setOpen(true);
+  };
   return (
     <div>
-      <AppBar position="static">
+      <AppBar
+        position="static"
+        style={{
+          backgroundColor: "#f1f1f1",
+          color: "#f26522"
+        }}
+      >
         <Toolbar>
-          <IconButton color="inherit" edge="start" aria-label="menu">
-            <Menu />
-          </IconButton>
+          <div className="showOnMobile">
+            <IconButton
+              color="inherit"
+              edge="start"
+              aria-label="menu"
+              onClick={handleDrawer}
+            >
+              <Menu />
+            </IconButton>
+          </div>
           <Typography
             variant="h6"
             style={{
@@ -25,20 +50,83 @@ const Navbar = () => {
           >
             Pride Education
           </Typography>
-          <Button color="inherit" className="hideOnMobile" href="/support">
+
+          <NavLink
+            to="/support"
+            className="hideOnMobile"
+            style={{
+              textDecoration: "none",
+              color: "#f26522",
+              textTransform: "uppercase",
+              marginRight: "10px"
+            }}
+          >
             Support
-          </Button>
-          <Button color="inherit" className="hideOnMobile" href="/classes">
+          </NavLink>
+          <NavLink
+            to="/classes"
+            className="hideOnMobile"
+            style={{
+              textDecoration: "none",
+              color: "#f26522",
+              textTransform: "uppercase",
+              marginRight: "10px"
+            }}
+          >
             MarketPlace
-          </Button>
-          <Button color="inherit" className="hideOnMobile" href="/login">
+          </NavLink>
+          <NavLink
+            to="/login"
+            className="hideOnMobile"
+            style={{
+              textDecoration: "none",
+              color: "#f26522",
+              textTransform: "uppercase",
+              marginRight: "10px"
+            }}
+          >
             Login
-          </Button>
-          <Button color="inherit" className="hideOnMobile" href="/register">
-            Register
-          </Button>
+          </NavLink>
         </Toolbar>
       </AppBar>
+      <Drawer anchor="left" open={open} onClose={() => setOpen(false)}>
+        <div
+          style={{
+            height: "100%",
+            width: "250px",
+            backgroundColor: "#f1f1f1"
+          }}
+        >
+          <List>
+            <NavLink to="/" className="fixLinks">
+              <ListItem button onClick={() => setOpen(false)}>
+                <ListItemIcon>
+                  <HomeIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Home"} />
+              </ListItem>
+              <Divider />
+            </NavLink>
+            <NavLink to="/support" className="fixLinks">
+              <ListItem button onClick={() => setOpen(false)}>
+                <ListItemIcon>
+                  <HomeIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Support"} />
+              </ListItem>
+              <Divider />
+            </NavLink>
+            <NavLink to="/classes" className="fixLinks">
+              <ListItem button onClick={() => setOpen(false)}>
+                <ListItemIcon>
+                  <ShopIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Marketplace"} />
+              </ListItem>
+            </NavLink>
+          </List>
+        </div>
+      </Drawer>
     </div>
   );
 };

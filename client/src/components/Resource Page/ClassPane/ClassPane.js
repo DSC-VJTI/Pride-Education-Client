@@ -10,7 +10,6 @@ const ClassPaneStyles = makeStyles({
     padding: "2rem",
     width: "90vw",
     margin: "auto",
-    boxSizing: "border-box",
     borderRadius: "1rem",
     boxShadow: "0.1rem 0.1rem #1565c0"
   }
@@ -26,9 +25,7 @@ const ClassPane = ({ Course, CoursesList }) => {
   const classes = ClassPaneStyles();
   return (
     <div>
-      <div data-aos="fade-left">
-        <ComboBox course={Course} CoursesList={CoursesList} />
-      </div>
+      <ComboBox course={Course} CoursesList={CoursesList} />
       <div data-aos="fade-up">
         <ReactElasticCarousel
           breakPoints={breakPoints}

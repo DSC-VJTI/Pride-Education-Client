@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardHeader, Button, makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import img1 from "../../../Resources/img1.jpeg";
+import img1 from "../../../assets/images/resourceImages/img1.jpeg";
 
 const ProductStyles = makeStyles({
   classHolder: {

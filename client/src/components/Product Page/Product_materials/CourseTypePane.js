@@ -7,7 +7,8 @@ const mainPaneStyles = makeStyles({
   mainHolder: {
     display: "flex",
     flexWrap: "wrap",
-    background: "#90caf9",
+    // background: "#90caf9",
+    background: "#42a5f4",
     width: "80%",
     margin: "auto",
     borderRadius: "15px",

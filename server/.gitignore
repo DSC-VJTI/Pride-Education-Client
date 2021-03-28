@@ -2,3 +2,5 @@
 .env
 /compiled
 .nyc_output
+/coverage
+src/config/*.json

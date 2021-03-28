@@ -23,7 +23,10 @@ const CourseListStyles = makeStyles((theme) => ({
   },
   CourseContentList: {
     width: "fit-content",
-    background: "#64b5f6",
+    // background: "#64b5f6",
+    background: "#90caf9",
+    // background: "#42a5f4",
+
     padding: "5px",
     borderRadius: "10px",
     boxShadow: "1px 1px #3949ab",

@@ -1,6 +1,14 @@
 import React from "react";
 
-import { TextField, Typography, makeStyles } from "@material-ui/core";
+import {
+  TextField,
+  Typography,
+  makeStyles,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select
+} from "@material-ui/core";
 
 // import { keyframes } from "styled-components";
 
@@ -8,7 +16,7 @@ import { TextField, Typography, makeStyles } from "@material-ui/core";
 //   0%{color:} 25%{color:} 50%{color:} 75%{color:}
 //  `//
 
-const ComboBoxStyles = makeStyles({
+const ComboBoxStyles = makeStyles((theme) => ({
   ClassesBox: {
     background: "#3f51b5",
     width: "40vw",
@@ -20,6 +28,8 @@ const ComboBoxStyles = makeStyles({
     justifyContent: "space-around"
   },
   searchBox: {
+    margin: theme.spacing(1),
+    minWidth: 120,
     background: "#e3f2fd",
     width: "fit-content",
     borderRadius: "8px",
@@ -29,8 +39,14 @@ const ComboBoxStyles = makeStyles({
     margin: "auto",
     color: "#ffffff",
     fontWeight: "800"
+  },
+  option: {
+    background: "#E7E7E7",
+    color: "#311b92",
+    fontWeight: "bold",
+    margin: "2px"
   }
-});
+}));
 
 const ComboBox = ({ course, CoursesList }) => {
   const [courses, setCourses] = React.useState("");
@@ -41,28 +57,24 @@ const ComboBox = ({ course, CoursesList }) => {
   return (
     <div className={classes.ClassesBox}>
       <Typography className={classes.title}>{course}</Typography>
-      <TextField
-        select
-        label="Instructor"
-        value={courses}
-        onChange={handleChange}
-        SelectProps={{
-          native: true
-        }}
-        className={classes.searchBox}
-      >
-        {CoursesList.map((option) => (
-          <option
-            key={option.value}
-            value={option.value}
-            style={{
-              width: "5rem"
-            }}
-          >
-            {option.label}
-          </option>
-        ))}
-      </TextField>
+      <FormControl className={classes.searchBox}>
+        <InputLabel htmlFor="age-native-helper">Instructor</InputLabel>
+        <Select
+          labelId="demo-simple-select-helper-label"
+          id="demo-simple-select-helper"
+          value={courses}
+          onChange={handleChange}
+          style={{
+            width: "10rem"
+          }}
+        >
+          {CoursesList.map((option) => (
+            <MenuItem value={option.value} className={classes.option}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
     </div>
   );
 };

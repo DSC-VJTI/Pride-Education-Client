@@ -10,7 +10,7 @@ const CourseSchema: Schema = new Schema({
   duration: { type: Number, required: true },
   language: { type: String, required: true },
   sysReq: { type: String, required: true },
-  views: { type: Number, required: true },
+  views: { type: Number, required: true, default: 0 },
   validity: { type: Number, required: true },
   mode: { type: String, required: true }
 });
