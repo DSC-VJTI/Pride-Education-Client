@@ -11,6 +11,9 @@ const useStyles = makeStyles((theme) => ({
       width: "100%",
       height: "auto",
       maxWidth: "300px"
+    },
+    "& .MuiFab-root": {
+      background: "#f26522"
     }
   },
   button: {
@@ -46,7 +49,7 @@ const Item = ({
       </Grid>
       <Grid item xs={12} container sm={7} style={{ paddingLeft: "40px" }}>
         <Grid item xs={8}>
-          <Typography gutterBottom variant="h5" color="primary">
+          <Typography gutterBottom variant="h6" style={{ color: "#f26522" }}>
             {title}
           </Typography>
           <Typography gutterBottom variant="subtitle2">
@@ -59,15 +62,28 @@ const Item = ({
           </Typography>
         </Grid>
         <Grid item xs={4}>
-          <Typography gutterBottom variant="subtitle2">
-            {`Rs.${price}`}
+          <Typography gutterBottom variant="h6" style={{ color: "#f26522" }}>
+            ₹{price}
           </Typography>
-          <Typography gutterbottom variant="subtitle2">
+
+          <Divider />
+          <Typography
+            gutterbottom
+            variant="subtitle2"
+            style={{ margin: "1rem 0rem" }}
+          >
             By {instructor}
           </Typography>
 
-          <div className={classes.button}>
-            <Fab color="primary" aria-label="add" onClick={handleOnClick}>
+          <div
+            style={{
+              paddingTop: "38px",
+              textAlign: "right",
+              paddingRight: "16px"
+            }}
+          >
+            {/* <div className={classes.button}></div> */}
+            <Fab aria-label="add" color="primary">
               <DeleteIcon />
             </Fab>
           </div>

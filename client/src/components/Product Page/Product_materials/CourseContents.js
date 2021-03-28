@@ -8,7 +8,8 @@ import {
   Avatar,
   ListSubheader,
   Typography,
-  Button
+  Button,
+  Divider
 } from "@material-ui/core";
 import { blue } from "@material-ui/core/colors";
 import ImageIcon from "@material-ui/icons/Image";
@@ -23,13 +24,9 @@ const CourseListStyles = makeStyles((theme) => ({
   },
   CourseContentList: {
     width: "fit-content",
-    // background: "#64b5f6",
-    background: "#90caf9",
-    // background: "#42a5f4",
-
+    background: "#f1f1f1",
     padding: "5px",
     borderRadius: "10px",
-    boxShadow: "1px 1px #3949ab",
     margin: "auto"
   },
   fontSizeIcon: {
@@ -41,16 +38,14 @@ const CourseListStyles = makeStyles((theme) => ({
   },
   blue: {
     color: theme.palette.getContrastText(blue[400]),
-    backgroundColor: blue[400]
+    backgroundColor: "#f1f1f1"
   },
   ListSubBack: {
-    background: "#3949ab",
-    borderRadius: "10px",
-    boxShadow: "1px 1px #3949ab",
-    position: "static",
-    color: "white",
+    color: "#f26522",
     fontWeight: "600",
-    margin: "auto"
+    margin: "auto",
+    textTransform: "uppercase",
+    textAlign: "center"
   },
   Duration: {
     color: "white",
@@ -58,11 +53,10 @@ const CourseListStyles = makeStyles((theme) => ({
     fontSize: "20px"
   },
   Enroll: {
-    background: "#3949ab",
-    color: "white",
+    background: "#f26522",
+    color: "#ffffff",
     margin: "1rem auto",
     borderRadius: "2rem",
-    border: "1px outset",
     width: "12rem"
   }
 }));
@@ -80,6 +74,7 @@ function CourseContents({ Content }) {
           subheader={
             <ListSubheader className={classes.ListSubBack}>
               Course Material
+              <Divider />
             </ListSubheader>
           }
           className={classes.CourseContentList}
