@@ -1,58 +1,144 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AppBar,
   Toolbar,
   IconButton,
   Typography,
-  Button
+  Button,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Divider
 } from "@material-ui/core";
+import Drawer from "@material-ui/core/Drawer";
 import { Menu } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import HomeIcon from "@material-ui/icons/Home";
+import ShopIcon from "@material-ui/icons/Shop";
 
 const Navbar = () => {
+  const [open, setOpen] = useState(false);
+  const handleDrawer = () => {
+    setOpen(true);
+  };
   return (
     <div>
-      <AppBar position="static">
+      <AppBar
+        position="static"
+        style={{
+          backgroundColor: "#f1f1f1",
+          color: "#f26522"
+        }}
+      >
         <Toolbar>
-          <IconButton color="inherit" edge="start" aria-label="menu">
-            <Menu />
-          </IconButton>
-          <Typography variant="h6">Pride Education</Typography>
+          <div className="showOnMobile">
+            <IconButton
+              color="inherit"
+              edge="start"
+              aria-label="menu"
+              onClick={handleDrawer}
+            >
+              <Menu />
+            </IconButton>
+          </div>
+          <Typography
+            variant="h6"
+            style={{
+              flexGrow: 1
+            }}
+          >
+            Pride Education
+          </Typography>
 
-          <Link
+          <NavLink
             to="/support"
-            style={{ color: "inherit", textDecoration: "none" }}
+            className="hideOnMobile"
+            style={{
+              textDecoration: "none",
+              color: "#f26522",
+              textTransform: "uppercase",
+              marginRight: "15px"
+            }}
           >
-            <Button color="inherit" className="hideOnMobile">
-              Support
-            </Button>
-          </Link>
-          <Link
+            Support
+          </NavLink>
+          <NavLink
             to="/classes"
-            style={{ color: "inherit", textDecoration: "none" }}
+            className="hideOnMobile"
+            style={{
+              textDecoration: "none",
+              color: "#f26522",
+              textTransform: "uppercase",
+              marginRight: "15px"
+            }}
           >
-            <Button color="inherit" className="hideOnMobile">
-              MarketPlace
-            </Button>
-          </Link>
-          <Link
+            MarketPlace
+          </NavLink>
+          <NavLink
             to="/login"
-            style={{ color: "inherit", textDecoration: "none" }}
+            className="hideOnMobile"
+            style={{
+              textDecoration: "none",
+              color: "#f26522",
+              textTransform: "uppercase",
+              marginRight: "15px"
+            }}
           >
-            <Button color="inherit" className="hideOnMobile">
-              Login
-            </Button>
-          </Link>
-          <Link
+            Login
+          </NavLink>
+          <NavLink
             to="/register"
-            style={{ color: "inherit", textDecoration: "none" }}
+            className="hideOnMobile"
+            style={{
+              textDecoration: "none",
+              color: "#f26522",
+              textTransform: "uppercase",
+              marginRight: "15px"
+            }}
           >
-            <Button color="inherit" className="hideOnMobile">
-              Register
-            </Button>
-          </Link>
+            Register
+          </NavLink>
         </Toolbar>
       </AppBar>
+      <Drawer anchor="left" open={open} onClose={() => setOpen(false)}>
+        <div
+          style={{
+            height: "100%",
+            width: "250px",
+            backgroundColor: "#f1f1f1"
+          }}
+        >
+          <List>
+            <NavLink to="/" className="fixLinks">
+              <ListItem button onClick={() => setOpen(false)}>
+                <ListItemIcon>
+                  <HomeIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Home"} />
+              </ListItem>
+              <Divider />
+            </NavLink>
+            <NavLink to="/support" className="fixLinks">
+              <ListItem button onClick={() => setOpen(false)}>
+                <ListItemIcon>
+                  <HomeIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Support"} />
+              </ListItem>
+              <Divider />
+            </NavLink>
+            <NavLink to="/classes" className="fixLinks">
+              <ListItem button onClick={() => setOpen(false)}>
+                <ListItemIcon>
+                  <ShopIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Marketplace"} />
+              </ListItem>
+            </NavLink>
+          </List>
+        </div>
+      </Drawer>
     </div>
   );
 };

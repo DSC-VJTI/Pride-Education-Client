@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import ClassesPane from "./components/Resource Page/ClassesPane";
 import CoursePage from "./components/Product Page/CoursePage";
-import Navbar from "./components/Navbar";
+
 import Landing from "./components/LandingPage/Landing";
 import SupportPage from "./components/Support Page/SupportPage";
 import Registration from "./components/LoginRegister/Registration";
@@ -17,6 +17,7 @@ import { useEffect } from "react";
 import AddProduct from "./components/DashboardLayout/ProductListView/AddProduct";
 import DashboardLayout from "./components/DashboardLayout";
 import Footer from "./components/Footer/Footer";
+import Navbar from "./components/Navbar";
 
 function App() {
   useEffect(() => {
@@ -39,7 +40,7 @@ function App() {
         <Route path="/admin" component={DashboardLayout} />
         <Route path="/" exact component={Landing} />
       </Switch>
-      <Footer />
+      {/* <Footer /> */}
     </Router>
   );
 }
