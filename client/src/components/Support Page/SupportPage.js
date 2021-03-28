@@ -37,13 +37,7 @@ const SupportPage = () => {
           exact
           path="/support/:page?"
           render={(props) => (
-            // <Grid container>
-            //   <Grid item md={2} xs={0}></Grid>
-            //   <Grid item md={8} xs={12}>
             <div className={classes.root}>{<Tabs {...props} />}</div>
-            // </Grid>
-            // <Grid item md={2} xs={0}></Grid>
-            // </Grid>
           )}
         />
       </Switch>

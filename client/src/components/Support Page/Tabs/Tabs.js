@@ -13,26 +13,16 @@ import PersonalDiscussion from "./PageThree/PersonalDiscussion";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // width: "900px",
     flexGrow: 1,
     width: "100%",
-    // backgroundColor: theme.palette.background.paper,
     "& .MuiTab-root": {
       background: "#f1f1f1"
     },
     "& .MuiTypography-root": {
       textAlign: "left"
     }
-    // '@media and all(min-width: 500px)': {
-    //   width: '800px',
-    //   background: 'blue'
-    // }
-  },
-  tabcolor: {
-    // background: "#3d3d3d"
   },
   tabpanel: {
-    // background: 'green',
     background: "#f1f1f1",
     "& html": {
       "& body": {
@@ -43,10 +33,6 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
     marginLeft: "auto",
     marginRight: "auto"
-    // background: "#f1f1f1",
-    // "& .MuiPaper-root": {
-    //   padding: "20px 0px",
-    // }
   }
 }));
 
@@ -88,13 +74,6 @@ function LinkTab(props) {
   );
 }
 
-function a11yProps(index) {
-  return {
-    id: `nav-tab-${index}`,
-    "aria-controls": `nav-tabpanel-${index}`
-  };
-}
-
 export default function NavTabs(props) {
   const { match, history } = props;
   const { params } = match;
@@ -124,7 +103,6 @@ export default function NavTabs(props) {
     <Box className={classes.root}>
       <AppBar position="static">
         <Tabs
-          // variant="fullWidth"
           value={value}
           onChange={handleChange}
           aria-label="nav tabs example"
@@ -137,9 +115,6 @@ export default function NavTabs(props) {
       </AppBar>
       <TabPanel value={value} index={0} className={classes.tabpanel}>
         <SoftwareProblems />
-        {/* <Paper className={classes.pageContent} width="100%" elevation={4}>
-          Imported from PageOne
-        </Paper> */}
       </TabPanel>
       <TabPanel value={value} index={1} className={classes.tabpanel}>
         <ProductEnquiry />

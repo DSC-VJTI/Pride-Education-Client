@@ -3,7 +3,6 @@ import { Grid, Typography, makeStyles, Box } from "@material-ui/core";
 import { useForm, Form } from "../../../UI Elements/UseForm";
 import { Input, MultiInput } from "../../../UI Elements/Input";
 import Button from "../../../UI Elements/Button";
-// import { useStyles } from "@material-ui/pickers/views/Calendar/SlideTransition";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -14,11 +13,9 @@ const useStyles = makeStyles((theme) => ({
       maxWidth: "94%",
       paddingLeft: "15px",
       paddingRight: "15px"
-      // background: 'blue'
     },
     "@media (min-width: 1300px)": {
       width: "1250px"
-      // background: 'yellow'
     },
     "& h2": {
       fontSize: "2.8rem",
@@ -86,13 +83,6 @@ const SoftwareProblems = () => {
               <h2>Can you provide some more information?</h2>
               <h6>We might contact you either through WhatsApp or Email</h6>
               <div className={classes.adjustInputs}>
-                {/* <Input
-            label="Mobile No."
-            name="mobile"
-            value={values.mobile}
-            onChange={handleInputChange}
-            error={error.mobile}
-          /> */}
                 <Input
                   label={`WhatsApp No. *`}
                   name="whatsapp"
