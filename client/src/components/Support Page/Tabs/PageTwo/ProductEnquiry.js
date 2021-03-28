@@ -37,7 +37,8 @@ const ProductEnquiry = () => {
   return (
     <Form onSubmit={handleSubmit}>
       <Grid container>
-        <Grid item xs={12}>
+        <Grid item md={2} xs={0}></Grid>
+        <Grid item md={4} xs={12}>
           <Typography variant="body">
             If you've any doubts regarding the product and it's plan, you can
             contact us here.
@@ -80,6 +81,7 @@ const ProductEnquiry = () => {
             style={{ borderRadius: "99999px" }}
           />
         </Grid>
+        <Grid item md={6} xs={0}></Grid>
       </Grid>
     </Form>
   );

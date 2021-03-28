@@ -3,16 +3,22 @@ import { Box, Button as MuiButton, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    textAlign: "center",
+    textAlign: "left",
     "& .MuiButton-root": {
       // fontFamily: "Work Sans, Roboto,-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif",
       // boxSizing: 'border-box',
+      padding: ".75rem 1.5rem",
+      borderRadius: "2.2rem",
+      fontSize: "0.675rem",
+      fontWeight: "normal",
       textAlign: "center",
-      marginTop: "20px",
-      marginBottom: "10px",
+      marginTop: "2rem",
+      marginBottom: "1rem",
       background: "#f26522",
       color: "white",
       border: "1px solid #f26522",
+      lineHeight: "1.25",
+
       "&:hover": {
         boxSizing: "border-box",
         background: "#f1f1f1",
