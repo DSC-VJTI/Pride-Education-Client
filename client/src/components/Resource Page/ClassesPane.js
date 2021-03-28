@@ -7,7 +7,7 @@ const ClassesPaneStyles = makeStyles({
     margin: "auto",
     padding: "2% 5%",
     boxSizing: "border-box",
-    background: "#E7E7E7"
+    background: "#ffffff"
   }
 });
 

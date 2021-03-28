@@ -5,17 +5,42 @@ import {
   IconButton,
   Typography,
   Button,
+  Drawer,
   List,
+  Divider,
   ListItem,
   ListItemIcon,
-  ListItemText,
-  Divider
+  ListItemText
 } from "@material-ui/core";
-import Drawer from "@material-ui/core/Drawer";
+import { makeStyles } from "@material-ui/core/styles";
+import InboxIcon from "@material-ui/icons/Inbox";
+import MailIcon from "@material-ui/icons/Mail";
+import { Link } from "react-router-dom";
 import { Menu } from "@material-ui/icons";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import HomeIcon from "@material-ui/icons/Home";
 import ShopIcon from "@material-ui/icons/Shop";
+
+const NavbarStyles = makeStyles({
+  list: {
+    width: "250px",
+    "& .MuiPaper-root": {
+      justifyContent: "center",
+      // backgroundColor: "#f1f1f1",
+      backgroundColor: "#fffff"
+    },
+    "& .MuiList-root": {
+      display: "flex"
+    },
+    "& .MuiListItemText-root": {
+      width: "max-content"
+    },
+    "& .MuiTypography-body1": {
+      fontWeight: "600",
+      color: "#f26522"
+    }
+  }
+});
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -48,7 +73,7 @@ const Navbar = () => {
               flexGrow: 1
             }}
           >
-            <Link
+            <NavLink
               to="/"
               style={{
                 textDecoration: "none",
@@ -56,7 +81,7 @@ const Navbar = () => {
               }}
             >
               Pride Education
-            </Link>
+            </NavLink>
           </Typography>
           <NavLink
             to="/support"

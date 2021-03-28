@@ -8,10 +8,8 @@ const CoursePageHeaderStyles = makeStyles({
     flexWrap: "wrap",
     justifyContent: "space-around",
     margin: "10px 10%",
-    // background: "#90caf9",
-    background: "#42a5f4",
+    background: "#f1f1f1",
     borderRadius: "20px",
-    boxShadow: "4px 4px #1565c0",
     padding: "20px 0px"
   },
   instructImg: {
@@ -23,7 +21,6 @@ const CoursePageHeaderStyles = makeStyles({
     width: "50%",
     fontWeight: "400",
     margin: "auto",
-    color: "white",
     fontWeight: "600"
   }
 });

@@ -5,7 +5,6 @@ import Total from "./Total";
 
 const CartStyles = makeStyles((theme) => ({
   style: {
-    background: "blue",
     padding: "20px",
     minWidth: "100px",
     margin: "15px"
@@ -25,7 +24,7 @@ const initialFValues = [
     content: "Books",
     views: "1.7",
     validity: "6 Months",
-    price: "Rs. 15,000",
+    price: "15,000",
     instructor: "CA Abhishek Khilwani"
   },
   {
@@ -33,7 +32,7 @@ const initialFValues = [
     content: "Books",
     views: "1.7",
     validity: "6 Months",
-    price: "Rs. 15,000",
+    price: "15,000",
     instructor: "CA Abhishek Khilwani"
   },
   {
@@ -41,7 +40,7 @@ const initialFValues = [
     content: "Books",
     views: "1.7",
     validity: "6 Months",
-    price: "Rs. 15,000",
+    price: "15,000",
     instructor: "CA Abhishek Khilwani"
   }
 ];
