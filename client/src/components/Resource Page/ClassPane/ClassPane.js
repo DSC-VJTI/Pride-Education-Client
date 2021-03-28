@@ -1,19 +1,35 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Paper } from "@material-ui/core";
 import ReactElasticCarousel from "react-elastic-carousel/dist/index";
 import Product from "./Product";
 import ComboBox from "./ComboBox";
 
-const ClassPaneStyles = makeStyles({
+const ClassPaneStyles = makeStyles((theme) => ({
   slider: {
-    backgroundColor: "#3f51b5",
     padding: "2rem",
     width: "90vw",
     margin: "auto",
     borderRadius: "1rem",
-    boxShadow: "0.1rem 0.1rem #1565c0"
+    "& .rec-dot": {
+      display: "none"
+    },
+    "& .rec-dot:hover ": {
+      boxShadow: "0 0 1px 3px"
+    },
+    "& .rec-dot:active": {
+      boxShadow: "0 0 1px 3px rgba(235,16,16,0.5)"
+    },
+    "& .rec-dot:focus": {
+      boxShadow: "0 0 1px 3px rgba(235,16,16,0.5)"
+    },
+    "& .rec-arrow": {
+      background: "none"
+    },
+    "& .rec.rec-arrow:hover": {
+      background: "#f26522"
+    }
   }
-});
+}));
 
 const ClassPane = ({ Course, CoursesList }) => {
   const breakPoints = [

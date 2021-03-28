@@ -7,15 +7,11 @@ const mainPaneStyles = makeStyles({
   mainHolder: {
     display: "flex",
     flexWrap: "wrap",
-    // background: "#90caf9",
-    background: "#42a5f4",
     width: "80%",
-    margin: "auto",
-    borderRadius: "15px",
-    boxShadow: "3px 3px #3949ab"
+    margin: "auto"
   },
   CourseType: {
-    background: "#3949ab",
+    background: "#f1f1f1",
     width: "50%",
     margin: "20px auto",
     padding: "10px",
@@ -24,8 +20,7 @@ const mainPaneStyles = makeStyles({
     fontSize: "25px",
     display: "flex",
     justifyContent: "center",
-    color: "white",
-    boxShadow: "3px 3px #1c87e5"
+    color: "#f26522"
   }
 });
 

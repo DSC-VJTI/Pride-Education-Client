@@ -1,110 +1,105 @@
-import React,{useState} from "react";
+
+import React from "react";
+import clsx from "clsx";
 import {
   AppBar,
   Toolbar,
   IconButton,
   Typography,
   Button,
+  Drawer,
   List,
+  Divider,
   ListItem,
   ListItemIcon,
-  ListItemText,
-  Divider
+  ListItemText
 } from "@material-ui/core";
-import Drawer from '@material-ui/core/Drawer';
-import { Menu } from "@material-ui/icons";
-import { NavLink } from 'react-router-dom';
-import HomeIcon from "@material-ui/icons/Home";
-import ShopIcon from '@material-ui/icons/Shop';
+import { makeStyles } from "@material-ui/core/styles";
+import InboxIcon from "@material-ui/icons/Inbox";
+import MailIcon from "@material-ui/icons/Mail";
+import Menu from "@material-ui/icons/Menu";
+import { Link } from "react-router-dom";
+
+const NavbarStyles = makeStyles({
+  list: {
+    width: "250px",
+    "& .MuiPaper-root": {
+      justifyContent: "center",
+      // backgroundColor: "#f1f1f1",
+      backgroundColor: "#fffff"
+    },
+    "& .MuiList-root": {
+      display: "flex"
+    },
+    "& .MuiListItemText-root": {
+      width: "max-content"
+    },
+    "& .MuiTypography-body1": {
+      fontWeight: "600",
+      color: "#f26522"
+    }
+  }
+});
 
 const Navbar = () => {
-  const [open,setOpen]=useState(false);
-  const handleDrawer=()=>{
-    setOpen(true);
-  }
-  return (
-    <div>
-      <AppBar position="static" style={{
-        backgroundColor:"#f1f1f1",
-        color:"#f26522"
-    
-    }}>
-        <Toolbar>
-        <div className="showOnMobile">
-          <IconButton color="inherit" edge="start" aria-label="menu" onClick={handleDrawer}>
-          
-            <Menu/>
-           
-          </IconButton>
-          </div>
-          <Typography variant="h6" style={{
-            flexGrow:1
-          }}>Pride Education</Typography>
-      
-         <NavLink to="/support" className="hideOnMobile" style={{
-           textDecoration:"none",
-           color:"#f26522",
-           textTransform:"uppercase",
-           marginRight:"10px"
-         }}>Support</NavLink>
-         <NavLink to="/classes" className="hideOnMobile" style={{
-          textDecoration:"none",
-          color:"#f26522",
-          textTransform:"uppercase",
-          marginRight:"10px"
-        }}>MarketPlace</NavLink>
-        <NavLink to="/login" className="hideOnMobile" style={{
-          textDecoration:"none",
-          color:"#f26522",
-          textTransform:"uppercase",
-          marginRight:"10px"
-        }}>Login</NavLink>
-
-          
-        </Toolbar>
-      </AppBar>
-      <Drawer
-      anchor='left'
-      open={open}
-      onClose={()=>setOpen(false)}
-      >
-      <div style={{
-        height:"100%",
-        width:"250px",
-        backgroundColor:"#f1f1f1"
-
-      }}>
+  const classes = NavbarStyles();
+  const [top, setTop] = React.useState(false);
+  const toggleDrawer = (open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setTop(open);
+  };
+  const list = () => (
+    <div
+      className={classes.list}
+      role="Marketplace"
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}
+    >
       <List>
-      <NavLink to="/" className="fixLinks">
-      <ListItem button onClick={()=>setOpen(false)}>
-      <ListItemIcon>
-      <HomeIcon/>
-      </ListItemIcon>
-      <ListItemText primary={"Home"}/>
-      </ListItem>
-      <Divider/>
-      </NavLink>
-      <NavLink to="/support" className="fixLinks">
-      <ListItem button onClick={()=>setOpen(false)}>
-      <ListItemIcon>
-      <HomeIcon/>
-      </ListItemIcon>
-      <ListItemText primary={"Support"}/>
-      </ListItem>
-      <Divider/>
-      </NavLink>
-      <NavLink to="/classes" className="fixLinks">
-      <ListItem button onClick={()=>setOpen(false)}>
-      <ListItemIcon>
-      <ShopIcon/>
-      </ListItemIcon>
-      <ListItemText primary={"Marketplace"}/>
-      </ListItem>
-      </NavLink>
+        {["Classes", "Books", "Test Series"].map((text, index) => (
+          <ListItem button key={text}>
+            <a href="/classes" style={{ textDecoration: "none" }}>
+              <ListItemText primary={text} />
+            </a>
+          </ListItem>
+        ))}
       </List>
-      </div>
-      </Drawer>
     </div>
+  );
+  return (
+    <AppBar position="static" style={{ background: "#3d3d3d" }}>
+      <Toolbar>
+        <IconButton color="inherit" edge="start" aria-label="menu">
+          <Menu />
+        </IconButton>
+        <Typography variant="h6">Pride Education</Typography>
+
+        <Button color="inherit" className="hideOnMobile" href="/support">
+          Support
+        </Button>
+        <Button color="inherit" className="hideOnMobile" href="/classes">
+          MarketPlace
+        </Button>
+        <React.Fragment>
+          <Button onClick={toggleDrawer(true)}>Marketplace</Button>
+          <Drawer anchor="top" open={top} onClose={toggleDrawer(false)}>
+            {list()}
+          </Drawer>
+        </React.Fragment>
+        <Button color="inherit" className="hideOnMobile" href="/login">
+          Login
+        </Button>
+        <Button color="inherit" className="hideOnMobile" href="/login">
+          Register
+        </Button>
+      </Toolbar>
+    </AppBar>
+
   );
 };
 
