@@ -18,30 +18,33 @@ import AddProduct from "./components/DashboardLayout/ProductListView/AddProduct"
 import DashboardLayout from "./components/DashboardLayout";
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar";
+import { AuthProvider } from "./context/context";
 
 function App() {
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
   return (
-    <Router>
-      <Navbar />
-      <Switch>
-        <Route path="/classes" component={ClassesPane} />
-        <Route path="/cart" component={Cart} />
-        <Route exact path="/product" component={CoursePage} />
-        <Route path="/support" component={SupportPage} />
-        <Route path="/register" component={Registration} />
-        <Route path="/login" component={Login} />
+    <AuthProvider>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route path="/classes" component={ClassesPane} />
+          <Route path="/cart" component={Cart} />
+          <Route exact path="/product" component={CoursePage} />
+          <Route path="/support" component={SupportPage} />
+          <Route path="/register" component={Registration} />
+          <Route path="/login" component={Login} />
 
-        {/* Protected routes go here */}
-        <Route path="/product/add" component={AddProduct} />
-        <Route path="/product/edit/:productId" component={AddProduct} />
-        <Route path="/admin" component={DashboardLayout} />
-        <Route path="/" exact component={Landing} />
-      </Switch>
-      {/* <Footer /> */}
-    </Router>
+          {/* Protected routes go here */}
+          <Route path="/product/add" component={AddProduct} />
+          <Route path="/product/edit/:productId" component={AddProduct} />
+          <Route path="/admin" component={DashboardLayout} />
+          <Route path="/" exact component={Landing} />
+        </Switch>
+        {/* <Footer /> */}
+      </Router>
+    </AuthProvider>
   );
 }
 

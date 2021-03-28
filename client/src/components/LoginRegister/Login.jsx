@@ -4,10 +4,13 @@ import "./css/FormStyle.css";
 import { sendOTP } from "../../actions/authActions";
 import { Redirect } from "react-router-dom";
 import OtpPage from "./inputOTP";
+import { useAuthState, useAuthDispatch } from "../../context/context";
 
-const Login = () => {
+const Login = (props) => {
+  const dispatch = useAuthDispatch();
+  const { loading, errorMessage } = useAuthState();
+
   const [email, setEmail] = useState("");
-  // const [redirect, setRedirect] = useState(null);
   const [data, setData] = useState(null);
   const [alert, setAlert] = useState(null);
 
@@ -32,10 +35,12 @@ const Login = () => {
   const onBtnClick = (event) => {
     event.preventDefault();
     if (validateEmail()) {
-      sendOTP({ email }).then((res) => {
-        if (res.status === 200) setData(res);
-        else if (res.status === 404)
-          setAlert("Email not found. Please register first.");
+      sendOTP({ dispatch, email }).then((res) => {
+        if (res.status === 200) {
+          setData(res);
+        } else if (res.status === 404)
+          // setAlert("Email not found. Please register first.");
+          setWarningEmail("Email not found. Please register first."); // Add alert popup funtionality
       });
     }
   };
@@ -51,8 +56,6 @@ const Login = () => {
     }
   };
 
-  const onFormSubmit = () => {};
-
   return !data ? (
     <>
       <div className="form">
@@ -63,7 +66,7 @@ const Login = () => {
           >
             Login
           </h1>
-          <form onSubmit={onFormSubmit}>
+          <form>
             <div className="">
               <div style={{ display: "flex", justifyContent: "space-around" }}>
                 <FormControl
@@ -98,6 +101,7 @@ const Login = () => {
                   }}
                   variant="contained"
                   color="primary"
+                  disabled={loading}
                 >
                   Send OTP
                 </Button>

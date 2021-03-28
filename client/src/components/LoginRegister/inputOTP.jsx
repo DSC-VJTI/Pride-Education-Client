@@ -3,20 +3,38 @@ import { React, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import OtpInput from "react-otp-input";
 import { login, register } from "../../actions/authActions";
+import { useAuthState, useAuthDispatch } from "../../context/context";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
   card: {}
 }));
 
-const OtpPage = ({ action, data }) => {
-  const [otp, setOtp] = useState();
+//TODO: Add styles to page
+
+const OtpPage = (props) => {
+  const dispatch = useAuthDispatch();
+  const history = useHistory();
+  const { loading, errorMessage } = useAuthState();
+
+  const [otp, setOtp] = useState("");
   // const classes = useStyles();
 
   const handleClick = () => {
-    if (action === "login") {
-      login({ hash: data.hash, email: data.email, otp: otp }).then((res) => {
-        console.log(res);
-      });
+    if (otp.length === 6) {
+      if (props.action === "login") {
+        login({
+          dispatch,
+          hash: props.data.hash,
+          email: props.data.email,
+          otp: otp
+        }).then((res) => {
+          console.log(res);
+          history.push("/");
+        });
+      }
+    } else {
+      console.log("Please input full otp"); // TODO: Display error message on the form here
     }
     // console.log(data);
   };
