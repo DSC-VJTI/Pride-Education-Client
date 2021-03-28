@@ -1,11 +1,9 @@
 import { Container, Grid, makeStyles, Paper } from "@material-ui/core";
 import React, { useState } from "react";
 import OrderedItem from "./OrderedItem";
-import download from "../../Resources/img1.jpeg";
 
 const useStyles = makeStyles((theme) => ({
   style: {
-    // background: "blue",
     padding: "20px",
     minWidth: "100px",
     margin: "15px"

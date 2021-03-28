@@ -55,12 +55,6 @@ const useStyles = makeStyles((theme) => ({
       fontFamily: `Work Sans, Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Arial,
        sans-serif`
     }
-
-    // '& .MuiFormLabel-root .Mui-focued': {
-    //   border: '1px solid black',
-    //   color: 'red',
-    //   background: 'red'
-    // }
   }
 }));
 
@@ -78,16 +72,6 @@ export const Input = (props) => {
     placeholder
   } = props;
   return (
-    // <TextField
-    //   //
-    //   // InputLabelProps={classes.root}
-    //   inputProps={classes.root}
-    //   label={label}
-    //   name={name}
-    //   value={value}
-    //   onChange={onChange}
-    //   {...(error && { error: true, helperText: error })}
-    // />
     <div className={classes.root}>
       <label for="hire_full_name">{`${label}`}</label>
       <input
@@ -109,19 +93,10 @@ export const MultiInput = (props) => {
   const classes = useStyles();
   const { label, name, value, onChange, type, required, placeholder } = props;
   return (
-    // <TextField
-    //   multiline
-    //   rowsMax={5}
-    //   label={label}
-    //   name={name}
-    //   value={value}
-    //   onChange={onChange}
-    //   // {...(error && { error: true, helperText: error })}
-    // />
     <div className={classes.root}>
-      <label for="hire_full_name">{`${label}`}</label>
+      <label for={name}>{`${label}`}</label>
       <textarea
-        id="hire_full_name"
+        id={name}
         type={type}
         value={value}
         onChange={onChange}

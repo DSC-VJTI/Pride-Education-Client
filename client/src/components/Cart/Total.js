@@ -5,7 +5,6 @@ import {
   CardContent,
   Typography,
   CardActions,
-  // Button,
   Checkbox,
   FormControlLabel,
   Link,
@@ -37,7 +36,6 @@ const CartStyles = makeStyles({
   totalButton: {
     margin: "auto",
     width: "100%",
-    // borderRadius: "2rem",
     padding: "10px 20px"
   }
 });
@@ -80,7 +78,6 @@ const Total = (props) => {
           </Grid>
         </CardContent>
         <CardActions>
-          {/* <Button className={classes.totalButton}>Proceed to Buy</Button> */}
           <Button
             variant="contained"
             color="primary"

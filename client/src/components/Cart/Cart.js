@@ -3,7 +3,6 @@ import {
   Container,
   Grid,
   makeStyles,
-  Paper,
   Typography,
   Divider,
   Card,
@@ -129,7 +128,6 @@ const Cart = () => {
                 onMouseEnter={handleOnHover}
                 onMouseLeave={handleonMouseLeave}
               >
-                {/* <Paper> */}
                 <CardActions>
                   <Item
                     id={cartItem.id}
@@ -143,8 +141,6 @@ const Cart = () => {
                     onClick={handleOnClick}
                   />
                 </CardActions>
-
-                {/* </Paper> */}
               </Card>
             </Grid>
           ))}

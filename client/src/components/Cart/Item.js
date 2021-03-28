@@ -1,7 +1,6 @@
 import React from "react";
-import { Divider, Grid, Typography, makeStyles } from "@material-ui/core";
+import { Grid, Typography, makeStyles } from "@material-ui/core";
 import download from "../../Resources/img1.jpeg";
-
 import Fab from "@material-ui/core/Fab";
 import DeleteIcon from "@material-ui/icons/Delete";
 const useStyles = makeStyles((theme) => ({
@@ -63,9 +62,6 @@ const Item = ({
           <Typography gutterBottom variant="subtitle2">
             {`Rs.${price}`}
           </Typography>
-
-          <Divider />
-
           <Typography gutterbottom variant="subtitle2">
             By {instructor}
           </Typography>
