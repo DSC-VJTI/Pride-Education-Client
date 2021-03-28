@@ -37,7 +37,6 @@ const Registration = () => {
   const [warningNumber, setWarningNumber] = useState("");
   const [warningEmail, setWarningEmail] = useState("");
   const [warningName, setWarningName] = useState("");
-  const [warningID, setWarningID] = useState("");
   const [warningAddr, setWarningAddr] = useState("");
   const [warningDate, setWarningDate] = useState("");
   const [warningSuggested, setWarningSuggestedBy] = useState("");
@@ -95,7 +94,6 @@ const Registration = () => {
     event.preventDefault();
     validateNumber();
     validateName();
-    // validateID();
     validateAddr();
     validateSuggest();
     validateDate();
@@ -114,9 +112,6 @@ const Registration = () => {
     if (name === "number") {
       setNumber(value);
     }
-    // if (name === "id") {
-    //   setID(value);
-    // }
     if (name === "addr") {
       setAddr(value);
     }
@@ -215,23 +210,6 @@ const Registration = () => {
               justifyContent: "space-around"
             }}
           >
-            {/* <FormControl
-              className="inputFields"
-              style={{ width: "90%", marginTop: "0.3rem" }}
-            >
-              <InputLabel htmlFor="my-input">
-                How did you come to know about us ?
-              </InputLabel>
-              <Input
-                name="suggestedBy"
-                value={suggestedBy}
-                onChange={onRegistration}
-                type="text"
-                id="my-input"
-                aria-describedby="my-helper-text"
-              />
-              <small style={{ color: "red" }}>{warningSuggested}</small>
-            </FormControl> */}
             <FormControl
               className="inputFields"
               style={{ width: "40%", marginTop: "0.3rem" }}

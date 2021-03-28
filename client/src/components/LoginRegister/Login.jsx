@@ -39,8 +39,7 @@ const Login = (props) => {
         if (res.status === 200) {
           setData(res);
         } else if (res.status === 404)
-          // setAlert("Email not found. Please register first.");
-          setWarningEmail("Email not found. Please register first."); // Add alert popup funtionality
+          setWarningEmail("Email not found. Please register first."); //TODO: Add alert popup funtionality
       });
     }
   };

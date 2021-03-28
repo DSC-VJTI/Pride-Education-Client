@@ -5,8 +5,8 @@ let token = localStorage.getItem("token");
 let isAuthenticated = localStorage.getItem("isAuthenticated") ? true : false;
 
 export const initialState = {
-  user: "" || user,
-  token: "" || token,
+  user: user,
+  token: token,
   isAuthenticated: isAuthenticated,
   loading: false,
   errorMessage: null
@@ -20,7 +20,6 @@ export const AuthReducer = (initialState, action) => {
         loading: true
       };
     case "LOGIN_SUCCESS":
-      // TODO: Add userdetails to local storage
       localStorage.setItem("user", JSON.stringify(action.payload.user));
       localStorage.setItem("token", action.payload.token);
       localStorage.setItem("isAuthenticated", true);

@@ -18,7 +18,6 @@ const OtpPage = (props) => {
   const { loading, errorMessage } = useAuthState();
 
   const [otp, setOtp] = useState("");
-  // const classes = useStyles();
 
   const handleClick = () => {
     if (otp.length === 6) {
@@ -36,7 +35,6 @@ const OtpPage = (props) => {
     } else {
       console.log("Please input full otp"); // TODO: Display error message on the form here
     }
-    // console.log(data);
   };
 
   return (
