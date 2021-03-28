@@ -22,10 +22,8 @@ export const DatePicker = (props) => {
     <div className="date">
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <KeyboardDatePicker
-          // className={classes.root}
           disableToolbar
           variant="inline"
-          // inputVariant="outlined"
           id="date-picker-dialog"
           label={label}
           format="MM/dd/yyyy"

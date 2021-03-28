@@ -5,8 +5,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     textAlign: "left",
     "& .MuiButton-root": {
-      // fontFamily: "Work Sans, Roboto,-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif",
-      // boxSizing: 'border-box',
+      fontFamily:
+        "Work Sans, Roboto,-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif",
       padding: ".75rem 1.5rem",
       borderRadius: "2.2rem",
       fontSize: "0.675rem",
@@ -38,17 +38,13 @@ export const Button = (props) => {
       <MuiButton
         variant={variant}
         size={size}
-        // color={"#f26522"}
         onClick={onClick}
         disableElevation
-        // onMouseEnter={handleMouseEnter}
-        // onMouseLeave={handleMouseLeave}
         className={classes.root}
         {...other}
       >
         {text}
       </MuiButton>
-      {/* <a className={classes.root}>{text}</a> */}
     </Box>
   );
 };
