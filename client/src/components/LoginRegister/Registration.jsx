@@ -2,7 +2,15 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import "./css/FormStyle.css";
-import { FormControl, Input, InputLabel, Button } from "@material-ui/core";
+import {
+  FormControl,
+  Input,
+  InputLabel,
+  Button,
+  Select,
+  MenuItem
+} from "@material-ui/core";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1
@@ -19,15 +27,16 @@ const Registration = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
-  const [id, setID] = useState("");
   const [addr, setAddr] = useState("");
   const [suggestedBy, setSuggestedBy] = useState("");
   const [date, setDate] = useState("");
+  const [field, setField] = useState("");
+  const [level, setLevel] = useState("");
+
   //States Used for Validation Starts from Here
   const [warningNumber, setWarningNumber] = useState("");
   const [warningEmail, setWarningEmail] = useState("");
   const [warningName, setWarningName] = useState("");
-  const [warningID, setWarningID] = useState("");
   const [warningAddr, setWarningAddr] = useState("");
   const [warningDate, setWarningDate] = useState("");
   const [warningSuggested, setWarningSuggestedBy] = useState("");
@@ -55,21 +64,11 @@ const Registration = () => {
       setWarningDate("");
     }
   };
-  const validateID = () => {
-    if (id.length === 0) {
-      setWarningID("Please enter  your Institute ID");
-    }
-    if (id.length !== 0) {
-      setWarningID("");
-    }
-  };
   const validateEmail = () => {
-    if (
-      email.length > 0 &&
-      email.indexOf("@") > -1 &&
-      isNaN(email[0]) &&
-      email.indexOf(".") > -1
-    ) {
+    let pattern = new RegExp(
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+    if (pattern.test(email)) {
       setWarningEmail("");
     } else {
       setWarningEmail("Please enter a valid email Address");
@@ -95,7 +94,6 @@ const Registration = () => {
     event.preventDefault();
     validateNumber();
     validateName();
-    validateID();
     validateAddr();
     validateSuggest();
     validateDate();
@@ -114,27 +112,34 @@ const Registration = () => {
     if (name === "number") {
       setNumber(value);
     }
-    if (name === "id") {
-      setID(value);
-    }
     if (name === "addr") {
       setAddr(value);
     }
     if (name === "suggestedBy") {
       setSuggestedBy(value);
+      console.log(value);
     }
     if (name === "date") {
       setDate(value);
+    }
+    if (name === "field") {
+      setField(value);
+    }
+    if (name === "level") {
+      setLevel(value);
     }
   };
 
   const onFormSubmit = () => {};
   return (
-    <>
-      <h1 className="heading" style={{ color: "#0065d1", textAlign: "center" }}>
-        Sign up for a free account
-      </h1>
+    <div className="form">
       <div className="mainSection">
+        <h1
+          className="heading"
+          style={{ color: "#0065d1", textAlign: "center" }}
+        >
+          Sign up for a free account
+        </h1>
         <form onSubmit={onFormSubmit}>
           <div
             className="inputFields"
@@ -169,7 +174,7 @@ const Registration = () => {
             className="inputFields"
             style={{ display: "flex", justifyContent: "space-around" }}
           >
-            <FormControl className="inputField" style={{ width: "40%" }}>
+            <FormControl className="inputField" style={{ width: "90%" }}>
               <InputLabel htmlFor="my-input">Enter Mobile Number</InputLabel>
               <Input
                 name="number"
@@ -180,18 +185,6 @@ const Registration = () => {
                 aria-describedby="my-helper-text"
               />
               <small style={{ color: "red" }}>{warningNumber}</small>
-            </FormControl>
-            <FormControl className="inputField" style={{ width: "40%" }}>
-              <InputLabel htmlFor="my-input">Enter Institute ID</InputLabel>
-              <Input
-                name="id"
-                value={id}
-                onChange={onRegistration}
-                type="text"
-                id="my-input"
-                aria-describedby="my-helper-text"
-              />
-              <small style={{ color: "red" }}>{warningID}</small>
             </FormControl>
           </div>
           <div
@@ -219,20 +212,49 @@ const Registration = () => {
           >
             <FormControl
               className="inputFields"
+              style={{ width: "40%", marginTop: "0.3rem" }}
+            >
+              <InputLabel>Field</InputLabel>
+              <Select name="field" value={field} onChange={onRegistration}>
+                <MenuItem value={"CA"}>CA</MenuItem>
+                <MenuItem value={"CS"}>CS</MenuItem>
+                <MenuItem value={"B.COM"}>B.COM</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl
+              className="inputFields"
+              style={{ width: "40%", marginTop: "0.3rem" }}
+            >
+              <InputLabel>Level</InputLabel>
+              <Select name="level" value={level} onChange={onRegistration}>
+                <MenuItem value={"Foundation"}>Foundation</MenuItem>
+                <MenuItem value={"ICPC"}>ICPC</MenuItem>
+                <MenuItem value={"Final"}>Final</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around"
+            }}
+          >
+            <FormControl
+              className="inputFields"
               style={{ width: "90%", marginTop: "0.3rem" }}
             >
-              <InputLabel htmlFor="my-input">
-                How did you come to know about us ?
-              </InputLabel>
-              <Input
+              <InputLabel>Reference</InputLabel>
+              <Select
                 name="suggestedBy"
                 value={suggestedBy}
                 onChange={onRegistration}
-                type="text"
-                id="my-input"
-                aria-describedby="my-helper-text"
-              />
-              <small style={{ color: "red" }}>{warningSuggested}</small>
+              >
+                <MenuItem value={"Social Media"}>Through social media</MenuItem>
+                <MenuItem value={"Word of mouth"}>
+                  Through recommendation by friends/family
+                </MenuItem>
+                <MenuItem value={"Other"}>Other</MenuItem>
+              </Select>
             </FormControl>
           </div>
           <div className="inputFieldsForDateAndBtn">
@@ -288,7 +310,7 @@ const Registration = () => {
           </div>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 export default Registration;
