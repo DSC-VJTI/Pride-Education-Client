@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Container,
   Grid,
@@ -90,16 +90,6 @@ const Cart = () => {
     total += item.price;
   };
 
-  useEffect(() => {
-    axios
-      .get("http://127.0.0.1:8000/api/cart/")
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  });
   value.map(TotalAmount);
 
   return (
