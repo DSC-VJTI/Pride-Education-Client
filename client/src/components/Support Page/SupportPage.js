@@ -29,8 +29,6 @@ const SupportPage = () => {
 
   return (
     <div>
-      {/* // <main style={{ height: "70vh", display: "grid", placeItems: "center" }}> */}
-
       <Switch>
         <Redirect exact from="/support" to="/support/software" />
         <Route
