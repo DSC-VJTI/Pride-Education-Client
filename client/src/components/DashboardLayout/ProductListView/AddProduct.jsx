@@ -99,7 +99,7 @@ export default function AddProduct() {
   useEffect(() => {
     if (isEditPage) {
       axios
-        .get(BASE_URL + `products/${productId}`)
+        .get(BASE_URL + `/products/${productId}`)
         .then((res) => {
           console.log(res.data);
           setProduct(res.data.data);

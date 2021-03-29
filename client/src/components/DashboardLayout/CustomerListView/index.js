@@ -21,7 +21,7 @@ const CustomerListView = () => {
 
   useEffect(() => {
     axios
-      .post(BASE_URL + "admin/getUsers")
+      .post(BASE_URL + "/admin/getUsers")
       .then((res) => {
         setUsers(res.data.allUsers);
       })
