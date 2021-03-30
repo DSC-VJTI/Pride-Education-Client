@@ -38,7 +38,6 @@ const Item = ({
 
   const handleOnClick = (e) => {
     onClick(id);
-    console.log(id);
   };
   return (
     <Grid container spacing={4} className={classes.root}>
