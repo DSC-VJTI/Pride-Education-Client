@@ -50,28 +50,23 @@ const Total = (props) => {
   const title = `(Rs.${props.price})`;
   const classes = CartStyles();
   return (
-    <Grid direction="column">
+    <Grid container direction="column">
       <Card className={classes.TotalCard}>
         <CardContent>
-          <Grid container direction="column" xs={12} spacing={2}>
+          <Grid item container direction="column" xs={12} spacing={2}>
             <Grid item xs={12}>
               <Typography className={classes.title} component="h5">
                 Your order is eligible for free order
               </Typography>
             </Grid>
             <Grid item xs={12}>
-              <Typography
-                color="textSecondary"
-                gutterBottom
-                variant
-                component="h5"
-              >
+              <Typography color="textSecondary" component="h5">
                 Select this option at checkout &nbsp;
                 <Link color="textPrimary">Details</Link>
               </Typography>
             </Grid>
             <Grid item xs={12}>
-              <Typography variant component="h4">
+              <Typography component="h4">
                 {`Subtotal (${items} items) : ${title}`}
               </Typography>
             </Grid>

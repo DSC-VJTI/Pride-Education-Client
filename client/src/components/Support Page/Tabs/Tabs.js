@@ -47,11 +47,7 @@ function TabPanel(props) {
       aria-labelledby={`nav-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box p={3}>{children}</Box>}
     </div>
   );
 }
@@ -81,14 +77,12 @@ export default function NavTabs(props) {
 
   const tabNameToIndex = {
     0: "software",
-    1: "product",
-    2: "personal"
+    1: "personal"
   };
 
   const indexToTabName = {
     software: 0,
-    product: 1,
-    personal: 2
+    personal: 1
   };
 
   const classes = useStyles();
@@ -108,18 +102,14 @@ export default function NavTabs(props) {
           aria-label="nav tabs example"
           style={{ background: "#f1f1f1", color: "#f25622" }}
         >
-          <LinkTab label="Software Problems" href="/drafts" />
-          <LinkTab label="Product Enquiry" href="/trash" />
-          <LinkTab label="Personal Discussion" href="/spam" />
+          <LinkTab label="Software Problems" />
+          <LinkTab label="Personal Discussion" />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0} className={classes.tabpanel}>
         <SoftwareProblems />
       </TabPanel>
       <TabPanel value={value} index={1} className={classes.tabpanel}>
-        <ProductEnquiry />
-      </TabPanel>
-      <TabPanel value={value} index={2} className={classes.tabpanel}>
         <PersonalDiscussion />
       </TabPanel>
     </Box>

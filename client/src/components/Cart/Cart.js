@@ -10,7 +10,6 @@ import {
 } from "@material-ui/core";
 import Item from "./Item";
 import Total from "./Total";
-import axios from "axios";
 
 const CartStyles = makeStyles((theme) => ({
   style: {
@@ -68,43 +67,27 @@ const initialFValues = [
 ];
 
 const Cart = () => {
-  const [elevation, setElevation] = useState(2);
-
-  const handleOnHover = (e) => {
-    console.log(e.target);
-    setElevation(10);
-  };
-
-  const handleonMouseLeave = () => {
-    setElevation(2);
-  };
   const [value, setValue] = useState(initialFValues);
+  const [total, setTotal] = useState(0);
   const classes = CartStyles();
 
   const handleOnClick = (e) => {
     setValue(value.filter((item) => item.id !== e));
   };
 
-  var total = 0;
-  const TotalAmount = (item) => {
-    total += item.price;
-  };
-
   useEffect(() => {
-    axios
-      .get("http://127.0.0.1:8000/api/cart/")
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
+    if (value.length !== 0) {
+      var sum = 0;
+      value.forEach((item) => {
+        sum = sum + item.price;
       });
-  });
-  value.map(TotalAmount);
+      setTotal(sum);
+    }
+  }, [value]);
 
   return (
     <Grid container spacing={3} direction={"row"}>
-      <Grid item xs={0} lg={1}></Grid>
+      <Grid item xs={false} lg={1}></Grid>
       <Grid
         container
         item
@@ -122,12 +105,8 @@ const Cart = () => {
             <Divider />
           </div>
           {value.map((cartItem) => (
-            <Grid item xs={12} spacing={2} className={classes.paper}>
-              <Card
-                elevation={`${elevation}`}
-                onMouseEnter={handleOnHover}
-                onMouseLeave={handleonMouseLeave}
-              >
+            <Grid item xs={12} className={classes.paper} key={cartItem.id}>
+              <Card>
                 <CardActions>
                   <Item
                     id={cartItem.id}
@@ -146,12 +125,12 @@ const Cart = () => {
           ))}
         </Container>
       </Grid>
-      <Grid item sm={7} xs={12} md={4} lg={3} spacing={4}>
+      <Grid item sm={7} xs={12} md={4} lg={3}>
         <Container className={classes.style}>
           <Total items={value.length} price={total} />
         </Container>
       </Grid>
-      <Grid item xs={0} md={0} lg={1}></Grid>
+      <Grid item xs={false} md={false} lg={1}></Grid>
     </Grid>
   );
 };

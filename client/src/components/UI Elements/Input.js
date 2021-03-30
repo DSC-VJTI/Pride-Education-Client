@@ -73,9 +73,9 @@ export const Input = (props) => {
   } = props;
   return (
     <div className={classes.root}>
-      <label for="hire_full_name">{`${label}`}</label>
+      <label htmlFor={name}>{`${label}`}</label>
       <input
-        id="hire_full_name"
+        id={name}
         type={type}
         value={value}
         onChange={onChange}
@@ -94,7 +94,7 @@ export const MultiInput = (props) => {
   const { label, name, value, onChange, type, required, placeholder } = props;
   return (
     <div className={classes.root}>
-      <label for={name}>{`${label}`}</label>
+      <label htmlFor={name}>{`${label}`}</label>
       <textarea
         id={name}
         type={type}

@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Typography, makeStyles } from "@material-ui/core";
+import { Grid, Typography, makeStyles, Divider } from "@material-ui/core";
 import download from "../../Resources/img1.jpeg";
 import Fab from "@material-ui/core/Fab";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -49,10 +49,10 @@ const Item = ({
       </Grid>
       <Grid item xs={12} container sm={7} style={{ paddingLeft: "40px" }}>
         <Grid item xs={8}>
-          <Typography gutterBottom variant="h6" style={{ color: "#f26522" }}>
+          <Typography variant="h6" style={{ color: "#f26522" }}>
             {title}
           </Typography>
-          <Typography gutterBottom variant="subtitle2">
+          <Typography variant="subtitle2">
             <ul>
               <li>{`Content Type: ${content}`}</li>
               <li>{`Duration: ${duration} Hours`}</li>
@@ -62,16 +62,12 @@ const Item = ({
           </Typography>
         </Grid>
         <Grid item xs={4}>
-          <Typography gutterBottom variant="h6" style={{ color: "#f26522" }}>
+          <Typography variant="h6" style={{ color: "#f26522" }}>
             ₹{price}
           </Typography>
 
           <Divider />
-          <Typography
-            gutterbottom
-            variant="subtitle2"
-            style={{ margin: "1rem 0rem" }}
-          >
+          <Typography variant="subtitle2" style={{ margin: "1rem 0rem" }}>
             By {instructor}
           </Typography>
 
@@ -82,8 +78,7 @@ const Item = ({
               paddingRight: "16px"
             }}
           >
-            {/* <div className={classes.button}></div> */}
-            <Fab aria-label="add" color="primary">
+            <Fab aria-label="add" color="primary" onClick={handleOnClick}>
               <DeleteIcon />
             </Fab>
           </div>
