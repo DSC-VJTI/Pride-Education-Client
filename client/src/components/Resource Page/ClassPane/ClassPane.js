@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles, Paper } from "@material-ui/core";
 import ReactElasticCarousel from "react-elastic-carousel/dist/index";
 import Product from "./Product";
 import ComboBox from "./ComboBox";
-
+import axios from "axios";
+import { BASE_URL } from "../../../constants";
 const ClassPaneStyles = makeStyles((theme) => ({
   slider: {
     padding: "2rem",
@@ -32,29 +33,87 @@ const ClassPaneStyles = makeStyles((theme) => ({
 }));
 
 const ClassPane = ({ Course, CoursesList }) => {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    getProducts();
+  }, []);
   const breakPoints = [
     { width: 1, itemsToShow: 1 },
     { width: 600, itemsToShow: 2 },
     { width: 900, itemsToShow: 3 },
-    { width: 1100, itemsToShow: 4 }
+    { width: 1100, itemsToShow: 3 }
   ];
   const classes = ClassPaneStyles();
+  const getProducts = async () => {
+    const innerProduct = await axios.get(`${BASE_URL}/products`);
+
+    setProducts(innerProduct.data.data);
+    console.log(innerProduct.data.data);
+  };
+
   return (
-    <div>
-      <ComboBox course={Course} CoursesList={CoursesList} />
-      <div data-aos="fade-up">
+    <section>
+      <ComboBox title="test series" />
+      <div>
         <ReactElasticCarousel
           breakPoints={breakPoints}
           className={classes.slider}
         >
-          {CoursesList.map(() => (
-            <div data-aos="flip-right">
-              <Product></Product>
-            </div>
-          ))}
+          {products.map((prod) => {
+            if (prod.type === "test series") {
+              return (
+                <div data-aos="flip-right">
+                  <Product
+                    title={prod.name}
+                    instructor={prod.courseDetails.faculty}
+                  />
+                </div>
+              );
+            }
+          })}
         </ReactElasticCarousel>
       </div>
-    </div>
+      <ComboBox title="courses" />
+      <div>
+        <ReactElasticCarousel
+          breakPoints={breakPoints}
+          className={classes.slider}
+        >
+          {products.map((prod) => {
+            if (prod.type === "course") {
+              return (
+                <div data-aos="flip-right">
+                  <Product
+                    title={prod.name}
+                    instructor={prod.courseDetails.faculty}
+                  />
+                </div>
+              );
+            }
+          })}
+        </ReactElasticCarousel>
+      </div>
+      <ComboBox title="books" />
+      <div>
+        <ReactElasticCarousel
+          breakPoints={breakPoints}
+          className={classes.slider}
+        >
+          {products.map((prod) => {
+            if (prod.type === "book") {
+              return (
+                <div data-aos="flip-right">
+                  <Product
+                    title={prod.name}
+                    instructor={prod.courseDetails.faculty}
+                  />
+                </div>
+              );
+            }
+          })}
+        </ReactElasticCarousel>
+      </div>
+    </section>
   );
 };
 
