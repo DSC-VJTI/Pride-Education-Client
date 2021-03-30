@@ -5,7 +5,6 @@ import OtpInput from "react-otp-input";
 import { login, register } from "../../actions/authActions";
 import { useAuthState, useAuthDispatch } from "../../context/context";
 import { useHistory } from "react-router-dom";
-import data from "../DashboardLayout/ProductListView/data";
 
 const useStyles = makeStyles(() => ({
   card: {}
@@ -33,8 +32,7 @@ const OtpPage = (props) => {
           console.log(res);
           history.push("/");
         });
-      }
-      if (props.type === "Register") {
+      } else if (props.type === "Register") {
         register({
           dispatch,
           data: {
