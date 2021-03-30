@@ -35,7 +35,7 @@ const Login = (props) => {
   const onBtnClick = (event) => {
     event.preventDefault();
     if (validateEmail()) {
-      sendOTP({ dispatch, email }).then((res) => {
+      sendOTP({ dispatch, email, type: "Login" }).then((res) => {
         if (res.status === 200) {
           setData(res);
         } else if (res.status === 404)
@@ -112,7 +112,7 @@ const Login = (props) => {
     </>
   ) : (
     <OtpPage
-      action="login"
+      type="Login"
       data={{ email: data.data.email, hash: data.data.hash }}
     />
   );

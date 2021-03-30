@@ -21,7 +21,7 @@ const AuthController = {
 
       const token = jwtHandler.setJwt(user);
       return res.status(201).json({
-        name: user.name,
+        user: user,
         token: token
       });
     } catch (err) {

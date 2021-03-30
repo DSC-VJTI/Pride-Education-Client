@@ -7,6 +7,7 @@ import CoursePage from "./components/Product Page/CoursePage";
 import Landing from "./components/LandingPage/Landing";
 import SupportPage from "./components/Support Page/SupportPage";
 import Registration from "./components/LoginRegister/Registration";
+import signUpForm from "./components/LoginRegister/Registration";
 import Login from "./components/LoginRegister/Login";
 
 import Cart from "./components/Cart/Cart";
