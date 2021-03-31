@@ -1,5 +1,5 @@
 import { Button, Container } from "@material-ui/core";
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import OtpInput from "react-otp-input";
 import { login, register } from "../../actions/authActions";
@@ -13,6 +13,7 @@ const useStyles = makeStyles(() => ({
 //TODO: Add styles to page
 
 const OtpPage = (props) => {
+  const [error, setError] = useState("");
   const dispatch = useAuthDispatch();
   const history = useHistory();
   const { loading, errorMessage } = useAuthState();
@@ -21,7 +22,7 @@ const OtpPage = (props) => {
 
   const handleClick = () => {
     if (otp.length === 6) {
-      if (props.action === "login") {
+      if (props.type === "Login") {
         login({
           dispatch,
           hash: props.data.hash,
@@ -31,9 +32,24 @@ const OtpPage = (props) => {
           console.log(res);
           history.push("/");
         });
+      } else if (props.type === "Register") {
+        register({
+          dispatch,
+          data: {
+            ...props.values,
+            otp: otp
+          }
+        }).then((res) => {
+          if (res.error) {
+            setError("There was an error. Please try again");
+          } else {
+            console.log(res);
+            history.push("/");
+          }
+        });
       }
     } else {
-      console.log("Please input full otp"); // TODO: Display error message on the form here
+      setError("Please input full otp"); // TODO: Display error message on the form here
     }
   };
 
@@ -47,6 +63,7 @@ const OtpPage = (props) => {
       />
 
       <Button onClick={handleClick}>Verify OTP</Button>
+      <small style={{ color: "red" }}>{error}</small>
     </Container>
   );
 };

@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
+import React, { useState, useEffect } from "react";
 import "./css/FormStyle.css";
 import {
   FormControl,
@@ -10,275 +8,250 @@ import {
   Select,
   MenuItem
 } from "@material-ui/core";
+import * as yup from "yup";
+import { Formik } from "formik";
+import OtpPage from "./inputOTP";
+import { sendOTP } from "../../actions/authActions";
+import { useAuthState, useAuthDispatch } from "../../context/context";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary
-  }
-}));
+const signUpSchema = yup.object().shape({
+  name: yup.string().required("Please enter your name."),
+  email: yup.string().email().required("Please enter your email."),
+  address: yup
+    .string()
+    .required("Please enter your address.")
+    .min(5, "Please enter full address"),
+  mobileNumber: yup
+    .number("Please input valid number")
+    .required("Please enter your mobile number without country code.")
+    .min(1000000000, "Please input valid number")
+    .max(9999999999, "Please input valid number"),
+  field: yup.string().required("Please enter your field"),
+  level: yup.string().required("Please enter the level you are interested in."),
+  reference: yup.string().required("Please tell us how you heard about us.")
+  // dateOfAttempt: yup.date().required('Please enter date of attempt')
+});
+
+const initialValues = {
+  name: "",
+  email: "",
+  mobileNumber: "",
+  address: "",
+  field: "",
+  level: "",
+  reference: ""
+  // dateOfAttempt: Date.now()
+};
 
 const Registration = () => {
-  const classes = useStyles();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [number, setNumber] = useState("");
-  const [addr, setAddr] = useState("");
-  const [suggestedBy, setSuggestedBy] = useState("");
-  const [date, setDate] = useState("");
-  const [field, setField] = useState("");
-  const [level, setLevel] = useState("");
+  const [formData, setFormData] = useState(null);
+  const [alert, setAlert] = useState("");
+  const dispatch = useAuthDispatch();
 
-  //States Used for Validation Starts from Here
-  const [warningNumber, setWarningNumber] = useState("");
-  const [warningEmail, setWarningEmail] = useState("");
-  const [warningName, setWarningName] = useState("");
-  const [warningAddr, setWarningAddr] = useState("");
-  const [warningDate, setWarningDate] = useState("");
-  const [warningSuggested, setWarningSuggestedBy] = useState("");
-  const validateNumber = () => {
-    if (number.length !== 10 || isNaN(number)) {
-      setWarningNumber("Please enter a valid mobile number");
-    }
-    if (number.length === 10 && !isNaN(number)) {
-      setWarningNumber("");
-    }
-  };
-  const validateName = () => {
-    if (name.length === 0) {
-      setWarningName("Please enter your name");
-    }
-    if (name.length !== 0) {
-      setWarningName("");
-    }
-  };
-  const validateDate = () => {
-    if (date === "") {
-      setWarningDate("set attempt date");
-    }
-    if (date !== "") {
-      setWarningDate("");
-    }
-  };
-  const validateEmail = () => {
-    let pattern = new RegExp(
-      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
-    if (pattern.test(email)) {
-      setWarningEmail("");
-    } else {
-      setWarningEmail("Please enter a valid email Address");
-    }
-  };
-  const validateAddr = () => {
-    if (addr.length === 0) {
-      setWarningAddr("Please enter your address");
-    }
-    if (addr.length !== 0) {
-      setWarningAddr("");
-    }
-  };
-  const validateSuggest = () => {
-    if (suggestedBy.length === 0) {
-      setWarningSuggestedBy("Please tell use who gave use our reference");
-    }
-    if (suggestedBy.length !== 0) {
-      setWarningSuggestedBy("");
-    }
-  };
-  const onBtnClick = (event) => {
-    event.preventDefault();
-    validateNumber();
-    validateName();
-    validateAddr();
-    validateSuggest();
-    validateDate();
-    validateEmail();
-  };
-
-  const onRegistration = (event) => {
-    let name = event.target.name;
-    let value = event.target.value;
-    if (name === "name") {
-      setName(value);
-    }
-    if (name === "email") {
-      setEmail(value);
-    }
-    if (name === "number") {
-      setNumber(value);
-    }
-    if (name === "addr") {
-      setAddr(value);
-    }
-    if (name === "suggestedBy") {
-      setSuggestedBy(value);
-      console.log(value);
-    }
-    if (name === "date") {
-      setDate(value);
-    }
-    if (name === "field") {
-      setField(value);
-    }
-    if (name === "level") {
-      setLevel(value);
-    }
-  };
-
-  const onFormSubmit = () => {};
-  return (
-    <div className="form">
-      <div className="mainSection">
-        <h1
-          className="heading"
-          style={{ color: "#0065d1", textAlign: "center" }}
-        >
-          Sign up for a free account
-        </h1>
-        <form onSubmit={onFormSubmit}>
-          <div
-            className="inputFields"
-            style={{ display: "flex", justifyContent: "space-around" }}
-          >
-            <FormControl className="inputField" style={{ width: "40%" }}>
-              <InputLabel htmlFor="my-input">Enter Full Name</InputLabel>
-              <Input
-                name="name"
-                value={name}
-                onChange={onRegistration}
-                type="text"
-                id="my-input"
-                aria-describedby="my-helper-text"
-              />
-              <small style={{ color: "red" }}>{warningName}</small>
-            </FormControl>
-            <FormControl className="inputField" style={{ width: "40%" }}>
-              <InputLabel htmlFor="my-input">Enter Email address</InputLabel>
-              <Input
-                name="email"
-                value={email}
-                onChange={onRegistration}
-                type="email"
-                id="my-input"
-                aria-describedby="my-helper-text"
-              />
-              <small style={{ color: "red" }}>{warningEmail}</small>
-            </FormControl>
-          </div>
-          <div
-            className="inputFields"
-            style={{ display: "flex", justifyContent: "space-around" }}
-          >
-            <FormControl className="inputField" style={{ width: "90%" }}>
-              <InputLabel htmlFor="my-input">Enter Mobile Number</InputLabel>
-              <Input
-                name="number"
-                value={number}
-                onChange={onRegistration}
-                type="text"
-                id="my-input"
-                aria-describedby="my-helper-text"
-              />
-              <small style={{ color: "red" }}>{warningNumber}</small>
-            </FormControl>
-          </div>
-          <div
-            className="inputField"
-            style={{ display: "flex", justifyContent: "space-around" }}
-          >
-            <FormControl className="inputFields" style={{ width: "90%" }}>
-              <InputLabel htmlFor="my-input">Enter your Address</InputLabel>
-              <Input
-                name="addr"
-                value={addr}
-                onChange={onRegistration}
-                type="text"
-                id="my-input"
-                aria-describedby="my-helper-text"
-              />
-              <small style={{ color: "red" }}>{warningAddr}</small>
-            </FormControl>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-around"
-            }}
-          >
-            <FormControl
-              className="inputFields"
-              style={{ width: "40%", marginTop: "0.3rem" }}
+  return !formData ? (
+    <Formik
+      initialValues={initialValues}
+      validationSchema={signUpSchema}
+      onSubmit={(values) => {
+        sendOTP({ dispatch, email: values.email, type: "Register" }).then(
+          (res) => {
+            if (res.status === 200) {
+              setFormData({
+                ...values,
+                hash: res.data.hash
+              });
+            } else if (res.status === 422) {
+              setAlert(
+                "Email or phone number already in use. Please login instead."
+              );
+            } else {
+              setAlert(res.error);
+            }
+          }
+        );
+      }}
+    >
+      {(props) => (
+        <div className="form">
+          <div className="mainSection">
+            <h1
+              className="heading"
+              style={{ color: "#0065d1", textAlign: "center" }}
             >
-              <InputLabel>Field</InputLabel>
-              <Select name="field" value={field} onChange={onRegistration}>
-                <MenuItem value={"CA"}>CA</MenuItem>
-                <MenuItem value={"CS"}>CS</MenuItem>
-                <MenuItem value={"B.COM"}>B.COM</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl
-              className="inputFields"
-              style={{ width: "40%", marginTop: "0.3rem" }}
-            >
-              <InputLabel>Level</InputLabel>
-              <Select name="level" value={level} onChange={onRegistration}>
-                <MenuItem value={"Foundation"}>Foundation</MenuItem>
-                <MenuItem value={"ICPC"}>ICPC</MenuItem>
-                <MenuItem value={"Final"}>Final</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-around"
-            }}
-          >
-            <FormControl
-              className="inputFields"
-              style={{ width: "90%", marginTop: "0.3rem" }}
-            >
-              <InputLabel>Reference</InputLabel>
-              <Select
-                name="suggestedBy"
-                value={suggestedBy}
-                onChange={onRegistration}
+              Sign up for a free account
+            </h1>
+            <form onSubmit={props.handleSubmit}>
+              <div
+                className="inputFields"
+                style={{ display: "flex", justifyContent: "space-around" }}
               >
-                <MenuItem value={"Social Media"}>Through social media</MenuItem>
-                <MenuItem value={"Word of mouth"}>
-                  Through recommendation by friends/family
-                </MenuItem>
-                <MenuItem value={"Other"}>Other</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-          <div className="inputFieldsForDateAndBtn">
+                <FormControl className="inputField" style={{ width: "40%" }}>
+                  <InputLabel>Enter Full Name</InputLabel>
+                  <Input
+                    name="name"
+                    type="text"
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    value={props.values.name}
+                  />
+                  {props.touched.name ? (
+                    <small style={{ color: "red" }}>{props.errors.name}</small>
+                  ) : null}
+                </FormControl>
+                <FormControl className="inputField" style={{ width: "40%" }}>
+                  <InputLabel>Enter Email address</InputLabel>
+                  <Input
+                    name="email"
+                    type="email"
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    value={props.values.email}
+                  />
+                  {props.touched.email ? (
+                    <small style={{ color: "red" }}>{props.errors.email}</small>
+                  ) : null}
+                </FormControl>
+              </div>
+              <div
+                className="inputFields"
+                style={{ display: "flex", justifyContent: "space-around" }}
+              >
+                <FormControl className="inputField" style={{ width: "90%" }}>
+                  <InputLabel>Enter Mobile Number</InputLabel>
+                  <Input
+                    name="mobileNumber"
+                    type="number"
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    value={props.values.mobileNumber}
+                  />
+                  {props.touched.mobileNumber ? (
+                    <small style={{ color: "red" }}>
+                      {props.errors.mobileNumber}
+                    </small>
+                  ) : null}
+                </FormControl>
+              </div>
+              <div
+                className="inputField"
+                style={{ display: "flex", justifyContent: "space-around" }}
+              >
+                <FormControl className="inputFields" style={{ width: "90%" }}>
+                  <InputLabel>Enter your Address</InputLabel>
+                  <Input
+                    name="address"
+                    type="text"
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    value={props.values.address}
+                  />
+                  {props.touched.address ? (
+                    <small style={{ color: "red" }}>
+                      {props.errors.address}
+                    </small>
+                  ) : null}
+                </FormControl>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-around"
+                }}
+              >
+                <FormControl
+                  className="inputFields"
+                  style={{ width: "40%", marginTop: "0.3rem" }}
+                >
+                  <InputLabel>Field</InputLabel>
+                  <Select
+                    name="field"
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    value={props.values.field}
+                  >
+                    <MenuItem value={"CA"}>CA</MenuItem>
+                    <MenuItem value={"CS"}>CS</MenuItem>
+                    <MenuItem value={"B.COM"}>B.COM</MenuItem>
+                  </Select>
+                  {props.touched.field ? (
+                    <small style={{ color: "red" }}>{props.errors.field}</small>
+                  ) : null}
+                </FormControl>
+                <FormControl
+                  className="inputFields"
+                  style={{ width: "40%", marginTop: "0.3rem" }}
+                >
+                  <InputLabel>Level</InputLabel>
+                  <Select
+                    name="level"
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    value={props.values.level}
+                  >
+                    <MenuItem value={"Foundation"}>Foundation</MenuItem>
+                    <MenuItem value={"ICPC"}>ICPC</MenuItem>
+                    <MenuItem value={"Final"}>Final</MenuItem>
+                  </Select>
+                  {props.touched.level ? (
+                    <small style={{ color: "red" }}>{props.errors.level}</small>
+                  ) : null}
+                </FormControl>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-around"
+                }}
+              >
+                <FormControl
+                  className="inputFields"
+                  style={{ width: "90%", marginTop: "0.3rem" }}
+                >
+                  <InputLabel>Reference</InputLabel>
+                  <Select
+                    name="reference"
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    value={props.values.reference}
+                  >
+                    <MenuItem value={"Social Media"}>
+                      Through social media
+                    </MenuItem>
+                    <MenuItem value={"Word of mouth"}>
+                      Through recommendation by friends/family
+                    </MenuItem>
+                    <MenuItem value={"Other"}>Other</MenuItem>
+                  </Select>
+                  {props.touched.reference ? (
+                    <small style={{ color: "red" }}>
+                      {props.errors.reference}
+                    </small>
+                  ) : null}
+                </FormControl>
+              </div>
+
+              {/* Not removing date field as client might require this to be added */}
+
+              {/* <div className="inputFieldsForDateAndBtn">
             <div
               className=""
               style={{ display: "flex", flexDirection: "column" }}
             >
               <TextField
                 name="date"
-                value={date}
-                onChange={onRegistration}
                 className="datePicker inputFields"
                 style={{ width: "40%", marginLeft: "2rem" }}
-                name="date"
-                value={date}
-                onChange={onRegistration}
                 id="date"
                 label="Attempt Date"
                 type="date"
                 defaultValue="2017-05-24"
-                className={`${classes.textField}`}
+                // className={`${classes.textField}`}
                 InputLabelProps={{
                   shrink: true
                 }}
+                onChange={props.handleChange}
+                onBlur={props.handleBlur}
+                value={props.values.dateOfAttempt}
               />
               <small
                 style={{
@@ -286,31 +259,38 @@ const Registration = () => {
                   marginLeft: "2rem"
                 }}
               >
-                {warningDate}
+                {props.errors.dateOfAttempt}
               </small>
-            </div>
-            <div className="">
-              <Button
-                onClick={onBtnClick}
-                className="submit_btn"
-                type="submit"
-                style={{
-                  backgroundColor: " #455ff0",
-                  width: "30%",
-                  alignSelf: "center",
-                  marginTop: "1.3rem",
-                  marginLeft: "2rem"
-                }}
-                variant="contained"
-                color="primary"
-              >
-                Register
-              </Button>
-            </div>
+            </div> */}
+              <div className="">
+                <Button
+                  // onClick={onBtnClick}
+                  className="submit_btn"
+                  disabled={!(props.dirty && props.isValid)}
+                  type="submit"
+                  style={{
+                    backgroundColor: " #455ff0",
+                    width: "30%",
+                    alignSelf: "center",
+                    marginTop: "1.3rem",
+                    marginLeft: "2rem"
+                  }}
+                  variant="contained"
+                  color="primary"
+                >
+                  Register
+                </Button>
+              </div>
+              {/* </div> */}
+            </form>
+            <small style={{ color: "red" }}>{alert}</small>
           </div>
-        </form>
-      </div>
-    </div>
+        </div>
+      )}
+    </Formik>
+  ) : (
+    <OtpPage type="Register" values={formData} />
   );
 };
+
 export default Registration;

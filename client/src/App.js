@@ -8,7 +8,6 @@ import Landing from "./components/LandingPage/Landing";
 import SupportPage from "./components/Support Page/SupportPage";
 import Registration from "./components/LoginRegister/Registration";
 import Login from "./components/LoginRegister/Login";
-
 import Cart from "./components/Cart/Cart";
 import Aos from "aos";
 import "aos/dist/aos.css";
