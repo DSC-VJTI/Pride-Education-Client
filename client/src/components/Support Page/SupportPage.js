@@ -1,21 +1,22 @@
 import React from "react";
-import { Container } from "@material-ui/core";
+import { Container, Grid, Tab, AppBar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Tabs from "./Tabs/Tabs";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    background: "#ffcc5c",
+    flex: 1,
+    background: "#f6f6f6",
     "& > *": {
       margin: theme.spacing(1)
     },
-    "& .MuiTypography-root": {
-      backgroundColor: "#ffeead"
-    },
     "& .MuiTabs-indicator": {
-      backgroundColor: "#ffffff"
+      backgroundColor: "#f26522"
     },
-    "@media all and (max-width: 600px)": {}
+    "@media all and (max-width: 600px)": {
+      padding: "0px"
+    }
   },
   pageContent: {
     margin: theme.spacing(5),
@@ -27,11 +28,18 @@ const SupportPage = () => {
   const classes = useStyles();
 
   return (
-    <Container maxWidth="sm">
-      <div style={{ marginTop: "120px" }} className={classes.root}>
-        <Tabs />
-      </div>
-    </Container>
+    <div>
+      <Switch>
+        <Redirect exact from="/support" to="/support/software" />
+        <Route
+          exact
+          path="/support/:page?"
+          render={(props) => (
+            <div className={classes.root}>{<Tabs {...props} />}</div>
+          )}
+        />
+      </Switch>
+    </div>
   );
 };
 

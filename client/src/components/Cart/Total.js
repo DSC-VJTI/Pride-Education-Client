@@ -5,19 +5,22 @@ import {
   CardContent,
   Typography,
   CardActions,
-  Button,
   Checkbox,
   FormControlLabel,
   Link,
   Grid
 } from "@material-ui/core";
-import Cart from "./Cart";
+import Button from "../UI Elements/Button";
 
 const CartStyles = makeStyles({
   TotalCard: {
     background: "white",
-    "& .MuiCheckbox-colorSecondary.Mui-checked": {
-      color: "#f26522"
+    textAlign: "left",
+    "& .MuiBox-root": {
+      width: "100%",
+      "& .MuiCheckbox-colorSecondary.Mui-checked": {
+        color: "#f26522"
+      }
     }
   },
   bullet: {
@@ -37,40 +40,37 @@ const CartStyles = makeStyles({
     background: "#f26522",
     color: "white",
     margin: "auto",
-    borderRadius: "2rem"
+    width: "100%",
+    padding: "10px 20px"
   }
 });
+
 const Total = (props) => {
   const items = props.items;
-  const title = `($${props.price})`;
+  const title = `(Rs.${props.price})`;
   const classes = CartStyles();
   return (
-    <Grid direction="column">
+    <Grid container direction="column">
       <Card className={classes.TotalCard}>
         <CardContent>
-          <Grid xs={12}>
-            <Grid xs={12}>
+          <Grid item container direction="column" xs={12} spacing={2}>
+            <Grid item xs={12}>
               <Typography className={classes.title} component="h5">
                 Your order is eligible for free order
               </Typography>
             </Grid>
-            <Grid xs={12}>
-              <Typography
-                color="textSecondary"
-                gutterBottom
-                variant
-                component="h5"
-              >
+            <Grid item xs={12}>
+              <Typography color="textSecondary" component="h5">
                 Select this option at checkout &nbsp;
                 <Link color="textPrimary">Details</Link>
               </Typography>
             </Grid>
-            <Grid xs={12}>
-              <Typography variant component="h4">
+            <Grid item xs={12}>
+              <Typography component="h4">
                 {`Subtotal (${items} items) : ${title}`}
               </Typography>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox />}
                 label="This order contains a gift"
@@ -78,11 +78,16 @@ const Total = (props) => {
             </Grid>
           </Grid>
         </CardContent>
-        <Grid xs={12}>
-          <CardActions>
-            <Button className={classes.totalButton}>Proceed to Buy</Button>
-          </CardActions>
-        </Grid>
+        <CardActions>
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            text="Proceed to buy"
+            type="submit"
+            className={classes.totalButton}
+          />
+        </CardActions>
       </Card>
     </Grid>
   );

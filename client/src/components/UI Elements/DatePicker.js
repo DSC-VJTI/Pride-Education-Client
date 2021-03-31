@@ -6,6 +6,7 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker
 } from "@material-ui/pickers";
+import "./DatePicker.css";
 
 export const DatePicker = (props) => {
   const { name, label, value, onChange } = props;
@@ -16,23 +17,25 @@ export const DatePicker = (props) => {
       value
     }
   });
+
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <KeyboardDatePicker
-        disableToolbar
-        variant="inline"
-        inputVariant="outlined"
-        id="date-picker-dialog"
-        label={label}
-        format="MM/dd/yyyy"
-        name={name}
-        value={value}
-        onChange={(date) => onChange(convertToDefEventPara(name, date))}
-        KeyboardButtonProps={{
-          "aria-label": "change date"
-        }}
-      />
-    </MuiPickersUtilsProvider>
+    <div className="date">
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <KeyboardDatePicker
+          disableToolbar
+          variant="inline"
+          id="date-picker-dialog"
+          label={label}
+          format="MM/dd/yyyy"
+          name={name}
+          value={value}
+          onChange={(date) => onChange(convertToDefEventPara(name, date))}
+          KeyboardButtonProps={{
+            "aria-label": "change date"
+          }}
+        />
+      </MuiPickersUtilsProvider>
+    </div>
   );
 };
 
@@ -49,7 +52,6 @@ export const AppointedTime = (props) => {
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <KeyboardTimePicker
         margin="normal"
-        inputVariant="outlined"
         id="time-picker"
         label={label}
         value={value}
