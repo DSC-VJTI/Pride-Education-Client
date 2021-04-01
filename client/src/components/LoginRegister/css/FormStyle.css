@@ -3,19 +3,29 @@
   padding: 0;
   box-sizing: border-box;
 }
-.form {
-  height: auto;
+body::before{
+  content: "";
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  z-index: -1;
+  background-image: #f1f1f1;
+}
+.form {
+  margin: 20px auto;
+  height: auto;
   padding: 2rem 2rem;
   width: 50%;
   background-image: linear-gradient(
     to right,
-    rgb(14, 35, 219),
-    rgb(8, 186, 240)
+    #ff5200,
+    #f26522
   );
+}
+.formOuterBody{
+  padding-top: 50px;
+  padding-bottom: 50px;
+  width: 100%;
+  height: auto;
+  background-color:#f1f1f1;
 }
 
 .mainSection {
@@ -35,7 +45,7 @@
   margin-bottom: 20px;
 }
 .inputFields {
-  margin: 0.2rem 0;
+  margin: 0 0 1rem 0;
 }
 .inputFieldsForDateAndBtn {
   margin-top: 1rem;
@@ -61,4 +71,19 @@
   .inputField {
     width: 50%;
   }
+}
+@media (max-width: 1400px) {
+  .inputFields{
+    flex-direction: column;
+    width:95%;
+    margin:auto;
+  }
+}
+@media (max-width: 567px) {
+  .inputField{
+    width: 92% !important;
+  }
+}
+.errorForumber{
+  bottom:-28px;
 }

@@ -11,11 +11,22 @@ const Footer = () => {
     <>
       <footer className="footer">
         <div className="main_footer">
+          <h1
+            className="LogoHeading"
+            style={{ color: "rgb(242, 101, 34)", fontSize: "50px" }}
+          >
+            LOGO
+          </h1>
           <div className="pageLinks">
-            <h1 style={{ color: "#fff", fontSize: "50px" }}>LOGO</h1>
-            <a href="">About</a>
-            <a href="">Contact</a>
-            <a href="">Privacy Policy</a>
+            <a className="footerLinks" href="">
+              About
+            </a>
+            <a className="footerLinks" href="">
+              Contact
+            </a>
+            <a className="footerLinks" href="">
+              Privacy Policy
+            </a>
           </div>
           <div className="socialHandles">
             <div className="firstPart">

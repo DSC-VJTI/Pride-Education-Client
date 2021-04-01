@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { FormControl, Input, InputLabel, Button } from "@material-ui/core";
+import { FormControl, InputLabel } from "@material-ui/core";
 import "./css/FormStyle.css";
 import { sendOTP } from "../../actions/authActions";
 import { Redirect } from "react-router-dom";
 import OtpPage from "./inputOTP";
 import { useAuthState, useAuthDispatch } from "../../context/context";
-
+import { Input } from "../UI Elements/Input";
+import { Button } from "../UI Elements/Button";
 const Login = (props) => {
   const dispatch = useAuthDispatch();
   const { loading, errorMessage } = useAuthState();
@@ -57,18 +58,28 @@ const Login = (props) => {
 
   return !data ? (
     <>
-      <div className="form">
-        <div className="mainSection">
-          <h1
-            className="heading"
-            style={{ color: "#0065d1", textAlign: "center" }}
-          >
-            Login
-          </h1>
-          <form>
-            <div className="">
-              <div style={{ display: "flex", justifyContent: "space-around" }}>
-                <FormControl
+      <div className="formOuterBody">
+        <div className="form">
+          <div className="mainSection">
+            <h1
+              className="heading"
+              style={{ color: "#f26522", textAlign: "center" }}
+            >
+              Login
+            </h1>
+            <form>
+              <div className="">
+                <div style={{ margin: "0 20px" }}>
+                  <Input
+                    label="Email Address*"
+                    placeholder="Email Address"
+                    name="email"
+                    type="email"
+                    value={email}
+                    onChange={onLogin}
+                    required="required"
+                  />
+                  {/* <FormControl
                   className="inputField"
                   style={{ width: "90%", marginBottom: "0.4rem" }}
                 >
@@ -84,10 +95,23 @@ const Login = (props) => {
                     aria-describedby="my-helper-text"
                   />
                   <small style={{ color: "red" }}>{warningEmail}</small>
-                </FormControl>
-              </div>
-              <div className="" style={{ marginTop: "0.3rem" }}>
-                <Button
+                </FormControl> */}
+                </div>
+                <div className="" style={{ marginTop: "0.3rem" }}>
+                  <Button
+                    style={{
+                      width: "20%",
+                      // alignSelf: "left",
+                      // marginTop: "1rem",
+                      marginLeft: "1.5rem"
+                    }}
+                    disabled={loading}
+                    type="submit"
+                    onClick={onBtnClick}
+                    variant="contained"
+                    text="Send OTP"
+                  />
+                  {/* <Button
                   onClick={onBtnClick}
                   className="submit_btn"
                   type="submit"
@@ -103,10 +127,11 @@ const Login = (props) => {
                   disabled={loading}
                 >
                   Send OTP
-                </Button>
+                </Button> */}
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </>

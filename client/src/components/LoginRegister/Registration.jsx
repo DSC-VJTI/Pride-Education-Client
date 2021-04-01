@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import "./css/FormStyle.css";
 import {
   FormControl,
-  Input,
+  // Input,
   InputLabel,
-  Button,
+  // Button,
   Select,
   MenuItem
 } from "@material-ui/core";
@@ -13,7 +13,9 @@ import { Formik } from "formik";
 import OtpPage from "./inputOTP";
 import { sendOTP } from "../../actions/authActions";
 import { useAuthState, useAuthDispatch } from "../../context/context";
-
+import { Button } from "../UI Elements/Button";
+import { Input } from "../UI Elements/Input";
+import { DropDown } from "../UI Elements/DropDown";
 const signUpSchema = yup.object().shape({
   name: yup.string().required("Please enter your name."),
   email: yup.string().email().required("Please enter your email."),
@@ -72,53 +74,79 @@ const Registration = () => {
       }}
     >
       {(props) => (
-        <div className="form">
-          <div className="mainSection">
-            <h1
-              className="heading"
-              style={{ color: "#0065d1", textAlign: "center" }}
-            >
-              Sign up for a free account
-            </h1>
-            <form onSubmit={props.handleSubmit}>
-              <div
-                className="inputFields"
-                style={{ display: "flex", justifyContent: "space-around" }}
+        <div className="formOuterBody">
+          <div className="form">
+            <div className="mainSection">
+              <h1
+                className="heading"
+                style={{ color: "#f26522", textAlign: "center" }}
               >
-                <FormControl className="inputField" style={{ width: "40%" }}>
-                  <InputLabel>Enter Full Name</InputLabel>
+                Sign up for a free account
+              </h1>
+              <form onSubmit={props.handleSubmit}>
+                <div
+                  className="inputFields"
+                  style={{ display: "flex", justifyContent: "space-around" }}
+                >
+                  <div className="inputField" style={{ position: "relative" }}>
+                    <Input
+                      style={{ width: "40%" }}
+                      name="name"
+                      type="text"
+                      label="Full Name*"
+                      placeholder="Enter Full Name"
+                      onChange={props.handleChange}
+                      onBlur={props.handleBlur}
+                      value={props.values.name}
+                    />
+                    {props.touched.name ? (
+                      <small
+                        style={{
+                          color: "red",
+                          position: "absolute",
+                          bottom: "-1px",
+                          left: "10px"
+                        }}
+                      >
+                        {props.errors.name}
+                      </small>
+                    ) : null}
+                  </div>
+                  <div className="inputField" style={{ position: "relative" }}>
+                    <div>
+                      <Input
+                        style={{ width: "37%" }}
+                        className="inputField"
+                        label="Email Address*"
+                        placeholder="Enter Email address"
+                        name="email"
+                        type="email"
+                        onChange={props.handleChange}
+                        onBlur={props.handleBlur}
+                        value={props.values.email}
+                      />
+                      {props.touched.email ? (
+                        <small
+                          style={{
+                            color: "red",
+                            position: "absolute",
+                            bottom: "-1px",
+                            left: "10px"
+                          }}
+                        >
+                          {props.errors.email}
+                        </small>
+                      ) : null}
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="inputField"
+                  style={{ width: "92%", margin: "auto", position: "relative" }}
+                >
                   <Input
-                    name="name"
-                    type="text"
-                    onChange={props.handleChange}
-                    onBlur={props.handleBlur}
-                    value={props.values.name}
-                  />
-                  {props.touched.name ? (
-                    <small style={{ color: "red" }}>{props.errors.name}</small>
-                  ) : null}
-                </FormControl>
-                <FormControl className="inputField" style={{ width: "40%" }}>
-                  <InputLabel>Enter Email address</InputLabel>
-                  <Input
-                    name="email"
-                    type="email"
-                    onChange={props.handleChange}
-                    onBlur={props.handleBlur}
-                    value={props.values.email}
-                  />
-                  {props.touched.email ? (
-                    <small style={{ color: "red" }}>{props.errors.email}</small>
-                  ) : null}
-                </FormControl>
-              </div>
-              <div
-                className="inputFields"
-                style={{ display: "flex", justifyContent: "space-around" }}
-              >
-                <FormControl className="inputField" style={{ width: "90%" }}>
-                  <InputLabel>Enter Mobile Number</InputLabel>
-                  <Input
+                    label="Mobile Number*"
+                    placeholder="Enter Mobile Number"
                     name="mobileNumber"
                     type="number"
                     onChange={props.handleChange}
@@ -126,19 +154,30 @@ const Registration = () => {
                     value={props.values.mobileNumber}
                   />
                   {props.touched.mobileNumber ? (
-                    <small style={{ color: "red" }}>
+                    <small
+                      className="errorForumber"
+                      style={{
+                        color: "red",
+                        position: "absolute",
+                        bottom: "-10px",
+                        left: "10px"
+                      }}
+                    >
                       {props.errors.mobileNumber}
                     </small>
                   ) : null}
-                </FormControl>
-              </div>
-              <div
-                className="inputField"
-                style={{ display: "flex", justifyContent: "space-around" }}
-              >
-                <FormControl className="inputFields" style={{ width: "90%" }}>
-                  <InputLabel>Enter your Address</InputLabel>
+                </div>
+                <div
+                  className="inputField"
+                  style={{
+                    width: "92%",
+                    margin: "20px auto",
+                    position: "relative"
+                  }}
+                >
                   <Input
+                    label="Address*"
+                    placeholder="Enter Your Address"
                     name="address"
                     type="text"
                     onChange={props.handleChange}
@@ -146,19 +185,40 @@ const Registration = () => {
                     value={props.values.address}
                   />
                   {props.touched.address ? (
-                    <small style={{ color: "red" }}>
+                    <small
+                      style={{
+                        color: "red",
+                        position: "absolute",
+                        bottom: "-10px",
+                        left: "10px"
+                      }}
+                    >
                       {props.errors.address}
                     </small>
                   ) : null}
-                </FormControl>
-              </div>
-              <div
+                </div>
+                {/* <div
                 style={{
                   display: "flex",
-                  justifyContent: "space-around"
+                  flexDirection: "column"
                 }}
-              >
-                <FormControl
+              > */}
+                <div
+                  className="inputField"
+                  style={{ width: "92%", margin: "auto", position: "relative" }}
+                >
+                  <DropDown
+                    name="field"
+                    label="Field*"
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    value={props.values.field}
+                    errorSignal={props.touched.field}
+                    errorMsg={props.errors.field}
+                    menuItems={["CA", "CS", "B.COM"]}
+                  />
+                </div>
+                {/* <FormControl
                   className="inputFields"
                   style={{ width: "40%", marginTop: "0.3rem" }}
                 >
@@ -176,8 +236,23 @@ const Registration = () => {
                   {props.touched.field ? (
                     <small style={{ color: "red" }}>{props.errors.field}</small>
                   ) : null}
-                </FormControl>
-                <FormControl
+                </FormControl> */}
+                <div
+                  className="inputField"
+                  style={{ width: "92%", margin: "auto", position: "relative" }}
+                >
+                  <DropDown
+                    name="level"
+                    label="Level*"
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    value={props.values.level}
+                    errorSignal={props.touched.level}
+                    errorMsg={props.errors.level}
+                    menuItems={["Foundation", "ICPC", "Final"]}
+                  />
+                </div>
+                {/* <FormControl
                   className="inputFields"
                   style={{ width: "40%", marginTop: "0.3rem" }}
                 >
@@ -195,15 +270,24 @@ const Registration = () => {
                   {props.touched.level ? (
                     <small style={{ color: "red" }}>{props.errors.level}</small>
                   ) : null}
-                </FormControl>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-around"
-                }}
-              >
-                <FormControl
+                </FormControl> */}
+                {/* </div> */}
+                <div
+                  className="inputField"
+                  style={{ width: "92%", margin: "auto", position: "relative" }}
+                >
+                  <DropDown
+                    name="reference"
+                    label="Reference*"
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    value={props.values.reference}
+                    errorSignal={props.touched.reference}
+                    errorMsg={props.errors.reference}
+                    menuItems={["Social Media", "Word of mouth", "Other"]}
+                  />
+                </div>
+                {/* <FormControl
                   className="inputFields"
                   style={{ width: "90%", marginTop: "0.3rem" }}
                 >
@@ -227,12 +311,11 @@ const Registration = () => {
                       {props.errors.reference}
                     </small>
                   ) : null}
-                </FormControl>
-              </div>
+                </FormControl> */}
 
-              {/* Not removing date field as client might require this to be added */}
+                {/* Not removing date field as client might require this to be added */}
 
-              {/* <div className="inputFieldsForDateAndBtn">
+                {/* <div className="inputFieldsForDateAndBtn">
             <div
               className=""
               style={{ display: "flex", flexDirection: "column" }}
@@ -262,8 +345,21 @@ const Registration = () => {
                 {props.errors.dateOfAttempt}
               </small>
             </div> */}
-              <div className="">
                 <Button
+                  // disabled={loading}
+                  type="submit"
+                  // onClick={onBtnClick}
+                  variant="contained"
+                  text="Register"
+                  style={{
+                    width: "20%",
+                    // alignSelf: "left",
+                    // marginTop: "1rem",
+                    marginLeft: "1.5rem"
+                  }}
+                />
+                {/* <div className=""> */}
+                {/* <Button
                   // onClick={onBtnClick}
                   className="submit_btn"
                   disabled={!(props.dirty && props.isValid)}
@@ -279,11 +375,12 @@ const Registration = () => {
                   color="primary"
                 >
                   Register
-                </Button>
-              </div>
-              {/* </div> */}
-            </form>
-            <small style={{ color: "red" }}>{alert}</small>
+                </Button> */}
+                {/* </div> */}
+                {/* </div> */}
+              </form>
+              <small style={{ color: "red" }}>{alert}</small>
+            </div>
           </div>
         </div>
       )}
