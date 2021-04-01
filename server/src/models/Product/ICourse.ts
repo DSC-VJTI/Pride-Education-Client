@@ -1,4 +1,5 @@
 import { Document } from "mongoose";
+import IUser from "../User/IUser";
 
 export default interface ICourse extends Document {
   level: string;
@@ -12,4 +13,5 @@ export default interface ICourse extends Document {
   views: number;
   validity: number;
   mode: string;
+  courseUsers: Array<IUser["_id"]>;
 }
