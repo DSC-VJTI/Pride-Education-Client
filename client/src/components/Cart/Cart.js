@@ -10,6 +10,8 @@ import {
 } from "@material-ui/core";
 import Item from "./Item";
 import Total from "./Total";
+import axios from "axios";
+import { useAuthState } from "../../context/context";
 
 const CartStyles = makeStyles((theme) => ({
   style: {
@@ -27,52 +29,76 @@ const CartStyles = makeStyles((theme) => ({
     }
   },
   header: {
-    "& .MuiTypography-root": {
-      padding: "20px"
+    "& h1": {
+      fontSize: "3.8rem",
+      lineHeight: "3rem",
+      fontWeight: "600",
+      marginTop: "2rem",
+      marginLeft: "2rem",
+
+      fontFamily: "Abhaya Libre, Times New Roman, Times, serif",
+      color: "#f26522",
+      letterSpacing: ".03rem",
+      marginBottom: ".5rem"
+    }
+  },
+  empty: {
+    "& h4": {
+      fontSize: "2.8rem",
+      lineHeight: "3rem",
+      fontWeight: "600",
+      marginTop: "2rem",
+      marginLeft: "2rem",
+      fontFamily: "Abhaya Libre, Times New Roman, Times, serif",
+      color: "#333840",
+      letterSpacing: ".03rem",
+      marginBottom: ".5rem"
     }
   }
 }));
 
 const initialFValues = [
-  {
-    title: "SCMPE Full Course",
-    content: "Books",
-    views: "1.7",
-    validity: "6 Months",
-    price: 15000,
-    instructor: "CA Abhishek Khilwani",
-    duration: 100,
-    id: 0
-  },
-  {
-    title: "SCMPE Full Course",
-    content: "Books",
-    views: "1.7",
-    validity: "6 Months",
-    price: 15000,
-    instructor: "CA Abhishek Khilwani",
-    duration: 100,
-    id: 1
-  },
-  {
-    title: "SCMPE Full Course",
-    content: "Books",
-    views: "1.7",
-    validity: "6 Months",
-    price: 15000,
-    instructor: "CA Abhishek Khilwani",
-    duration: 100,
-    id: 2
-  }
+  // {
+  //   title: "SCMPE Full Course",
+  //   content: "Books",
+  //   views: "1.7",
+  //   validity: "6 Months",
+  //   price: 15000,
+  //   instructor: "CA Abhishek Khilwani",
+  //   duration: 100,
+  //   id: 0
+  // },
+  // {
+  //   title: "SCMPE Full Course",
+  //   content: "Books",
+  //   views: "1.7",
+  //   validity: "6 Months",
+  //   price: 15000,
+  //   instructor: "CA Abhishek Khilwani",
+  //   duration: 100,
+  //   id: 1
+  // },
+  // {
+  //   title: "SCMPE Full Course",
+  //   content: "Books",
+  //   views: "1.7",
+  //   validity: "6 Months",
+  //   price: 15000,
+  //   instructor: "CA Abhishek Khilwani",
+  //   duration: 100,
+  //   id: 2
+  // }
 ];
 
 const Cart = () => {
   const [value, setValue] = useState(initialFValues);
   const [total, setTotal] = useState(0);
   const classes = CartStyles();
+  const state = useAuthState();
+  console.log(state);
 
   const handleOnClick = (e) => {
-    setValue(value.filter((item) => item.id !== e));
+    setValue(value.filter((item) => item._id !== e));
   };
 
   useEffect(() => {
@@ -82,8 +108,24 @@ const Cart = () => {
         sum = sum + item.price;
       });
       setTotal(sum);
+    } else {
+      setTotal(0);
     }
   }, [value]);
+
+  useEffect(() => {
+    // axios.get("http://localhost:8000/api/cart")
+    axios({
+      method: "post",
+      url: "http://localhost:8000/api/cart",
+      headers: state
+    })
+      .then((response) => {
+        console.log("you", response.data.data);
+        setValue(response.data.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <Grid container spacing={3} direction={"row"}>
@@ -99,30 +141,36 @@ const Cart = () => {
       >
         <Container className={classes.style}>
           <div className={classes.header}>
-            <Typography variant="h3" color="primary">
-              Shopping Cart
-            </Typography>
+            <h1>My Cart</h1>
             <Divider />
           </div>
-          {value.map((cartItem) => (
-            <Grid item xs={12} className={classes.paper} key={cartItem.id}>
-              <Card>
-                <CardActions>
-                  <Item
-                    id={cartItem.id}
-                    title={cartItem.title}
-                    content={cartItem.content}
-                    views={cartItem.views}
-                    validity={cartItem.validity}
-                    price={cartItem.price}
-                    instructor={cartItem.instructor}
-                    duration={cartItem.duration}
-                    onClick={handleOnClick}
-                  />
-                </CardActions>
-              </Card>
+          {value.length !== 0 ? (
+            value.map((cartItem) => (
+              <Grid item xs={12} className={classes.paper} key={cartItem.id}>
+                <Card>
+                  <CardActions>
+                    <Item
+                      id={cartItem._id}
+                      title={cartItem.name}
+                      validity={cartItem.courseDetails.validity}
+                      price={cartItem.price}
+                      instructor={cartItem.courseDetails.faculty}
+                      duration={cartItem.courseDetails.duration}
+                      onClick={handleOnClick}
+                      content={cartItem.type}
+                      views={cartItem.views}
+                    />
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))
+          ) : (
+            <Grid item>
+              <Container className={classes.empty}>
+                <h4>Your cart is empty</h4>
+              </Container>
             </Grid>
-          ))}
+          )}
         </Container>
       </Grid>
       <Grid item sm={7} xs={12} md={4} lg={3}>
