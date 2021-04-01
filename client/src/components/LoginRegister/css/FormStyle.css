@@ -22,7 +22,7 @@ body::before{
 }
 .formOuterBody{
   padding-top: 50px;
-  padding-bottom: 50px;
+  padding-bottom: 100px;
   width: 100%;
   height: auto;
   background-color:#f1f1f1;

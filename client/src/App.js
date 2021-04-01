@@ -41,7 +41,7 @@ function App() {
           <Route path="/admin" component={DashboardLayout} />
           <Route path="/" exact component={Landing} />
         </Switch>
-        {/* <Footer /> */}
+        <Footer />
       </Router>
     </AuthProvider>
   );
