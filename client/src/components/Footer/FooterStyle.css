@@ -32,6 +32,9 @@ body{
 .socialHandles{
     width:25%;
 }
+.mediaHandles{
+    color:rgb(242, 101, 34);
+}
 .firstPart,.secondPart{
     display:flex;
     justify-content: center;

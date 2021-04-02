@@ -33,34 +33,34 @@ const Footer = () => {
             <div className="firstPart">
               <div className="logo">
                 <Link to="">
-                  <YouTubeIcon />
+                  <YouTubeIcon className="mediaHandles" />
                 </Link>
               </div>
               <div className="logo">
                 <Link to="">
-                  <LinkedInIcon />
+                  <LinkedInIcon className="mediaHandles" />
                 </Link>
               </div>
               <div className="logo">
                 <Link to="">
-                  <InstagramIcon />
+                  <InstagramIcon className="mediaHandles" />
                 </Link>
               </div>
             </div>
             <div className="secondPart">
               <div className="logo">
                 <Link to="">
-                  <FacebookIcon />
+                  <FacebookIcon className="mediaHandles" />
                 </Link>
               </div>
               <div className="logo">
                 <Link to="">
-                  <TwitterIcon />
+                  <TwitterIcon className="mediaHandles" />
                 </Link>
               </div>
               <div className="logo">
                 <Link to="">
-                  <TelegramIcon />
+                  <TelegramIcon className="mediaHandles" />
                 </Link>
               </div>
             </div>
