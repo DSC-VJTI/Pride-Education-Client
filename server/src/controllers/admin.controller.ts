@@ -50,7 +50,6 @@ const AdminController = {
       switch (type) {
         case "course":
           product.course = await Course.create(JSON.parse(req.body.course));
-          console.log(product);
           break;
         case "book": {
           if (!req.file) {
