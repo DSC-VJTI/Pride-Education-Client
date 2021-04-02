@@ -5,6 +5,7 @@ import InstagramIcon from "@material-ui/icons/Instagram";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import TelegramIcon from "@material-ui/icons/Telegram";
+import { Link } from "react-router-dom";
 import "./FooterStyle.css";
 const Footer = () => {
   return (
@@ -18,37 +19,49 @@ const Footer = () => {
             LOGO
           </h1>
           <div className="pageLinks">
-            <a className="footerLinks" href="">
+            <Link className="footerLinks" href="">
               About
-            </a>
-            <a className="footerLinks" href="">
+            </Link>
+            <Link className="footerLinks" href="">
               Contact
-            </a>
-            <a className="footerLinks" href="">
+            </Link>
+            <Link className="footerLinks" href="">
               Privacy Policy
-            </a>
+            </Link>
           </div>
           <div className="socialHandles">
             <div className="firstPart">
               <div className="logo">
-                <YouTubeIcon />
+                <Link>
+                  <YouTubeIcon />
+                </Link>
               </div>
               <div className="logo">
-                <LinkedInIcon />
+                <Link>
+                  <LinkedInIcon />
+                </Link>
               </div>
               <div className="logo">
-                <InstagramIcon />
+                <Link>
+                  <InstagramIcon />
+                </Link>
               </div>
             </div>
             <div className="secondPart">
               <div className="logo">
-                <FacebookIcon />
+                <Link>
+                  <FacebookIcon />
+                </Link>
               </div>
               <div className="logo">
-                <TwitterIcon />
+                <Link>
+                  <TwitterIcon />
+                </Link>
               </div>
               <div className="logo">
-                <TelegramIcon />
+                <Link>
+                  <TelegramIcon />
+                </Link>
               </div>
             </div>
           </div>

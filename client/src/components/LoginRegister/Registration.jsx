@@ -41,7 +41,7 @@ const Registration = () => {
   const [formData, setFormData] = useState(null);
   const [alert, setAlert] = useState("");
   const dispatch = useAuthDispatch();
-
+  const onBtnClick = () => {};
   return !formData ? (
     <Formik
       initialValues={initialValues}
@@ -235,7 +235,6 @@ const Registration = () => {
                   />
                 </div>
                 <Button
-                  disabled={loading}
                   type="submit"
                   onClick={onBtnClick}
                   variant="contained"
