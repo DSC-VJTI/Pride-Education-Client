@@ -23,6 +23,7 @@ import * as yup from "yup";
 import { useParams } from "react-router-dom";
 import { BASE_URL } from "../../../constants";
 import { green } from "@material-ui/core/colors";
+import { useAuthState } from "../../../context/context";
 
 const MyTextField = ({
   placeholder,
@@ -58,6 +59,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function AddProduct() {
+  const { token } = useAuthState();
+
   const classes = useStyles();
   const [productType, setProductType] = useState("course");
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -99,7 +102,11 @@ export default function AddProduct() {
   useEffect(() => {
     if (isEditPage) {
       axios
-        .get(BASE_URL + `/products/${productId}`)
+        .get(BASE_URL + `/products/${productId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
         .then((res) => {
           console.log(res.data);
           setProduct(res.data.data);
@@ -135,7 +142,7 @@ export default function AddProduct() {
   const validationSchema = yup.object({
     name: yup.string().required(),
     price: yup.number().required().positive(),
-    discount: yup.number().required().positive(),
+    discount: yup.number().optional().moreThan(-1), // Discount can be zero
     course: yup
       .object({
         level: yup.string().optional(),
@@ -180,51 +187,55 @@ export default function AddProduct() {
           validateOnChange={true}
           initialValues={product}
           validationSchema={validationSchema}
-          onSubmit={async (data, { setSubmitting }) => {
+          onSubmit={async (data, { setSubmitting, resetForm }) => {
             setSubmitting(true);
             // Preprocess Data
             let formData = new FormData();
             let reqBody = { ...data };
             formData.append("name", reqBody["name"]);
             formData.append("price", reqBody["price"]);
-            formData.append("discount", reqBody["discount"]);
+            formData.append("discount", reqBody["discount"] || 0);
             switch (productType) {
               case "course":
-                // delete reqBody["test"];
-                // delete reqBody["book"];
                 reqBody["course"]["applicableDate"] = selectedDate;
-                formData.append("course", reqBody["course"]);
+                formData.append("course", JSON.stringify(reqBody["course"]));
                 break;
               case "test":
-                // delete reqBody["course"];
-                // delete reqBody["book"];
-                formData.append("test", reqBody["test"]);
+                formData.append("test", JSON.stringify(reqBody["test"]));
                 break;
               case "book":
-                // delete reqBody["test"];
-                // delete reqBody["course"];
                 formData.append("book", file);
                 break;
             }
-            // reqBody["type"] = productType;
             formData.append("type", productType);
             // Finish preprocessing
             let response;
             if (isEditPage) {
               response = await axios.put(
-                BASE_URL + "admin/editProduct/" + productId,
+                BASE_URL + "/admin/editProduct/" + productId,
                 {
                   ...reqBody
+                },
+                {
+                  headers: {
+                    Authorization: `Bearer ${token}`
+                  }
                 }
               );
             } else {
               response = await axios.post(
-                BASE_URL + "admin/createProduct/",
-                formData
+                BASE_URL + "/admin/createProduct/",
+                formData,
+                {
+                  headers: {
+                    Authorization: `Bearer ${token}`
+                  }
+                }
               );
             }
             console.log("submit: Done ", response.data);
             setSubmitting(false);
+            resetForm();
           }}
         >
           {({ values, errors, isSubmitting }) => (
