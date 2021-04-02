@@ -3,12 +3,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-body::before{
-  content: "";
-  position: absolute;
-  z-index: -1;
-  background-image: #f1f1f1;
-}
 .form {
   margin: 20px auto;
   height: auto;

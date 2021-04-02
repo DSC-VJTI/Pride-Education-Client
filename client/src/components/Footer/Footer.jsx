@@ -19,47 +19,47 @@ const Footer = () => {
             LOGO
           </h1>
           <div className="pageLinks">
-            <Link className="footerLinks" href="">
+            <Link className="footerLinks" to="">
               About
             </Link>
-            <Link className="footerLinks" href="">
+            <Link className="footerLinks" to="">
               Contact
             </Link>
-            <Link className="footerLinks" href="">
+            <Link className="footerLinks" to="">
               Privacy Policy
             </Link>
           </div>
           <div className="socialHandles">
             <div className="firstPart">
               <div className="logo">
-                <Link>
+                <Link to="">
                   <YouTubeIcon />
                 </Link>
               </div>
               <div className="logo">
-                <Link>
+                <Link to="">
                   <LinkedInIcon />
                 </Link>
               </div>
               <div className="logo">
-                <Link>
+                <Link to="">
                   <InstagramIcon />
                 </Link>
               </div>
             </div>
             <div className="secondPart">
               <div className="logo">
-                <Link>
+                <Link to="">
                   <FacebookIcon />
                 </Link>
               </div>
               <div className="logo">
-                <Link>
+                <Link to="">
                   <TwitterIcon />
                 </Link>
               </div>
               <div className="logo">
-                <Link>
+                <Link to="">
                   <TelegramIcon />
                 </Link>
               </div>
