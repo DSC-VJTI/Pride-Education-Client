@@ -48,7 +48,6 @@ const ClassPane = ({ Course, CoursesList }) => {
     const innerProduct = await axios.get(`${BASE_URL}/products`);
 
     setProducts(innerProduct.data.data);
-    console.log(innerProduct.data.data);
   };
 
   return (
@@ -60,12 +59,13 @@ const ClassPane = ({ Course, CoursesList }) => {
           className={classes.slider}
         >
           {products.map((prod) => {
-            if (prod.type === "test series") {
+            if ("test" in prod) {
               return (
                 <div data-aos="flip-right">
                   <Product
                     title={prod.name}
-                    instructor={prod.courseDetails.faculty}
+                    instructor={prod.test.subject}
+                    buttonText="View Book"
                   />
                 </div>
               );
@@ -80,12 +80,13 @@ const ClassPane = ({ Course, CoursesList }) => {
           className={classes.slider}
         >
           {products.map((prod) => {
-            if (prod.type === "course") {
+            if ("course" in prod) {
               return (
                 <div data-aos="flip-right">
                   <Product
                     title={prod.name}
-                    instructor={prod.courseDetails.faculty}
+                    instructor={prod.course.faculty}
+                    buttonText="View Course"
                   />
                 </div>
               );
@@ -100,13 +101,10 @@ const ClassPane = ({ Course, CoursesList }) => {
           className={classes.slider}
         >
           {products.map((prod) => {
-            if (prod.type === "book") {
+            if ("book" in prod) {
               return (
                 <div data-aos="flip-right">
-                  <Product
-                    title={prod.name}
-                    instructor={prod.courseDetails.faculty}
-                  />
+                  <Product title={prod.name} buttonText="View Book" />
                 </div>
               );
             }

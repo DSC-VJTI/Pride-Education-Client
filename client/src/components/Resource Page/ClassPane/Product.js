@@ -33,7 +33,7 @@ const ProductStyles = makeStyles({
   }
 });
 
-const Product = ({ title, instructor }) => {
+const Product = ({ title, instructor, buttonText }) => {
   const classes = ProductStyles();
 
   return (
@@ -42,7 +42,7 @@ const Product = ({ title, instructor }) => {
       <CardHeader title={title} subheader={instructor} />
       <Button className={classes.classButton}>
         <Link style={{ textDecoration: "none", color: "white" }} to="/product">
-          View Courses
+          {buttonText}
         </Link>
       </Button>
     </Card>

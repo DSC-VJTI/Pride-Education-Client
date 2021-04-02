@@ -3,12 +3,10 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import ClassesPane from "./components/Resource Page/ClassesPane";
 import CoursePage from "./components/Product Page/CoursePage";
-
 import Landing from "./components/LandingPage/Landing";
 import SupportPage from "./components/Support Page/SupportPage";
 import Registration from "./components/LoginRegister/Registration";
 import Login from "./components/LoginRegister/Login";
-
 import Cart from "./components/Cart/Cart";
 import Aos from "aos";
 import "aos/dist/aos.css";
@@ -17,6 +15,7 @@ import AddProduct from "./components/DashboardLayout/ProductListView/AddProduct"
 import DashboardLayout from "./components/DashboardLayout";
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar";
+import MyOrders from "./components/MyOrders/MyOrders";
 import { AuthProvider } from "./context/context";
 
 function App() {
@@ -34,6 +33,7 @@ function App() {
           <Route path="/support" component={SupportPage} />
           <Route path="/register" component={Registration} />
           <Route path="/login" component={Login} />
+          <Route path="/orders" component={MyOrders} />
 
           {/* Protected routes go here */}
           <Route path="/product/add" component={AddProduct} />

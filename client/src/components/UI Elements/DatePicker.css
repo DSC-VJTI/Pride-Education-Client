@@ -1,0 +1,33 @@
+.date div.MuiFormControl-root.MuiTextField-root {
+    background-color: transparent;
+}
+.MuiPickersDay-daySelected.MuiPickersDay-day {
+    background-color: #f26522;
+        
+}
+.MuiPickersDay-daySelected.MuiPickersDay-day:hover {
+    background-color: #f26522;
+        
+}
+
+.MuiTypography-colorPrimary {
+    color: #f26522;
+}
+
+.MuiPickersToolbar-toolbar.MuiToolbar-regular {
+    background-color: #f26522 ;
+}
+
+div.MuiPickersClock-pin {
+    background-color: #f26522;
+}
+div.MuiPickersClockPointer-pointer {
+    background-color: #f26522;
+}
+.MuiPickersClockNumber-clockNumberSelected {
+    background-color: #f26522;
+}
+
+div.MuiPickersClockPointer-thumb {
+    border: 14px solid #f26522;
+}
