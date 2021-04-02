@@ -8,8 +8,9 @@ const admin = {
     res: express.Response,
     next: express.NextFunction
   ): Promise<express.Response | void> {
-    const user = await User.findById(req.body.userId);
+    const user = await User.findById(req.body.user._id);
     if (user != null && user.isAdmin == true) {
+      delete req.body.user;
       next();
     } else {
       return res.status(403).send({ error: "User not an Admin" });

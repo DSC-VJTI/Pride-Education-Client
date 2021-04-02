@@ -60,7 +60,7 @@ const auth = {
       const token = req.headers.authorization.split(" ")[1];
       const response: IJWTResponse = jwtHandler.verifyJWT(token);
       if (response.success) {
-        req.body.user = response.jwtPayload;
+        req.body = { ...req.body, ...response.jwtPayload };
         next();
       } else {
         const { success, error } = response;
