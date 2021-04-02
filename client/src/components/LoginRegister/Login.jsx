@@ -14,8 +14,6 @@ const Login = (props) => {
   const [email, setEmail] = useState("");
   const [data, setData] = useState(null);
   const [alert, setAlert] = useState(null);
-
-  //States Used for Validation Starts from Here
   const [warningEmail, setWarningEmail] = useState("");
 
   const validateEmail = () => {
@@ -79,30 +77,11 @@ const Login = (props) => {
                     onChange={onLogin}
                     required="required"
                   />
-                  {/* <FormControl
-                  className="inputField"
-                  style={{ width: "90%", marginBottom: "0.4rem" }}
-                >
-                  <InputLabel htmlFor="my-input">
-                    Enter Email address
-                  </InputLabel>
-                  <Input
-                    name="email"
-                    value={email}
-                    onChange={onLogin}
-                    type="text"
-                    id="my-input"
-                    aria-describedby="my-helper-text"
-                  />
-                  <small style={{ color: "red" }}>{warningEmail}</small>
-                </FormControl> */}
                 </div>
                 <div className="" style={{ marginTop: "0.3rem" }}>
                   <Button
                     style={{
                       width: "20%",
-                      // alignSelf: "left",
-                      // marginTop: "1rem",
                       marginLeft: "1.5rem"
                     }}
                     disabled={loading}
@@ -111,23 +90,6 @@ const Login = (props) => {
                     variant="contained"
                     text="Send OTP"
                   />
-                  {/* <Button
-                  onClick={onBtnClick}
-                  className="submit_btn"
-                  type="submit"
-                  style={{
-                    backgroundColor: " #455ff0",
-                    width: "30%",
-                    alignSelf: "left",
-                    marginTop: "1rem",
-                    marginLeft: "2rem"
-                  }}
-                  variant="contained"
-                  color="primary"
-                  disabled={loading}
-                >
-                  Send OTP
-                </Button> */}
                 </div>
               </div>
             </form>
