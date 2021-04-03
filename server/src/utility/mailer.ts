@@ -22,12 +22,11 @@ const sendOtpEmail = async (email: string, otp: number) => {
     const info = await transporter.sendMail({
       from: "pride.education.website@gmail.com", // sender address
       to: email, // list of receivers
-      subject: "OTP verification", // Subject line
+      subject: "Pride Education | OTP verification", // Subject line
       html: otpHtml // html body
     });
 
     console.log(`Message sent: ${info.messageId}`);
-    return `Message sent: ${info.messageId}`;
   } catch (error) {
     console.error(error);
     throw new Error(
