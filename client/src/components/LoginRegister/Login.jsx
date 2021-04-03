@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { FormControl, Input, InputLabel, Button } from "@material-ui/core";
+import { FormControl, InputLabel } from "@material-ui/core";
 import "./css/FormStyle.css";
 import { sendOTP } from "../../actions/authActions";
 import { Redirect } from "react-router-dom";
 import OtpPage from "./inputOTP";
 import { useAuthState, useAuthDispatch } from "../../context/context";
-
+import { Input } from "../UI Elements/Input";
+import { Button } from "../UI Elements/Button";
 const Login = (props) => {
   const dispatch = useAuthDispatch();
   const { loading, errorMessage } = useAuthState();
@@ -13,8 +14,6 @@ const Login = (props) => {
   const [email, setEmail] = useState("");
   const [data, setData] = useState(null);
   const [alert, setAlert] = useState(null);
-
-  //States Used for Validation Starts from Here
   const [warningEmail, setWarningEmail] = useState("");
 
   const validateEmail = () => {
@@ -31,9 +30,33 @@ const Login = (props) => {
 
     return isEmailValidated;
   };
-
+  const isValidEmail = () => {
+    let vaildEmail = true;
+    if (email == "") {
+      vaildEmail = false;
+      return vaildEmail;
+    }
+    if (email[0] == "." || email[email.length - 1] == ".") {
+      vaildEmail = false;
+      return vaildEmail;
+    }
+    if (email[0] == "@" || email[email.length - 1] == "@") {
+      validEmail = false;
+      return validEmail;
+    }
+    if (email.indexOf(".") == -1 || email.indexOf("@") == -1) {
+      vaildEmail = false;
+      return vaildEmail;
+    }
+    return vaildEmail;
+  };
   const onBtnClick = (event) => {
+    console.log("hello");
     event.preventDefault();
+    if (!isValidEmail()) {
+      setWarningEmail("Please enter a valid Email Address");
+      return;
+    }
     if (validateEmail()) {
       sendOTP({ dispatch, email, type: "Login" }).then((res) => {
         if (res.status === 200) {
@@ -50,63 +73,58 @@ const Login = (props) => {
     if (name === "email") {
       setEmail(value);
     }
-    if (name === "number") {
-      setNumber(value);
-    }
   };
 
   return !data ? (
     <>
-      <div className="form">
-        <div className="mainSection">
-          <h1
-            className="heading"
-            style={{ color: "#0065d1", textAlign: "center" }}
-          >
-            Login
-          </h1>
-          <form>
-            <div className="">
-              <div style={{ display: "flex", justifyContent: "space-around" }}>
-                <FormControl
-                  className="inputField"
-                  style={{ width: "90%", marginBottom: "0.4rem" }}
-                >
-                  <InputLabel htmlFor="my-input">
-                    Enter Email address
-                  </InputLabel>
+      <div className="formOuterBody">
+        <div className="form">
+          <div className="mainSection">
+            <h1
+              className="heading"
+              style={{ color: "#f26522", textAlign: "center" }}
+            >
+              Login
+            </h1>
+            <form>
+              <div className="">
+                <div style={{ margin: "0 20px", position: "relative" }}>
                   <Input
+                    label="Email Address*"
+                    placeholder="Email Address"
                     name="email"
+                    type="email"
                     value={email}
                     onChange={onLogin}
-                    type="text"
-                    id="my-input"
-                    aria-describedby="my-helper-text"
+                    required="required"
                   />
-                  <small style={{ color: "red" }}>{warningEmail}</small>
-                </FormControl>
+                  <small
+                    style={{
+                      color: "red",
+                      position: "absolute",
+                      bottom: "-10px",
+                      left: "10px"
+                    }}
+                  >
+                    {warningEmail}
+                  </small>
+                </div>
+                <div className="" style={{ marginTop: "0.3rem" }}>
+                  <Button
+                    style={{
+                      width: "20%",
+                      marginLeft: "1.5rem"
+                    }}
+                    disabled={loading}
+                    type="submit"
+                    onClick={onBtnClick}
+                    variant="contained"
+                    text="Send OTP"
+                  />
+                </div>
               </div>
-              <div className="" style={{ marginTop: "0.3rem" }}>
-                <Button
-                  onClick={onBtnClick}
-                  className="submit_btn"
-                  type="submit"
-                  style={{
-                    backgroundColor: " #455ff0",
-                    width: "30%",
-                    alignSelf: "left",
-                    marginTop: "1rem",
-                    marginLeft: "2rem"
-                  }}
-                  variant="contained"
-                  color="primary"
-                  disabled={loading}
-                >
-                  Send OTP
-                </Button>
-              </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </>
