@@ -43,6 +43,7 @@ export const AuthReducer = (initialState, action) => {
       return {
         ...initialState,
         loading: false,
+        isAuthenticated: false,
         errorMessage: action.error
       };
 
