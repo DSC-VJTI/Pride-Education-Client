@@ -77,64 +77,66 @@ const Registration = () => {
               </h1>
               <form onSubmit={props.handleSubmit}>
                 <div
-                  className="inputFields"
-                  style={{ display: "flex", justifyContent: "space-around" }}
+                  className="inputField"
+                  style={{
+                    width: "92%",
+                    margin: "20px auto",
+                    position: "relative"
+                  }}
                 >
-                  <div
-                    className="inputField"
-                    style={{ position: "relative", width: "300px" }}
-                  >
-                    <Input
-                      style={{ width: "300px" }}
-                      name="name"
-                      type="text"
-                      label="Full Name*"
-                      placeholder="Enter Full Name"
-                      onChange={props.handleChange}
-                      onBlur={props.handleBlur}
-                      value={props.values.name}
-                    />
-                    {props.touched.name ? (
-                      <small
-                        style={{
-                          color: "red",
-                          position: "absolute",
-                          bottom: "-1px",
-                          left: "10px"
-                        }}
-                      >
-                        {props.errors.name}
-                      </small>
-                    ) : null}
-                  </div>
-                  <div style={{ position: "relative", width: "300px" }}>
-                    <div>
-                      <Input
-                        // className="inputFields"
-                        style={{ width: "300px" }}
-                        className="inputField"
-                        label="Email Address*"
-                        placeholder="Enter Email address"
-                        name="email"
-                        type="email"
-                        onChange={props.handleChange}
-                        onBlur={props.handleBlur}
-                        value={props.values.email}
-                      />
-                      {props.touched.email ? (
-                        <small
-                          style={{
-                            color: "red",
-                            position: "absolute",
-                            bottom: "-1px",
-                            left: "10px"
-                          }}
-                        >
-                          {props.errors.email}
-                        </small>
-                      ) : null}
-                    </div>
-                  </div>
+                  <Input
+                    name="name"
+                    type="text"
+                    label="Full Name*"
+                    placeholder="Enter Full Name"
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    value={props.values.name}
+                  />
+                  {props.touched.name ? (
+                    <small
+                      className="errorForumber"
+                      style={{
+                        color: "red",
+                        position: "absolute",
+                        bottom: "-10px",
+                        left: "10px"
+                      }}
+                    >
+                      {props.errors.name}
+                    </small>
+                  ) : null}
+                </div>
+                <div
+                  className="inputField"
+                  style={{
+                    width: "92%",
+                    margin: "20px auto",
+                    position: "relative"
+                  }}
+                >
+                  <Input
+                    label="Email Address*"
+                    placeholder="Enter Email address"
+                    name="email"
+                    type="email"
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    value={props.values.email}
+                  />
+                  {props.touched.email ? (
+                    <small
+                      className="errorForumber"
+                      style={{
+                        color: "red",
+                        position: "absolute",
+                        bottom: "-10px",
+                        left: "10px"
+                      }}
+                    >
+                      {props.errors.email}
+                    </small>
+                  ) : null}
                 </div>
                 <div
                   className="inputField"
