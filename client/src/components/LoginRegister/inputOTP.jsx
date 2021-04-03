@@ -31,8 +31,12 @@ const OtpPage = (props) => {
           email: props.data.email,
           otp: otp
         }).then((res) => {
-          console.log(res);
-          history.push("/");
+          if (res.error) {
+            setError(res.error);
+          } else {
+            console.log(res);
+            history.push("/");
+          }
         });
       } else if (props.type === "Register") {
         register({
@@ -43,7 +47,7 @@ const OtpPage = (props) => {
           }
         }).then((res) => {
           if (res.error) {
-            setError("There was an error. Please try again");
+            setError(res.error);
           } else {
             console.log(res);
             history.push("/");
