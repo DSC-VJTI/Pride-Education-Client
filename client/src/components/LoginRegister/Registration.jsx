@@ -85,7 +85,6 @@ const Registration = () => {
                     style={{ position: "relative", width: "300px" }}
                   >
                     <Input
-                      // className="inputField"
                       style={{ width: "300px" }}
                       name="name"
                       type="text"
@@ -108,10 +107,7 @@ const Registration = () => {
                       </small>
                     ) : null}
                   </div>
-                  <div
-                    className="inputField"
-                    style={{ position: "relative", width: "300px" }}
-                  >
+                  <div style={{ position: "relative", width: "300px" }}>
                     <div>
                       <Input
                         // className="inputFields"
