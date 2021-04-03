@@ -42,7 +42,7 @@ const ComboBoxStyles = makeStyles((theme) => ({
   }
 }));
 
-const ComboBox = ({ course, CoursesList }) => {
+const ComboBox = ({ title }) => {
   const [courses, setCourses] = React.useState("");
   const classes = ComboBoxStyles();
   const handleChange = (event) => {
@@ -50,25 +50,7 @@ const ComboBox = ({ course, CoursesList }) => {
   };
   return (
     <div className={classes.ClassesBox}>
-      <Typography className={classes.title}>{course}</Typography>
-      <FormControl className={classes.searchBox}>
-        <InputLabel htmlFor="age-native-helper">Instructor</InputLabel>
-        <Select
-          labelId="demo-simple-select-helper-label"
-          id="demo-simple-select-helper"
-          value={courses}
-          onChange={handleChange}
-          style={{
-            width: "10rem"
-          }}
-        >
-          {CoursesList.map((option) => (
-            <MenuItem value={option.value} className={classes.option}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <Typography className={classes.title}>{title}</Typography>
     </div>
   );
 };

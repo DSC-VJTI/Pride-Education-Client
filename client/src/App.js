@@ -17,6 +17,8 @@ import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar";
 import MyOrders from "./components/MyOrders/MyOrders";
 import { AuthProvider } from "./context/context";
+import PdfViewer from "./components/Books/PdfViewer";
+import Resources from "./components/Books/Resources";
 
 function App() {
   useEffect(() => {
@@ -39,9 +41,11 @@ function App() {
           <Route path="/product/add" component={AddProduct} />
           <Route path="/product/edit/:productId" component={AddProduct} />
           <Route path="/admin" component={DashboardLayout} />
+          <Route path="/resources/:fileName" component={PdfViewer} />
+          <Route path="/resources" component={Resources} />
           <Route path="/" exact component={Landing} />
         </Switch>
-        {/* <Footer /> */}
+        <Footer />
       </Router>
     </AuthProvider>
   );

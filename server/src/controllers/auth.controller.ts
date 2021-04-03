@@ -3,12 +3,13 @@ import User from "./../models/User/User";
 import express from "express";
 import IUser from "src/models/User/IUser";
 import jwtHandler from "../utility/jwt";
+import sendOtpEmail from "../utility/mailer";
 
 const AuthController = {
   // Sends Hash and OTP for login/register routes
   sendOTP(req: express.Request, res: express.Response): express.Response {
     const [otp, hash] = OTPUtil.generateOtpHash(req.body.email);
-    console.log("otp: ", otp); // Change this console.log to a nodemailer/twilio implementation
+    sendOtpEmail(req.body.email, otp);
     return res.status(200).json({ hash: hash, email: req.body.email });
   },
 
