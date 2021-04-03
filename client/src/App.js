@@ -16,6 +16,7 @@ import DashboardLayout from "./components/DashboardLayout";
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar";
 import MyOrders from "./components/MyOrders/MyOrders";
+import ProductDetails from "./components/ProductDetails/ProductDetails";
 import { AuthProvider } from "./context/context";
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Route path="/register" component={Registration} />
           <Route path="/login" component={Login} />
           <Route path="/orders" component={MyOrders} />
+          <Route path="/product/details/:_id" component={ProductDetails} />
 
           {/* Protected routes go here */}
           <Route path="/product/add" component={AddProduct} />
