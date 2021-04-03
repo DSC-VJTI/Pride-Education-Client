@@ -48,12 +48,14 @@ const items = [
 
 const useStyles = makeStyles(() => ({
   mobileDrawer: {
-    width: 256
+    width: 256,
+    backgroundColor: "#f1f1f1"
   },
   desktopDrawer: {
     width: 256,
     top: 64,
-    height: "calc(100% - 64px)"
+    height: "calc(100% - 64px)",
+    backgroundColor: "#f1f1f1"
   },
   avatar: {
     cursor: "pointer",

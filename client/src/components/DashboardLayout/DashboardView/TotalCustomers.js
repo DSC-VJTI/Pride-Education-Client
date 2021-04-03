@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 import {
@@ -9,10 +9,17 @@ import {
   Grid,
   Typography,
   colors,
-  makeStyles
+  makeStyles,
+  CircularProgress,
+  Button,
+  CardHeader,
+  Divider
 } from "@material-ui/core";
-import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
+import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 import PeopleIcon from "@material-ui/icons/PeopleOutlined";
+import { useAuthState } from "../../../context/context";
+import axios from "axios";
+import { BASE_URL } from "../../../constants";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,35 +41,62 @@ const useStyles = makeStyles((theme) => ({
 
 const TotalCustomers = ({ className, ...rest }) => {
   const classes = useStyles();
+  const { token } = useAuthState();
+
+  const [count, setCount] = useState(0);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get(BASE_URL + "/admin/getCountUsers", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then((res) => {
+        setCount(res.data.count);
+      })
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
+      <CardHeader title="Total Customers" />
+      <Divider />
       <CardContent>
-        <Grid container justify="space-between" spacing={3}>
-          <Grid item>
-            <Typography color="textSecondary" gutterBottom variant="h6">
-              TOTAL CUSTOMERS
-            </Typography>
-            <Typography color="textPrimary" variant="h3">
-              1,600
-            </Typography>
+        {isLoading ? (
+          <CircularProgress />
+        ) : (
+          <Grid container justify="space-between" spacing={3}>
+            <Grid item xs={6}>
+              <Avatar className={classes.avatar}>
+                <PeopleIcon />
+              </Avatar>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography color="textPrimary" variant="h3">
+                {count}
+              </Typography>
+            </Grid>
           </Grid>
-          <Grid item>
-            <Avatar className={classes.avatar}>
-              <PeopleIcon />
-            </Avatar>
-          </Grid>
-        </Grid>
-        <Box mt={2} display="flex" alignItems="center">
-          <ArrowUpwardIcon className={classes.differenceIcon} />
-          <Typography className={classes.differenceValue} variant="body2">
-            16%
-          </Typography>
-          <Typography color="textSecondary" variant="caption">
-            Since last month
-          </Typography>
-        </Box>
+        )}
       </CardContent>
+      <Box display="flex" justifyContent="flex-end" p={2}>
+        <Button
+          color="primary"
+          endIcon={<ArrowRightIcon />}
+          size="small"
+          variant="text"
+        >
+          View all
+        </Button>
+      </Box>
     </Card>
   );
 };

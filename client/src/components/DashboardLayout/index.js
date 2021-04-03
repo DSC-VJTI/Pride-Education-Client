@@ -7,7 +7,7 @@ import Products from "./ProductListView";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.background.dark,
+    backgroundColor: "#f1f1f1",
     display: "flex",
     height: "100%",
     overflow: "hidden",
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flex: "1 1 auto",
     overflow: "hidden",
-    paddingTop: 64,
+    // paddingTop: 64,
     [theme.breakpoints.up("lg")]: {
       paddingLeft: 256
     }

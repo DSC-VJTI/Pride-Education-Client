@@ -54,6 +54,12 @@ router.post(
   adminMiddleware.isAdmin,
   admin.getUsers
 );
+router.get(
+  "/admin/getCountUsers",
+  auth.isAuthenticated,
+  adminMiddleware.isAdmin,
+  admin.getNumberOfCustomers
+);
 
 //cart routes
 router.post("/cart", CartController.showCart);

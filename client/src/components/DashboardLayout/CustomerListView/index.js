@@ -5,6 +5,7 @@ import Results from "./Results";
 import Toolbar from "../Toolbar";
 import axios from "axios";
 import { BASE_URL } from "../../../constants";
+import { useAuthState } from "../../../context/context";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,11 +18,20 @@ const useStyles = makeStyles((theme) => ({
 
 const CustomerListView = () => {
   const classes = useStyles();
+  const { token } = useAuthState();
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     axios
-      .post(BASE_URL + "/admin/getUsers")
+      .post(
+        BASE_URL + "/admin/getUsers",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
       .then((res) => {
         setUsers(res.data.allUsers);
       })
