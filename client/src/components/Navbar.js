@@ -115,7 +115,7 @@ const Navbar = () => {
             MarketPlace
           </NavLink>
           <NavLink
-            to={isAuthenticated ? "/resources" : "/register"}
+            to={"/resources"}
             className="hideOnMobile"
             style={{
               textDecoration: "none",

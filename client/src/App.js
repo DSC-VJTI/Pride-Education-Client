@@ -19,6 +19,7 @@ import MyOrders from "./components/MyOrders/MyOrders";
 import { AuthProvider } from "./context/context";
 import PdfViewer from "./components/Books/PdfViewer";
 import Resources from "./components/Books/Resources";
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
   useEffect(() => {
@@ -42,7 +43,7 @@ function App() {
           <Route path="/product/edit/:productId" component={AddProduct} />
           <Route path="/admin" component={DashboardLayout} />
           <Route path="/resources/:fileName" component={PdfViewer} />
-          <Route path="/resources" component={Resources} />
+          <ProtectedRoute path="/resources" component={Resources} />
           <Route path="/" exact component={Landing} />
         </Switch>
         <Footer />
