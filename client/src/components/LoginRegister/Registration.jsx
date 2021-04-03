@@ -80,9 +80,13 @@ const Registration = () => {
                   className="inputFields"
                   style={{ display: "flex", justifyContent: "space-around" }}
                 >
-                  <div className="inputField" style={{ position: "relative" }}>
+                  <div
+                    className="inputField"
+                    style={{ position: "relative", width: "300px" }}
+                  >
                     <Input
-                      style={{ width: "40%" }}
+                      // className="inputField"
+                      style={{ width: "300px" }}
                       name="name"
                       type="text"
                       label="Full Name*"
@@ -104,10 +108,14 @@ const Registration = () => {
                       </small>
                     ) : null}
                   </div>
-                  <div className="inputField" style={{ position: "relative" }}>
+                  <div
+                    className="inputField"
+                    style={{ position: "relative", width: "300px" }}
+                  >
                     <div>
                       <Input
-                        style={{ width: "37%" }}
+                        // className="inputFields"
+                        style={{ width: "300px" }}
                         className="inputField"
                         label="Email Address*"
                         placeholder="Enter Email address"
@@ -191,7 +199,11 @@ const Registration = () => {
                 </div>
                 <div
                   className="inputField"
-                  style={{ width: "92%", margin: "auto", position: "relative" }}
+                  style={{
+                    width: "92%",
+                    margin: "20px auto",
+                    position: "relative"
+                  }}
                 >
                   <DropDown
                     name="field"
@@ -206,7 +218,11 @@ const Registration = () => {
                 </div>
                 <div
                   className="inputField"
-                  style={{ width: "92%", margin: "auto", position: "relative" }}
+                  style={{
+                    width: "92%",
+                    margin: "20px auto",
+                    position: "relative"
+                  }}
                 >
                   <DropDown
                     name="level"
@@ -221,7 +237,11 @@ const Registration = () => {
                 </div>
                 <div
                   className="inputField"
-                  style={{ width: "92%", margin: "auto", position: "relative" }}
+                  style={{
+                    width: "92%",
+                    margin: "20px auto",
+                    position: "relative"
+                  }}
                 >
                   <DropDown
                     name="reference"

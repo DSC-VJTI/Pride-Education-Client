@@ -79,5 +79,15 @@
   }
 }
 .errorForumber{
-  bottom:-28px;
+  bottom:-32px;
+}
+@media (max-width: 550px) {
+  .errorForumber{
+    bottom:-40px;
+  }
+  .inputField{
+    margin-bottom: 20px;
+    width: 250px;
+  }
+  
 }
