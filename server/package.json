@@ -12,8 +12,7 @@
     "test": "cross-env NODE_ENV=test mocha 'tests/**/*.ts'",
     "coverage": "nyc npm test",
     "production": "cross-env NODE_ENV=production node compiled/app.js",
-    "preproduction": "tsc",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix=../client && npm run build --prefix=../client"
+    "preproduction": "tsc"
   },
   "husky": {
     "hooks": {
