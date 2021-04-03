@@ -46,6 +46,7 @@ const NavbarStyles = makeStyles({
 });
 
 const Navbar = () => {
+  const isProd = process.env.REACT_APP_ENV === "production";
   const [open, setOpen] = useState(false);
   const handleDrawer = () => {
     setOpen(true);
@@ -53,6 +54,8 @@ const Navbar = () => {
   const { isAuthenticated } = useAuthState();
   const dispatch = useAuthDispatch();
   const history = useHistory();
+
+  console.log("prod: ", isProd);
 
   return (
     <div>
@@ -91,7 +94,7 @@ const Navbar = () => {
             </NavLink>
           </Typography>
           <NavLink
-            to="/support"
+            to={isProd ? "/coming" : "/support"}
             className="hideOnMobile"
             style={{
               textDecoration: "none",
@@ -103,7 +106,7 @@ const Navbar = () => {
             Support
           </NavLink>
           <NavLink
-            to="/classes"
+            to={isProd ? "/coming" : "/classes"}
             className="hideOnMobile"
             style={{
               textDecoration: "none",

@@ -20,6 +20,7 @@ import { AuthProvider } from "./context/context";
 import PdfViewer from "./components/Books/PdfViewer";
 import Resources from "./components/Books/Resources";
 import ProtectedRoute from "./ProtectedRoute";
+import ComingSoon from "./components/ComingSoon";
 
 function App() {
   useEffect(() => {
@@ -44,6 +45,7 @@ function App() {
           <Route path="/admin" component={DashboardLayout} />
           <Route path="/resources/:fileName" component={PdfViewer} />
           <ProtectedRoute path="/resources" component={Resources} />
+          <Route path="/coming" component={ComingSoon} />
           <Route path="/" exact component={Landing} />
         </Switch>
         <Footer />
