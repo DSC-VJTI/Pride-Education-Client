@@ -30,9 +30,33 @@ const Login = (props) => {
 
     return isEmailValidated;
   };
-
+  const isValidEmail = () => {
+    let vaildEmail = true;
+    if (email == "") {
+      vaildEmail = false;
+      return vaildEmail;
+    }
+    if (email[0] == "." || email[email.length - 1] == ".") {
+      vaildEmail = false;
+      return vaildEmail;
+    }
+    if (email[0] == "@" || email[email.length - 1] == "@") {
+      validEmail = false;
+      return validEmail;
+    }
+    if (email.indexOf(".") == -1 || email.indexOf("@") == -1) {
+      vaildEmail = false;
+      return vaildEmail;
+    }
+    return vaildEmail;
+  };
   const onBtnClick = (event) => {
+    console.log("hello");
     event.preventDefault();
+    if (!isValidEmail()) {
+      setWarningEmail("Please enter a valid Email Address");
+      return;
+    }
     if (validateEmail()) {
       sendOTP({ dispatch, email, type: "Login" }).then((res) => {
         if (res.status === 200) {
@@ -49,9 +73,6 @@ const Login = (props) => {
     if (name === "email") {
       setEmail(value);
     }
-    if (name === "number") {
-      setNumber(value);
-    }
   };
 
   return !data ? (
@@ -67,7 +88,7 @@ const Login = (props) => {
             </h1>
             <form>
               <div className="">
-                <div style={{ margin: "0 20px" }}>
+                <div style={{ margin: "0 20px", position: "relative" }}>
                   <Input
                     label="Email Address*"
                     placeholder="Email Address"
@@ -77,6 +98,16 @@ const Login = (props) => {
                     onChange={onLogin}
                     required="required"
                   />
+                  <small
+                    style={{
+                      color: "red",
+                      position: "absolute",
+                      bottom: "-10px",
+                      left: "10px"
+                    }}
+                  >
+                    {warningEmail}
+                  </small>
                 </div>
                 <div className="" style={{ marginTop: "0.3rem" }}>
                   <Button
