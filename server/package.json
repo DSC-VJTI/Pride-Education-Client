@@ -5,6 +5,7 @@
   "main": "compiled/app.js",
   "scripts": {
     "build": "tsc",
+    "postbuild": "cp -R src/views/ compiled/",
     "prestart": "npm run build",
     "start": "node compiled/app.js",
     "dev": "nodemon --watch 'src/**/*.ts' --exec ts-node src/app.ts",
