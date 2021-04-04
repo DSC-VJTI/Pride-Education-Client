@@ -1,4 +1,7 @@
 import React from "react";
+import Axios from "axios";
+import "../../constants";
+
 import {
   Card,
   makeStyles,
@@ -11,6 +14,7 @@ import {
   Grid
 } from "@material-ui/core";
 import Button from "../UI Elements/Button";
+import { key_id } from "../../constants";
 
 const CartStyles = makeStyles({
   TotalCard: {
@@ -49,6 +53,35 @@ const Total = (props) => {
   const items = props.items;
   const title = `(Rs.${props.price})`;
   const classes = CartStyles();
+
+  //for handling payment
+  const paymentHandler = async (e) => {
+    console.log(key_id);
+    e.preventDefault();
+    const options = {
+      key: key_id,
+      name: "Client CA",
+      description: "Test mode for our client",
+      orderId: "605aec8f9677e9b4f86602b0",
+      amount: 100,
+      handler: async (response) => {
+        try {
+          const paymentId = response.razorpay_payment_id;
+          const url = `http://localhost:8000/api/pay/${paymentId}/605aec8f9677e9b4f86602b0`;
+          const captureResponse = await Axios.post(url, {});
+          console.log(captureResponse.data);
+        } catch (err) {
+          console.log(err);
+        }
+      },
+      theme: {
+        color: "#686CFD"
+      }
+    };
+    const rzp1 = new window.Razorpay(options);
+    rzp1.open();
+  };
+
   return (
     <Grid container direction="column">
       <Card className={classes.TotalCard}>
@@ -86,6 +119,7 @@ const Total = (props) => {
             text="Proceed to buy"
             type="submit"
             className={classes.totalButton}
+            onClick={paymentHandler}
           />
         </CardActions>
       </Card>
