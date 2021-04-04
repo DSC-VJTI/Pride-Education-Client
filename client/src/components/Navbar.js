@@ -46,6 +46,7 @@ const NavbarStyles = makeStyles({
 });
 
 const Navbar = () => {
+  const isProd = process.env.NODE_ENV === "production";
   const [open, setOpen] = useState(false);
   const handleDrawer = () => {
     setOpen(true);
@@ -91,7 +92,7 @@ const Navbar = () => {
             </NavLink>
           </Typography>
           <NavLink
-            to="/support"
+            to={isProd ? "/coming" : "/support"}
             className="hideOnMobile"
             style={{
               textDecoration: "none",
@@ -103,7 +104,7 @@ const Navbar = () => {
             Support
           </NavLink>
           <NavLink
-            to="/classes"
+            to={isProd ? "/coming" : "/classes"}
             className="hideOnMobile"
             style={{
               textDecoration: "none",
@@ -115,7 +116,7 @@ const Navbar = () => {
             MarketPlace
           </NavLink>
           <NavLink
-            to={isAuthenticated ? "/resources" : "/register"}
+            to={"/resources"}
             className="hideOnMobile"
             style={{
               textDecoration: "none",

@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function AniCard({ number }) {
+export default function AniCard({ name, text }) {
   const classes = useStyles();
 
   return (
@@ -46,14 +46,10 @@ export default function AniCard({ number }) {
             component="h2"
             className="centerText"
           >
-            CA Abhishek Khilwani
+            {name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Lorem ipsum, dolor sit amet consectetur adipisic ing elit. Neque
-            exercitationem at placeat ven iam ea sunt possimus, consectetur,
-            officiis volupta tem qui ut nesciunt recusandae eveniet asperiores,
-            vo luptatibus illo obcaecati voluptates sit illum molestia s porro
-            corporis iste error! Laborum debitis ipsa sunt!
+            {text}
           </Typography>
         </CardContent>
       </CardActionArea>
