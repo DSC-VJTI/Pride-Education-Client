@@ -13,7 +13,7 @@
     "test": "cross-env NODE_ENV=test mocha 'tests/**/*.ts'",
     "coverage": "nyc npm test",
     "production": "cross-env NODE_ENV=production node compiled/app.js",
-    "preproduction": "tsc"
+    "preproduction": "npm run build"
   },
   "husky": {
     "hooks": {
