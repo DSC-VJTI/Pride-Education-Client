@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
 import ejs from "ejs";
+import path from "path";
 
 const sib_pass = process.env.SIB_PASS;
 
@@ -15,9 +16,12 @@ const sendOtpEmail = async (email: string, otp: number) => {
       }
     });
 
-    const otpHtml = await ejs.renderFile(__dirname + "/../views/otp.ejs", {
-      otp: otp
-    });
+    const otpHtml = await ejs.renderFile(
+      path.resolve(__dirname + "/../views/otp.ejs"),
+      {
+        otp: otp
+      }
+    );
     // send mail with defined transport object
     const info = await transporter.sendMail({
       from: "pride.education.website@gmail.com", // sender address
