@@ -46,7 +46,7 @@ const NavbarStyles = makeStyles({
 });
 
 const Navbar = () => {
-  const isProd = process.env.REACT_APP_ENV === "production";
+  const isProd = process.env.NODE_ENV === "production";
   const [open, setOpen] = useState(false);
   const handleDrawer = () => {
     setOpen(true);
@@ -54,8 +54,6 @@ const Navbar = () => {
   const { isAuthenticated } = useAuthState();
   const dispatch = useAuthDispatch();
   const history = useHistory();
-
-  console.log("prod: ", isProd);
 
   return (
     <div>
