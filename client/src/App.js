@@ -13,7 +13,6 @@ import "aos/dist/aos.css";
 import { useEffect } from "react";
 import AddProduct from "./components/DashboardLayout/ProductListView/AddProduct";
 import DashboardLayout from "./components/DashboardLayout";
-import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar";
 import MyOrders from "./components/MyOrders/MyOrders";
 import { AuthProvider } from "./context/context";
@@ -21,7 +20,7 @@ import PdfViewer from "./components/Books/PdfViewer";
 import Resources from "./components/Books/Resources";
 import ProtectedRoute from "./ProtectedRoute";
 import ComingSoon from "./components/ComingSoon";
-
+import Footer from "./components/Footer/Footer";
 function App() {
   useEffect(() => {
     Aos.init({ duration: 2000 });

@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 .form {
   margin: 20px auto;
   height: auto;
@@ -14,14 +15,20 @@
     #f26522
   );
 }
-.formOuterBody{
-  padding-top: 50px;
-  padding-bottom: 100px;
+.formOuterBody_Registration{
+  padding-top: 70px;
+  padding-bottom: 180px;
   width: 100%;
-  height: auto;
+  height: 100%;
   background-color:#f1f1f1;
 }
-
+.formOuterBody_Login{
+  padding-top: 70px;
+  padding-bottom: 250px;
+  width: 100%;
+  height: 100%;
+  background-color:#f1f1f1;
+}
 .mainSection {
   width: 100%;
   height: auto;

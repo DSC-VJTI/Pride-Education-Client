@@ -7,6 +7,7 @@ import OtpPage from "./inputOTP";
 import { useAuthState, useAuthDispatch } from "../../context/context";
 import { Input } from "../UI Elements/Input";
 import { Button } from "../UI Elements/Button";
+import Footer from "../Footer/Footer";
 const Login = (props) => {
   const dispatch = useAuthDispatch();
   const { loading, errorMessage } = useAuthState();
@@ -77,56 +78,58 @@ const Login = (props) => {
 
   return !data ? (
     <>
-      <div className="formOuterBody">
-        <div className="form">
-          <div className="mainSection">
-            <h1
-              className="heading"
-              style={{ color: "#f26522", textAlign: "center" }}
-            >
-              Login
-            </h1>
-            <form>
-              <div className="">
-                <div style={{ margin: "0 20px", position: "relative" }}>
-                  <Input
-                    label="Email Address*"
-                    placeholder="Email Address"
-                    name="email"
-                    type="email"
-                    value={email}
-                    onChange={onLogin}
-                    required="required"
-                  />
-                  <small
-                    style={{
-                      color: "red",
-                      position: "absolute",
-                      bottom: "-10px",
-                      left: "10px"
-                    }}
-                  >
-                    {warningEmail}
-                  </small>
+      <>
+        <div className="formOuterBody_Login">
+          <div className="form">
+            <div className="mainSection">
+              <h1
+                className="heading"
+                style={{ color: "#f26522", textAlign: "center" }}
+              >
+                Login
+              </h1>
+              <form>
+                <div className="">
+                  <div style={{ margin: "0 20px", position: "relative" }}>
+                    <Input
+                      label="Email Address*"
+                      placeholder="Email Address"
+                      name="email"
+                      type="email"
+                      value={email}
+                      onChange={onLogin}
+                      required="required"
+                    />
+                    <small
+                      style={{
+                        color: "red",
+                        position: "absolute",
+                        bottom: "-10px",
+                        left: "10px"
+                      }}
+                    >
+                      {warningEmail}
+                    </small>
+                  </div>
+                  <div className="" style={{ marginTop: "0.3rem" }}>
+                    <Button
+                      style={{
+                        width: "20%",
+                        marginLeft: "1.5rem"
+                      }}
+                      disabled={loading}
+                      type="submit"
+                      onClick={onBtnClick}
+                      variant="contained"
+                      text="Send OTP"
+                    />
+                  </div>
                 </div>
-                <div className="" style={{ marginTop: "0.3rem" }}>
-                  <Button
-                    style={{
-                      width: "20%",
-                      marginLeft: "1.5rem"
-                    }}
-                    disabled={loading}
-                    type="submit"
-                    onClick={onBtnClick}
-                    variant="contained"
-                    text="Send OTP"
-                  />
-                </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
+      </>
     </>
   ) : (
     <OtpPage

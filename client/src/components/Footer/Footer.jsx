@@ -10,7 +10,7 @@ import "./FooterStyle.css";
 const Footer = () => {
   return (
     <>
-      <footer className="footer">
+      <footer style={{ marginTop: "auto!important" }}  className="footer">
         <div className="main_footer">
           <h1
             className="LogoHeading"
