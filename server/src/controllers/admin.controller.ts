@@ -46,10 +46,10 @@ const AdminController = {
   ): Promise<express.Response> {
     try {
       const { name, discount, price, type } = req.body as IProductBody;
-      let product = new Product({ name, discount, type, price });
+      let product = new Product({ name, discount, price });
       switch (type) {
         case "course":
-          product.course = await Course.create(req.body.course);
+          product.course = await Course.create(JSON.parse(req.body.course));
           break;
         case "book": {
           if (!req.file) {
@@ -79,7 +79,7 @@ const AdminController = {
           break;
         }
         case "test":
-          product.test = await Test.create(req.body.test);
+          product.test = await Test.create(JSON.parse(req.body.test));
           break;
         default:
           return res.status(400).json({

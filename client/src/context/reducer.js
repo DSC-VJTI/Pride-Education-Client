@@ -35,13 +35,17 @@ export const AuthReducer = (initialState, action) => {
       return {
         ...initialState,
         user: "",
-        token: ""
+        token: "",
+        errorMessage: "",
+        isAuthenticated: false,
+        loading: false
       };
 
     case "LOGIN_ERROR":
       return {
         ...initialState,
         loading: false,
+        isAuthenticated: false,
         errorMessage: action.error
       };
 

@@ -12,7 +12,8 @@ const CourseSchema: Schema = new Schema({
   sysReq: { type: String, required: true },
   views: { type: Number, required: true, default: 0 },
   validity: { type: Number, required: true },
-  mode: { type: String, required: true }
+  mode: { type: String, required: true },
+  courseUsers: [{ type: Schema.Types.ObjectId, ref: "User" }]
 });
 
 export default model<ICourse>("Course", CourseSchema);

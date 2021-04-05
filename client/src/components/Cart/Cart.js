@@ -128,7 +128,7 @@ const Cart = () => {
       .post(BASE_URL + "/cart", { user: state.user })
       .then((response) => console.log(response.data))
       .catch((err) => {
-        console.log(response);
+        console.log(err);
       });
   }, []);
 
