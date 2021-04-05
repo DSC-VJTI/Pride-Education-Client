@@ -11,7 +11,19 @@ const cartController = {
       const myCart = await Cart.find({ user: userId })
         .populate({
           path: "products",
-          select: ["_id", "name", "price", "discount"]
+          select: ["_id", "name", "price", "discount"],
+          populate:
+            [{
+              path: "course",
+              select: ["mode", "faculty"]
+            },
+            {
+              path: "test",
+              select: ["subject", "contents"]
+            }, {
+              path: "book",
+              select: ["url", "_id", "file"]
+            }],
         })
         .lean();
       return res.status(200).json({ myCart });
@@ -39,7 +51,19 @@ const cartController = {
       myCart = await Cart.findOne({ user: userId })
         .populate({
           path: "products",
-          select: ["_id", "name", "price", "discount"]
+          select: ["_id", "name", "price", "discount"],
+          populate:
+            [{
+              path: "course",
+              select: ["mode", "faculty"]
+            },
+            {
+              path: "test",
+              select: ["subject", "contents"]
+            }, {
+              path: "book",
+              select: ["url", "_id", "file"]
+            }],
         })
         .lean();
       return res.status(201).json({ myCart });
@@ -61,7 +85,7 @@ const cartController = {
 
       if (myCart) {
         const newCartProducts = myCart.products.filter(
-          (cartItem) => String(cartItem) !== productId
+          (cartItem: any) => String(cartItem) !== productId
         );
         const newCart = await Cart.findByIdAndUpdate(
           String(myCart._id),
