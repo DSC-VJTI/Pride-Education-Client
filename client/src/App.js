@@ -43,7 +43,7 @@ function App() {
       <AuthProvider>
         <Router>
           <Navbar />
-          <Box>
+          <Box flexGrow={1}>
             <Switch>
               <Route path="/classes" component={ClassesPane} />
               <Route path="/cart" component={Cart} />
