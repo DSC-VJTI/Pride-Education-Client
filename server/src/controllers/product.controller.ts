@@ -6,17 +6,24 @@ const ProductController = {
     try {
       const data = await Product.find({})
         .populate({
-          path: "course",
-          select: ["mode", "faculty"]
+          path: "products",
+          select: ["_id", "name", "price", "discount"],
+          populate: [
+            {
+              path: "course",
+              select: ["mode", "faculty"]
+            },
+            {
+              path: "test",
+              select: ["subject", "contents"]
+            },
+            {
+              path: "book",
+              select: ["url", "_id", "file"]
+            }
+          ]
         })
-        .populate({
-          path: "test",
-          select: ["subject", "contents"]
-        })
-        .populate({
-          path: "book",
-          select: ["url", "_id", "file"]
-        });
+        .lean();
       return res.status(200).json({ data });
     } catch (error) {
       return res.status(500).json({ message: error.message });

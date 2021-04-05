@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 import ejs from "ejs";
 
 const sib_pass = process.env.SIB_PASS;
-
+console.log(sib_pass);
 const sendOtpEmail = async (email: string, otp: number) => {
   try {
     // Create a transporter

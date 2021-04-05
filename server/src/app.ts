@@ -8,7 +8,7 @@ dotenv.config();
 const app = express();
 
 dbConnect();
-
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 app.use(express.json({ limit: "10mb" }));
 app.use(cors());
 

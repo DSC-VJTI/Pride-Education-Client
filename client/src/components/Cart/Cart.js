@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import {
   Container,
   Grid,
@@ -70,7 +71,6 @@ const Cart = () => {
   const [value, setValue] = useState(initialFValues);
   const [total, setTotal] = useState(0);
   const classes = CartStyles();
-
   const handleOnClick = (e) => {
     setValue(value.filter((item) => item.id !== e));
   };
