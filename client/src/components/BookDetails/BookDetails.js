@@ -14,6 +14,10 @@ import {
 } from "@material-ui/core";
 
 import Button from "../UI Elements/Button";
+import { useAuthState } from "../../context/context";
+import axios from "axios";
+import { BASE_URL } from "../../constants";
+import { Link, useHistory } from "react-router-dom";
 
 const DetailsStyles = makeStyles((theme) => ({
   root: {
@@ -28,6 +32,19 @@ const DetailsStyles = makeStyles((theme) => ({
 
 const BookDetails = ({ product }) => {
   const classes = DetailsStyles();
+
+  const history = useHistory();
+
+  const state = useAuthState();
+  const AddToCart = async () => {
+    const addingProduct = await axios.post(
+      `${BASE_URL}/cart/${product._id}`,
+      state
+    );
+    setTimeout(() => {
+      history.push("/cart");
+    }, 2000);
+  };
 
   return (
     <div>
@@ -45,7 +62,11 @@ const BookDetails = ({ product }) => {
           <Typography style={{ margin: "0px", padding: "0px" }}>
             {product.name}
           </Typography>
-          <Button text={"Add To Cart"} style={{ margin: "1rem" }}></Button>
+          <Button
+            text={"Add To Cart"}
+            onClick={AddToCart}
+            style={{ margin: "1rem" }}
+          ></Button>
         </Grid>
 
         <Divider variant="fullWidth" />

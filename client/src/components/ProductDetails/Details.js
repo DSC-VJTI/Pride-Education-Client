@@ -12,8 +12,11 @@ import {
   TableRow,
   Paper
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { useAuthState } from "../../context/context";
+import { Link, useHistory } from "react-router-dom";
 import Button from "../UI Elements/Button";
+import axios from "axios";
+import { BASE_URL } from "../../constants";
 
 const DetailsStyles = makeStyles((theme) => ({
   root: {
@@ -28,7 +31,18 @@ const DetailsStyles = makeStyles((theme) => ({
 
 const Details = ({ product }) => {
   const classes = DetailsStyles();
-  console.log(product);
+  const state = useAuthState();
+  const history = useHistory();
+  // console.log(state.user);
+  const AddToCart = async () => {
+    const addingProduct = await axios.post(
+      `${BASE_URL}/cart/${product._id}`,
+      state
+    );
+    setTimeout(() => {
+      history.push("/cart");
+    }, 2000);
+  };
   return (
     <div>
       <Grid container spacing={2} className={classes.root}>
@@ -42,16 +56,22 @@ const Details = ({ product }) => {
             alignItems: "center"
           }}
         >
-          <Typography style={{ margin: "0px", padding: "0px" }}>
-            {product.name}
-          </Typography>
-          <Button text={"Add To Cart"} style={{ margin: "1rem" }}></Button>
+          <span>
+            <Typography
+              style={{ margin: "0px", padding: "0px", color: "#f26522" }}
+            >
+              {product.name}
+            </Typography>
+          </span>
+          <Button
+            text={"Add To Cart"}
+            onClick={AddToCart}
+            style={{ margin: "1rem" }}
+          ></Button>
         </Grid>
-
         <Divider variant="fullWidth" />
 
         <Grid item xs={12}>
-          <Typography>Price</Typography>
           <Typography variant={"h6"}>About this Item</Typography>
           <Divider />
           <TableContainer component={Paper}>

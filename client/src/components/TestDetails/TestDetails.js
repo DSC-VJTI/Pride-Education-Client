@@ -12,9 +12,11 @@ import {
   TableRow,
   Paper
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Button from "../UI Elements/Button";
-
+import axios from "axios";
+import { BASE_URL } from "../../constants";
+import { useAuthState } from "../../context/context";
 const DetailsStyles = makeStyles((theme) => ({
   root: {
     background: "#f1f1f1",
@@ -26,29 +28,20 @@ const DetailsStyles = makeStyles((theme) => ({
   }
 }));
 
-function createData(obj) {
-  const { name, discount, price } = obj;
-  console.log(price);
-}
-
-// const rows = [
-//   createData("Faculty", 159, 6.0),
-//   createData("Product", 237, 9.0),
-//   createData("Applicable Exam", 262, 16.0),
-//   createData("Language", 305, 3.7),
-//   createData("Delivery Time", 356, 16.0),
-//   createData("Duration", 356, 16.0),
-//   createData("Validity", 356, 16.0),
-//   createData("Validity", 356, 16.0),
-//   createData("Mode", 356, 16.0),
-//   createData("MRP", 356, 16.0),
-//   createData("Discount", 356, 16.0),
-//   createData("Discounted Price", 356, 16.0)
-// ];
-
 const TestDetails = ({ product }) => {
   const classes = DetailsStyles();
-  const singleProduct = createData(product);
+  const history = useHistory();
+
+  const state = useAuthState();
+  const AddToCart = async () => {
+    const addingProduct = await axios.post(
+      `${BASE_URL}/cart/${product._id}`,
+      state
+    );
+    setTimeout(() => {
+      history.push("/cart");
+    }, 2000);
+  };
   return (
     <div>
       <Grid container spacing={2} className={classes.root}>
@@ -65,7 +58,11 @@ const TestDetails = ({ product }) => {
           <Typography style={{ margin: "0px", padding: "0px" }}>
             {product.name}
           </Typography>
-          <Button text={"Add To Cart"} style={{ margin: "1rem" }}></Button>
+          <Button
+            text={"Add To Cart"}
+            onClick={AddToCart}
+            style={{ margin: "1rem" }}
+          ></Button>
         </Grid>
 
         <Divider variant="fullWidth" />
