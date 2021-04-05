@@ -7,7 +7,6 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "0.5rem",
     textAlign: "left",
     "& input": {
-      // display: 'block',
       padding: ".5rem .75rem",
       lineHeight: "1.25",
       background: "transparent",

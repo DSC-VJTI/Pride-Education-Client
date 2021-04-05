@@ -10,16 +10,19 @@ import {
   Divider,
   ListItem,
   ListItemIcon,
-  ListItemText
+  ListItemText,
+  Tooltip
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import InboxIcon from "@material-ui/icons/Inbox";
 import MailIcon from "@material-ui/icons/Mail";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Menu } from "@material-ui/icons";
 import { NavLink } from "react-router-dom";
 import HomeIcon from "@material-ui/icons/Home";
 import ShopIcon from "@material-ui/icons/Shop";
+import { useAuthDispatch, useAuthState } from "../context/context";
+import { logout } from "../actions/authActions";
 
 const NavbarStyles = makeStyles({
   list: {
@@ -43,10 +46,15 @@ const NavbarStyles = makeStyles({
 });
 
 const Navbar = () => {
+  const isProd = process.env.NODE_ENV === "production";
   const [open, setOpen] = useState(false);
   const handleDrawer = () => {
     setOpen(true);
   };
+  const { isAuthenticated } = useAuthState();
+  const dispatch = useAuthDispatch();
+  const history = useHistory();
+
   return (
     <div>
       <AppBar
@@ -84,7 +92,7 @@ const Navbar = () => {
             </NavLink>
           </Typography>
           <NavLink
-            to="/support"
+            to={isProd ? "/coming" : "/support"}
             className="hideOnMobile"
             style={{
               textDecoration: "none",
@@ -96,7 +104,7 @@ const Navbar = () => {
             Support
           </NavLink>
           <NavLink
-            to="/classes"
+            to={isProd ? "/coming" : "/classes"}
             className="hideOnMobile"
             style={{
               textDecoration: "none",
@@ -108,7 +116,7 @@ const Navbar = () => {
             MarketPlace
           </NavLink>
           <NavLink
-            to="/login"
+            to={"/resources"}
             className="hideOnMobile"
             style={{
               textDecoration: "none",
@@ -117,20 +125,53 @@ const Navbar = () => {
               marginRight: "15px"
             }}
           >
-            Login
+            Resources
           </NavLink>
-          <NavLink
-            to="/register"
-            className="hideOnMobile"
-            style={{
-              textDecoration: "none",
-              color: "#f26522",
-              textTransform: "uppercase",
-              marginRight: "15px"
-            }}
-          >
-            Register
-          </NavLink>
+          {!isAuthenticated ? (
+            <>
+              <NavLink
+                to="/login"
+                className="hideOnMobile"
+                style={{
+                  textDecoration: "none",
+                  color: "#f26522",
+                  textTransform: "uppercase",
+                  marginRight: "15px"
+                }}
+              >
+                Login
+              </NavLink>
+              <NavLink
+                to="/register"
+                className="hideOnMobile"
+                style={{
+                  textDecoration: "none",
+                  color: "#f26522",
+                  textTransform: "uppercase",
+                  marginRight: "15px"
+                }}
+              >
+                Register
+              </NavLink>
+            </>
+          ) : (
+            <div
+              className="hideOnMobile"
+              style={{
+                textDecoration: "none",
+                color: "#f26522",
+                textTransform: "uppercase",
+                marginRight: "15px",
+                cursor: "pointer"
+              }}
+              onClick={() => {
+                logout({ dispatch });
+                history.push("/");
+              }}
+            >
+              Logout
+            </div>
+          )}
         </Toolbar>
       </AppBar>
       <Drawer anchor="left" open={open} onClose={() => setOpen(false)}>
