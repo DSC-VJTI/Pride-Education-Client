@@ -33,15 +33,20 @@ const ProductStyles = makeStyles({
   }
 });
 
-const Product = ({ title, instructor, buttonText }) => {
+const Product = ({ title, instructor, buttonText, obj, rou }) => {
   const classes = ProductStyles();
-
   return (
     <Card className={classes.classHolder}>
       <img src={img1} className={classes.CardImage} alt="Instructor" />
       <CardHeader title={title} subheader={instructor} />
       <Button className={classes.classButton}>
-        <Link style={{ textDecoration: "none", color: "white" }} to="/product">
+        <Link
+          style={{ textDecoration: "none", color: "white" }}
+          to={{
+            pathname: `${rou}/${obj._id}`,
+            state: obj
+          }}
+        >
           {buttonText}
         </Link>
       </Button>

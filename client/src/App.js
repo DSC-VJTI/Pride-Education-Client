@@ -16,11 +16,15 @@ import DashboardLayout from "./components/DashboardLayout";
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar";
 import MyOrders from "./components/MyOrders/MyOrders";
+import ProductDetails from "./components/ProductDetails/ProductDetails";
 import { AuthProvider } from "./context/context";
 import PdfViewer from "./components/Books/PdfViewer";
 import Resources from "./components/Books/Resources";
 import ProtectedRoute from "./ProtectedRoute";
 import ComingSoon from "./components/ComingSoon";
+
+import TestProductDetails from "./components/TestDetails/TestProductDetails";
+import BookProductDetails from "./components/BookDetails/BookProductDetails";
 
 function App() {
   useEffect(() => {
@@ -38,6 +42,9 @@ function App() {
           <Route path="/register" component={Registration} />
           <Route path="/login" component={Login} />
           <Route path="/orders" component={MyOrders} />
+          <Route path="/product/details/:_id" component={ProductDetails} />
+          <Route path="/test/details/:_id" component={TestProductDetails} />
+          <Route path="/book/details/:_id" component={BookProductDetails} />
 
           {/* Protected routes go here */}
           <Route path="/product/add" component={AddProduct} />
