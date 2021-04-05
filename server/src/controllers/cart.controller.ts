@@ -85,7 +85,7 @@ const cartController = {
 
       if (myCart) {
         const newCartProducts = myCart.products.filter(
-          (cartItem: any) => String(cartItem) !== productId
+          (cartItem) => String(cartItem) !== productId
         );
         const newCart = await Cart.findByIdAndUpdate(
           String(myCart._id),
