@@ -13,7 +13,7 @@ const Footer = () => {
     <>
       <footer className="footer">
         <div className="main_footer">
-          <img style={{ width: "5%" }} src={Logo} />
+          <img style={{ width: "5%", backgroundColor: "red" }} src={Logo} />
           <div className="pageLinks">
             <Link className="footerLinks" to="">
               About
