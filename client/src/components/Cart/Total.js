@@ -50,18 +50,18 @@ const Total = (props) => {
   const items = props.items;
   const title = `(Rs.${props.price})`;
   const classes = CartStyles();
-   //for handling payment
-   //get amount addition of all products
-   //get array of id of products
-   //pass the array of id of products to post request
-   const paymentHandler = async (e) => {    
+  //for handling payment
+  //get amount addition of all products
+  //get array of id of products
+  //pass the array of id of products to post request
+  const paymentHandler = async (e) => {
     console.log(key_id);
     e.preventDefault();
     const options = {
       key: key_id,
       name: "Client CA",
       description: "Test mode for our client",
-      amount: 100,
+      amount: props.price,
       handler: async (response) => {
         try {
           const paymentId = response.razorpay_payment_id;

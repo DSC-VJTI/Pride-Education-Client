@@ -32,7 +32,7 @@ function App() {
         <Navbar />
         <Switch>
           <Route path="/classes" component={ClassesPane} />
-          <Route path="/cart" component={Cart} />
+          <Route path="/cart/:_id" component={Cart} />
           <Route exact path="/product" component={CoursePage} />
           <Route path="/support" component={SupportPage} />
           <Route path="/register" component={Registration} />

@@ -91,7 +91,7 @@ const initialFValues = [
   // }
 ];
 
-const Cart = () => {
+const Cart = ({ match }) => {
   const [value, setValue] = useState(initialFValues);
   const [total, setTotal] = useState(0);
   const classes = CartStyles();
@@ -114,23 +114,25 @@ const Cart = () => {
     }
   }, [value]);
 
-  useEffect(() => {
-    // axios({
-    //   method: "POST",
-    //   url: "http://localhost:8000/api/cart",
+  // useEffect(() => {
+  //   // axios({
+  //   //   method: "POST",
+  //   //   url: "http://localhost:8000/api/cart",
 
-    // }).then((response) => {
-    //     console.log(response);
-    //     // setValue(response.data.data);
-    //   })
-    //   .catch((err) => console.log(err));
-    axios
-      .post(BASE_URL + "/cart", { user: state.user })
-      .then((response) => console.log(response.data))
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  //   // }).then((response) => {
+  //   //     console.log(response);
+  //   //     // setValue(response.data.data);
+  //   //   })
+  //   //   .catch((err) => console.log(err));
+  //   axios
+  //     .post(BASE_URL + "/cart", { user: state.user })
+  //     .then((response) => console.log(response.data))
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
+
+  console.log(match.params._id);
 
   return (
     <Grid container spacing={3} direction={"row"}>
