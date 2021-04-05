@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Grid, makeStyles, Typography } from "@material-ui/core";
-import Details from "./Details";
-import BuyingOptions from "./BuyingOptions";
-import ProductImages from "./ProductImages";
+import { Grid, makeStyles } from "@material-ui/core";
+import BookDetails from "./BookDetails";
+import BuyingOptions from "./BookBuyingOptions";
+import ProductImages from "./BookProductImages";
 import axios from "axios";
 import { BASE_URL } from "../../constants";
 const ProductDetailsStyles = makeStyles((theme) => ({
@@ -16,7 +16,7 @@ const ProductDetailsStyles = makeStyles((theme) => ({
     color: theme.palette.text.primary
   }
 }));
-const ProductDetails = ({ match }) => {
+const BookProductDetails = ({ match }) => {
   const classes = ProductDetailsStyles();
   const [product, setProduct] = useState([]);
   useEffect(() => {
@@ -42,11 +42,11 @@ const ProductDetails = ({ match }) => {
           </Grid>
         </Grid>
         <Grid item xs={6}>
-          {"course" in product && <Details product={product} />}
+          {"book" in product && <BookDetails product={product} />}
         </Grid>
       </Grid>
     </div>
   );
 };
 
-export default ProductDetails;
+export default BookProductDetails;

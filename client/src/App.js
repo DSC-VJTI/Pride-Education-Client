@@ -19,6 +19,9 @@ import MyOrders from "./components/MyOrders/MyOrders";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import { AuthProvider } from "./context/context";
 
+import TestProductDetails from "./components/TestDetails/TestProductDetails";
+import BookProductDetails from "./components/BookDetails/BookProductDetails";
+
 function App() {
   useEffect(() => {
     Aos.init({ duration: 2000 });
@@ -36,6 +39,8 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/orders" component={MyOrders} />
           <Route path="/product/details/:_id" component={ProductDetails} />
+          <Route path="/test/details/:_id" component={TestProductDetails} />
+          <Route path="/book/details/:_id" component={BookProductDetails} />
 
           {/* Protected routes go here */}
           <Route path="/product/add" component={AddProduct} />

@@ -33,7 +33,7 @@ const ProductStyles = makeStyles({
   }
 });
 
-const Product = ({ title, instructor, buttonText, obj }) => {
+const Product = ({ title, instructor, buttonText, obj, rou }) => {
   const classes = ProductStyles();
   return (
     <Card className={classes.classHolder}>
@@ -43,7 +43,7 @@ const Product = ({ title, instructor, buttonText, obj }) => {
         <Link
           style={{ textDecoration: "none", color: "white" }}
           to={{
-            pathname: `/product/details/${obj._id}`,
+            pathname: `${rou}/${obj._id}`,
             state: obj
           }}
         >

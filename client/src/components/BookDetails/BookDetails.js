@@ -12,7 +12,7 @@ import {
   TableRow,
   Paper
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
+
 import Button from "../UI Elements/Button";
 
 const DetailsStyles = makeStyles((theme) => ({
@@ -26,9 +26,9 @@ const DetailsStyles = makeStyles((theme) => ({
   }
 }));
 
-const Details = ({ product }) => {
+const BookDetails = ({ product }) => {
   const classes = DetailsStyles();
-  console.log(product);
+
   return (
     <div>
       <Grid container spacing={2} className={classes.root}>
@@ -121,23 +121,10 @@ const Details = ({ product }) => {
                     align="left"
                     size="small"
                   >
-                    Faculty
+                    Sample
                   </TableCell>
                   <TableCell align="left" size="small">
-                    {product.course.faculty}
-                  </TableCell>
-                </TableRow>
-                <TableRow style={{ width: "fit-content" }}>
-                  <TableCell
-                    component="th"
-                    scope="row"
-                    align="left"
-                    size="small"
-                  >
-                    Mode
-                  </TableCell>
-                  <TableCell align="left" size="small">
-                    {product.course["mode"]}
+                    <a href={product.book.url}>Download Now</a>
                   </TableCell>
                 </TableRow>
                 <TableRow style={{ width: "fit-content" }}>
@@ -153,19 +140,6 @@ const Details = ({ product }) => {
                     Windows 7 Minimum
                   </TableCell>
                 </TableRow>
-                <TableRow style={{ width: "fit-content" }}>
-                  <TableCell
-                    component="th"
-                    scope="row"
-                    align="left"
-                    size="small"
-                  >
-                    Delivery Time
-                  </TableCell>
-                  <TableCell align="left" size="small">
-                    6 to 8 days
-                  </TableCell>
-                </TableRow>
               </TableBody>
             </Table>
           </TableContainer>
@@ -175,4 +149,4 @@ const Details = ({ product }) => {
   );
 };
 
-export default Details;
+export default BookDetails;

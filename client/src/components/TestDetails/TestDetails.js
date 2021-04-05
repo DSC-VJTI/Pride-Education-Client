@@ -26,9 +26,29 @@ const DetailsStyles = makeStyles((theme) => ({
   }
 }));
 
-const Details = ({ product }) => {
+function createData(obj) {
+  const { name, discount, price } = obj;
+  console.log(price);
+}
+
+// const rows = [
+//   createData("Faculty", 159, 6.0),
+//   createData("Product", 237, 9.0),
+//   createData("Applicable Exam", 262, 16.0),
+//   createData("Language", 305, 3.7),
+//   createData("Delivery Time", 356, 16.0),
+//   createData("Duration", 356, 16.0),
+//   createData("Validity", 356, 16.0),
+//   createData("Validity", 356, 16.0),
+//   createData("Mode", 356, 16.0),
+//   createData("MRP", 356, 16.0),
+//   createData("Discount", 356, 16.0),
+//   createData("Discounted Price", 356, 16.0)
+// ];
+
+const TestDetails = ({ product }) => {
   const classes = DetailsStyles();
-  console.log(product);
+  const singleProduct = createData(product);
   return (
     <div>
       <Grid container spacing={2} className={classes.root}>
@@ -121,23 +141,10 @@ const Details = ({ product }) => {
                     align="left"
                     size="small"
                   >
-                    Faculty
+                    Subject
                   </TableCell>
                   <TableCell align="left" size="small">
-                    {product.course.faculty}
-                  </TableCell>
-                </TableRow>
-                <TableRow style={{ width: "fit-content" }}>
-                  <TableCell
-                    component="th"
-                    scope="row"
-                    align="left"
-                    size="small"
-                  >
-                    Mode
-                  </TableCell>
-                  <TableCell align="left" size="small">
-                    {product.course["mode"]}
+                    {product.test.subject}
                   </TableCell>
                 </TableRow>
                 <TableRow style={{ width: "fit-content" }}>
@@ -153,19 +160,6 @@ const Details = ({ product }) => {
                     Windows 7 Minimum
                   </TableCell>
                 </TableRow>
-                <TableRow style={{ width: "fit-content" }}>
-                  <TableCell
-                    component="th"
-                    scope="row"
-                    align="left"
-                    size="small"
-                  >
-                    Delivery Time
-                  </TableCell>
-                  <TableCell align="left" size="small">
-                    6 to 8 days
-                  </TableCell>
-                </TableRow>
               </TableBody>
             </Table>
           </TableContainer>
@@ -175,4 +169,4 @@ const Details = ({ product }) => {
   );
 };
 
-export default Details;
+export default TestDetails;
