@@ -65,6 +65,5 @@ router.get("/orders", OrderController.getOrders);
 router.get("/orders/:id", OrderController.getOrderById);
 router.get("/orders/user/:user_id", OrderController.getOrdersByUserId);
 router.post("/orders", OrderController.addOrder);
-//router.post("/pay/:paymentId/", auth.isAuthenticated, OrderController.payAmount);
 
 export default router;
