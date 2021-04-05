@@ -12,6 +12,7 @@ import Item from "./Item";
 import Total from "./Total";
 import axios from "axios";
 import { useAuthState } from "../../context/context";
+import { BASE_URL } from "../../constants.js";
 
 const CartStyles = makeStyles((theme) => ({
   style: {
@@ -114,17 +115,21 @@ const Cart = () => {
   }, [value]);
 
   useEffect(() => {
-    // axios.get("http://localhost:8000/api/cart")
-    axios({
-      method: "post",
-      url: "http://localhost:8000/api/cart",
-      headers: state
-    })
-      .then((response) => {
-        console.log("you", response.data.data);
-        setValue(response.data.data);
-      })
-      .catch((err) => console.log(err));
+    // axios({
+    //   method: "POST",
+    //   url: "http://localhost:8000/api/cart",
+
+    // }).then((response) => {
+    //     console.log(response);
+    //     // setValue(response.data.data);
+    //   })
+    //   .catch((err) => console.log(err));
+    axios
+      .post(BASE_URL + "/cart", { user: state.user })
+      .then((response) => console.log(response.data))
+      .catch((err) => {
+        console.log(response);
+      });
   }, []);
 
   return (
@@ -144,7 +149,7 @@ const Cart = () => {
             <h1>My Cart</h1>
             <Divider />
           </div>
-          {value.length !== 0 ? (
+          {/* {value.length !== 0 ? (
             value.map((cartItem) => (
               <Grid item xs={12} className={classes.paper} key={cartItem.id}>
                 <Card>
@@ -170,7 +175,7 @@ const Cart = () => {
                 <h4>Your cart is empty</h4>
               </Container>
             </Grid>
-          )}
+          )} */}
         </Container>
       </Grid>
       <Grid item sm={7} xs={12} md={4} lg={3}>

@@ -3,7 +3,7 @@ import AuthController from "./controllers/auth.controller";
 import ProductController from "./controllers/product.controller";
 import auth from "./middleware/auth.middleware";
 import admin from "./controllers/admin.controller";
-import adminMiddleware from "./middleware/admin.middleware";
+// import adminMiddleware from "./middleware/admin.middleware";
 import CartController from "./controllers/cart.controller";
 import OrderController from "./controllers/order.controller";
 import uploader from "./utility/uploader";
@@ -31,27 +31,27 @@ router.get("/products/filter/:id", ProductController.getProductsByFilter);
 
 router.post(
   "/admin/createProduct/",
-  auth.isAuthenticated,
-  adminMiddleware.isAdmin,
+  //auth.isAuthenticated,
+  //adminMiddleware.isAdmin,
   uploader.single("book"),
   admin.newProduct
 );
 router.put(
   "/admin/editProduct/:productId",
-  auth.isAuthenticated,
-  adminMiddleware.isAdmin,
+  // auth.isAuthenticated,
+  // adminMiddleware.isAdmin,
   admin.editProduct
 );
 router.delete(
   "/admin/deleteProduct/:productId",
-  auth.isAuthenticated,
-  adminMiddleware.isAdmin,
+  // auth.isAuthenticated,
+  // adminMiddleware.isAdmin,
   admin.deleteProduct
 );
 router.post(
   "/admin/getUsers",
-  auth.isAuthenticated,
-  adminMiddleware.isAdmin,
+  // auth.isAuthenticated,
+  // adminMiddleware.isAdmin,
   admin.getUsers
 );
 
