@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import Button from "../UI Elements/Button";
 import { key_id, BASE_URL } from "../../constants";
+import Axios from "axios";
 
 const CartStyles = makeStyles({
   TotalCard: {
@@ -65,7 +66,8 @@ const Total = (props) => {
       handler: async (response) => {
         try {
           const paymentId = response.razorpay_payment_id;
-          const url = `${BASE_URL}/${paymentId}/`;
+          console.log(paymentId);
+          const url = `http://localhost:5000/api/pay/${paymentId}`;
           const captureResponse = await Axios.post(url, {});
           console.log(captureResponse.data);
         } catch (err) {
