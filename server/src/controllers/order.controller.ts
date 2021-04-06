@@ -54,7 +54,7 @@ const OrderController = {
     } catch (error) {
       return res.status(500).json({ message: error.message });
     }
-  },
+  }
   /* async payAmount(req: Request, res: Response): Promise<Response> {
      const options = {
        method: "POST",

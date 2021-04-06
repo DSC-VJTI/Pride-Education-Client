@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import Button from "../UI Elements/Button";
 import { key_id, BASE_URL } from "../../constants";
+import { useAuthState } from "../../context/context";
 
 const CartStyles = makeStyles({
   TotalCard: {
@@ -50,23 +51,28 @@ const Total = (props) => {
   const items = props.items;
   const title = `(Rs.${props.price})`;
   const classes = CartStyles();
-   //for handling payment
-   //get amount addition of all products
-   //get array of id of products
-   //pass the array of id of products to post request
-   const paymentHandler = async (e) => {    
+  const state = useAuthState();
+  //for handling payment
+  //get amount addition of all products
+  //get array of id of products
+  //pass the array of id of products to post request
+  const paymentHandler = async (e) => {
     console.log(key_id);
     e.preventDefault();
     const options = {
       key: key_id,
       name: "Client CA",
       description: "Test mode for our client",
-      amount: 100,
+      amount: props.price * 100,
       handler: async (response) => {
         try {
           const paymentId = response.razorpay_payment_id;
-          const url = `${BASE_URL}/${paymentId}/`;
-          const captureResponse = await Axios.post(url, {});
+          const url = `${BASE_URL}/pay/${paymentId}/`;
+          const captureResponse = await Axios.post(url, {
+            productIds: props.productID,
+            total: props.price * 100,
+            user: state.user
+          });
           console.log(captureResponse.data);
         } catch (err) {
           console.log(err);
@@ -100,12 +106,6 @@ const Total = (props) => {
               <Typography component="h4">
                 {`Subtotal (${items} items) : ${title}`}
               </Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox />}
-                label="This order contains a gift"
-              />
             </Grid>
           </Grid>
         </CardContent>

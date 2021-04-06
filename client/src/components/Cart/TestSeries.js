@@ -23,21 +23,18 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Item = ({
+const TestSeries = ({
   title,
   content,
-  views,
   validity,
   price,
-  instructor,
-  duration,
+  subject,
   onClick,
   id
 }) => {
   const classes = useStyles();
 
   const handleOnClick = (e) => {
-    e.preventDefault();
     onClick(id);
   };
   return (
@@ -55,8 +52,7 @@ const Item = ({
           <Typography variant="subtitle2">
             <ul>
               <li>{`Content Type: ${content}`}</li>
-              <li>{`Duration: ${duration} Hours`}</li>
-              <li>{`${views} Views`}</li>
+              <li>{`Subject: ${subject}`}</li>
               <li>{`Validity ${validity}`}</li>
             </ul>
           </Typography>
@@ -67,9 +63,6 @@ const Item = ({
           </Typography>
 
           <Divider />
-          <Typography variant="subtitle2" style={{ margin: "1rem 0rem" }}>
-            By {instructor}
-          </Typography>
 
           <div
             style={{
@@ -88,4 +81,4 @@ const Item = ({
   );
 };
 
-export default Item;
+export default TestSeries;

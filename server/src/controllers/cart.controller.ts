@@ -12,18 +12,20 @@ const cartController = {
         .populate({
           path: "products",
           select: ["_id", "name", "price", "discount"],
-          populate:
-            [{
+          populate: [
+            {
               path: "course",
               select: ["mode", "faculty"]
             },
             {
               path: "test",
               select: ["subject", "contents"]
-            }, {
+            },
+            {
               path: "book",
               select: ["url", "_id", "file"]
-            }],
+            }
+          ]
         })
         .lean();
       return res.status(200).json({ myCart });
@@ -52,18 +54,20 @@ const cartController = {
         .populate({
           path: "products",
           select: ["_id", "name", "price", "discount"],
-          populate:
-            [{
+          populate: [
+            {
               path: "course",
               select: ["mode", "faculty"]
             },
             {
               path: "test",
               select: ["subject", "contents"]
-            }, {
+            },
+            {
               path: "book",
               select: ["url", "_id", "file"]
-            }],
+            }
+          ]
         })
         .lean();
       return res.status(201).json({ myCart });

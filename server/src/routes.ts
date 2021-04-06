@@ -58,12 +58,20 @@ router.post(
 //cart routes
 router.post("/cart", auth.isAuthenticated, CartController.showCart);
 router.post("/cart/:productId", auth.isAuthenticated, CartController.addToCart);
-router.delete("/cart/:productId", auth.isAuthenticated, CartController.removeFromCart);
+router.delete(
+  "/cart/:productId",
+  auth.isAuthenticated,
+  CartController.removeFromCart
+);
 
 // Order routes
 router.get("/orders", auth.isAuthenticated, OrderController.getOrders);
 router.get("/orders/:id", auth.isAuthenticated, OrderController.getOrderById);
-router.get("/orders/user/:user_id", auth.isAuthenticated, OrderController.getOrdersByUserId);
+router.get(
+  "/orders/user/:user_id",
+  auth.isAuthenticated,
+  OrderController.getOrdersByUserId
+);
 router.post("/orders", auth.isAuthenticated, OrderController.addOrder);
 
 export default router;
