@@ -11,8 +11,10 @@ import {
 import Item from "./Item";
 import Total from "./Total";
 import axios from "axios";
+import { BASE_URL } from "../../constants";
 import { useAuthState } from "../../context/context";
-import { BASE_URL } from "../../constants.js";
+import TestSeries from "./TestSeries";
+import Book from "./Book";
 
 const CartStyles = makeStyles((theme) => ({
   style: {
@@ -30,30 +32,8 @@ const CartStyles = makeStyles((theme) => ({
     }
   },
   header: {
-    "& h1": {
-      fontSize: "3.8rem",
-      lineHeight: "3rem",
-      fontWeight: "600",
-      marginTop: "2rem",
-      marginLeft: "2rem",
-
-      fontFamily: "Abhaya Libre, Times New Roman, Times, serif",
-      color: "#f26522",
-      letterSpacing: ".03rem",
-      marginBottom: ".5rem"
-    }
-  },
-  empty: {
-    "& h4": {
-      fontSize: "2.8rem",
-      lineHeight: "3rem",
-      fontWeight: "600",
-      marginTop: "2rem",
-      marginLeft: "2rem",
-      fontFamily: "Abhaya Libre, Times New Roman, Times, serif",
-      color: "#333840",
-      letterSpacing: ".03rem",
-      marginBottom: ".5rem"
+    "& .MuiTypography-root": {
+      padding: "20px"
     }
   }
 }));
@@ -92,14 +72,18 @@ const initialFValues = [
 ];
 
 const Cart = ({ match }) => {
+  const state = useAuthState();
+  const [productID, setProductID] = useState([]);
   const [value, setValue] = useState(initialFValues);
   const [total, setTotal] = useState(0);
   const classes = CartStyles();
-  const state = useAuthState();
-  console.log(state);
 
   const handleOnClick = (e) => {
-    setValue(value.filter((item) => item._id !== e));
+    setValue(
+      value.filter((item) => {
+        return item._id !== e;
+      })
+    );
   };
 
   useEffect(() => {
@@ -109,28 +93,29 @@ const Cart = ({ match }) => {
         sum = sum + item.price;
       });
       setTotal(sum);
+      const tempID = value.map((item) => {
+        return item._id;
+      });
+      setProductID(tempID);
     } else {
       setTotal(0);
     }
   }, [value]);
 
-  // useEffect(() => {
-  //   // axios({
-  //   //   method: "POST",
-  //   //   url: "http://localhost:8000/api/cart",
+  const fetchingProducts = async () => {
+    const fetchedProduct = await axios.post(`${BASE_URL}/cart`, {
+      user: state.user
+    });
+    console.log(fetchedProduct.data.myCart[0].products);
+    setValue(fetchedProduct.data.myCart[0].products);
+  };
 
-  //   // }).then((response) => {
-  //   //     console.log(response);
-  //   //     // setValue(response.data.data);
-  //   //   })
-  //   //   .catch((err) => console.log(err));
-  //   axios
-  //     .post(BASE_URL + "/cart", { user: state.user })
-  //     .then((response) => console.log(response.data))
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetchingProducts();
+  }, []);
+
+  // setProductID([
+  // ])
 
   console.log(match.params._id);
 
@@ -148,41 +133,75 @@ const Cart = ({ match }) => {
       >
         <Container className={classes.style}>
           <div className={classes.header}>
-            <h1>My Cart</h1>
+            <Typography variant="h3" color="primary">
+              Shopping Cart
+            </Typography>
             <Divider />
           </div>
-          {/* {value.length !== 0 ? (
-            value.map((cartItem) => (
-              <Grid item xs={12} className={classes.paper} key={cartItem.id}>
-                <Card>
-                  <CardActions>
-                    <Item
-                      id={cartItem._id}
-                      title={cartItem.name}
-                      validity={cartItem.courseDetails.validity}
-                      price={cartItem.price}
-                      instructor={cartItem.courseDetails.faculty}
-                      duration={cartItem.courseDetails.duration}
-                      onClick={handleOnClick}
-                      content={cartItem.type}
-                      views={cartItem.views}
-                    />
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))
-          ) : (
-            <Grid item>
-              <Container className={classes.empty}>
-                <h4>Your cart is empty</h4>
-              </Container>
-            </Grid>
-          )} */}
+          {value.map((cartItem) => {
+            if ("course" in cartItem) {
+              return (
+                <Grid item xs={12} className={classes.paper} key={cartItem.id}>
+                  <Card>
+                    <CardActions>
+                      <Item
+                        id={cartItem._id}
+                        title={cartItem.name}
+                        content="Course"
+                        views={cartItem.views}
+                        validity={cartItem.validity}
+                        price={cartItem.price}
+                        instructor={cartItem.course.faculty}
+                        duration={cartItem.duration}
+                        onClick={handleOnClick}
+                      />
+                    </CardActions>
+                  </Card>
+                </Grid>
+              );
+            } else if ("test" in cartItem) {
+              return (
+                <Grid item xs={12} className={classes.paper} key={cartItem.id}>
+                  <Card>
+                    <CardActions>
+                      <TestSeries
+                        id={cartItem._id}
+                        title={cartItem.name}
+                        content="Test Series"
+                        validity={cartItem.validity}
+                        price={cartItem.price}
+                        subject={cartItem.test.subject}
+                        onClick={handleOnClick}
+                      />
+                    </CardActions>
+                  </Card>
+                </Grid>
+              );
+            } else if ("book" in cartItem) {
+              return (
+                <Grid item xs={12} className={classes.paper} key={cartItem.id}>
+                  <Card>
+                    <CardActions>
+                      <Book
+                        id={cartItem._id}
+                        title={cartItem.name}
+                        content="Book"
+                        price={cartItem.price}
+                        instructor={cartItem.book.faculty}
+                        // subject={cartItem.subject}
+                        onClick={handleOnClick}
+                      />
+                    </CardActions>
+                  </Card>
+                </Grid>
+              );
+            }
+          })}
         </Container>
       </Grid>
       <Grid item sm={7} xs={12} md={4} lg={3}>
         <Container className={classes.style}>
-          <Total items={value.length} price={total} />
+          <Total items={value.length} price={total} productID={productID} />
         </Container>
       </Grid>
       <Grid item xs={false} md={false} lg={1}></Grid>
