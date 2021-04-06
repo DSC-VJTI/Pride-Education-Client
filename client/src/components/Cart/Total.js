@@ -107,12 +107,6 @@ const Total = (props) => {
                 {`Subtotal (${items} items) : ${title}`}
               </Typography>
             </Grid>
-            {/* <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox />}
-                label="This order contains a gift"
-              />
-            </Grid> */}
           </Grid>
         </CardContent>
         <CardActions>

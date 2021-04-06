@@ -52,7 +52,6 @@ const Book = ({
           <Typography variant="subtitle2">
             <ul>
               <li>{`Content Type: ${content}`}</li>
-              {/* <li>{`Subject: ${subject}`}</li> */}
             </ul>
           </Typography>
         </Grid>

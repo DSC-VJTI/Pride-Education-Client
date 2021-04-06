@@ -72,27 +72,18 @@ const Cart = ({ match }) => {
     }
   }, [value]);
 
-  // useEffect(() => {
-  //   axios.post(`${BASE_URL}/cart`, { user: state.user})
-  //   .then(response => console.log(response))
-  // }, [])
-
   const fetchingProducts = async () => {
     console.log(state.user);
     const fetchedProduct = await axios.post(`${BASE_URL}/cart`, {
       user: state.user
     });
     console.log(fetchedProduct.data.myCart[0].products);
-    // setValue(fetchedProduct.data.myCart[0].products);
   };
 
   useEffect(() => {
     fetchingProducts();
     console.log("fetched");
   }, []);
-
-  // setProductID([
-  // ])
 
   console.log(match.params._id);
 
@@ -165,7 +156,6 @@ const Cart = ({ match }) => {
                         content="Book"
                         price={cartItem.price}
                         instructor={cartItem.book.faculty}
-                        // subject={cartItem.subject}
                         onClick={handleOnClick}
                       />
                     </CardActions>
