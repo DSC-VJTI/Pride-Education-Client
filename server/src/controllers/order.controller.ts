@@ -60,47 +60,47 @@ const OrderController = {
   },
 
   async payAmount(req: Request, res: Response): Promise<Response> {
-    var isPaymentSucess = "1";
+    let isPaymentSucess = "1";
     try {
-      request({
-        method: 'POST',
-        url: `https://${process.env.key_id}:${process.env.key_secret}@api.razorpay.com/v1/payments/${req.params.paymentId}/capture`,
-        form: {
-          amount: req.body.total,
-          currency: 'INR'
-        }
-      }, async (error: any, response: request.Response) => {
-        if (error)
-          isPaymentSucess = "0";
-        else {
-          console.log(response.statusCode);
-          const userId = req.body.user._id;
-          const user = await User.findById(userId);
-          if (user != null && response.statusCode === 200) {
-            var i;
-            for (i = 0; i < req.body.orderId.length; i++) {
-              user.transactions.push({
-                amount: 100,
-                transactionId: req.params.paymentId,
-                orderId: req.body.productIds[i],
-                time: new Date().getTime()
-              });
-              await user.save();
-            }
+      request(
+        {
+          method: "POST",
+          url: `https://${process.env.key_id}:${process.env.key_secret}@api.razorpay.com/v1/payments/${req.params.paymentId}/capture`,
+          form: {
+            amount: req.body.total,
+            currency: "INR"
+          }
+        },
+        async (error: any, response: request.Response) => {
+          if (error) isPaymentSucess = "0";
+          else {
+            console.log(response.statusCode);
+            const userId = req.body.user._id;
+            const user = await User.findById(userId);
+            if (user != null && response.statusCode === 200) {
+              let i;
+              for (i = 0; i < req.body.orderId.length; i++) {
+                user.transactions.push({
+                  amount: 100,
+                  transactionId: req.params.paymentId,
+                  orderId: req.body.productIds[i],
+                  time: new Date().getTime()
+                });
+                await user.save();
+              }
 
-            await Cart.findOneAndUpdate({ user: userId },
-              { products: [] },
-              { new: true }
-            );
-
-          } else
-            isPaymentSucess = "0";
+              await Cart.findOneAndUpdate(
+                { user: userId },
+                { products: [] },
+                { new: true }
+              );
+            } else isPaymentSucess = "0";
+          }
         }
-      });
+      );
       if (isPaymentSucess === "1")
         return res.status(200).json({ message: "Successful Payment" });
-      else
-        return res.status(200).json({ message: "Error Occured" });
+      else return res.status(200).json({ message: "Error Occured" });
     } catch (err) {
       return res.status(500).json({ message: err.message });
     }
@@ -108,5 +108,3 @@ const OrderController = {
 };
 
 export = OrderController;
-
-

@@ -23,21 +23,18 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Item = ({
+const Book = ({
   title,
   content,
-  views,
-  validity,
   price,
   instructor,
-  duration,
   onClick,
+  //   subject,
   id
 }) => {
   const classes = useStyles();
 
   const handleOnClick = (e) => {
-    e.preventDefault();
     onClick(id);
   };
   return (
@@ -55,9 +52,6 @@ const Item = ({
           <Typography variant="subtitle2">
             <ul>
               <li>{`Content Type: ${content}`}</li>
-              <li>{`Duration: ${duration} Hours`}</li>
-              <li>{`${views} Views`}</li>
-              <li>{`Validity ${validity}`}</li>
             </ul>
           </Typography>
         </Grid>
@@ -88,4 +82,4 @@ const Item = ({
   );
 };
 
-export default Item;
+export default Book;

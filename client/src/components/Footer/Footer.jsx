@@ -6,18 +6,14 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import TelegramIcon from "@material-ui/icons/Telegram";
 import { Link } from "react-router-dom";
+import Logo from "../../assets/images/FooterImages/Logo.jpg";
 import "./FooterStyle.css";
 const Footer = () => {
   return (
     <>
       <footer className="footer">
         <div className="main_footer">
-          <h1
-            className="LogoHeading"
-            style={{ color: "rgb(242, 101, 34)", fontSize: "50px" }}
-          >
-            LOGO
-          </h1>
+          <img style={{ width: "5%", backgroundColor: "red" }} src={Logo} />
           <div className="pageLinks">
             <Link className="footerLinks" to="">
               About

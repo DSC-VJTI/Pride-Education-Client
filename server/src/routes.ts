@@ -56,15 +56,23 @@ router.post(
 );
 
 //cart routes
-router.post("/cart", CartController.showCart);
-router.post("/cart/:productId", CartController.addToCart);
-router.delete("/cart/:productId", CartController.removeFromCart);
+router.post("/cart", auth.isAuthenticated, CartController.showCart);
+router.post("/cart/:productId", auth.isAuthenticated, CartController.addToCart);
+router.delete(
+  "/cart/:productId",
+  auth.isAuthenticated,
+  CartController.removeFromCart
+);
 
 // Order routes
-router.get("/orders", OrderController.getOrders);
-router.get("/orders/:id", OrderController.getOrderById);
-router.get("/orders/user/:user_id", OrderController.getOrdersByUserId);
-router.post("/orders", OrderController.addOrder);
+router.get("/orders", auth.isAuthenticated, OrderController.getOrders);
+router.get("/orders/:id", auth.isAuthenticated, OrderController.getOrderById);
+router.get(
+  "/orders/user/:user_id",
+  auth.isAuthenticated,
+  OrderController.getOrdersByUserId
+);
+router.post("/orders", auth.isAuthenticated, OrderController.addOrder);
 
 // Payment routes
 router.post("/pay/:paymentId", OrderController.payAmount);
