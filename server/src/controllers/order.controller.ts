@@ -74,7 +74,6 @@ const OrderController = {
         async (error: any, response: request.Response) => {
           if (error) isPaymentSucess = "0";
           else {
-            console.log(response.statusCode);
             const userId = req.body.user._id;
             const user = await User.findById(userId);
             if (user != null && response.statusCode === 200) {
