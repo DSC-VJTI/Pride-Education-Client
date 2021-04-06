@@ -38,38 +38,7 @@ const CartStyles = makeStyles((theme) => ({
   }
 }));
 
-const initialFValues = [
-  // {
-  //   title: "SCMPE Full Course",
-  //   content: "Books",
-  //   views: "1.7",
-  //   validity: "6 Months",
-  //   price: 15000,
-  //   instructor: "CA Abhishek Khilwani",
-  //   duration: 100,
-  //   id: 0
-  // },
-  // {
-  //   title: "SCMPE Full Course",
-  //   content: "Books",
-  //   views: "1.7",
-  //   validity: "6 Months",
-  //   price: 15000,
-  //   instructor: "CA Abhishek Khilwani",
-  //   duration: 100,
-  //   id: 1
-  // },
-  // {
-  //   title: "SCMPE Full Course",
-  //   content: "Books",
-  //   views: "1.7",
-  //   validity: "6 Months",
-  //   price: 15000,
-  //   instructor: "CA Abhishek Khilwani",
-  //   duration: 100,
-  //   id: 2
-  // }
-];
+const initialFValues = [];
 
 const Cart = ({ match }) => {
   const state = useAuthState();
@@ -103,12 +72,18 @@ const Cart = ({ match }) => {
     }
   }, [value]);
 
+  // useEffect(() => {
+  //   axios.post(`${BASE_URL}/cart`, { user: state.user})
+  //   .then(response => console.log(response))
+  // }, [])
+
   const fetchingProducts = async () => {
+    console.log(state.user);
     const fetchedProduct = await axios.post(`${BASE_URL}/cart`, {
       user: state.user
     });
     console.log(fetchedProduct.data.myCart[0].products);
-    setValue(fetchedProduct.data.myCart[0].products);
+    // setValue(fetchedProduct.data.myCart[0].products);
   };
 
   useEffect(() => {

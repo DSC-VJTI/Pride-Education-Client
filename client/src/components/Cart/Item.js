@@ -37,6 +37,7 @@ const Item = ({
   const classes = useStyles();
 
   const handleOnClick = (e) => {
+    e.preventDefault();
     onClick(id);
   };
   return (
