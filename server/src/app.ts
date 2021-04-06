@@ -4,7 +4,6 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import router from "./routes";
 import dbConnect from "./config/dbconnect";
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 dotenv.config();
 const app = express();
 
@@ -22,7 +21,7 @@ if (process.env.NODE_ENV === "test") {
   port = 8001;
 }
 
-const listen = app.listen(8000, () => {
+const listen = app.listen(port, () => {
   console.log(`Server running at port ${port}`);
 });
 
