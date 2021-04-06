@@ -22,7 +22,7 @@ import PdfViewer from "./components/Books/PdfViewer";
 import Resources from "./components/Books/Resources";
 import ProtectedRoute from "./ProtectedRoute";
 import ComingSoon from "./components/ComingSoon";
-
+import { Box } from "@material-ui/core";
 import TestProductDetails from "./components/TestDetails/TestProductDetails";
 import BookProductDetails from "./components/BookDetails/BookProductDetails";
 
@@ -31,33 +31,47 @@ function App() {
     Aos.init({ duration: 2000 });
   }, []);
   return (
-    <AuthProvider>
-      <Router>
-        <Navbar />
-        <Switch>
-          <Route path="/classes" component={ClassesPane} />
-          <Route path="/cart" component={Cart} />
-          <Route exact path="/product" component={CoursePage} />
-          <Route path="/support" component={SupportPage} />
-          <Route path="/register" component={Registration} />
-          <Route path="/login" component={Login} />
-          <Route path="/orders" component={MyOrders} />
-          <Route path="/product/details/:_id" component={ProductDetails} />
-          <Route path="/test/details/:_id" component={TestProductDetails} />
-          <Route path="/book/details/:_id" component={BookProductDetails} />
+    <Box
+      display="flex"
+      flexDirection="column"
+      className="App"
+      style={{
+        position: "relative",
+        minHeight: "100vh"
+      }}
+    >
+      <AuthProvider>
+        <Router>
+          <Navbar />
+          <Box flexGrow={1}>
+            <Switch>
+              <Route path="/classes" component={ClassesPane} />
+              <Route path="/cart" component={Cart} />
+              <Route exact path="/product" component={CoursePage} />
+              <Route path="/support" component={SupportPage} />
+              <Route path="/register" component={Registration} />
+              <Route path="/login" component={Login} />
+              <Route path="/orders" component={MyOrders} />
+              <Route path="/product/details/:_id" component={ProductDetails} />
+              <Route path="/test/details/:_id" component={TestProductDetails} />
+              <Route path="/book/details/:_id" component={BookProductDetails} />
 
-          {/* Protected routes go here */}
-          <Route path="/product/add" component={AddProduct} />
-          <Route path="/product/edit/:productId" component={AddProduct} />
-          <Route path="/admin" component={DashboardLayout} />
-          <Route path="/resources/:fileName" component={PdfViewer} />
-          <ProtectedRoute path="/resources" component={Resources} />
-          <Route path="/coming" component={ComingSoon} />
-          <Route path="/" exact component={Landing} />
-        </Switch>
-        <Footer />
-      </Router>
-    </AuthProvider>
+              {/* Protected routes go here */}
+              <Route path="/product/add" component={AddProduct} />
+              <Route path="/product/edit/:productId" component={AddProduct} />
+              <Route path="/admin" component={DashboardLayout} />
+              <Route path="/resources/:fileName" component={PdfViewer} />
+              <ProtectedRoute path="/resources" component={Resources} />
+              <Route path="/coming" component={ComingSoon} />
+              <Route path="/" exact component={Landing} />
+            </Switch>
+          </Box>
+          <Box>
+            <Footer />
+          </Box>
+        </Router>
+      </AuthProvider>
+    </Box>
   );
 }
 
