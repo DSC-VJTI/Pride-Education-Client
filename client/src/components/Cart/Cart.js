@@ -73,6 +73,7 @@ const initialFValues = [
 
 const Cart = ({ match }) => {
   const state = useAuthState();
+  console.log(state);
   const [productID, setProductID] = useState([]);
   const [value, setValue] = useState(initialFValues);
   const [total, setTotal] = useState(0);
@@ -112,6 +113,7 @@ const Cart = ({ match }) => {
 
   useEffect(() => {
     fetchingProducts();
+    console.log("fetched");
   }, []);
 
   // setProductID([
