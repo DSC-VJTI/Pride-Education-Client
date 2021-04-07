@@ -15,7 +15,19 @@ const cartController = {
           populate: [
             {
               path: "course",
-              select: ["mode", "faculty"]
+              select: [
+                "mode",
+                "faculty",
+                "level",
+                "subject",
+                "type",
+                "applicableExamDate",
+                "language",
+                "duration",
+                "sysReq",
+                "views",
+                "validity"
+              ]
             },
             {
               path: "test",
@@ -57,7 +69,19 @@ const cartController = {
           populate: [
             {
               path: "course",
-              select: ["mode", "faculty"]
+              select: [
+                "mode",
+                "faculty",
+                "level",
+                "subject",
+                "type",
+                "applicableExamDate",
+                "language",
+                "duration",
+                "sysReq",
+                "views",
+                "validity"
+              ]
             },
             {
               path: "test",
