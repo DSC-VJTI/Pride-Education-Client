@@ -33,15 +33,21 @@ const Details = ({ product }) => {
   const classes = DetailsStyles();
   const state = useAuthState();
   const history = useHistory();
-  // console.log(state.user);
+  console.log(state);
+
   const AddToCart = async () => {
     const addingProduct = await axios.post(
       `${BASE_URL}/cart/${product._id}`,
-      state
+      state,
+      {
+        headers: {
+          Authorization: `Bearer ${state.token}`
+        }
+      }
     );
     setTimeout(() => {
-      history.push("/cart");
-    }, 2000);
+      history.push(`/cart/${product._id}`);
+    }, 3000);
   };
   return (
     <div>

@@ -34,6 +34,7 @@ const ClassPaneStyles = makeStyles((theme) => ({
 
 const ClassPane = ({ Course, CoursesList }) => {
   const [products, setProducts] = useState([]);
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -75,14 +76,14 @@ const ClassPane = ({ Course, CoursesList }) => {
           })}
         </ReactElasticCarousel>
       </div>
-      <ComboBox title="Full time courses" />
+      <ComboBox title="courses" />
       <div>
         <ReactElasticCarousel
           breakPoints={breakPoints}
           className={classes.slider}
         >
           {products.map((prod) => {
-            if ("course" in prod && prod.course.type == "Full time") {
+            if ("course" in prod) {
               return (
                 <div data-aos="flip-right">
                   <Product
@@ -99,29 +100,7 @@ const ClassPane = ({ Course, CoursesList }) => {
           })}
         </ReactElasticCarousel>
       </div>
-      <ComboBox title="Fast Track courses" />
-      <div>
-        <ReactElasticCarousel
-          breakPoints={breakPoints}
-          className={classes.slider}
-        >
-          {products.map((prod) => {
-            if ("course" in prod && prod.course.type == "Fast track") {
-              return (
-                <div data-aos="flip-right">
-                  <Product
-                    title={prod.name}
-                    instructor={prod.course.faculty}
-                    buttonText="View Course"
-                    obj={prod}
-                    rou="/product/details"
-                  />
-                </div>
-              );
-            }
-          })}
-        </ReactElasticCarousel>
-      </div>
+
       <ComboBox title="books" />
       <div>
         <ReactElasticCarousel
