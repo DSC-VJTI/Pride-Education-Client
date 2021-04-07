@@ -61,3 +61,7 @@ export const register = ({ dispatch, data }) => {
       };
     });
 };
+
+export const logout = ({ dispatch }) => {
+  dispatch({ type: "LOGOUT" });
+};
