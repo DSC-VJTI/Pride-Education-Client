@@ -74,4 +74,7 @@ router.get(
 );
 router.post("/orders", auth.isAuthenticated, OrderController.addOrder);
 
+// Payment routes
+router.post("/pay/:paymentId", OrderController.payAmount);
+
 export default router;
