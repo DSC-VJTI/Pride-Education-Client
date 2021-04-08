@@ -35,6 +35,7 @@ const ClassPaneStyles = makeStyles((theme) => ({
 const ClassPane = ({ Course, CoursesList }) => {
   const [products, setProducts] = useState([]);
 
+  const [subjects, setSubjects] = useState([]);
   useEffect(() => {
     getProducts();
   }, []);
@@ -45,10 +46,17 @@ const ClassPane = ({ Course, CoursesList }) => {
     { width: 1100, itemsToShow: 3 }
   ];
   const classes = ClassPaneStyles();
+
   const getProducts = async () => {
     const innerProduct = await axios.get(`${BASE_URL}/products`);
 
     setProducts(innerProduct.data.data);
+    // console.log(products)
+    let us = [];
+
+    console.log(us);
+    const name = [...new Set(products.map((p) => p.name))];
+    console.log(name);
   };
 
   return (
@@ -77,6 +85,7 @@ const ClassPane = ({ Course, CoursesList }) => {
         </ReactElasticCarousel>
       </div>
       <ComboBox title="courses" />
+
       <div>
         <ReactElasticCarousel
           breakPoints={breakPoints}
@@ -89,10 +98,9 @@ const ClassPane = ({ Course, CoursesList }) => {
                   <Product
                     title={prod.name}
                     instructor={prod.course.faculty}
-                    buttonText="View Course"
+                    buttonText="View Test"
                     obj={prod}
-                    rou="/product/details"
-                    lang={prod.course.language}
+                    rou="/test/details"
                   />
                 </div>
               );
