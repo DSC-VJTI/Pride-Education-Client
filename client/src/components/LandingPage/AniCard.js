@@ -29,7 +29,6 @@ export default function AniCard({ name, text }) {
     <Card
       className={classes.root}
       style={{
-        // border: "1px solid red",
         position: "relative",
         display: "flex",
         justifyContent: "space-between",
@@ -58,8 +57,7 @@ export default function AniCard({ name, text }) {
             flexDirection: "column",
             justifyContent: "space-around",
             alignItems: "center",
-            // border: "1px solid red",
-            height: "25vh"
+            height: "35vh"
           }}
         >
           <Typography
