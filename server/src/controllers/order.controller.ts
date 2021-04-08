@@ -60,7 +60,7 @@ const OrderController = {
   },
 
   async payAmount(req: Request, res: Response): Promise<Response> {
-    let isPaymentSucess = "1";
+    let isPaymentSucess = true;
     try {
       request(
         {
@@ -72,7 +72,7 @@ const OrderController = {
           }
         },
         async (error: any, response: request.Response) => {
-          if (error) isPaymentSucess = "0";
+          if (error) isPaymentSucess = false;
           else {
             const userId = req.body.user._id;
             const user = await User.findById(userId);
@@ -80,7 +80,7 @@ const OrderController = {
               let i;
               for (i = 0; i < req.body.orderId.length; i++) {
                 user.transactions.push({
-                  amount: 100,
+                  amount: req.body.total,
                   transactionId: req.params.paymentId,
                   orderId: req.body.productIds[i],
                   time: new Date().getTime()
@@ -93,11 +93,11 @@ const OrderController = {
                 { products: [] },
                 { new: true }
               );
-            } else isPaymentSucess = "0";
+            } else isPaymentSucess = false;
           }
         }
       );
-      if (isPaymentSucess === "1")
+      if (isPaymentSucess == true)
         return res.status(200).json({ message: "Successful Payment" });
       else return res.status(200).json({ message: "Error Occured" });
     } catch (err) {
