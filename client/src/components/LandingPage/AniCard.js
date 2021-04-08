@@ -4,7 +4,7 @@ import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-
+import "./css/AniCard.css";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
@@ -24,13 +24,25 @@ const useStyles = makeStyles({
 
 export default function AniCard({ name, text }) {
   const classes = useStyles();
-
+  // data-aos="flip-up"
   return (
-    <Card className={classes.root} data-aos="flip-up">
+    <Card
+      className={classes.root}
+      style={{
+        border: "1px solid red",
+        position: "relative",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "space-between",
+        flexDirection: "column"
+      }}
+    >
       <CardActionArea
         style={{
-          display: "grid",
-          placeItems: "center"
+          flexDirection: "column",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "space-between"
         }}
       >
         <img
@@ -39,11 +51,20 @@ export default function AniCard({ name, text }) {
           style={{ borderRadius: "50%" }}
           alt=""
         />
-        <CardContent>
+        <CardContent
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-around",
+            alignItems: "center",
+            border: "1px solid red"
+          }}
+        >
           <Typography
             gutterBottom
             variant="h5"
-            component="h2"
+            style={{ fontWeight: "bold" }}
+            component="h3"
             className="centerText"
           >
             {name}
@@ -53,7 +74,16 @@ export default function AniCard({ name, text }) {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
+      <CardActions
+        style={
+          {
+            // position: "absolute",
+            // bottom: "10px",
+            // left: "50%",
+            // transform: "translateX(-50%)"
+          }
+        }
+      >
         <Button
           size="small"
           className={classes.adjust}
