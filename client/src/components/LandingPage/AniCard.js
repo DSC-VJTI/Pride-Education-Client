@@ -24,18 +24,19 @@ const useStyles = makeStyles({
 
 export default function AniCard({ name, text }) {
   const classes = useStyles();
-  // data-aos="flip-up"
+  //
   return (
     <Card
       className={classes.root}
       style={{
-        border: "1px solid red",
+        // border: "1px solid red",
         position: "relative",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "space-between",
         flexDirection: "column"
       }}
+      data-aos="flip-up"
     >
       <CardActionArea
         style={{
@@ -57,7 +58,8 @@ export default function AniCard({ name, text }) {
             flexDirection: "column",
             justifyContent: "space-around",
             alignItems: "center",
-            border: "1px solid red"
+            // border: "1px solid red",
+            height: "25vh"
           }}
         >
           <Typography
@@ -74,16 +76,7 @@ export default function AniCard({ name, text }) {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions
-        style={
-          {
-            // position: "absolute",
-            // bottom: "10px",
-            // left: "50%",
-            // transform: "translateX(-50%)"
-          }
-        }
-      >
+      <CardActions>
         <Button
           size="small"
           className={classes.adjust}

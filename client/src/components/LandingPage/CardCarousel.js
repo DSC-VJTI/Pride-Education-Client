@@ -42,7 +42,6 @@ const CardCarousel = () => {
           Testimonials
         </Typography>
         <ReactElasticCarousel
-          style={{ border: "2px solid black" }}
           className="addMarginTop"
           breakPoints={breakPoints}
         >
