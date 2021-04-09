@@ -3,6 +3,8 @@ import { Grid, Typography, makeStyles, Box } from "@material-ui/core";
 import { useForm, Form } from "../../../UI Elements/UseForm";
 import { Input, MultiInput } from "../../../UI Elements/Input";
 import Button from "../../../UI Elements/Button";
+import axios from "axios";
+import { BASE_URL } from "./../../../../constants";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -63,10 +65,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const initialFValues = {
-  slct: "software",
-  whatsapp: "",
+  type: "software",
+  mobileNumber: "",
   email: "",
-  query: ""
+  description: ""
 };
 
 const SoftwareProblems = () => {
@@ -77,6 +79,15 @@ const SoftwareProblems = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    axios
+      .post(`${BASE_URL}/queries`, values)
+      .then((response) => {
+        console.log(response.status);
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     console.log(values);
   };
 
@@ -88,7 +99,7 @@ const SoftwareProblems = () => {
             <div style={{ marginTop: "7vh" }}>
               <h6>SELECT THE TYPE OF QUERY YOU HAVE.</h6>
               <div className="select">
-                <select name="slct" id="slct" onChange={handleInputChange}>
+                <select name="type" id="type" onChange={handleInputChange}>
                   <option value="software">Software Problems</option>
                   <option value="product">Product Inquiry</option>
                 </select>
@@ -98,13 +109,13 @@ const SoftwareProblems = () => {
               <div className={classes.adjustInputs}>
                 <Input
                   label={`WhatsApp No. *`}
-                  name="whatsapp"
+                  name="mobileNumber"
                   placeholder="WhatsApp No."
-                  value={values.whatsapp}
+                  value={values.mobileNumber}
                   onChange={handleInputChange}
-                  error={error.whatsapp}
+                  error={error.mobileNumber}
                   required={true}
-                  type="tel"
+                  type="number"
                   pattern="[0-9]{10}"
                   title="Please enter a valid phone number"
                 />
@@ -123,8 +134,8 @@ const SoftwareProblems = () => {
                 <MultiInput
                   label="Leave your message *"
                   placeholder="Describe your Problem in detail"
-                  name="query"
-                  value={values.query}
+                  name="description"
+                  value={values.description}
                   onChange={handleInputChange}
                   type="string"
                   required={true}
