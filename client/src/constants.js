@@ -5,3 +5,4 @@ if (process.env.NODE_ENV === "production") {
 }
 
 export const BASE_URL = URL;
+export const key_id = "rzp_test_MisCJjIkfowQs8";

@@ -65,7 +65,9 @@ const ClassPane = ({ Course, CoursesList }) => {
                   <Product
                     title={prod.name}
                     instructor={prod.test.subject}
-                    buttonText="View Book"
+                    buttonText="View Test"
+                    obj={prod}
+                    rou="/test/details"
                   />
                 </div>
               );
@@ -87,6 +89,8 @@ const ClassPane = ({ Course, CoursesList }) => {
                     title={prod.name}
                     instructor={prod.course.faculty}
                     buttonText="View Course"
+                    obj={prod}
+                    rou="/product/details"
                   />
                 </div>
               );
@@ -104,7 +108,12 @@ const ClassPane = ({ Course, CoursesList }) => {
             if ("book" in prod) {
               return (
                 <div data-aos="flip-right">
-                  <Product title={prod.name} buttonText="View Book" />
+                  <Product
+                    title={prod.name}
+                    buttonText="View Book"
+                    obj={prod}
+                    rou="/book/details"
+                  />
                 </div>
               );
             }
