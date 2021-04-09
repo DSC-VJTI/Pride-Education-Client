@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const initialFValues = {
-  type: "software",
+  type: "product",
   mobileNumber: "",
   email: "",
   description: ""
@@ -100,8 +100,8 @@ const SoftwareProblems = () => {
               <h6>SELECT THE TYPE OF QUERY YOU HAVE.</h6>
               <div className="select">
                 <select name="type" id="type" onChange={handleInputChange}>
-                  <option value="software">Software Problems</option>
                   <option value="product">Product Inquiry</option>
+                  <option value="software">Software Problems</option>
                 </select>
               </div>
               <h2>Can you provide some more information?</h2>
