@@ -5,6 +5,7 @@ import { Input, MultiInput } from "../../../UI Elements/Input";
 import Button from "../../../UI Elements/Button";
 import axios from "axios";
 import { BASE_URL } from "./../../../../constants";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -73,6 +74,7 @@ const initialFValues = {
 
 const SoftwareProblems = () => {
   const classes = useStyles();
+  const history = useHistory();
   const { values, setValues, handleInputChange, error, setError } = useForm(
     initialFValues
   );
@@ -82,13 +84,11 @@ const SoftwareProblems = () => {
     axios
       .post(`${BASE_URL}/queries`, values)
       .then((response) => {
-        console.log(response.status);
-        console.log(response.data);
+        history.push("/");
       })
       .catch((err) => {
         console.log(err);
       });
-    console.log(values);
   };
 
   return (
