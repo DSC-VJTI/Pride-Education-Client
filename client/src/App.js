@@ -1,30 +1,47 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import ClassesPane from "./components/Resource Page/ClassesPane";
-import CoursePage from "./components/Product Page/CoursePage";
-import Landing from "./components/LandingPage/Landing";
-import SupportPage from "./components/Support Page/SupportPage";
-import Registration from "./components/LoginRegister/Registration";
-import Login from "./components/LoginRegister/Login";
-import Cart from "./components/Cart/Cart";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
-import AddProduct from "./components/DashboardLayout/ProductListView/AddProduct";
-import DashboardLayout from "./components/DashboardLayout";
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar";
-import MyOrders from "./components/MyOrders/MyOrders";
-import ProductDetails from "./components/ProductDetails/ProductDetails";
 import { AuthProvider } from "./context/context";
-import PdfViewer from "./components/Books/PdfViewer";
-import Resources from "./components/Books/Resources";
 import ProtectedRoute from "./ProtectedRoute";
-import ComingSoon from "./components/ComingSoon";
 import { Box } from "@material-ui/core";
-import TestProductDetails from "./components/TestDetails/TestProductDetails";
-import BookProductDetails from "./components/BookDetails/BookProductDetails";
+
+const LazyClassesPane = lazy(() =>
+  import("./components/Resource Page/ClassesPane")
+);
+const LazyCart = lazy(() => import("./components/Cart/Cart"));
+const LazyCoursePage = lazy(() =>
+  import("./components/Product Page/CoursePage")
+);
+const LazySupportPage = lazy(() =>
+  import("./components/Support Page/SupportPage")
+);
+const LazyRegistration = lazy(() =>
+  import("./components/LoginRegister/Registration")
+);
+const LazyLogin = lazy(() => import("./components/LoginRegister/Login"));
+const LazyMyOrders = lazy(() => import("./components/MyOrders/MyOrders"));
+const LazyProductDetails = lazy(() =>
+  import("./components/ProductDetails/ProductDetails")
+);
+const LazyTestProductDetails = lazy(() =>
+  import("./components/TestDetails/TestProductDetails")
+);
+const LazyBookProductDetails = lazy(() =>
+  import("./components/BookDetails/BookProductDetails")
+);
+const LazyAddProduct = lazy(() =>
+  import("./components/DashboardLayout/ProductListView/AddProduct")
+);
+const LazyDashboardLayout = lazy(() => import("./components/DashboardLayout"));
+const LazyPdfViewer = lazy(() => import("./components/Books/PdfViewer"));
+const LazyResources = lazy(() => import("./components/Books/Resources"));
+const LazyComingSoon = lazy(() => import("./components/ComingSoon"));
+const LazyLanding = lazy(() => import("./components/LandingPage/Landing"));
 
 function App() {
   useEffect(() => {
@@ -44,27 +61,41 @@ function App() {
         <Router>
           <Navbar />
           <Box flexGrow={1}>
-            <Switch>
-              <Route path="/classes" component={ClassesPane} />
-              <Route path="/cart" component={Cart} />
-              <Route exact path="/product" component={CoursePage} />
-              <Route path="/support" component={SupportPage} />
-              <Route path="/register" component={Registration} />
-              <Route path="/login" component={Login} />
-              <Route path="/orders" component={MyOrders} />
-              <Route path="/product/details/:_id" component={ProductDetails} />
-              <Route path="/test/details/:_id" component={TestProductDetails} />
-              <Route path="/book/details/:_id" component={BookProductDetails} />
+            <Suspense fallback={<h3>Loading...</h3>}>
+              <Switch>
+                <Route path="/classes" component={LazyClassesPane} />
+                <Route path="/cart" component={LazyCart} />
+                <Route exact path="/product" component={LazyCoursePage} />
+                <Route path="/support" component={LazySupportPage} />
+                <Route path="/register" component={LazyRegistration} />
+                <Route path="/login" component={LazyLogin} />
+                <Route path="/orders" component={LazyMyOrders} />
+                <Route
+                  path="/product/details/:_id"
+                  component={LazyProductDetails}
+                />
+                <Route
+                  path="/test/details/:_id"
+                  component={LazyTestProductDetails}
+                />
+                <Route
+                  path="/book/details/:_id"
+                  component={LazyBookProductDetails}
+                />
 
-              {/* Protected routes go here */}
-              <Route path="/product/add" component={AddProduct} />
-              <Route path="/product/edit/:productId" component={AddProduct} />
-              <Route path="/admin" component={DashboardLayout} />
-              <Route path="/resources/:fileName" component={PdfViewer} />
-              <ProtectedRoute path="/resources" component={Resources} />
-              <Route path="/coming" component={ComingSoon} />
-              <Route path="/" exact component={Landing} />
-            </Switch>
+                {/* Protected routes go here */}
+                <Route path="/product/add" component={LazyAddProduct} />
+                <Route
+                  path="/product/edit/:productId"
+                  component={LazyAddProduct}
+                />
+                <Route path="/admin" component={LazyDashboardLayout} />
+                <Route path="/resources/:fileName" component={LazyPdfViewer} />
+                <ProtectedRoute path="/resources" component={LazyResources} />
+                <Route path="/coming" component={LazyComingSoon} />
+                <Route path="/" exact component={LazyLanding} />
+              </Switch>
+            </Suspense>
           </Box>
           <Box>
             <Footer />
