@@ -1,0 +1,32 @@
+name: Deploy to Netlify on commits to prod and changes to client
+on:
+  push:
+    branches:
+      - prod
+    paths:
+      - client/**
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+        
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Creating react static build
+        run: |
+          cd client
+          npm i
+          npm run build
+      
+      # Deploy the site with netlify-cli
+      - name: Deploy Site to Netlify
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        run: netlify deploy --dir=build --prod
