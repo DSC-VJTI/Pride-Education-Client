@@ -11,7 +11,33 @@ const cartController = {
       const myCart = await Cart.find({ user: userId })
         .populate({
           path: "products",
-          select: ["_id", "name", "price", "discount"]
+          select: ["_id", "name", "price", "discount"],
+          populate: [
+            {
+              path: "course",
+              select: [
+                "mode",
+                "faculty",
+                "level",
+                "subject",
+                "type",
+                "applicableExamDate",
+                "language",
+                "duration",
+                "sysReq",
+                "views",
+                "validity"
+              ]
+            },
+            {
+              path: "test",
+              select: ["subject", "contents"]
+            },
+            {
+              path: "book",
+              select: ["url", "_id", "file"]
+            }
+          ]
         })
         .lean();
       return res.status(200).json({ myCart });
@@ -39,7 +65,33 @@ const cartController = {
       myCart = await Cart.findOne({ user: userId })
         .populate({
           path: "products",
-          select: ["_id", "name", "price", "discount"]
+          select: ["_id", "name", "price", "discount"],
+          populate: [
+            {
+              path: "course",
+              select: [
+                "mode",
+                "faculty",
+                "level",
+                "subject",
+                "type",
+                "applicableExamDate",
+                "language",
+                "duration",
+                "sysReq",
+                "views",
+                "validity"
+              ]
+            },
+            {
+              path: "test",
+              select: ["subject", "contents"]
+            },
+            {
+              path: "book",
+              select: ["url", "_id", "file"]
+            }
+          ]
         })
         .lean();
       return res.status(201).json({ myCart });

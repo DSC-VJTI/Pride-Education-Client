@@ -10,6 +10,11 @@ import {
 } from "@material-ui/core";
 import Item from "./Item";
 import Total from "./Total";
+import axios from "axios";
+import { BASE_URL } from "../../constants";
+import { useAuthState } from "../../context/context";
+import TestSeries from "./TestSeries";
+import Book from "./Book";
 
 const CartStyles = makeStyles((theme) => ({
   style: {
@@ -33,46 +38,22 @@ const CartStyles = makeStyles((theme) => ({
   }
 }));
 
-const initialFValues = [
-  {
-    title: "SCMPE Full Course",
-    content: "Books",
-    views: "1.7",
-    validity: "6 Months",
-    price: 15000,
-    instructor: "CA Abhishek Khilwani",
-    duration: 100,
-    id: 0
-  },
-  {
-    title: "SCMPE Full Course",
-    content: "Books",
-    views: "1.7",
-    validity: "6 Months",
-    price: 15000,
-    instructor: "CA Abhishek Khilwani",
-    duration: 100,
-    id: 1
-  },
-  {
-    title: "SCMPE Full Course",
-    content: "Books",
-    views: "1.7",
-    validity: "6 Months",
-    price: 15000,
-    instructor: "CA Abhishek Khilwani",
-    duration: 100,
-    id: 2
-  }
-];
+const initialFValues = [];
 
-const Cart = () => {
+const Cart = ({ match }) => {
+  const state = useAuthState();
+  console.log(state);
+  const [productID, setProductID] = useState([]);
   const [value, setValue] = useState(initialFValues);
   const [total, setTotal] = useState(0);
   const classes = CartStyles();
 
   const handleOnClick = (e) => {
-    setValue(value.filter((item) => item.id !== e));
+    setValue(
+      value.filter((item) => {
+        return item._id !== e;
+      })
+    );
   };
 
   useEffect(() => {
@@ -82,8 +63,29 @@ const Cart = () => {
         sum = sum + item.price;
       });
       setTotal(sum);
+      const tempID = value.map((item) => {
+        return item._id;
+      });
+      setProductID(tempID);
+    } else {
+      setTotal(0);
     }
   }, [value]);
+
+  const fetchingProducts = async () => {
+    console.log(state.user);
+    const fetchedProduct = await axios.post(`${BASE_URL}/cart`, {
+      user: state.user
+    });
+    console.log(fetchedProduct.data.myCart[0].products);
+  };
+
+  useEffect(() => {
+    fetchingProducts();
+    console.log("fetched");
+  }, []);
+
+  console.log(match.params._id);
 
   return (
     <Grid container spacing={3} direction={"row"}>
@@ -104,30 +106,69 @@ const Cart = () => {
             </Typography>
             <Divider />
           </div>
-          {value.map((cartItem) => (
-            <Grid item xs={12} className={classes.paper} key={cartItem.id}>
-              <Card>
-                <CardActions>
-                  <Item
-                    id={cartItem.id}
-                    title={cartItem.title}
-                    content={cartItem.content}
-                    views={cartItem.views}
-                    validity={cartItem.validity}
-                    price={cartItem.price}
-                    instructor={cartItem.instructor}
-                    duration={cartItem.duration}
-                    onClick={handleOnClick}
-                  />
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
+          {value.map((cartItem) => {
+            if ("course" in cartItem) {
+              return (
+                <Grid item xs={12} className={classes.paper} key={cartItem.id}>
+                  <Card>
+                    <CardActions>
+                      <Item
+                        id={cartItem._id}
+                        title={cartItem.name}
+                        content="Course"
+                        views={cartItem.views}
+                        validity={cartItem.validity}
+                        price={cartItem.price}
+                        instructor={cartItem.course.faculty}
+                        duration={cartItem.duration}
+                        onClick={handleOnClick}
+                      />
+                    </CardActions>
+                  </Card>
+                </Grid>
+              );
+            } else if ("test" in cartItem) {
+              return (
+                <Grid item xs={12} className={classes.paper} key={cartItem.id}>
+                  <Card>
+                    <CardActions>
+                      <TestSeries
+                        id={cartItem._id}
+                        title={cartItem.name}
+                        content="Test Series"
+                        validity={cartItem.validity}
+                        price={cartItem.price}
+                        subject={cartItem.test.subject}
+                        onClick={handleOnClick}
+                      />
+                    </CardActions>
+                  </Card>
+                </Grid>
+              );
+            } else if ("book" in cartItem) {
+              return (
+                <Grid item xs={12} className={classes.paper} key={cartItem.id}>
+                  <Card>
+                    <CardActions>
+                      <Book
+                        id={cartItem._id}
+                        title={cartItem.name}
+                        content="Book"
+                        price={cartItem.price}
+                        instructor={cartItem.book.faculty}
+                        onClick={handleOnClick}
+                      />
+                    </CardActions>
+                  </Card>
+                </Grid>
+              );
+            }
+          })}
         </Container>
       </Grid>
       <Grid item sm={7} xs={12} md={4} lg={3}>
         <Container className={classes.style}>
-          <Total items={value.length} price={total} />
+          <Total items={value.length} price={total} productID={productID} />
         </Container>
       </Grid>
       <Grid item xs={false} md={false} lg={1}></Grid>

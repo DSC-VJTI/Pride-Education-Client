@@ -7,7 +7,19 @@ const ProductController = {
       const data = await Product.find({})
         .populate({
           path: "course",
-          select: ["mode", "faculty"]
+          select: [
+            "mode",
+            "faculty",
+            "level",
+            "subject",
+            "type",
+            "applicableExamDate",
+            "language",
+            "duration",
+            "sysReq",
+            "views",
+            "validity"
+          ]
         })
         .populate({
           path: "test",
@@ -29,7 +41,19 @@ const ProductController = {
       const data = await Product.findById(id)
         .populate({
           path: "course",
-          select: ["mode", "faculty"]
+          select: [
+            "mode",
+            "faculty",
+            "level",
+            "subject",
+            "type",
+            "applicableExamDate",
+            "language",
+            "duration",
+            "sysReq",
+            "views",
+            "validity"
+          ]
         })
         .populate({
           path: "test",
