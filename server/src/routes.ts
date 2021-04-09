@@ -27,7 +27,7 @@ router.post("/login", auth.verifyOTP, AuthController.login);
 // Product routes
 router.get("/products", ProductController.getProducts);
 router.get("/products/:id", ProductController.getProductById);
-router.get("/products/filter/:id", ProductController.getProductsByFilter);
+router.get("/product/filter", ProductController.getCoursesByFilter);
 
 router.post(
   "/admin/createProduct/",

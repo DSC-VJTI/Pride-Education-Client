@@ -71,7 +71,7 @@ function App() {
                 <Route path="/login" component={LazyLogin} />
                 <Route path="/orders" component={LazyMyOrders} />
                 <Route
-                  path="/product/details/:_id"
+                  path="/course/details/:name"
                   component={LazyProductDetails}
                 />
                 <Route

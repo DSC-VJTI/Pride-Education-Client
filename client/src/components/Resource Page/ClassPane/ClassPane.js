@@ -5,6 +5,7 @@ import Product from "./Product";
 import ComboBox from "./ComboBox";
 import axios from "axios";
 import { BASE_URL } from "../../../constants";
+
 const ClassPaneStyles = makeStyles((theme) => ({
   slider: {
     padding: "2rem",
@@ -56,6 +57,7 @@ const ClassPane = ({ Course, CoursesList }) => {
   const getProducts = async () => {
     const innerProduct = await axios.get(`${BASE_URL}/products`);
     const allProducts = innerProduct.data.data;
+
     let tests = [],
       courses = [],
       books = [],
@@ -102,6 +104,7 @@ const ClassPane = ({ Course, CoursesList }) => {
           })}
         </ReactElasticCarousel>
       </div>
+
       <ComboBox title="Courses" />
       <div>
         <ReactElasticCarousel
@@ -116,13 +119,15 @@ const ClassPane = ({ Course, CoursesList }) => {
                   // instructor={prod.course.faculty}
                   buttonText="View Course"
                   obj={prod}
-                  rou="/product/details"
+                  rou="/course/details"
+                  type="course"
                 />
               </div>
             );
           })}
         </ReactElasticCarousel>
       </div>
+
       <ComboBox title="Books" />
       <div>
         <ReactElasticCarousel
