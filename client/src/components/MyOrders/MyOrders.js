@@ -1,7 +1,9 @@
 import { Container, Grid, makeStyles, Paper } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import OrderedItem from "./OrderedItem";
-
+import axios from "axios";
+import { BASE_URL } from "../../constants";
+import { useAuthState } from "../../context/context";
 const useStyles = makeStyles((theme) => ({
   style: {
     padding: "20px",
@@ -42,9 +44,19 @@ const prevOrders = [
 ];
 
 const MyOrders = () => {
+  const state = useAuthState();
   const [value, setValue] = useState(prevOrders);
   const classes = useStyles();
-
+  const fetchingOrders = async () => {
+    const fetchedOrders = await axios.post(`${BASE_URL}/orders/user`, {
+      state,
+      headers: { Authorization: `Bearer ${state.token}` }
+    });
+    console.log(fetchedOrders);
+  };
+  useEffect(() => {
+    fetchingOrders();
+  }, []);
   return (
     <Grid container spacing={4}>
       <Grid item xs={0} md={2}></Grid>
