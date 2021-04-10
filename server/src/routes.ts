@@ -69,7 +69,7 @@ router.delete(
 router.get("/orders", auth.isAuthenticated, OrderController.getOrders);
 router.get("/orders/:id", auth.isAuthenticated, OrderController.getOrderById);
 router.get(
-  "/orders/user/:user_id",
+  "/orders/user",
   auth.isAuthenticated,
   OrderController.getOrdersByUserId
 );
