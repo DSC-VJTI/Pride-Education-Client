@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Product from "../models/Product/Product";
+import Course from "../models/Product/Course";
 
 const ProductController = {
   async getProducts(_: Request, res: Response): Promise<Response> {
@@ -74,10 +75,28 @@ const ProductController = {
     }
   },
 
-  async getProductsByFilter(req: Request, res: Response): Promise<Response> {
+  async getCoursesByFilter(req: Request, res: Response): Promise<Response> {
     try {
-      const data = await Product.find(req.body);
-
+      const data = await Course.findOne(req.body);
+      if (data) {
+        const course = await Product.findOne({ course: data._id }).populate({
+          path: "course",
+          select: [
+            "mode",
+            "faculty",
+            "level",
+            "subject",
+            "type",
+            "applicableExamDate",
+            "language",
+            "duration",
+            "sysReq",
+            "views",
+            "validity"
+          ]
+        });
+        return res.status(200).json({ course });
+      }
       return res.status(200).json({ data });
     } catch (error) {
       return res.status(500).json({ message: error.message });

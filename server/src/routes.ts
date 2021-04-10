@@ -7,6 +7,7 @@ import adminMiddleware from "./middleware/admin.middleware";
 import CartController from "./controllers/cart.controller";
 import OrderController from "./controllers/order.controller";
 import uploader from "./utility/uploader";
+import QueryController from "./controllers/query.controller";
 const router = express.Router();
 
 // Basic route
@@ -27,7 +28,7 @@ router.post("/login", auth.verifyOTP, AuthController.login);
 // Product routes
 router.get("/products", ProductController.getProducts);
 router.get("/products/:id", ProductController.getProductById);
-router.get("/products/filter/:id", ProductController.getProductsByFilter);
+router.get("/product/filter", ProductController.getCoursesByFilter);
 
 router.post(
   "/admin/createProduct/",
@@ -76,5 +77,11 @@ router.post("/orders", auth.isAuthenticated, OrderController.addOrder);
 
 // Payment routes
 router.post("/pay/:paymentId", OrderController.payAmount);
+
+// Query routes
+router.get("/queries", adminMiddleware.isAdmin, QueryController.getQueries);
+router.post("/queries", QueryController.addQuery);
+router.put("/queries", QueryController.updateQuery);
+router.delete("/queries", adminMiddleware.isAdmin, QueryController.deleteQuery);
 
 export default router;

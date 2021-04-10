@@ -19,15 +19,19 @@ const ProductDetailsStyles = makeStyles((theme) => ({
 const ProductDetails = ({ match }) => {
   const classes = ProductDetailsStyles();
   const [product, setProduct] = useState([]);
+
   useEffect(() => {
     getProducts();
   }, []);
-  const getProducts = async () => {
-    const innerProduct = await axios.get(
-      `${BASE_URL}/products/${match.params._id}`
-    );
 
-    setProduct(innerProduct.data.data);
+  const getProducts = async () => {
+    console.log(match.params.name);
+    const innerProduct = await axios.get(`${BASE_URL}/product/filter`, {
+      subject: match.params.name
+    });
+
+    console.log(innerProduct.data.course);
+    // setProduct(innerProduct.data.data);
   };
 
   return (
