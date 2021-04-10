@@ -7,6 +7,7 @@ import adminMiddleware from "./middleware/admin.middleware";
 import CartController from "./controllers/cart.controller";
 import OrderController from "./controllers/order.controller";
 import uploader from "./utility/uploader";
+import QueryController from "./controllers/query.controller";
 const router = express.Router();
 
 // Basic route
@@ -68,7 +69,7 @@ router.delete(
 router.get("/orders", auth.isAuthenticated, OrderController.getOrders);
 router.get("/orders/:id", auth.isAuthenticated, OrderController.getOrderById);
 router.get(
-  "/orders/user/:user_id",
+  "/orders/user",
   auth.isAuthenticated,
   OrderController.getOrdersByUserId
 );
@@ -76,5 +77,11 @@ router.post("/orders", auth.isAuthenticated, OrderController.addOrder);
 
 // Payment routes
 router.post("/pay/:paymentId", OrderController.payAmount);
+
+// Query routes
+router.get("/queries", adminMiddleware.isAdmin, QueryController.getQueries);
+router.post("/queries", QueryController.addQuery);
+router.put("/queries", QueryController.updateQuery);
+router.delete("/queries", adminMiddleware.isAdmin, QueryController.deleteQuery);
 
 export default router;
