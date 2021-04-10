@@ -1,10 +1,44 @@
 import { Request, Response } from "express";
 import Order from "../models/Order/Order";
+import User from "../models/User/User";
+import Cart from "../models/Cart/Cart";
+import request from "request";
 
 const OrderController = {
   async getOrders(_: Request, res: Response): Promise<Response> {
     try {
-      const data = await Order.find({});
+      const data = await Order.find({})
+        .populate({
+          path: "products",
+          select: ["_id", "name", "price", "discount"],
+          populate: [
+            {
+              path: "course",
+              select: [
+                "mode",
+                "faculty",
+                "level",
+                "subject",
+                "type",
+                "applicableExamDate",
+                "language",
+                "duration",
+                "sysReq",
+                "views",
+                "validity"
+              ]
+            },
+            {
+              path: "test",
+              select: ["subject", "contents"]
+            },
+            {
+              path: "book",
+              select: ["url", "_id", "file"]
+            }
+          ]
+        })
+        .lean();
 
       return res.status(200).json({ data });
     } catch (error) {
@@ -15,7 +49,38 @@ const OrderController = {
   async getOrderById(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params;
-      const data = await Order.findById(id);
+      const data = await Order.findById(id)
+        .populate({
+          path: "products",
+          select: ["_id", "name", "price", "discount"],
+          populate: [
+            {
+              path: "course",
+              select: [
+                "mode",
+                "faculty",
+                "level",
+                "subject",
+                "type",
+                "applicableExamDate",
+                "language",
+                "duration",
+                "sysReq",
+                "views",
+                "validity"
+              ]
+            },
+            {
+              path: "test",
+              select: ["subject", "contents"]
+            },
+            {
+              path: "book",
+              select: ["url", "_id", "file"]
+            }
+          ]
+        })
+        .lean();
 
       if (data) {
         return res.status(200).json({ data });
@@ -29,9 +94,39 @@ const OrderController = {
 
   async getOrdersByUserId(req: Request, res: Response): Promise<Response> {
     try {
-      const { user_id } = req.params;
-      const data = await Order.find({ user: user_id });
-
+      const user_id = req.body.user._id;
+      const data = await Order.find({ user: user_id })
+        .populate({
+          path: "products",
+          select: ["_id", "name", "price", "discount"],
+          populate: [
+            {
+              path: "course",
+              select: [
+                "mode",
+                "faculty",
+                "level",
+                "subject",
+                "type",
+                "applicableExamDate",
+                "language",
+                "duration",
+                "sysReq",
+                "views",
+                "validity"
+              ]
+            },
+            {
+              path: "test",
+              select: ["subject", "contents"]
+            },
+            {
+              path: "book",
+              select: ["url", "_id", "file"]
+            }
+          ]
+        })
+        .lean();
       return res.status(200).json({ data });
     } catch (error) {
       return res.status(500).json({ message: error.message });
@@ -54,39 +149,53 @@ const OrderController = {
     } catch (error) {
       return res.status(500).json({ message: error.message });
     }
+  },
+
+  async payAmount(req: Request, res: Response): Promise<Response> {
+    let isPaymentSucess = true;
+    try {
+      request(
+        {
+          method: "POST",
+          url: `https://${process.env.key_id}:${process.env.key_secret}@api.razorpay.com/v1/payments/${req.params.paymentId}/capture`,
+          form: {
+            amount: req.body.total,
+            currency: "INR"
+          }
+        },
+        async (error: any, response: request.Response) => {
+          if (error) isPaymentSucess = false;
+          else {
+            const userId = req.body.user._id;
+            const user = await User.findById(userId);
+            if (user != null && response.statusCode === 200) {
+              let i;
+              for (i = 0; i < req.body.orderId.length; i++) {
+                user.transactions.push({
+                  amount: req.body.total,
+                  transactionId: req.params.paymentId,
+                  orderId: req.body.productIds[i],
+                  time: new Date().getTime()
+                });
+                await user.save();
+              }
+
+              await Cart.findOneAndUpdate(
+                { user: userId },
+                { products: [] },
+                { new: true }
+              );
+            } else isPaymentSucess = false;
+          }
+        }
+      );
+      if (isPaymentSucess == true)
+        return res.status(200).json({ message: "Successful Payment" });
+      else return res.status(200).json({ message: "Error Occured" });
+    } catch (err) {
+      return res.status(500).json({ message: err.message });
+    }
   }
-  /* async payAmount(req: Request, res: Response): Promise<Response> {
-     const options = {
-       method: "POST",
-       url: `https://${process.env.key_id}:${process.env.key_secret}@api.razorpay.com/v1/payments/${req.params.paymentId}/capture`,
-       form: {
-         amount: 100,
-         currency: "INR"
-       }
-     };
-     try {
-       request(options, async (_: any, response: Response) => {
-         console.log(response.statusCode);
-         const userId = req.body.user._id;
-         const user = await User.findById({user:userId});
-         //iterate for all OrderId in the cart
-         if (user != null && response.statusCode === 200) {
-           user.transactions.push({
-             amount: 100,
-             transactionId: req.params.paymentId,
-             orderId: req.body.orderId,
-             time: new Date().getTime()
-           });
-           await user.save();
-         }
-         //logic for emptying cart to be written
-       });
-       return res.status(200).json({ message: "Successful" });
-     } catch (err) {
-       console.log(err);
-       return res.status(500).json({ message: err.message });
-     }
-   }*/
 };
 
 export = OrderController;
