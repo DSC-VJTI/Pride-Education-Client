@@ -85,7 +85,12 @@ router.post("/orders", auth.isAuthenticated, OrderController.addOrder);
 router.post("/pay/:paymentId", OrderController.payAmount);
 
 // Query routes
-router.get("/queries", adminMiddleware.isAdmin, QueryController.getQueries);
+router.get(
+  "/queries",
+  auth.isAuthenticated,
+  adminMiddleware.isAdmin,
+  QueryController.getQueries
+);
 router.post("/queries", QueryController.addQuery);
 router.put("/queries", QueryController.updateQuery);
 router.delete("/queries", adminMiddleware.isAdmin, QueryController.deleteQuery);

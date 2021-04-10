@@ -4,6 +4,7 @@ import NavBar from "./NavBar";
 import AdminDashboard from "./DashboardView";
 import Customer from "./CustomerListView";
 import Products from "./ProductListView";
+import Support from "./Support";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,6 +53,7 @@ const DashboardLayout = () => {
             {contents === 0 && <AdminDashboard />}
             {contents === 1 && <Customer />}
             {contents === 2 && <Products />}
+            {contents === 3 && <Support />}
           </div>
         </div>
       </div>

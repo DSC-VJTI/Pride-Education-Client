@@ -13,14 +13,10 @@ import {
   makeStyles
 } from "@material-ui/core";
 import {
-  AlertCircle as AlertCircleIcon,
   BarChart as BarChartIcon,
-  Lock as LockIcon,
-  Settings as SettingsIcon,
   ShoppingBag as ShoppingBagIcon,
-  User as UserIcon,
-  UserPlus as UserPlusIcon,
-  Users as UsersIcon
+  Users as UsersIcon,
+  HelpCircle as HelpCircleIcon
 } from "react-feather";
 import NavItem from "./NavItem";
 import UserAvatar from "../../../assets/images/adminimages/avatar_6.png";
@@ -43,6 +39,10 @@ const items = [
   {
     icon: ShoppingBagIcon,
     title: "Products"
+  },
+  {
+    icon: HelpCircleIcon,
+    title: "Support"
   }
 ];
 
