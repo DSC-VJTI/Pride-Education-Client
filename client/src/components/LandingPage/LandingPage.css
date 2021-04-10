@@ -64,7 +64,7 @@
   transition: all 250ms ease;
   border: none;
   margin: 5px;
-  background-color: #f26522;
+  background-color: #f26522!important;
   font-size: 1.3em;
   content: "";
   height: 10px;
