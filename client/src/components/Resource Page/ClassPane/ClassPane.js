@@ -36,9 +36,16 @@ const ClassPane = ({ Course, CoursesList }) => {
   const [products, setProducts] = useState([]);
 
   const [subjects, setSubjects] = useState([]);
+
   useEffect(() => {
     getProducts();
   }, []);
+  useEffect(() => {
+    makeUniqueSubs();
+  }, [products]);
+  // useEffect(()=>{
+  // console.log(subjects)
+  // },[])
   const breakPoints = [
     { width: 1, itemsToShow: 1 },
     { width: 600, itemsToShow: 2 },
@@ -49,16 +56,33 @@ const ClassPane = ({ Course, CoursesList }) => {
 
   const getProducts = async () => {
     const innerProduct = await axios.get(`${BASE_URL}/products`);
+    let subArr = [];
+    innerProduct.data.data.map((prod) => {
+      if ("course" in prod) {
+        subArr.concat(prod.course.subject);
+      }
+    });
 
     setProducts(innerProduct.data.data);
+    console.log(products);
+
     // console.log(products)
-    let us = [];
+    // let us = [];
 
-    console.log(us);
-    const name = [...new Set(products.map((p) => p.name))];
-    console.log(name);
+    // console.log(us);
+    // const name = [...new Set(products.map((p) => p.name))];
+    // console.log(name);
   };
-
+  const makeUniqueSubs = () => {
+    let subjectArray = [];
+    products.map((prod) => {
+      if ("course" in prod) {
+        subjectArray.concat(prod.course.subject);
+      }
+    });
+    const uniqueSubs = [...new Set(subjectArray)];
+    console.log("these are unique subs", subjectArray);
+  };
   return (
     <section>
       <ComboBox title="test series" />
@@ -93,6 +117,12 @@ const ClassPane = ({ Course, CoursesList }) => {
         >
           {products.map((prod) => {
             if ("course" in prod) {
+              // setSubjects([...subjects,prod.course.subject])
+              // subjectArray.push(prod.course.subject);
+              // let distinctSubs=[...new Set(subjectArray)];
+
+              // console.log(`here ${subjectArray}`);
+
               return (
                 <div data-aos="flip-right">
                   <Product
