@@ -7,7 +7,38 @@ import request from "request";
 const OrderController = {
   async getOrders(_: Request, res: Response): Promise<Response> {
     try {
-      const data = await Order.find({});
+      const data = await Order.find({})
+        .populate({
+          path: "products",
+          select: ["_id", "name", "price", "discount"],
+          populate: [
+            {
+              path: "course",
+              select: [
+                "mode",
+                "faculty",
+                "level",
+                "subject",
+                "type",
+                "applicableExamDate",
+                "language",
+                "duration",
+                "sysReq",
+                "views",
+                "validity"
+              ]
+            },
+            {
+              path: "test",
+              select: ["subject", "contents"]
+            },
+            {
+              path: "book",
+              select: ["url", "_id", "file"]
+            }
+          ]
+        })
+        .lean();
 
       return res.status(200).json({ data });
     } catch (error) {
@@ -18,7 +49,38 @@ const OrderController = {
   async getOrderById(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params;
-      const data = await Order.findById(id);
+      const data = await Order.findById(id)
+        .populate({
+          path: "products",
+          select: ["_id", "name", "price", "discount"],
+          populate: [
+            {
+              path: "course",
+              select: [
+                "mode",
+                "faculty",
+                "level",
+                "subject",
+                "type",
+                "applicableExamDate",
+                "language",
+                "duration",
+                "sysReq",
+                "views",
+                "validity"
+              ]
+            },
+            {
+              path: "test",
+              select: ["subject", "contents"]
+            },
+            {
+              path: "book",
+              select: ["url", "_id", "file"]
+            }
+          ]
+        })
+        .lean();
 
       if (data) {
         return res.status(200).json({ data });
@@ -32,9 +94,39 @@ const OrderController = {
 
   async getOrdersByUserId(req: Request, res: Response): Promise<Response> {
     try {
-      const { user_id } = req.params;
-      const data = await Order.find({ user: user_id });
-
+      const { user_id } = req.body.user._id;
+      const data = await Order.find({ user: user_id })
+        .populate({
+          path: "products",
+          select: ["_id", "name", "price", "discount"],
+          populate: [
+            {
+              path: "course",
+              select: [
+                "mode",
+                "faculty",
+                "level",
+                "subject",
+                "type",
+                "applicableExamDate",
+                "language",
+                "duration",
+                "sysReq",
+                "views",
+                "validity"
+              ]
+            },
+            {
+              path: "test",
+              select: ["subject", "contents"]
+            },
+            {
+              path: "book",
+              select: ["url", "_id", "file"]
+            }
+          ]
+        })
+        .lean();
       return res.status(200).json({ data });
     } catch (error) {
       return res.status(500).json({ message: error.message });
