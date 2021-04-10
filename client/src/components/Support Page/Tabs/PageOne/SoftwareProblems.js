@@ -3,6 +3,9 @@ import { Grid, Typography, makeStyles, Box } from "@material-ui/core";
 import { useForm, Form } from "../../../UI Elements/UseForm";
 import { Input, MultiInput } from "../../../UI Elements/Input";
 import Button from "../../../UI Elements/Button";
+import axios from "axios";
+import { BASE_URL } from "./../../../../constants";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -63,21 +66,29 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const initialFValues = {
-  slct: "software",
-  whatsapp: "",
+  type: "product",
+  mobileNumber: "",
   email: "",
-  query: ""
+  description: ""
 };
 
 const SoftwareProblems = () => {
   const classes = useStyles();
+  const history = useHistory();
   const { values, setValues, handleInputChange, error, setError } = useForm(
     initialFValues
   );
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(values);
+    axios
+      .post(`${BASE_URL}/queries`, values)
+      .then((response) => {
+        history.push("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -88,9 +99,9 @@ const SoftwareProblems = () => {
             <div style={{ marginTop: "7vh" }}>
               <h6>SELECT THE TYPE OF QUERY YOU HAVE.</h6>
               <div className="select">
-                <select name="slct" id="slct" onChange={handleInputChange}>
-                  <option value="software">Software Problems</option>
+                <select name="type" id="type" onChange={handleInputChange}>
                   <option value="product">Product Inquiry</option>
+                  <option value="software">Software Problems</option>
                 </select>
               </div>
               <h2>Can you provide some more information?</h2>
@@ -98,13 +109,13 @@ const SoftwareProblems = () => {
               <div className={classes.adjustInputs}>
                 <Input
                   label={`WhatsApp No. *`}
-                  name="whatsapp"
+                  name="mobileNumber"
                   placeholder="WhatsApp No."
-                  value={values.whatsapp}
+                  value={values.mobileNumber}
                   onChange={handleInputChange}
-                  error={error.whatsapp}
+                  error={error.mobileNumber}
                   required={true}
-                  type="tel"
+                  type="number"
                   pattern="[0-9]{10}"
                   title="Please enter a valid phone number"
                 />
@@ -123,8 +134,8 @@ const SoftwareProblems = () => {
                 <MultiInput
                   label="Leave your message *"
                   placeholder="Describe your Problem in detail"
-                  name="query"
-                  value={values.query}
+                  name="description"
+                  value={values.description}
                   onChange={handleInputChange}
                   type="string"
                   required={true}

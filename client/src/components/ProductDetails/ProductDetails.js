@@ -25,9 +25,10 @@ const ProductDetails = ({ match }) => {
   }, []);
 
   const getProducts = async () => {
-    console.log(match.params.name);
-    const innerProduct = await axios.get(`${BASE_URL}/product/filter`, {
-      subject: match.params.name
+    const innerProduct = await axios.post(`${BASE_URL}/product/filter`, {
+      subject: match.params.name,
+      mode: "GOOGLE DRIVE",
+      language: "ENGLISH"
     });
 
     console.log(innerProduct.data.course);
