@@ -20,6 +20,7 @@ const SupportListView = () => {
   const classes = useStyles();
   const { token } = useAuthState();
   const [queries, setQueries] = useState([]);
+  const [counter, setCounter] = useState(0);
 
   useEffect(() => {
     axios
@@ -34,14 +35,57 @@ const SupportListView = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [counter]);
+
+  const handleCustomerSolved = (enquiry) => {
+    axios
+      .put(
+        BASE_URL + "/queries",
+        {
+          query: {
+            ...enquiry,
+            solved: true
+          }
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
+      .then((res) => {
+        setCounter(counter + 1);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const handleDelete = (enquiry) => {
+    axios
+      .delete(BASE_URL + `/queries/${enquiry._id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then((res) => {
+        setCounter(counter + 1);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   return (
     <Page className={classes.root} title="Enquiries">
       <Container maxWidth={false}>
         <Toolbar title="enquiry" isButtonHidden={true} />
         <Box mt={3}>
-          <Results queries={queries} />
+          <Results
+            queries={queries}
+            handleCustomerSolved={handleCustomerSolved}
+            handleDelete={handleDelete}
+          />
         </Box>
       </Container>
     </Page>

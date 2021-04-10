@@ -92,7 +92,17 @@ router.get(
   QueryController.getQueries
 );
 router.post("/queries", QueryController.addQuery);
-router.put("/queries", QueryController.updateQuery);
-router.delete("/queries", adminMiddleware.isAdmin, QueryController.deleteQuery);
+router.put(
+  "/queries",
+  auth.isAuthenticated,
+  adminMiddleware.isAdmin,
+  QueryController.updateQuery
+);
+router.delete(
+  "/queries/:id",
+  auth.isAuthenticated,
+  adminMiddleware.isAdmin,
+  QueryController.deleteQuery
+);
 
 export default router;

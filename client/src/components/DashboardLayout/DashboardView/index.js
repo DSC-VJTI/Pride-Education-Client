@@ -9,7 +9,6 @@ import TotalCustomers from "./TotalCustomers";
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#f1f1f1"
-    // paddingBottom: theme.spacing(3),
   }
 }));
 

@@ -39,7 +39,7 @@ const QueryController = {
 
   async deleteQuery(req: Request, res: Response): Promise<Response> {
     try {
-      await Query.findByIdAndRemove(req.body.query._id).lean();
+      await Query.findByIdAndRemove(req.params.id).lean();
       return res.status(204).json({});
     } catch (err) {
       return res.status(500).json({

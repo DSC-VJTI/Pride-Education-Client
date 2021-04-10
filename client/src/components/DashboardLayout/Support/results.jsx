@@ -11,9 +11,10 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  makeStyles
+  makeStyles,
+  Checkbox
 } from "@material-ui/core";
-import { Mail, MessageSquare } from "react-feather";
+import { Mail, MessageSquare, Trash } from "react-feather";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -22,7 +23,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Results = ({ className, queries, ...rest }) => {
+const Results = ({
+  className,
+  queries,
+  handleCustomerSolved,
+  handleDelete,
+  ...rest
+}) => {
   const classes = useStyles();
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
@@ -47,6 +54,7 @@ const Results = ({ className, queries, ...rest }) => {
                 <TableCell>Mobile Number</TableCell>
                 <TableCell>Solved?</TableCell>
                 <TableCell>Action</TableCell>
+                <TableCell>Delete</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -57,7 +65,13 @@ const Results = ({ className, queries, ...rest }) => {
                     <TableCell>{customer.email}</TableCell>
                     <TableCell>{customer.description}</TableCell>
                     <TableCell>{customer.mobileNumber}</TableCell>
-                    <TableCell>{customer.solved.toString()}</TableCell>
+                    <TableCell>
+                      <Checkbox
+                        checked={customer.solved}
+                        onChange={() => handleCustomerSolved(customer)}
+                        disabled={customer.solved}
+                      />
+                    </TableCell>
                     <TableCell>
                       <Box display="flex" flexDirection="column">
                         <a
@@ -77,6 +91,13 @@ const Results = ({ className, queries, ...rest }) => {
                           <MessageSquare color="green" />
                         </a>
                       </Box>
+                    </TableCell>
+                    <TableCell>
+                      <Trash
+                        color="red"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => handleDelete(customer)}
+                      />
                     </TableCell>
                   </TableRow>
                 ))}
