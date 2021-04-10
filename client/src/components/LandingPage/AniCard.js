@@ -5,6 +5,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import "./css/AniCard.css";
+import { Box } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
@@ -24,9 +25,9 @@ const useStyles = makeStyles({
 
 export default function AniCard({ name, text }) {
   const classes = useStyles();
-  //
   return (
     <Card
+      className="carouselCard"
       className={classes.root}
       style={{
         position: "relative",
@@ -48,22 +49,24 @@ export default function AniCard({ name, text }) {
         <img
           src="https://picsum.photos/100"
           className="addMarginTop"
-          style={{ borderRadius: "50%" }}
+          style={{ borderRadius: "50%", width: "20%" }}
           alt=""
         />
         <CardContent
           style={{
+            position: "relative",
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-around",
-            alignItems: "center",
-            height: "35vh"
+            height: "30vh"
           }}
         >
           <Typography
             gutterBottom
             variant="h5"
-            style={{ fontWeight: "bold" }}
+            style={{
+              fontWeight: "bold",
+              height: "35%"
+            }}
             component="h3"
             className="centerText"
           >
