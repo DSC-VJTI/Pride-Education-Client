@@ -30,9 +30,9 @@ const OrderedItem = ({ title, price, instructor, buyDate }) => {
             {title}
           </Typography>
           <Typography gutterBottom variant="body">
-            {`Bought on: ${buyDate.getDate()}/${buyDate.getMonth()}/${
+            {/* {`Bought on: ${buyDate.getDate()}/${buyDate.getMonth()}/${
               buyDate.getYear() - 100
-            }`}
+            }`} */}
           </Typography>
         </Grid>
         <Grid item xs={4}>

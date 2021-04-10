@@ -73,7 +73,7 @@ const Cart = ({ match }) => {
   }, [value]);
 
   const fetchingProducts = async () => {
-    console.log(state.user);
+    console.log(state);
     const fetchedProduct = await axios.post(`${BASE_URL}/cart`, {
       user: state.user
     });
