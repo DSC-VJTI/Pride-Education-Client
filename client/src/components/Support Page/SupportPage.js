@@ -3,7 +3,6 @@ import { Container, Grid, Tab, AppBar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Tabs from "./Tabs/Tabs";
 import { Route, Switch, Redirect } from "react-router-dom";
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flex: 1,

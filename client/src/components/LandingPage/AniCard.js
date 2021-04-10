@@ -53,7 +53,6 @@ export default function AniCard({ name, text }) {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions></CardActions>
     </Card>
   );
 }

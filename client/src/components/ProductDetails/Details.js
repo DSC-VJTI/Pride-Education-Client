@@ -33,12 +33,11 @@ const Details = ({ product }) => {
   const classes = DetailsStyles();
   const state = useAuthState();
   const history = useHistory();
-  console.log(state);
 
   const AddToCart = async () => {
     const addingProduct = await axios.post(
       `${BASE_URL}/cart/${product._id}`,
-      state,
+      state.user,
       {
         headers: {
           Authorization: `Bearer ${state.token}`
@@ -121,6 +120,58 @@ const Details = ({ product }) => {
                     align="left"
                     size="small"
                   >
+                    Duration
+                  </TableCell>
+                  <TableCell align="left" size="small">
+                    {product.course.duration} hours
+                  </TableCell>
+                </TableRow>
+                <TableRow style={{ width: "fit-content" }}>
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    align="left"
+                    size="small"
+                  >
+                    Validity
+                  </TableCell>
+                  <TableCell align="left" size="small">
+                    {product.course.validity} months
+                  </TableCell>
+                </TableRow>
+                <TableRow style={{ width: "fit-content" }}>
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    align="left"
+                    size="small"
+                  >
+                    Views
+                  </TableCell>
+                  <TableCell align="left" size="small">
+                    {product.course.views}
+                  </TableCell>
+                </TableRow>
+                <TableRow style={{ width: "fit-content" }}>
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    align="left"
+                    size="small"
+                  >
+                    Subject
+                  </TableCell>
+                  <TableCell align="left" size="small">
+                    {product.course.subject}
+                  </TableCell>
+                </TableRow>
+                <TableRow style={{ width: "fit-content" }}>
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    align="left"
+                    size="small"
+                  >
                     Price
                   </TableCell>
                   <TableCell align="left" size="small">
@@ -163,7 +214,20 @@ const Details = ({ product }) => {
                     Mode
                   </TableCell>
                   <TableCell align="left" size="small">
-                    {product.course["mode"]}
+                    {product.course.mode}
+                  </TableCell>
+                </TableRow>
+                <TableRow style={{ width: "fit-content" }}>
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    align="left"
+                    size="small"
+                  >
+                    Language
+                  </TableCell>
+                  <TableCell align="left" size="small">
+                    {product.course.language}
                   </TableCell>
                 </TableRow>
                 <TableRow style={{ width: "fit-content" }}>
@@ -176,7 +240,20 @@ const Details = ({ product }) => {
                     System Requirements
                   </TableCell>
                   <TableCell align="left" size="small">
-                    Windows 7 Minimum
+                    {product.course.sysReq}
+                  </TableCell>
+                </TableRow>
+                <TableRow style={{ width: "fit-content" }}>
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    align="left"
+                    size="small"
+                  >
+                    Course Type
+                  </TableCell>
+                  <TableCell align="left" size="small">
+                    {product.course.type}
                   </TableCell>
                 </TableRow>
                 <TableRow style={{ width: "fit-content" }}>

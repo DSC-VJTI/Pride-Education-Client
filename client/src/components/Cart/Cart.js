@@ -74,7 +74,7 @@ const Cart = ({ match }) => {
   }, [value]);
 
   const fetchingProducts = async () => {
-    const fetchedProduct = await axios.post(`${BASE_URL}/cart`, state, {
+    const fetchedProduct = await axios.post(`${BASE_URL}/cart`, state.user, {
       headers: {
         Authorization: `Bearer ${state.token}`
       }

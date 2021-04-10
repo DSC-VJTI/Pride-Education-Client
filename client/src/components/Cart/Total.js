@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 import Button from "../UI Elements/Button";
 import { key_id, BASE_URL } from "../../constants";
-import { useAuthState } from "../../context/context";
+import Axios from "axios";
 
 const CartStyles = makeStyles({
   TotalCard: {
@@ -51,11 +51,7 @@ const Total = (props) => {
   const items = props.items;
   const title = `(Rs.${props.price})`;
   const classes = CartStyles();
-  const state = useAuthState();
-  //for handling payment
-  //get amount addition of all products
-  //get array of id of products
-  //pass the array of id of products to post request
+
   const paymentHandler = async (e) => {
     console.log(key_id);
     e.preventDefault();

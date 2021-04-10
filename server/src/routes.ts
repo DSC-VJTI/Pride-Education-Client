@@ -27,7 +27,7 @@ router.post("/login", auth.verifyOTP, AuthController.login);
 // Product routes
 router.get("/products", ProductController.getProducts);
 router.get("/products/:id", ProductController.getProductById);
-router.get("/products/filter/:id", ProductController.getProductsByFilter);
+router.post("/product/filter", ProductController.getCoursesByFilter);
 
 router.post(
   "/admin/createProduct/",
@@ -73,5 +73,8 @@ router.get(
   OrderController.getOrdersByUserId
 );
 router.post("/orders", auth.isAuthenticated, OrderController.addOrder);
+
+// Payment routes
+router.post("/pay/:paymentId", OrderController.payAmount);
 
 export default router;
