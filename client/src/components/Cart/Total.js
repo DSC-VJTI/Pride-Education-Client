@@ -11,6 +11,8 @@ import {
   Grid
 } from "@material-ui/core";
 import Button from "../UI Elements/Button";
+import { key_id, BASE_URL } from "../../constants";
+import Axios from "axios";
 
 const CartStyles = makeStyles({
   TotalCard: {
@@ -49,6 +51,37 @@ const Total = (props) => {
   const items = props.items;
   const title = `(Rs.${props.price})`;
   const classes = CartStyles();
+
+  const paymentHandler = async (e) => {
+    console.log(key_id);
+    e.preventDefault();
+    const options = {
+      key: key_id,
+      name: "Client CA",
+      description: "Test mode for our client",
+      amount: props.price * 100,
+      handler: async (response) => {
+        try {
+          const paymentId = response.razorpay_payment_id;
+          const url = `${BASE_URL}/pay/${paymentId}/`;
+          const captureResponse = await Axios.post(url, {
+            productIds: props.productID,
+            total: props.price * 100,
+            user: state.user
+          });
+          console.log(captureResponse.data);
+        } catch (err) {
+          console.log(err);
+        }
+      },
+      theme: {
+        color: "#686CFD"
+      }
+    };
+    const rzp1 = new window.Razorpay(options);
+    rzp1.open();
+  };
+
   return (
     <Grid container direction="column">
       <Card className={classes.TotalCard}>
@@ -70,12 +103,6 @@ const Total = (props) => {
                 {`Subtotal (${items} items) : ${title}`}
               </Typography>
             </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox />}
-                label="This order contains a gift"
-              />
-            </Grid>
           </Grid>
         </CardContent>
         <CardActions>
@@ -86,6 +113,7 @@ const Total = (props) => {
             text="Proceed to buy"
             type="submit"
             className={classes.totalButton}
+            onClick={paymentHandler}
           />
         </CardActions>
       </Card>

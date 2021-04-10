@@ -7,6 +7,7 @@ import adminMiddleware from "./middleware/admin.middleware";
 import CartController from "./controllers/cart.controller";
 import OrderController from "./controllers/order.controller";
 import uploader from "./utility/uploader";
+import QueryController from "./controllers/query.controller";
 const router = express.Router();
 
 // Basic route
@@ -27,7 +28,7 @@ router.post("/login", auth.verifyOTP, AuthController.login);
 // Product routes
 router.get("/products", ProductController.getProducts);
 router.get("/products/:id", ProductController.getProductById);
-router.get("/products/filter/:id", ProductController.getProductsByFilter);
+router.get("/product/filter", ProductController.getCoursesByFilter);
 
 router.post(
   "/admin/createProduct/",
@@ -62,14 +63,31 @@ router.get(
 );
 
 //cart routes
-router.post("/cart", CartController.showCart);
-router.post("/cart/:productId", CartController.addToCart);
-router.delete("/cart/:productId", CartController.removeFromCart);
+router.post("/cart", auth.isAuthenticated, CartController.showCart);
+router.post("/cart/:productId", auth.isAuthenticated, CartController.addToCart);
+router.delete(
+  "/cart/:productId",
+  auth.isAuthenticated,
+  CartController.removeFromCart
+);
 
 // Order routes
-router.get("/orders", OrderController.getOrders);
-router.get("/orders/:id", OrderController.getOrderById);
-router.get("/orders/user/:user_id", OrderController.getOrdersByUserId);
-router.post("/orders", OrderController.addOrder);
+router.get("/orders", auth.isAuthenticated, OrderController.getOrders);
+router.get("/orders/:id", auth.isAuthenticated, OrderController.getOrderById);
+router.get(
+  "/orders/user/:user_id",
+  auth.isAuthenticated,
+  OrderController.getOrdersByUserId
+);
+router.post("/orders", auth.isAuthenticated, OrderController.addOrder);
+
+// Payment routes
+router.post("/pay/:paymentId", OrderController.payAmount);
+
+// Query routes
+router.get("/queries", adminMiddleware.isAdmin, QueryController.getQueries);
+router.post("/queries", QueryController.addQuery);
+router.put("/queries", QueryController.updateQuery);
+router.delete("/queries", adminMiddleware.isAdmin, QueryController.deleteQuery);
 
 export default router;

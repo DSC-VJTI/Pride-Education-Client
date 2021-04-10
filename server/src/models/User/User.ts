@@ -9,7 +9,20 @@ const UserSchema: Schema = new Schema({
   field: { type: String },
   level: { type: String },
   reference: { type: String },
-  isAdmin: { type: Boolean, required: true, default: false }
+  isAdmin: { type: Boolean, required: true, default: false },
+  transactions: [
+    {
+      amount: Number,
+      orderId: {
+        type: Schema.Types.ObjectId,
+        ref: "Order"
+      },
+      transactionId: String,
+      time: {
+        type: Date
+      }
+    }
+  ]
 });
 
 export default model<IUser>("User", UserSchema);
