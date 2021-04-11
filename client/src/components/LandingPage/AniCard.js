@@ -75,6 +75,18 @@ export default function AniCard({ name, text }) {
             {text}
           </Typography>
         </CardContent>
+        <Button
+          size="small"
+          className={classes.adjust}
+          style={{
+            backgroundColor: "#f26522",
+            borderRadius: "999999999999999999999999999px"
+          }}
+          color="primary"
+          variant="contained"
+        >
+          Learn More
+        </Button>
       </CardActionArea>
     </Card>
   );
