@@ -56,6 +56,7 @@ const auth = {
     res: express.Response,
     next: express.NextFunction
   ): express.Response | void {
+    console.log(req.headers.authorization);
     if (req.headers.authorization) {
       const token = req.headers.authorization.split(" ")[1];
       const response: IJWTResponse = jwtHandler.verifyJWT(token);

@@ -6,7 +6,7 @@ import router from "./routes";
 import dbConnect from "./config/dbconnect";
 dotenv.config();
 const app = express();
-
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 dbConnect();
 
 app.use(express.json({ limit: "10mb" }));
