@@ -8,7 +8,6 @@ import { useAuthState } from "../../context/context";
 const Landing = () => {
   // Just do this to access user details and token.
   const state = useAuthState();
-  console.log(state);
 
   return (
     <main>

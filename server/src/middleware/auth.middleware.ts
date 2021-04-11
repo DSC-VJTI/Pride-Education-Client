@@ -62,6 +62,9 @@ const auth = {
       if (response.success) {
         req.body = { ...req.body, ...response.jwtPayload };
         next();
+        return res
+          .status(200)
+          .json({ success: response.success, message: "Is authenticated" });
       } else {
         const { success, error } = response;
         return res.status(403).send({

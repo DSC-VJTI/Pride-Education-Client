@@ -24,6 +24,7 @@ router.post(
 router.post("/register", auth.verifyOTP, AuthController.register);
 router.post("/sendOtpLogin", auth.userExists("login"), AuthController.sendOTP);
 router.post("/login", auth.verifyOTP, AuthController.login);
+router.get("/verifyToken", auth.isAuthenticated);
 
 // Product routes
 router.get("/products", ProductController.getProducts);
