@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Container, Typography, makeStyles } from "@material-ui/core";
-import Page from "../UI Elements/Page";
+import Page from "./UI Elements/Page";
+import NotFound from "../../assets/images/adminimages/undraw_page_not_found_su7k.svg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,7 +41,7 @@ const NotFoundView = () => {
             <img
               alt="Under development"
               className={classes.image}
-              src="/static/images/undraw_page_not_found_su7k.svg"
+              src={NotFound}
             />
           </Box>
         </Container>

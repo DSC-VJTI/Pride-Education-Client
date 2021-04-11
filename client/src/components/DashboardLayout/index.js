@@ -5,6 +5,7 @@ import AdminDashboard from "./DashboardView";
 import Customer from "./CustomerListView";
 import Products from "./ProductListView";
 import Support from "./Support";
+import Orders from "./OrderListView";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,10 +50,11 @@ const DashboardLayout = () => {
       <div className={classes.wrapper}>
         <div className={classes.contentContainer}>
           <div className={classes.content}>
-            {contents === 0 && <AdminDashboard setState={setContents} />}
+            {contents === 0 && <AdminDashboard setCounter={setContents} />}
             {contents === 1 && <Customer />}
             {contents === 2 && <Products />}
-            {contents === 3 && <Support />}
+            {contents === 3 && <Orders />}
+            {contents === 4 && <Support />}
           </div>
         </div>
       </div>

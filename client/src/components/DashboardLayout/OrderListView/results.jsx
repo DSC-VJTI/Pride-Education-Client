@@ -1,60 +1,44 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
+import PropTypes from "prop-types";
 import moment from "moment";
 import PerfectScrollbar from "react-perfect-scrollbar";
-import PropTypes from "prop-types";
 import {
   Box,
-  Button,
   Card,
-  CardHeader,
-  Divider,
   Table,
   TableBody,
   TableCell,
   TableHead,
+  TablePagination,
   TableRow,
-  TableSortLabel,
   Tooltip,
+  TableSortLabel,
   makeStyles
 } from "@material-ui/core";
-import ArrowRightIcon from "@material-ui/icons/ArrowRight";
-import axios from "axios";
-import { BASE_URL } from "../../../constants";
-import { useAuthState } from "../../../context/context";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {},
-  actions: {
-    justifyContent: "flex-end"
+  avatar: {
+    marginRight: theme.spacing(2)
   }
 }));
 
-const LatestOrders = ({ className, setCounter, ...rest }) => {
+const Results = ({ className, orders, ...rest }) => {
   const classes = useStyles();
-  const [orders, setOrders] = useState([]);
-  const { token } = useAuthState();
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(0);
 
-  useEffect(() => {
-    axios
-      .get(BASE_URL + "/orders", {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      .then((res) => {
-        console.log(res.data.data);
-        setOrders(res.data.data.splice(0, 5));
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+  const handleLimitChange = (event) => {
+    setLimit(event.target.value);
+  };
+
+  const handlePageChange = (event, newPage) => {
+    setPage(newPage);
+  };
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
-      <CardHeader title="Latest Orders" />
-      <Divider />
       <PerfectScrollbar>
         <Box>
           <Table>
@@ -89,23 +73,22 @@ const LatestOrders = ({ className, setCounter, ...rest }) => {
           </Table>
         </Box>
       </PerfectScrollbar>
-      <Box display="flex" justifyContent="flex-end" p={2}>
-        <Button
-          color="primary"
-          endIcon={<ArrowRightIcon />}
-          size="small"
-          variant="text"
-          onClick={() => setCounter(3)}
-        >
-          View all
-        </Button>
-      </Box>
+      <TablePagination
+        component="div"
+        count={orders.length}
+        onChangePage={handlePageChange}
+        onChangeRowsPerPage={handleLimitChange}
+        page={page}
+        rowsPerPage={limit}
+        rowsPerPageOptions={[5, 10, 25]}
+      />
     </Card>
   );
 };
 
-LatestOrders.propTypes = {
-  className: PropTypes.string
+Results.propTypes = {
+  className: PropTypes.string,
+  orders: PropTypes.array.isRequired
 };
 
-export default LatestOrders;
+export default Results;

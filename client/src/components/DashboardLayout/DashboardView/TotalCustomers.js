@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const TotalCustomers = ({ className, setState, ...rest }) => {
+const TotalCustomers = ({ className, setCounter, ...rest }) => {
   const classes = useStyles();
   const { token } = useAuthState();
 
@@ -85,7 +85,7 @@ const TotalCustomers = ({ className, setState, ...rest }) => {
           endIcon={<ArrowRightIcon />}
           size="small"
           variant="text"
-          onClick={() => setState(1)}
+          onClick={() => setCounter(1)}
         >
           View all
         </Button>

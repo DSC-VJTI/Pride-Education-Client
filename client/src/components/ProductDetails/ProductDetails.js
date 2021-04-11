@@ -50,9 +50,6 @@ const ProductDetails = ({ match }) => {
       language: Language,
       type: CourseType,
       validity: Validity
-
-    
-
     });
 
     console.log(innerProduct.data.course);

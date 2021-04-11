@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Dashboard = ({ setState }) => {
+const Dashboard = ({ setCounter }) => {
   const classes = useStyles();
 
   return (
@@ -20,14 +20,14 @@ const Dashboard = ({ setState }) => {
       <Container maxWidth={false}>
         <Grid container spacing={3}>
           <Grid item lg={8} md={12} xl={9} xs={12}>
-            <LatestOrders setState={setState} />
+            <LatestOrders setCounter={setCounter} />
           </Grid>
           <Grid item lg={4} sm={6} xl={3} xs={12} container spacing={3}>
             <Grid item xs={12}>
-              <TotalCustomers setState={setState} />
+              <TotalCustomers setCounter={setCounter} />
             </Grid>
             <Grid item xs={12}>
-              <TotalQueries setState={setState} />
+              <TotalQueries setCounter={setCounter} />
             </Grid>
           </Grid>
         </Grid>

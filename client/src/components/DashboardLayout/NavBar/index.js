@@ -17,7 +17,8 @@ import {
   ShoppingBag as ShoppingBagIcon,
   Users as UsersIcon,
   HelpCircle as HelpCircleIcon,
-  User
+  User,
+  Database
 } from "react-feather";
 import NavItem from "./NavItem";
 import { useAuthState } from "../../../context/context";
@@ -34,6 +35,10 @@ const items = [
   {
     icon: ShoppingBagIcon,
     title: "Products"
+  },
+  {
+    icon: Database,
+    title: "Orders"
   },
   {
     icon: HelpCircleIcon,
