@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Container, Typography, makeStyles } from "@material-ui/core";
 import Page from "./UI Elements/Page";
-import NotFound from "../../assets/images/adminimages/undraw_page_not_found_su7k.svg";
+import NotFound from "../assets/images/adminimages/undraw_page_not_found_su7k.svg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,7 +30,11 @@ const NotFoundView = () => {
         justifyContent="center"
       >
         <Container maxWidth="md">
-          <Typography align="center" color="textPrimary" variant="h1">
+          <Typography
+            align="center"
+            style={{ color: "rgb(242, 101, 34)" }}
+            variant="h2"
+          >
             404: The page you are looking for isn’t here
           </Typography>
           <Typography align="center" color="textPrimary" variant="subtitle2">
