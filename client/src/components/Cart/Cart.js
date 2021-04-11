@@ -42,10 +42,11 @@ const initialFValues = [];
 
 const Cart = ({ match }) => {
   const state = useAuthState();
-  console.log(state);
+
   const [productID, setProductID] = useState([]);
   const [value, setValue] = useState(initialFValues);
   const [total, setTotal] = useState(0);
+
   const classes = CartStyles();
 
   const handleOnClick = (e) => {
@@ -73,19 +74,18 @@ const Cart = ({ match }) => {
   }, [value]);
 
   const fetchingProducts = async () => {
-    console.log(state.user);
-    const fetchedProduct = await axios.post(`${BASE_URL}/cart`, {
-      user: state.user
+    const fetchedProduct = await axios.post(`${BASE_URL}/cart`, state.user, {
+      headers: {
+        Authorization: `Bearer ${state.token}`
+      }
     });
-    console.log(fetchedProduct.data.myCart[0].products);
+
+    setValue(fetchedProduct.data.myCart[0].products);
   };
 
   useEffect(() => {
     fetchingProducts();
-    console.log("fetched");
   }, []);
-
-  console.log(match.params._id);
 
   return (
     <Grid container spacing={3} direction={"row"}>
@@ -101,7 +101,12 @@ const Cart = ({ match }) => {
       >
         <Container className={classes.style}>
           <div className={classes.header}>
-            <Typography variant="h3" color="primary">
+            <Typography
+              variant="h3"
+              style={{
+                color: "#f26f22"
+              }}
+            >
               Shopping Cart
             </Typography>
             <Divider />
@@ -116,11 +121,11 @@ const Cart = ({ match }) => {
                         id={cartItem._id}
                         title={cartItem.name}
                         content="Course"
-                        views={cartItem.views}
-                        validity={cartItem.validity}
+                        views={cartItem.course.views}
+                        validity={cartItem.course.validity}
                         price={cartItem.price}
                         instructor={cartItem.course.faculty}
-                        duration={cartItem.duration}
+                        duration={cartItem.course.duration}
                         onClick={handleOnClick}
                       />
                     </CardActions>
