@@ -50,7 +50,7 @@ const MyOrders = () => {
   const fetchingOrders = async () => {
     const fetchedOrders = await axios.get(`${BASE_URL}/orders`, {
       user: state.user,
-      headers: { Authorization: `Bearer ${state.token}` }
+      headers: { Authorization: `${state.token}` }
     });
     console.log(fetchedOrders.data.data);
   };
