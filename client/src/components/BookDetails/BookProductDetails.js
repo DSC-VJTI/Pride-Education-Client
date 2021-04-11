@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Grid, makeStyles } from "@material-ui/core";
 import BookDetails from "./BookDetails";
-import BuyingOptions from "./BookBuyingOptions";
+
 import ProductImages from "./BookProductImages";
 import axios from "axios";
 import { BASE_URL } from "../../constants";
@@ -36,9 +36,6 @@ const BookProductDetails = ({ match }) => {
         <Grid container item xs={6}>
           <Grid item xs={12} style={{ margin: "0rem 1.5rem" }}>
             <ProductImages />
-          </Grid>
-          <Grid item xs={12} style={{ margin: "0rem 1.5rem" }}>
-            <BuyingOptions />
           </Grid>
         </Grid>
         <Grid item xs={6}>

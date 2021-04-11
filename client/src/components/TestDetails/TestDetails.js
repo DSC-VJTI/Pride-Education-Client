@@ -36,7 +36,12 @@ const TestDetails = ({ product }) => {
   const AddToCart = async () => {
     const addingProduct = await axios.post(
       `${BASE_URL}/cart/${product._id}`,
-      state
+      state.user,
+      {
+        headers: {
+          Authorization: `Bearer ${state.token}`
+        }
+      }
     );
     setTimeout(() => {
       history.push("/cart");

@@ -1,5 +1,11 @@
 import React from "react";
-import { Card, CardHeader, Button, makeStyles } from "@material-ui/core";
+import {
+  Card,
+  CardHeader,
+  Button,
+  makeStyles,
+  Typography
+} from "@material-ui/core";
 import { Link } from "react-router-dom";
 import img1 from "../../../assets/images/resourceImages/img1.jpeg";
 
@@ -33,13 +39,14 @@ const ProductStyles = makeStyles({
   }
 });
 
-const Product = ({ title, instructor, buttonText, obj, rou, type }) => {
+const Product = ({ title, instructor, buttonText, obj, rou, type, lang }) => {
   const classes = ProductStyles();
   const isCourse = type === "course";
   return (
     <Card className={classes.classHolder}>
       <img src={img1} className={classes.CardImage} alt="Instructor" />
       <CardHeader title={title} subheader={instructor} />
+
       <Button className={classes.classButton}>
         <Link
           style={{ textDecoration: "none", color: "white" }}

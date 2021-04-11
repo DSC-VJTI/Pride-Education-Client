@@ -37,9 +37,6 @@ const TestProductDetails = ({ match }) => {
           <Grid item xs={12} style={{ margin: "0rem 1.5rem" }}>
             <ProductImages />
           </Grid>
-          <Grid item xs={12} style={{ margin: "0rem 1.5rem" }}>
-            <BuyingOptions />
-          </Grid>
         </Grid>
         <Grid item xs={6}>
           {"test" in product && <TestDetails product={product} />}
