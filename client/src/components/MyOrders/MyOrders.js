@@ -47,16 +47,7 @@ const MyOrders = () => {
   const state = useAuthState();
   const [value, setValue] = useState(prevOrders);
   const classes = useStyles();
-  const fetchingOrders = async () => {
-    const fetchedOrders = await axios.get(
-      `${BASE_URL}/orders/user/${state.user.id}`,
-      {
-        user: state.user,
-        headers: { Authorization: `Bearer ${state.token}` }
-      }
-    );
-    console.log(fetchedOrders);
-  };
+  const fetchingOrders = async () => {};
   useEffect(() => {
     fetchingOrders();
   }, []);
