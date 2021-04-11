@@ -46,7 +46,6 @@ const ProductDetails = ({ match }) => {
   const getProducts = async () => {
     const innerProduct = await axios.post(`${BASE_URL}/product/filter`, {
       subject: match.params.name,
-
       mode: Mode,
       language: Language,
       type: CourseType,
