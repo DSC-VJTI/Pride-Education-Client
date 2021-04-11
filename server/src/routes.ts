@@ -68,8 +68,8 @@ router.delete(
 // Order routes
 router.get("/orders", auth.isAuthenticated, OrderController.getOrders);
 router.get("/orders/:id", auth.isAuthenticated, OrderController.getOrderById);
-router.post(
-  "/orders/user",
+router.get(
+  "/orders/user/:id",
   auth.isAuthenticated,
   OrderController.getOrdersByUserId
 );
