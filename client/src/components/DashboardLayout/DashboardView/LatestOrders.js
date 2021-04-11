@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import moment from "moment";
 import { v4 as uuid } from "uuid";
@@ -21,10 +21,12 @@ import {
   makeStyles
 } from "@material-ui/core";
 import ArrowRightIcon from "@material-ui/icons/ArrowRight";
+import axios from "axios";
+import { BASE_URL } from "../../../constants";
+import { useAuthState } from "../../../context/context";
 
 const data = [
   {
-    id: uuid(),
     ref: "CDD1049",
     amount: 30.5,
     customer: {
@@ -34,7 +36,6 @@ const data = [
     status: "pending"
   },
   {
-    id: uuid(),
     ref: "CDD1048",
     amount: 25.1,
     customer: {
@@ -44,7 +45,6 @@ const data = [
     status: "delivered"
   },
   {
-    id: uuid(),
     ref: "CDD1047",
     amount: 10.99,
     customer: {
@@ -54,7 +54,6 @@ const data = [
     status: "refunded"
   },
   {
-    id: uuid(),
     ref: "CDD1046",
     amount: 96.43,
     customer: {
@@ -64,7 +63,6 @@ const data = [
     status: "pending"
   },
   {
-    id: uuid(),
     ref: "CDD1045",
     amount: 32.54,
     customer: {
@@ -74,7 +72,6 @@ const data = [
     status: "delivered"
   },
   {
-    id: uuid(),
     ref: "CDD1044",
     amount: 16.76,
     customer: {
@@ -94,7 +91,24 @@ const useStyles = makeStyles(() => ({
 
 const LatestOrders = ({ className, ...rest }) => {
   const classes = useStyles();
-  const [orders] = useState(data);
+  const [orders, setOrders] = useState([]);
+  const { token } = useAuthState();
+
+  useEffect(() => {
+    axios
+      .get(BASE_URL + "/orders", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then((res) => {
+        console.log(res.data.data);
+        setOrders(res.data.data.splice(0, 5));
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
@@ -105,7 +119,7 @@ const LatestOrders = ({ className, ...rest }) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Order Ref</TableCell>
+                <TableCell>Serial No.</TableCell>
                 <TableCell>Customer</TableCell>
                 <TableCell sortDirection="desc">
                   <Tooltip enterDelay={300} title="Sort">
@@ -114,20 +128,18 @@ const LatestOrders = ({ className, ...rest }) => {
                     </TableSortLabel>
                   </Tooltip>
                 </TableCell>
-                <TableCell>Status</TableCell>
+                <TableCell>Coupon</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {orders.map((order) => (
-                <TableRow hover key={order.id}>
-                  <TableCell>{order.ref}</TableCell>
-                  <TableCell>{order.customer.name}</TableCell>
+              {orders.map((order, idx) => (
+                <TableRow hover key={idx}>
+                  <TableCell>{idx + 1}</TableCell>
+                  <TableCell>{order.user}</TableCell>
                   <TableCell>
-                    {moment(order.createdAt).format("DD/MM/YYYY")}
+                    {moment(order.orderPlacedAt).format("DD/MM/YYYY")}
                   </TableCell>
-                  <TableCell>
-                    <Chip color="primary" label={order.status} size="small" />
-                  </TableCell>
+                  <TableCell>{order.coupon}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

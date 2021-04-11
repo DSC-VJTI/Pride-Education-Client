@@ -12,6 +12,19 @@ const QueryController = {
     }
   },
 
+  async getCountQueries(_: Request, res: Response): Promise<Response> {
+    try {
+      const count = await Query.countDocuments({}).lean();
+      return res.status(200).json({
+        count
+      });
+    } catch (err) {
+      return res.status(500).json({
+        error: err.message
+      });
+    }
+  },
+
   async addQuery(req: Request, res: Response): Promise<Response> {
     try {
       const query = await Query.create(req.body);

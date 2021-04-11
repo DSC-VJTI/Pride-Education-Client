@@ -16,16 +16,11 @@ import {
   BarChart as BarChartIcon,
   ShoppingBag as ShoppingBagIcon,
   Users as UsersIcon,
-  HelpCircle as HelpCircleIcon
+  HelpCircle as HelpCircleIcon,
+  User
 } from "react-feather";
 import NavItem from "./NavItem";
-import UserAvatar from "../../../assets/images/adminimages/avatar_6.png";
-
-const user = {
-  avatar: UserAvatar,
-  jobTitle: "Senior Developer",
-  name: "Katarina Smith"
-};
+import { useAuthState } from "../../../context/context";
 
 const items = [
   {
@@ -60,22 +55,21 @@ const useStyles = makeStyles(() => ({
   avatar: {
     cursor: "pointer",
     width: 64,
-    height: 64
+    height: 64,
+    backgroundColor: "rgb(242, 101, 34)"
   }
 }));
 
 const NavBar = ({ onMobileClose, openMobile, setContents }) => {
   const classes = useStyles();
+  const { user } = useAuthState();
 
   const content = (
     <Box height="100%" display="flex" flexDirection="column">
       <Box alignItems="center" display="flex" flexDirection="column" p={2}>
-        <Avatar className={classes.avatar} src={user.avatar} />
+        <Avatar className={classes.avatar} src={User} />
         <Typography className={classes.name} color="textPrimary" variant="h5">
           {user.name}
-        </Typography>
-        <Typography color="textSecondary" variant="body2">
-          {user.jobTitle}
         </Typography>
       </Box>
       <Divider />

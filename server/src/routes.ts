@@ -91,6 +91,12 @@ router.get(
   adminMiddleware.isAdmin,
   QueryController.getQueries
 );
+router.get(
+  "/queries/getCount",
+  auth.isAuthenticated,
+  adminMiddleware.isAdmin,
+  QueryController.getCountQueries
+);
 router.post("/queries", QueryController.addQuery);
 router.put(
   "/queries",

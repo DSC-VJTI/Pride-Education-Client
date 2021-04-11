@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from "react";
-import clsx from "clsx";
-import PropTypes from "prop-types";
 import {
   Avatar,
   Box,
+  Button,
   Card,
   CardContent,
-  Grid,
-  Typography,
-  makeStyles,
-  CircularProgress,
-  Button,
   CardHeader,
-  Divider
+  CircularProgress,
+  Divider,
+  Grid,
+  makeStyles,
+  Typography
 } from "@material-ui/core";
+import { ContactSupport } from "@material-ui/icons";
 import ArrowRightIcon from "@material-ui/icons/ArrowRight";
-import PeopleIcon from "@material-ui/icons/PeopleOutlined";
-import { useAuthState } from "../../../context/context";
 import axios from "axios";
+import clsx from "clsx";
+import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../../../constants";
+import { useAuthState } from "../../../context/context";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const TotalCustomers = ({ className, setState, ...rest }) => {
+const TotalQueries = ({ className, setState, ...rest }) => {
   const classes = useStyles();
   const { token } = useAuthState();
 
@@ -41,7 +41,7 @@ const TotalCustomers = ({ className, setState, ...rest }) => {
 
   useEffect(() => {
     axios
-      .get(BASE_URL + "/admin/getCountUsers", {
+      .get(BASE_URL + "/queries/getCount", {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -59,7 +59,7 @@ const TotalCustomers = ({ className, setState, ...rest }) => {
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
-      <CardHeader title="Total Customers" />
+      <CardHeader title="Total Queries" />
       <Divider />
       <CardContent>
         {isLoading ? (
@@ -68,7 +68,7 @@ const TotalCustomers = ({ className, setState, ...rest }) => {
           <Grid container justify="space-between" spacing={3}>
             <Grid item xs={6}>
               <Avatar className={classes.avatar}>
-                <PeopleIcon />
+                <ContactSupport />
               </Avatar>
             </Grid>
             <Grid item xs={6}>
@@ -85,7 +85,7 @@ const TotalCustomers = ({ className, setState, ...rest }) => {
           endIcon={<ArrowRightIcon />}
           size="small"
           variant="text"
-          onClick={() => setState(1)}
+          onClick={() => setState(3)}
         >
           View all
         </Button>
@@ -94,8 +94,8 @@ const TotalCustomers = ({ className, setState, ...rest }) => {
   );
 };
 
-TotalCustomers.propTypes = {
+TotalQueries.propTypes = {
   className: PropTypes.string
 };
 
-export default TotalCustomers;
+export default TotalQueries;

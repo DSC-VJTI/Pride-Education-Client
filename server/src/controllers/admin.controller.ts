@@ -205,7 +205,7 @@ const AdminController = {
     res: express.Response
   ): Promise<express.Response | void> {
     try {
-      const count = await User.count({}).lean();
+      const count = await User.countDocuments({}).lean();
       return res.status(200).json({
         count
       });
