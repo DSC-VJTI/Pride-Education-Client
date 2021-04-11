@@ -28,7 +28,7 @@ router.post("/login", auth.verifyOTP, AuthController.login);
 // Product routes
 router.get("/products", ProductController.getProducts);
 router.get("/products/:id", ProductController.getProductById);
-router.get("/product/filter", ProductController.getCoursesByFilter);
+router.post("/product/filter", ProductController.getCoursesByFilter);
 
 router.post(
   "/admin/createProduct/",
@@ -75,7 +75,7 @@ router.delete(
 router.get("/orders", auth.isAuthenticated, OrderController.getOrders);
 router.get("/orders/:id", auth.isAuthenticated, OrderController.getOrderById);
 router.get(
-  "/orders/user/:user_id",
+  "/orders/user",
   auth.isAuthenticated,
   OrderController.getOrdersByUserId
 );

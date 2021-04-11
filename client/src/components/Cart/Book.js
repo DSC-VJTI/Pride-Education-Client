@@ -23,15 +23,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Book = ({
-  title,
-  content,
-  price,
-  instructor,
-  onClick,
-  //   subject,
-  id
-}) => {
+const Book = ({ title, content, price, instructor, onClick, id }) => {
   const classes = useStyles();
 
   const handleOnClick = (e) => {
