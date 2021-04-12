@@ -29,7 +29,11 @@ const OrderListView = () => {
         }
       })
       .then((res) => {
-        setOrders(res.data.data);
+        setOrders(
+          res.data.data.filter(
+            (order) => order.hasOwnProperty("user") && !!order.user
+          )
+        );
       })
       .catch((err) => {
         console.log(err);

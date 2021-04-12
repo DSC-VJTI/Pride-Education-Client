@@ -1,24 +1,23 @@
+import React, { useEffect, useState } from "react";
+import clsx from "clsx";
+import PropTypes from "prop-types";
 import {
   Avatar,
   Box,
-  Button,
   Card,
   CardContent,
-  CardHeader,
-  CircularProgress,
-  Divider,
   Grid,
+  Typography,
   makeStyles,
-  Typography
+  CircularProgress,
+  Button,
+  CardHeader,
+  Divider
 } from "@material-ui/core";
-import { ContactSupport } from "@material-ui/icons";
 import ArrowRightIcon from "@material-ui/icons/ArrowRight";
-import axios from "axios";
-import clsx from "clsx";
-import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
-import { BASE_URL } from "../../../constants";
 import { useAuthState } from "../../../context/context";
+import axios from "axios";
+import { BASE_URL } from "../../../constants";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,7 +30,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const TotalQueries = ({ className, setCounter, ...rest }) => {
+const Total = ({
+  className,
+  apiRoute,
+  cardTitle,
+  Icon,
+  setCounter,
+  counter,
+  ...rest
+}) => {
   const classes = useStyles();
   const { token } = useAuthState();
 
@@ -41,7 +48,7 @@ const TotalQueries = ({ className, setCounter, ...rest }) => {
 
   useEffect(() => {
     axios
-      .get(BASE_URL + "/queries/getCount", {
+      .get(BASE_URL + apiRoute, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -59,7 +66,7 @@ const TotalQueries = ({ className, setCounter, ...rest }) => {
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
-      <CardHeader title="Total Queries" />
+      <CardHeader title={`Total ${cardTitle}`} />
       <Divider />
       <CardContent>
         {isLoading ? (
@@ -68,7 +75,7 @@ const TotalQueries = ({ className, setCounter, ...rest }) => {
           <Grid container justify="space-between" spacing={3}>
             <Grid item xs={6}>
               <Avatar className={classes.avatar}>
-                <ContactSupport />
+                <Icon />
               </Avatar>
             </Grid>
             <Grid item xs={6}>
@@ -85,7 +92,7 @@ const TotalQueries = ({ className, setCounter, ...rest }) => {
           endIcon={<ArrowRightIcon />}
           size="small"
           variant="text"
-          onClick={() => setCounter(4)}
+          onClick={() => setCounter(counter)}
         >
           View all
         </Button>
@@ -94,8 +101,13 @@ const TotalQueries = ({ className, setCounter, ...rest }) => {
   );
 };
 
-TotalQueries.propTypes = {
-  className: PropTypes.string
+Total.propTypes = {
+  className: PropTypes.string,
+  apiRoute: PropTypes.string.isRequired,
+  cardTitle: PropTypes.string.isRequired,
+  Icon: PropTypes.node.isRequired,
+  setCounter: PropTypes.func.isRequired,
+  counter: PropTypes.number.isRequired
 };
 
-export default TotalQueries;
+export default Total;

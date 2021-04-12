@@ -24,7 +24,9 @@ import { BASE_URL } from "../../../constants";
 import { useAuthState } from "../../../context/context";
 
 const useStyles = makeStyles(() => ({
-  root: {},
+  root: {
+    height: "100%"
+  },
   actions: {
     justifyContent: "flex-end"
   }
@@ -43,8 +45,11 @@ const LatestOrders = ({ className, setCounter, ...rest }) => {
         }
       })
       .then((res) => {
-        console.log(res.data.data);
-        setOrders(res.data.data.splice(0, 5));
+        setOrders(
+          res.data.data
+            .filter((order) => order.hasOwnProperty("user") && !!order.user)
+            .splice(0, 5)
+        );
       })
       .catch((err) => {
         console.error(err);
@@ -77,7 +82,7 @@ const LatestOrders = ({ className, setCounter, ...rest }) => {
               {orders.map((order, idx) => (
                 <TableRow hover key={idx}>
                   <TableCell>{idx + 1}</TableCell>
-                  <TableCell>{order.user}</TableCell>
+                  <TableCell>{order.user?.name}</TableCell>
                   <TableCell>
                     {moment(order.orderPlacedAt).format("DD/MM/YYYY")}
                   </TableCell>

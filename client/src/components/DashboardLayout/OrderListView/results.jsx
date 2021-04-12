@@ -61,7 +61,7 @@ const Results = ({ className, orders, ...rest }) => {
               {orders.map((order, idx) => (
                 <TableRow hover key={idx}>
                   <TableCell>{idx + 1}</TableCell>
-                  <TableCell>{order.user}</TableCell>
+                  <TableCell>{order.user.name}</TableCell>
                   <TableCell>
                     {moment(order.orderPlacedAt).format("DD/MM/YYYY")}
                   </TableCell>
