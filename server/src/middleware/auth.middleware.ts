@@ -61,10 +61,11 @@ const auth = {
       const response: IJWTResponse = jwtHandler.verifyJWT(token);
       if (response.success) {
         req.body = { ...req.body, ...response.jwtPayload };
-        next();
-        return res
-          .status(200)
-          .json({ success: response.success, message: "Is authenticated" });
+        if (req.query.verifyTokenOnly) {
+          return res
+            .status(201)
+            .json({ success: response.success, message: "Is authenticated" });
+        } else next();
       } else {
         const { success, error } = response;
         return res.status(403).send({

@@ -53,12 +53,15 @@ const Navbar = () => {
   const handleDrawer = () => {
     setOpen(true);
   };
-  const { token, isAuthenticated } = useAuthState();
+  const {
+    token,
+    isAuthenticated,
+    user: { isAdmin }
+  } = useAuthState();
   const dispatch = useAuthDispatch();
   const history = useHistory();
 
   useEffect(() => {
-    // console.log("in effect", token);
     verifyToken();
   }, []);
 
@@ -66,6 +69,7 @@ const Navbar = () => {
     if (token) {
       return axios
         .get(`${BASE_URL}/verifyToken`, {
+          params: { verifyTokenOnly: true },
           headers: { Authorization: `Bearer ${token}` }
         })
         .catch((err) => {
@@ -176,22 +180,38 @@ const Navbar = () => {
               </NavLink>
             </>
           ) : (
-            <div
-              className="hideOnMobile"
-              style={{
-                textDecoration: "none",
-                color: "#f26522",
-                textTransform: "uppercase",
-                marginRight: "15px",
-                cursor: "pointer"
-              }}
-              onClick={() => {
-                logout({ dispatch });
-                history.push("/");
-              }}
-            >
-              Logout
-            </div>
+            <>
+              {isAdmin && (
+                <NavLink
+                  to="/admin"
+                  className="hideOnMobile"
+                  style={{
+                    textDecoration: "none",
+                    color: "#f26522",
+                    textTransform: "uppercase",
+                    marginRight: "15px"
+                  }}
+                >
+                  Admin
+                </NavLink>
+              )}
+              <div
+                className="hideOnMobile"
+                style={{
+                  textDecoration: "none",
+                  color: "#f26522",
+                  textTransform: "uppercase",
+                  marginRight: "15px",
+                  cursor: "pointer"
+                }}
+                onClick={() => {
+                  logout({ dispatch });
+                  history.push("/");
+                }}
+              >
+                Logout
+              </div>
+            </>
           )}
         </Toolbar>
       </AppBar>

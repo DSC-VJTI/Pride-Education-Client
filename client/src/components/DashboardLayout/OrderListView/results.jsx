@@ -1,65 +1,44 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
+import PropTypes from "prop-types";
 import { format } from "date-fns";
 import PerfectScrollbar from "react-perfect-scrollbar";
-import PropTypes from "prop-types";
 import {
   Box,
-  Button,
   Card,
-  CardHeader,
-  Divider,
   Table,
   TableBody,
   TableCell,
   TableHead,
+  TablePagination,
   TableRow,
-  TableSortLabel,
   Tooltip,
+  TableSortLabel,
   makeStyles
 } from "@material-ui/core";
-import ArrowRightIcon from "@material-ui/icons/ArrowRight";
-import axios from "axios";
-import { BASE_URL } from "../../../constants";
-import { useAuthState } from "../../../context/context";
 
-const useStyles = makeStyles(() => ({
-  root: {
-    height: "100%"
-  },
-  actions: {
-    justifyContent: "flex-end"
+const useStyles = makeStyles((theme) => ({
+  root: {},
+  avatar: {
+    marginRight: theme.spacing(2)
   }
 }));
 
-const LatestOrders = ({ className, setCounter, ...rest }) => {
+const Results = ({ className, orders, ...rest }) => {
   const classes = useStyles();
-  const [orders, setOrders] = useState([]);
-  const { token } = useAuthState();
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(0);
 
-  useEffect(() => {
-    axios
-      .get(BASE_URL + "/orders", {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      .then((res) => {
-        setOrders(
-          res.data.data
-            .filter((order) => order.hasOwnProperty("user") && !!order.user)
-            .splice(0, 5)
-        );
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+  const handleLimitChange = (event) => {
+    setLimit(event.target.value);
+  };
+
+  const handlePageChange = (event, newPage) => {
+    setPage(newPage);
+  };
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
-      <CardHeader title="Latest Orders" />
-      <Divider />
       <PerfectScrollbar>
         <Box>
           <Table>
@@ -82,7 +61,7 @@ const LatestOrders = ({ className, setCounter, ...rest }) => {
               {orders.map((order, idx) => (
                 <TableRow hover key={idx}>
                   <TableCell>{idx + 1}</TableCell>
-                  <TableCell>{order.user?.name}</TableCell>
+                  <TableCell>{order.user.name}</TableCell>
                   <TableCell>
                     {format(new Date(order.orderPlacedAt), "dd/MM/yyyy")}
                   </TableCell>
@@ -94,23 +73,22 @@ const LatestOrders = ({ className, setCounter, ...rest }) => {
           </Table>
         </Box>
       </PerfectScrollbar>
-      <Box display="flex" justifyContent="flex-end" p={2}>
-        <Button
-          color="primary"
-          endIcon={<ArrowRightIcon />}
-          size="small"
-          variant="text"
-          onClick={() => setCounter(3)}
-        >
-          View all
-        </Button>
-      </Box>
+      <TablePagination
+        component="div"
+        count={orders.length}
+        onChangePage={handlePageChange}
+        onChangeRowsPerPage={handleLimitChange}
+        page={page}
+        rowsPerPage={limit}
+        rowsPerPageOptions={[5, 10, 25]}
+      />
     </Card>
   );
 };
 
-LatestOrders.propTypes = {
-  className: PropTypes.string
+Results.propTypes = {
+  className: PropTypes.string,
+  orders: PropTypes.array.isRequired
 };
 
-export default LatestOrders;
+export default Results;

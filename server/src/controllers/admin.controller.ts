@@ -198,6 +198,22 @@ const AdminController = {
         message: err.message
       });
     }
+  },
+
+  async getNumberOfCustomers(
+    _: express.Request,
+    res: express.Response
+  ): Promise<express.Response | void> {
+    try {
+      const count = await User.countDocuments({}).lean();
+      return res.status(200).json({
+        count
+      });
+    } catch (err) {
+      return res.status(500).json({
+        message: err.message
+      });
+    }
   }
 };
 
