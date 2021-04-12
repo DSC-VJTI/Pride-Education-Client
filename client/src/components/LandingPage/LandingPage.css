@@ -1,7 +1,7 @@
 #heroSection {
   display: grid;
   place-items: center;
-  background-image: url("./../../assets/images/landingImages/hero.jpg");
+  background-image: url("https://res.cloudinary.com/prideca/image/upload/v1618240174/hero_q1gkzb.jpg");
   background-attachment: fixed;
   background-position: center;
   text-align: center;
