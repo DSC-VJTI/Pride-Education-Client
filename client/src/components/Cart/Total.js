@@ -13,7 +13,7 @@ import {
 import Button from "../UI Elements/Button";
 import { key_id, BASE_URL } from "../../constants";
 import Axios from "axios";
-
+import { useAuthState } from "../../context/context";
 const CartStyles = makeStyles({
   TotalCard: {
     background: "white",
@@ -51,9 +51,8 @@ const Total = (props) => {
   const items = props.items;
   const title = `(Rs.${props.price})`;
   const classes = CartStyles();
-
+  const state = useAuthState();
   const paymentHandler = async (e) => {
-    console.log(key_id);
     e.preventDefault();
     const options = {
       key: key_id,
