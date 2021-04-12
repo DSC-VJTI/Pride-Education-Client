@@ -22,27 +22,41 @@ const OrderedItem = ({ title, price, instructor, buyDate }) => {
       <div
         style={{
           backgroundColor: "rgb(241, 241, 241)"
-          // display: "flex",
-          // flexDirection: "column",
-          // justifyContent: "center"
         }}
       >
         <div>
           <img
-            style={{ width: "40%", margin: "15px auto", display: "block" }}
+            style={{
+              width: "80%",
+              height: "40%",
+              margin: "20px auto",
+              display: "block"
+            }}
             src={download}
           />
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div>
+        <div
+          className="cardContentForOrder"
+          style={{
+            display: "flex",
+            border: "1px solid red",
+            justifyContent: "space-between"
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              height: "12vh"
+            }}
+          >
             <Typography
               style={{
                 fontWeight: "bold",
-                margin: "20px 0 20px 0",
+                fontSize: "20px",
                 color: "rgb(242, 101, 34)"
               }}
-              gutterBottom
-              variant="h6"
               color="primary"
             >
               {title}
@@ -50,10 +64,9 @@ const OrderedItem = ({ title, price, instructor, buyDate }) => {
             <Typography
               style={{
                 fontWeight: "bold",
-                margin: "20px 0 20px 0",
-                color: "rgb(242, 101, 34)"
+                color: "rgb(242, 101, 34)",
+                fontSize: "15px"
               }}
-              gutterBottom
               variant="body"
             >
               {`Bought on : ${new Date(buyDate).getDate()}/${new Date(
@@ -61,14 +74,20 @@ const OrderedItem = ({ title, price, instructor, buyDate }) => {
               ).getMonth()}/${new Date(buyDate).getFullYear()}`}
             </Typography>
           </div>
-          <div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              height: "12vh"
+            }}
+          >
             <Typography
               style={{
                 fontWeight: "bold",
-                margin: "20px 0 20px 0",
+                fontSize: "20px",
                 color: "rgb(242, 101, 34)"
               }}
-              gutterBottom
               variant="subtitle2"
             >
               {`Rs.${price}`}
@@ -77,27 +96,20 @@ const OrderedItem = ({ title, price, instructor, buyDate }) => {
             <Typography
               style={{
                 fontWeight: "bold",
-                margin: "20px 0 20px 0",
-                color: "rgb(242, 101, 34)"
+                color: "rgb(242, 101, 34)",
+                fontSize: "15px"
               }}
-              gutterbottom
               variant="subtitle2"
             >
               By {instructor}
             </Typography>
           </div>
         </div>
-        {/* <CardActions
-          style={{
-            width: "100%",
-            textAlign: "center"
-          }}
-        > */}
         <Button
           style={{
             display: "block",
-            width: "60%",
-            margin: "10px auto"
+            width: "50%",
+            margin: "30px auto 0"
           }}
           variant="contained"
           color="primary"
@@ -105,7 +117,6 @@ const OrderedItem = ({ title, price, instructor, buyDate }) => {
           text="View Course"
           type="submit"
         />
-        {/* </CardActions> */}
       </div>
     </>
   );
