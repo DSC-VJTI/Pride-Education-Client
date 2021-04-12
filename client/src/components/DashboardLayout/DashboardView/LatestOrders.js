@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import clsx from "clsx";
-import moment from "moment";
+import { format } from "date-fns";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import PropTypes from "prop-types";
 import {
@@ -84,7 +84,7 @@ const LatestOrders = ({ className, setCounter, ...rest }) => {
                   <TableCell>{idx + 1}</TableCell>
                   <TableCell>{order.user?.name}</TableCell>
                   <TableCell>
-                    {moment(order.orderPlacedAt).format("DD/MM/YYYY")}
+                    {format(new Date(order.orderPlacedAt), "dd/MM/yyyy")}
                   </TableCell>
                   <TableCell>{order.coupon}</TableCell>
                   <TableCell>{order.total}</TableCell>

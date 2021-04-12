@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import clsx from "clsx";
 import PropTypes from "prop-types";
-import moment from "moment";
+import { format } from "date-fns";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import {
   Box,
@@ -63,7 +63,7 @@ const Results = ({ className, orders, ...rest }) => {
                   <TableCell>{idx + 1}</TableCell>
                   <TableCell>{order.user.name}</TableCell>
                   <TableCell>
-                    {moment(order.orderPlacedAt).format("DD/MM/YYYY")}
+                    {format(new Date(order.orderPlacedAt), "dd/MM/yyyy")}
                   </TableCell>
                   <TableCell>{order.coupon}</TableCell>
                   <TableCell>{order.total}</TableCell>
