@@ -17,12 +17,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import InboxIcon from "@material-ui/icons/Inbox";
 import MailIcon from "@material-ui/icons/Mail";
 import { Link, useHistory } from "react-router-dom";
-import { Menu } from "@material-ui/icons";
+import { ContactSupport, Menu } from "@material-ui/icons";
 import { NavLink } from "react-router-dom";
 import HomeIcon from "@material-ui/icons/Home";
 import ShopIcon from "@material-ui/icons/Shop";
 import { useAuthDispatch, useAuthState } from "../context/context";
 import { logout } from "../actions/authActions";
+import "./LandingPage/LandingPage.css";
+import { Book, LogOut, User } from "react-feather";
 
 const NavbarStyles = makeStyles({
   list: {
@@ -202,10 +204,29 @@ const Navbar = () => {
           }}
         >
           <List>
+            <Typography
+              variant="h6"
+              style={{
+                flexGrow: 1,
+                textAlign: "center",
+                marginBottom: "80px"
+              }}
+            >
+              <NavLink
+                to="/"
+                style={{
+                  textDecoration: "none",
+                  color: "#f26522"
+                }}
+              >
+                Pride Education
+              </NavLink>
+            </Typography>
+            <Divider />
             <NavLink to="/" className="fixLinks">
               <ListItem button onClick={() => setOpen(false)}>
                 <ListItemIcon>
-                  <HomeIcon />
+                  <HomeIcon htmlColor="rgb(242, 101, 34)" />
                 </ListItemIcon>
                 <ListItemText primary={"Home"} />
               </ListItem>
@@ -214,7 +235,7 @@ const Navbar = () => {
             <NavLink to="/support" className="fixLinks">
               <ListItem button onClick={() => setOpen(false)}>
                 <ListItemIcon>
-                  <HomeIcon />
+                  <ContactSupport htmlColor="rgb(242, 101, 34)" />
                 </ListItemIcon>
                 <ListItemText primary={"Support"} />
               </ListItem>
@@ -223,11 +244,66 @@ const Navbar = () => {
             <NavLink to="/classes" className="fixLinks">
               <ListItem button onClick={() => setOpen(false)}>
                 <ListItemIcon>
-                  <ShopIcon />
+                  <ShopIcon htmlColor="rgb(242, 101, 34)" />
                 </ListItemIcon>
                 <ListItemText primary={"Marketplace"} />
               </ListItem>
             </NavLink>
+            <NavLink to={"/resources"} className="fixLinks">
+              <ListItem button onClick={() => setOpen(false)}>
+                <ListItemIcon>
+                  <Book color="rgb(242, 101, 34)" />
+                </ListItemIcon>
+                <ListItemText primary={"Resources"} />
+              </ListItem>
+            </NavLink>
+            {!isAuthenticated ? (
+              <>
+                <NavLink to="/login" className="fixLinks">
+                  <ListItem button onClick={() => setOpen(false)}>
+                    <ListItemIcon>
+                      <User color="rgb(242, 101, 34)" />
+                    </ListItemIcon>
+                    <ListItemText primary={"Login"} />
+                  </ListItem>
+                </NavLink>
+                <NavLink to="/register" className="fixLinks">
+                  <ListItem button onClick={() => setOpen(false)}>
+                    <ListItemIcon>
+                      <User color="rgb(242, 101, 34)" />
+                    </ListItemIcon>
+                    <ListItemText primary={"Register"} />
+                  </ListItem>
+                </NavLink>
+              </>
+            ) : (
+              <>
+                {isAdmin && (
+                  <NavLink to="/admin" className="fixLinks">
+                    <ListItem button onClick={() => setOpen(false)}>
+                      <ListItemIcon>
+                        <User color="rgb(242, 101, 34)" />
+                      </ListItemIcon>
+                      <ListItemText primary={"Admin"} />
+                    </ListItem>
+                  </NavLink>
+                )}
+                <div
+                  className="fixLinks"
+                  onClick={() => {
+                    logout({ dispatch });
+                    history.push("/");
+                  }}
+                >
+                  <ListItem button onClick={() => setOpen(false)}>
+                    <ListItemIcon>
+                      <LogOut color="rgb(242, 101, 34)" />
+                    </ListItemIcon>
+                    <ListItemText primary={"Logout"} />
+                  </ListItem>
+                </div>
+              </>
+            )}
           </List>
         </div>
       </Drawer>
