@@ -12,6 +12,19 @@ const QueryController = {
     }
   },
 
+  async getCountQueries(_: Request, res: Response): Promise<Response> {
+    try {
+      const count = await Query.countDocuments({}).lean();
+      return res.status(200).json({
+        count
+      });
+    } catch (err) {
+      return res.status(500).json({
+        error: err.message
+      });
+    }
+  },
+
   async addQuery(req: Request, res: Response): Promise<Response> {
     try {
       const query = await Query.create(req.body);
@@ -39,7 +52,7 @@ const QueryController = {
 
   async deleteQuery(req: Request, res: Response): Promise<Response> {
     try {
-      await Query.findByIdAndRemove(req.body.query._id).lean();
+      await Query.findByIdAndRemove(req.params.id).lean();
       return res.status(204).json({});
     } catch (err) {
       return res.status(500).json({

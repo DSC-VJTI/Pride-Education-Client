@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Container, makeStyles } from "@material-ui/core";
 import Page from "../../UI Elements/Page";
-import Results from "./Results";
+import Results from "./results";
 import Toolbar from "../Toolbar";
 import axios from "axios";
 import { BASE_URL } from "../../../constants";
@@ -16,24 +16,24 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const CustomerListView = () => {
+const OrderListView = () => {
   const classes = useStyles();
   const { token } = useAuthState();
-  const [users, setUsers] = useState([]);
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     axios
-      .post(
-        BASE_URL + "/admin/getUsers",
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
+      .get(BASE_URL + "/orders", {
+        headers: {
+          Authorization: `Bearer ${token}`
         }
-      )
+      })
       .then((res) => {
-        setUsers(res.data.allUsers);
+        setOrders(
+          res.data.data.filter(
+            (order) => order.hasOwnProperty("user") && !!order.user
+          )
+        );
       })
       .catch((err) => {
         console.log(err);
@@ -43,13 +43,13 @@ const CustomerListView = () => {
   return (
     <Page className={classes.root} title="Customers">
       <Container maxWidth={false}>
-        <Toolbar title="customer" isButtonHidden={true} />
+        <Toolbar title="order" isButtonHidden={true} />
         <Box mt={3}>
-          <Results customers={users} />
+          <Results orders={orders} />
         </Box>
       </Container>
     </Page>
   );
 };
 
-export default CustomerListView;
+export default OrderListView;

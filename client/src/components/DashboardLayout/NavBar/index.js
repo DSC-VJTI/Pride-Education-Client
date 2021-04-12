@@ -13,23 +13,15 @@ import {
   makeStyles
 } from "@material-ui/core";
 import {
-  AlertCircle as AlertCircleIcon,
   BarChart as BarChartIcon,
-  Lock as LockIcon,
-  Settings as SettingsIcon,
   ShoppingBag as ShoppingBagIcon,
-  User as UserIcon,
-  UserPlus as UserPlusIcon,
-  Users as UsersIcon
+  Users as UsersIcon,
+  HelpCircle as HelpCircleIcon,
+  User,
+  Database
 } from "react-feather";
 import NavItem from "./NavItem";
-import UserAvatar from "../../../assets/images/adminimages/avatar_6.png";
-
-const user = {
-  avatar: UserAvatar,
-  jobTitle: "Senior Developer",
-  name: "Katarina Smith"
-};
+import { useAuthState } from "../../../context/context";
 
 const items = [
   {
@@ -43,37 +35,46 @@ const items = [
   {
     icon: ShoppingBagIcon,
     title: "Products"
+  },
+  {
+    icon: Database,
+    title: "Orders"
+  },
+  {
+    icon: HelpCircleIcon,
+    title: "Support"
   }
 ];
 
 const useStyles = makeStyles(() => ({
   mobileDrawer: {
-    width: 256
+    width: 256,
+    backgroundColor: "#f1f1f1"
   },
   desktopDrawer: {
     width: 256,
     top: 64,
-    height: "calc(100% - 64px)"
+    height: "calc(100% - 64px)",
+    backgroundColor: "#f1f1f1"
   },
   avatar: {
     cursor: "pointer",
     width: 64,
-    height: 64
+    height: 64,
+    backgroundColor: "rgb(242, 101, 34)"
   }
 }));
 
 const NavBar = ({ onMobileClose, openMobile, setContents }) => {
   const classes = useStyles();
+  const { user } = useAuthState();
 
   const content = (
     <Box height="100%" display="flex" flexDirection="column">
       <Box alignItems="center" display="flex" flexDirection="column" p={2}>
-        <Avatar className={classes.avatar} src={user.avatar} />
+        <Avatar className={classes.avatar} src={User} />
         <Typography className={classes.name} color="textPrimary" variant="h5">
           {user.name}
-        </Typography>
-        <Typography color="textSecondary" variant="body2">
-          {user.jobTitle}
         </Typography>
       </Box>
       <Divider />
