@@ -44,7 +44,8 @@ const AuthController = {
           _id: 1,
           name: 1,
           email: 1,
-          mobileNumber: 1
+          mobileNumber: 1,
+          isAdmin: 1
         })
         .lean();
 

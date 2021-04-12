@@ -53,12 +53,15 @@ const Toolbar = ({
         {!isButtonHidden &&
           (link ? (
             <Link to={link}>
-              <Button color="primary" variant="contained">
+              <Button
+                style={{ backgroundColor: "rgb(242, 101, 34)", color: "white" }}
+                variant="contained"
+              >
                 {`Add ${title}`}
               </Button>
             </Link>
           ) : (
-            <Button color="primary" variant="contained">
+            <Button color="rgb(242, 101, 34)" variant="contained">
               {`Add ${title}`}
             </Button>
           ))}

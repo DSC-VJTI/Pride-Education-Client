@@ -55,6 +55,12 @@ router.post(
   adminMiddleware.isAdmin,
   admin.getUsers
 );
+router.get(
+  "/admin/getCountUsers",
+  auth.isAuthenticated,
+  adminMiddleware.isAdmin,
+  admin.getNumberOfCustomers
+);
 
 //cart routes
 router.post("/cart", auth.isAuthenticated, CartController.showCart);
@@ -79,9 +85,30 @@ router.post("/orders", auth.isAuthenticated, OrderController.addOrder);
 router.post("/pay/:paymentId", OrderController.payAmount);
 
 // Query routes
-router.get("/queries", adminMiddleware.isAdmin, QueryController.getQueries);
+router.get(
+  "/queries",
+  auth.isAuthenticated,
+  adminMiddleware.isAdmin,
+  QueryController.getQueries
+);
+router.get(
+  "/queries/getCount",
+  auth.isAuthenticated,
+  adminMiddleware.isAdmin,
+  QueryController.getCountQueries
+);
 router.post("/queries", QueryController.addQuery);
-router.put("/queries", QueryController.updateQuery);
-router.delete("/queries", adminMiddleware.isAdmin, QueryController.deleteQuery);
+router.put(
+  "/queries",
+  auth.isAuthenticated,
+  adminMiddleware.isAdmin,
+  QueryController.updateQuery
+);
+router.delete(
+  "/queries/:id",
+  auth.isAuthenticated,
+  adminMiddleware.isAdmin,
+  QueryController.deleteQuery
+);
 
 export default router;

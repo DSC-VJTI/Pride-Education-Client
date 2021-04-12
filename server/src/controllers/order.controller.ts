@@ -8,36 +8,42 @@ const OrderController = {
   async getOrders(_: Request, res: Response): Promise<Response> {
     try {
       const data = await Order.find({})
-        .populate({
-          path: "products",
-          select: ["_id", "name", "price", "discount"],
-          populate: [
-            {
-              path: "course",
-              select: [
-                "mode",
-                "faculty",
-                "level",
-                "subject",
-                "type",
-                "applicableExamDate",
-                "language",
-                "duration",
-                "sysReq",
-                "views",
-                "validity"
-              ]
-            },
-            {
-              path: "test",
-              select: ["subject", "contents"]
-            },
-            {
-              path: "book",
-              select: ["url", "_id", "file"]
-            }
-          ]
-        })
+        .populate([
+          {
+            path: "user",
+            select: ["name"]
+          },
+          {
+            path: "products",
+            select: ["_id", "name", "price", "discount"],
+            populate: [
+              {
+                path: "course",
+                select: [
+                  "mode",
+                  "faculty",
+                  "level",
+                  "subject",
+                  "type",
+                  "applicableExamDate",
+                  "language",
+                  "duration",
+                  "sysReq",
+                  "views",
+                  "validity"
+                ]
+              },
+              {
+                path: "test",
+                select: ["subject", "contents"]
+              },
+              {
+                path: "book",
+                select: ["url", "_id", "file"]
+              }
+            ]
+          }
+        ])
         .lean();
 
       return res.status(200).json({ data });

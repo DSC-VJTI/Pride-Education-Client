@@ -51,7 +51,10 @@ const Navbar = () => {
   const handleDrawer = () => {
     setOpen(true);
   };
-  const { isAuthenticated } = useAuthState();
+  const {
+    isAuthenticated,
+    user: { isAdmin }
+  } = useAuthState();
   const dispatch = useAuthDispatch();
   const history = useHistory();
 
@@ -155,22 +158,38 @@ const Navbar = () => {
               </NavLink>
             </>
           ) : (
-            <div
-              className="hideOnMobile"
-              style={{
-                textDecoration: "none",
-                color: "#f26522",
-                textTransform: "uppercase",
-                marginRight: "15px",
-                cursor: "pointer"
-              }}
-              onClick={() => {
-                logout({ dispatch });
-                history.push("/");
-              }}
-            >
-              Logout
-            </div>
+            <>
+              {isAdmin && (
+                <NavLink
+                  to="/admin"
+                  className="hideOnMobile"
+                  style={{
+                    textDecoration: "none",
+                    color: "#f26522",
+                    textTransform: "uppercase",
+                    marginRight: "15px"
+                  }}
+                >
+                  Admin
+                </NavLink>
+              )}
+              <div
+                className="hideOnMobile"
+                style={{
+                  textDecoration: "none",
+                  color: "#f26522",
+                  textTransform: "uppercase",
+                  marginRight: "15px",
+                  cursor: "pointer"
+                }}
+                onClick={() => {
+                  logout({ dispatch });
+                  history.push("/");
+                }}
+              >
+                Logout
+              </div>
+            </>
           )}
         </Toolbar>
       </AppBar>
