@@ -1,7 +1,8 @@
 import React from "react";
 import { Divider, Grid, Typography, makeStyles } from "@material-ui/core";
 import download from "../../Resources/img1.jpeg";
-
+import { CardActions } from "@material-ui/core";
+import Button from "../UI Elements/Button";
 const useStyles = makeStyles((theme) => ({
   root: {
     "& img": {
@@ -17,35 +18,96 @@ const useStyles = makeStyles((theme) => ({
 const OrderedItem = ({ title, price, instructor, buyDate }) => {
   const classes = useStyles();
   return (
-    <Grid container spacing={2} className={classes.root}>
-      <Grid item xs={12} sm={5} style={{ paddingLeft: "10px" }}>
+    <>
+      <div
+        style={{
+          backgroundColor: "rgb(241, 241, 241)"
+          // display: "flex",
+          // flexDirection: "column",
+          // justifyContent: "center"
+        }}
+      >
         <div>
-          <img src={download} />
+          <img
+            style={{ width: "40%", margin: "15px auto", display: "block" }}
+            src={download}
+          />
         </div>
-      </Grid>
-
-      <Grid item xs={12} container sm={7} style={{ paddingLeft: "40px" }}>
-        <Grid item xs={8}>
-          <Typography gutterBottom variant="h6" color="primary">
-            {title}
-          </Typography>
-          <Typography gutterBottom variant="body">
-            {/* {`Bought on: ${buyDate.getDate()}/${buyDate.getMonth()}/${
-              buyDate.getYear() - 100
-            }`} */}
-          </Typography>
-        </Grid>
-        <Grid item xs={4}>
-          <Typography gutterBottom variant="subtitle2">
-            {`Rs.${price}`}
-          </Typography>
-          <Divider />
-          <Typography gutterbottom variant="subtitle2">
-            By {instructor}
-          </Typography>
-        </Grid>
-      </Grid>
-    </Grid>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div>
+            <Typography
+              style={{
+                fontWeight: "bold",
+                margin: "20px 0 20px 0",
+                color: "rgb(242, 101, 34)"
+              }}
+              gutterBottom
+              variant="h6"
+              color="primary"
+            >
+              {title}
+            </Typography>
+            <Typography
+              style={{
+                fontWeight: "bold",
+                margin: "20px 0 20px 0",
+                color: "rgb(242, 101, 34)"
+              }}
+              gutterBottom
+              variant="body"
+            >
+              {`Bought on : ${new Date(buyDate).getDate()}/${new Date(
+                buyDate
+              ).getMonth()}/${new Date(buyDate).getFullYear()}`}
+            </Typography>
+          </div>
+          <div>
+            <Typography
+              style={{
+                fontWeight: "bold",
+                margin: "20px 0 20px 0",
+                color: "rgb(242, 101, 34)"
+              }}
+              gutterBottom
+              variant="subtitle2"
+            >
+              {`Rs.${price}`}
+            </Typography>
+            <Divider />
+            <Typography
+              style={{
+                fontWeight: "bold",
+                margin: "20px 0 20px 0",
+                color: "rgb(242, 101, 34)"
+              }}
+              gutterbottom
+              variant="subtitle2"
+            >
+              By {instructor}
+            </Typography>
+          </div>
+        </div>
+        {/* <CardActions
+          style={{
+            width: "100%",
+            textAlign: "center"
+          }}
+        > */}
+        <Button
+          style={{
+            display: "block",
+            width: "60%",
+            margin: "10px auto"
+          }}
+          variant="contained"
+          color="primary"
+          size="large"
+          text="View Course"
+          type="submit"
+        />
+        {/* </CardActions> */}
+      </div>
+    </>
   );
 };
 

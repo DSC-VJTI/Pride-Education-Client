@@ -46,24 +46,55 @@ const prevOrders = [
 const MyOrders = () => {
   const state = useAuthState();
   const [value, setValue] = useState(prevOrders);
+  // const [value, setValue] = useState([]);
   const classes = useStyles();
-  const fetchingOrders = async () => {};
+  const fetchingOrders = async () => {
+    const fetchedOrders = await axios.post(
+      `${BASE_URL}/orders/user`,
+      state.user,
+      {
+        headers: {
+          Authorization: `Bearer ${state.token}`
+        }
+      }
+    );
+    setValue(fetchedOrders.data.data);
+    console.log(fetchedOrders.data.data);
+  };
   useEffect(() => {
     fetchingOrders();
   }, []);
   return (
-    <Grid container spacing={4}>
+    <Grid style={{ margin: "10px 0" }} container spacing={0}>
       <Grid item xs={0} md={2}></Grid>
       <Grid item md={8} spacing={2} className={classes.paper}>
-        <Container className={classes.style}>
+        <Container
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gridGap: "10px 60px"
+          }}
+          className={classes.style}
+        >
           {value.map((orderedItem) => (
-            <Paper>
+            <Paper
+              style={{
+                margin: "40px 0",
+                backgroundColor: "rgb(241, 241, 241)"
+              }}
+            >
               <OrderedItem
                 title={orderedItem.title}
                 price={orderedItem.price}
                 buyDate={orderedItem.buyDate}
                 instructor={orderedItem.instructor}
               />
+              {/* <OrderedItem
+                title={`${orderedItem.products[0].test.subject} Full Course`}
+                price={orderedItem.products[0].price}
+                buyDate={orderedItem.orderPlacedAt}
+                instructor={orderedItem.products[0].name}
+              /> */}
             </Paper>
           ))}
         </Container>
