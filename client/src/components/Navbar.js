@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Toolbar,
@@ -25,6 +25,8 @@ import { useAuthDispatch, useAuthState } from "../context/context";
 import { logout } from "../actions/authActions";
 import "./LandingPage/LandingPage.css";
 import { Book, LogOut, User } from "react-feather";
+import { BASE_URL } from "../constants";
+import axios from "axios";
 
 const NavbarStyles = makeStyles({
   list: {
@@ -54,11 +56,31 @@ const Navbar = () => {
     setOpen(true);
   };
   const {
+    token,
     isAuthenticated,
     user: { isAdmin }
   } = useAuthState();
   const dispatch = useAuthDispatch();
   const history = useHistory();
+
+  useEffect(() => {
+    verifyToken();
+  }, []);
+
+  const verifyToken = async () => {
+    if (token) {
+      return axios
+        .get(`${BASE_URL}/verifyToken`, {
+          params: { verifyTokenOnly: true },
+          headers: { Authorization: `Bearer ${token}` }
+        })
+        .catch((err) => {
+          if (err.response.status === 403) {
+            logout({ dispatch });
+          }
+        });
+    }
+  };
 
   return (
     <div>

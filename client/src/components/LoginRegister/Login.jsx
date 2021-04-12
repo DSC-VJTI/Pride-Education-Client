@@ -51,7 +51,6 @@ const Login = (props) => {
     return vaildEmail;
   };
   const onBtnClick = (event) => {
-    console.log("hello");
     event.preventDefault();
     if (!isValidEmail()) {
       setWarningEmail("Please enter a valid Email Address");
