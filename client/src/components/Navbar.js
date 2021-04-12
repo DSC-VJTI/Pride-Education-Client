@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Toolbar,
@@ -23,6 +23,8 @@ import HomeIcon from "@material-ui/icons/Home";
 import ShopIcon from "@material-ui/icons/Shop";
 import { useAuthDispatch, useAuthState } from "../context/context";
 import { logout } from "../actions/authActions";
+import { BASE_URL } from "../constants";
+import axios from "axios";
 
 const NavbarStyles = makeStyles({
   list: {
@@ -51,9 +53,32 @@ const Navbar = () => {
   const handleDrawer = () => {
     setOpen(true);
   };
-  const { isAuthenticated } = useAuthState();
+  const {
+    token,
+    isAuthenticated,
+    user: { isAdmin }
+  } = useAuthState();
   const dispatch = useAuthDispatch();
   const history = useHistory();
+
+  useEffect(() => {
+    verifyToken();
+  }, []);
+
+  const verifyToken = async () => {
+    if (token) {
+      return axios
+        .get(`${BASE_URL}/verifyToken`, {
+          params: { verifyTokenOnly: true },
+          headers: { Authorization: `Bearer ${token}` }
+        })
+        .catch((err) => {
+          if (err.response.status === 403) {
+            logout({ dispatch });
+          }
+        });
+    }
+  };
 
   return (
     <div>
@@ -155,22 +180,38 @@ const Navbar = () => {
               </NavLink>
             </>
           ) : (
-            <div
-              className="hideOnMobile"
-              style={{
-                textDecoration: "none",
-                color: "#f26522",
-                textTransform: "uppercase",
-                marginRight: "15px",
-                cursor: "pointer"
-              }}
-              onClick={() => {
-                logout({ dispatch });
-                history.push("/");
-              }}
-            >
-              Logout
-            </div>
+            <>
+              {isAdmin && (
+                <NavLink
+                  to="/admin"
+                  className="hideOnMobile"
+                  style={{
+                    textDecoration: "none",
+                    color: "#f26522",
+                    textTransform: "uppercase",
+                    marginRight: "15px"
+                  }}
+                >
+                  Admin
+                </NavLink>
+              )}
+              <div
+                className="hideOnMobile"
+                style={{
+                  textDecoration: "none",
+                  color: "#f26522",
+                  textTransform: "uppercase",
+                  marginRight: "15px",
+                  cursor: "pointer"
+                }}
+                onClick={() => {
+                  logout({ dispatch });
+                  history.push("/");
+                }}
+              >
+                Logout
+              </div>
+            </>
           )}
         </Toolbar>
       </AppBar>

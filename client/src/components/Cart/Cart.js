@@ -45,6 +45,7 @@ const Cart = () => {
   const [productID, setProductID] = useState([]);
   const [value, setValue] = useState(initialFValues);
   const [total, setTotal] = useState(0);
+
   const classes = CartStyles();
 
   const handleOnClick = (e) => {
@@ -78,14 +79,13 @@ const Cart = () => {
   }, [value]);
 
   const fetchingProducts = async () => {
-    console.log(state.user);
-    const fetchedProduct = await axios.post(
-      `${BASE_URL}/cart`,
-      { user: state.user },
-      { headers: { Authorization: `Bearer ${state.token}` } }
-    );
-    setValue(fetchedProduct.data.myCart);
-    console.log(value);
+    const fetchedProduct = await axios.post(`${BASE_URL}/cart`, state.user, {
+      headers: {
+        Authorization: `Bearer ${state.token}`
+      }
+    });
+
+    setValue(fetchedProduct.data.myCart[0].products);
   };
 
   useEffect(() => {
@@ -106,7 +106,12 @@ const Cart = () => {
       >
         <Container className={classes.style}>
           <div className={classes.header}>
-            <Typography variant="h3" color="primary">
+            <Typography
+              variant="h3"
+              style={{
+                color: "#f26f22"
+              }}
+            >
               Shopping Cart
             </Typography>
             <Divider />

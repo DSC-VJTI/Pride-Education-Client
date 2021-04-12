@@ -44,7 +44,6 @@ const ClassPane = ({ Course, CoursesList }) => {
   useEffect(() => {
     getProducts();
   }, []);
-
   const breakPoints = [
     { width: 1, itemsToShow: 1 },
     { width: 600, itemsToShow: 2 },
@@ -81,6 +80,20 @@ const ClassPane = ({ Course, CoursesList }) => {
     setSubjects(uniqueSubjects);
   };
 
+  // console.log(us);
+  // const name = [...new Set(products.map((p) => p.name))];
+  // console.log(name);
+
+  const makeUniqueSubs = () => {
+    let subjectArray = [];
+    products.map((prod) => {
+      if ("course" in prod) {
+        subjectArray.concat(prod.course.subject);
+      }
+    });
+    const uniqueSubs = [...new Set(subjectArray)];
+    console.log("these are unique subs", subjectArray);
+  };
   return (
     <section>
       <ComboBox title="Test Series" />
@@ -116,7 +129,7 @@ const ClassPane = ({ Course, CoursesList }) => {
               <div data-aos="flip-right">
                 <Product
                   title={prod}
-                  // instructor={prod.course.faculty}
+                  instructor="Abhishek Khilwani"
                   buttonText="View Course"
                   obj={prod}
                   rou="/course/details"
