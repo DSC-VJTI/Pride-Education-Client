@@ -40,20 +40,25 @@ const CartStyles = makeStyles((theme) => ({
 
 const initialFValues = [];
 
-const Cart = ({ match }) => {
+const Cart = () => {
   const state = useAuthState();
-  console.log(state);
   const [productID, setProductID] = useState([]);
   const [value, setValue] = useState(initialFValues);
   const [total, setTotal] = useState(0);
   const classes = CartStyles();
 
   const handleOnClick = (e) => {
-    setValue(
-      value.filter((item) => {
-        return item._id !== e;
+    // setValue(
+    //   value.filter((item) => {
+    //     return item._id !== e;
+    //   })
+    // );
+    axios
+      .delete(`${BASE_URL}/cart/${e}`, {
+        headers: { Authorization: `Bearer ${state.token}` }
       })
-    );
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
@@ -74,22 +79,18 @@ const Cart = ({ match }) => {
 
   const fetchingProducts = async () => {
     console.log(state.user);
-    // const fetchedProduct = await axios.post(`${BASE_URL}/cart`, {user: state.user});
     const fetchedProduct = await axios.post(
       `${BASE_URL}/cart`,
       { user: state.user },
       { headers: { Authorization: `Bearer ${state.token}` } }
     );
-    console.log(fetchedProduct.data.myCart);
     setValue(fetchedProduct.data.myCart);
+    console.log(value);
   };
 
   useEffect(() => {
     fetchingProducts();
-    console.log("fetched");
   }, []);
-
-  console.log(match.params._id);
 
   return (
     <Grid container spacing={3} direction={"row"}>
