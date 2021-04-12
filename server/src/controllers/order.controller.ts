@@ -8,36 +8,42 @@ const OrderController = {
   async getOrders(_: Request, res: Response): Promise<Response> {
     try {
       const data = await Order.find({})
-        .populate({
-          path: "products",
-          select: ["_id", "name", "price", "discount"],
-          populate: [
-            {
-              path: "course",
-              select: [
-                "mode",
-                "faculty",
-                "level",
-                "subject",
-                "type",
-                "applicableExamDate",
-                "language",
-                "duration",
-                "sysReq",
-                "views",
-                "validity"
-              ]
-            },
-            {
-              path: "test",
-              select: ["subject", "contents"]
-            },
-            {
-              path: "book",
-              select: ["url", "_id", "file"]
-            }
-          ]
-        })
+        .populate([
+          {
+            path: "user",
+            select: ["name"]
+          },
+          {
+            path: "products",
+            select: ["_id", "name", "price", "discount"],
+            populate: [
+              {
+                path: "course",
+                select: [
+                  "mode",
+                  "faculty",
+                  "level",
+                  "subject",
+                  "type",
+                  "applicableExamDate",
+                  "language",
+                  "duration",
+                  "sysReq",
+                  "views",
+                  "validity"
+                ]
+              },
+              {
+                path: "test",
+                select: ["subject", "contents"]
+              },
+              {
+                path: "book",
+                select: ["url", "_id", "file"]
+              }
+            ]
+          }
+        ])
         .lean();
 
       return res.status(200).json({ data });
@@ -170,23 +176,34 @@ const OrderController = {
             const userId = req.body.user._id;
             const user = await User.findById(userId);
             if (user != null && response.statusCode === 200) {
-              let i;
-              for (i = 0; i < req.body.orderId.length; i++) {
+              try {
+                const newOrder = new Order({
+                  user: userId,
+                  products: req.body.productIds,
+                  total: req.body.total,
+                  address: req.body?.address,
+                  coupon: req.body?.coupon
+                });
+                await newOrder.save();
+
                 user.transactions.push({
                   amount: req.body.total,
                   transactionId: req.params.paymentId,
-                  orderId: req.body.productIds[i],
+                  orderId: newOrder._id,
                   time: new Date().getTime()
                 });
                 await user.save();
+                await Cart.findOneAndUpdate(
+                  { user: userId },
+                  { products: [] },
+                  { new: true }
+                );
+              } catch (err) {
+                isPaymentSucess = false;
               }
-
-              await Cart.findOneAndUpdate(
-                { user: userId },
-                { products: [] },
-                { new: true }
-              );
-            } else isPaymentSucess = false;
+            } else {
+              isPaymentSucess = false;
+            }
           }
         }
       );

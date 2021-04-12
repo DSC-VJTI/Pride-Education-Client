@@ -2,37 +2,45 @@ import React from "react";
 import { Container, Grid, makeStyles } from "@material-ui/core";
 import Page from "../../UI Elements/Page";
 import LatestOrders from "./LatestOrders";
-import LatestProducts from "./LatestProducts";
-import Sales from "./Sales";
-import TotalCustomers from "./TotalCustomers";
+import Total from "./Total";
+import { ContactSupport, PeopleOutlined } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.background.dark,
-    minHeight: "100%",
-    paddingBottom: theme.spacing(3),
-    paddingTop: theme.spacing(3)
+    backgroundColor: "#f1f1f1",
+    overflow: "hidden"
   }
 }));
 
-const Dashboard = () => {
+const Dashboard = ({ setCounter }) => {
   const classes = useStyles();
 
   return (
     <Page className={classes.root} title="Dashboard">
       <Container maxWidth={false}>
         <Grid container spacing={3}>
-          <Grid item md={12} xl={9} xs={12}>
-            <Sales />
-          </Grid>
-          {/* <Grid item lg={4} md={6} xl={3} xs={12}>
-            <LatestProducts />
-          </Grid> */}
           <Grid item lg={8} md={12} xl={9} xs={12}>
-            <LatestOrders />
+            <LatestOrders setCounter={setCounter} />
           </Grid>
-          <Grid item lg={3} sm={6} xl={3} xs={12}>
-            <TotalCustomers />
+          <Grid item lg={4} sm={6} xl={3} xs={12} container spacing={3}>
+            <Grid item xs={12}>
+              <Total
+                setCounter={setCounter}
+                counter={1}
+                apiRoute="/admin/getCountUsers"
+                cardTitle="Customers"
+                Icon={PeopleOutlined}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Total
+                setCounter={setCounter}
+                counter={4}
+                apiRoute="/queries/getCount"
+                cardTitle="Queries"
+                Icon={ContactSupport}
+              />
+            </Grid>
           </Grid>
         </Grid>
       </Container>
