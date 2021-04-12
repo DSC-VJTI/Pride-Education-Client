@@ -1,6 +1,21 @@
-@media(max-width:1480px)
+ /* @media(max-width:1137px)
 {
-    .cardContentForOrder{
-        flex-direction: column!important;
+    .orderPageResponsive{
+        width:80%!important;
     }
 }
+@media(max-width:924px)
+{
+    .orderPageResponsive{
+        margin:40px auto!important;
+    }
+    .orderImage{
+        width:40%!important;
+    }
+}
+@media(max-width:578px)
+{
+    .orderPageResponsive{
+        width: 90%!important;
+    }
+} */

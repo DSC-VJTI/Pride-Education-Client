@@ -1,14 +1,13 @@
 import React from "react";
 import { Divider, Grid, Typography, makeStyles } from "@material-ui/core";
 import download from "../../Resources/img1.jpeg";
-import { CardActions } from "@material-ui/core";
 import Button from "../UI Elements/Button";
+import "./Order.css";
 const useStyles = makeStyles((theme) => ({
   root: {
     "& img": {
       margin: "auto",
       display: "block",
-      width: "100%",
       height: "auto",
       maxWidth: "300px"
     }
@@ -26,9 +25,9 @@ const OrderedItem = ({ title, price, instructor, buyDate }) => {
       >
         <div>
           <img
+            className="orderImage"
             style={{
-              width: "80%",
-              height: "40%",
+              width: "35%",
               margin: "20px auto",
               display: "block"
             }}
@@ -36,79 +35,59 @@ const OrderedItem = ({ title, price, instructor, buyDate }) => {
           />
         </div>
         <div
-          className="cardContentForOrder"
           style={{
             display: "flex",
-            border: "1px solid red",
-            justifyContent: "space-between"
+            flexDirection: "column",
+            justifyContent: "space-between",
+            alignItems: "center",
+            height: "20vh"
           }}
         >
-          <div
+          <Typography
             style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              height: "12vh"
+              fontWeight: "bold",
+              fontSize: "20px",
+              color: "rgb(242, 101, 34)"
             }}
+            variant="subtitle2"
           >
-            <Typography
-              style={{
-                fontWeight: "bold",
-                fontSize: "20px",
-                color: "rgb(242, 101, 34)"
-              }}
-              color="primary"
-            >
-              {title}
-            </Typography>
-            <Typography
-              style={{
-                fontWeight: "bold",
-                color: "rgb(242, 101, 34)",
-                fontSize: "15px"
-              }}
-              variant="body"
-            >
-              {`Bought on : ${new Date(buyDate).getDate()}/${new Date(
-                buyDate
-              ).getMonth()}/${new Date(buyDate).getFullYear()}`}
-            </Typography>
-          </div>
-          <div
+            {`Rs.${price}`}
+          </Typography>
+          <Typography
             style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              height: "12vh"
+              fontWeight: "bold",
+              fontSize: "20px"
             }}
+            color="primary"
           >
-            <Typography
-              style={{
-                fontWeight: "bold",
-                fontSize: "20px",
-                color: "rgb(242, 101, 34)"
-              }}
-              variant="subtitle2"
-            >
-              {`Rs.${price}`}
-            </Typography>
-            <Divider />
-            <Typography
-              style={{
-                fontWeight: "bold",
-                color: "rgb(242, 101, 34)",
-                fontSize: "15px"
-              }}
-              variant="subtitle2"
-            >
-              By {instructor}
-            </Typography>
-          </div>
+            {title}
+          </Typography>
+
+          <Typography
+            style={{
+              fontWeight: "bold",
+              fontSize: "20px"
+            }}
+            variant="subtitle2"
+          >
+            By {instructor}
+          </Typography>
+          <Typography
+            style={{
+              fontWeight: "bold",
+              fontSize: "20px"
+            }}
+            variant="body"
+          >
+            {`Bought on : ${new Date(buyDate).getDate()}/${new Date(
+              buyDate
+            ).getMonth()}/${new Date(buyDate).getFullYear()}`}
+          </Typography>
         </div>
         <Button
           style={{
             display: "block",
-            width: "50%",
+            width: "30%",
             margin: "30px auto 0"
           }}
           variant="contained"
