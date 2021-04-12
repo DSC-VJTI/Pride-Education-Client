@@ -45,7 +45,7 @@ const prevOrders = [
 
 const MyOrders = () => {
   const state = useAuthState();
-  const [value, setValue] = useState(prevOrders);
+  const [value, setValue] = useState([]);
   // const [value, setValue] = useState([]);
   const classes = useStyles();
   const fetchingOrders = async () => {
@@ -88,17 +88,11 @@ const MyOrders = () => {
               }}
             >
               <OrderedItem
-                title={orderedItem.title}
-                price={orderedItem.price}
-                buyDate={orderedItem.buyDate}
-                instructor={orderedItem.instructor}
-              />
-              {/* <OrderedItem
                 title={`${orderedItem.products[0].test.subject} Full Course`}
                 price={orderedItem.products[0].price}
                 buyDate={orderedItem.orderPlacedAt}
                 instructor={orderedItem.products[0].name}
-              /> */}
+              />
             </Paper>
           ))}
         </Container>
