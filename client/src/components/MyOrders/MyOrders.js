@@ -1,7 +1,9 @@
 import { Container, Grid, makeStyles, Paper } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import OrderedItem from "./OrderedItem";
-
+import axios from "axios";
+import { BASE_URL } from "../../constants";
+import { useAuthState } from "../../context/context";
 const useStyles = makeStyles((theme) => ({
   style: {
     padding: "20px",
@@ -17,46 +19,53 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const prevOrders = [
-  {
-    id: 0,
-    title: "SCMPE Full Course",
-    price: 15000,
-    instructor: "CA Abhishek Khilwani",
-    buyDate: new Date()
-  },
-  {
-    id: 1,
-    title: "SCMPE Full Course",
-    price: 15000,
-    instructor: "CA Abhishek Khilwani",
-    buyDate: new Date()
-  },
-  {
-    id: 2,
-    title: "SCMPE Full Course",
-    price: 15000,
-    instructor: "CA Abhishek Khilwani",
-    buyDate: new Date()
-  }
-];
-
 const MyOrders = () => {
-  const [value, setValue] = useState(prevOrders);
+  const state = useAuthState();
+  const [value, setValue] = useState([]);
   const classes = useStyles();
-
+  const fetchingOrders = async () => {
+    const fetchedOrders = await axios.post(
+      `${BASE_URL}/orders/user`,
+      state.user,
+      {
+        headers: {
+          Authorization: `Bearer ${state.token}`
+        }
+      }
+    );
+    setValue(fetchedOrders.data.data);
+  };
+  useEffect(() => {
+    fetchingOrders();
+  }, []);
   return (
-    <Grid container spacing={4}>
+    <Grid style={{ margin: "10px 0" }} container spacing={0}>
       <Grid item xs={0} md={2}></Grid>
       <Grid item md={8} spacing={2} className={classes.paper}>
-        <Container className={classes.style}>
+        <Container
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center"
+          }}
+          className={classes.style}
+        >
           {value.map((orderedItem) => (
-            <Paper>
+            <Paper
+              className="orderPageResponsive"
+              style={{
+                backgroundColor: "rgb(241, 241, 241)",
+                width: "60%",
+                display: "block",
+                margin: "50px!important"
+              }}
+            >
               <OrderedItem
-                title={orderedItem.title}
-                price={orderedItem.price}
-                buyDate={orderedItem.buyDate}
-                instructor={orderedItem.instructor}
+                title={`${orderedItem.products[0].test.subject} Full Course`}
+                price={orderedItem.products[0].price}
+                buyDate={orderedItem.orderPlacedAt}
+                instructor={orderedItem.products[0].name}
               />
             </Paper>
           ))}
