@@ -54,8 +54,6 @@ const Cart = () => {
         Authorization: `Bearer ${state.token}`
       }
     });
-
-    console.log(deletedProduct);
   };
   const handleOnClick = (e) => {
     deleteProduct(e);
