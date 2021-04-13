@@ -23,8 +23,8 @@ $ npm run dev
 ```
 
 5. At the end of this, you should have
-- server running at `http://localhost:8000`
-- client running at `http://localhost:3000`
+server running at `http://localhost:8000`
+client running at `http://localhost:3000`
 
 ## Repository structure
 
