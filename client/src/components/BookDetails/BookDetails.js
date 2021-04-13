@@ -60,6 +60,7 @@ const BookDetails = ({ product }) => {
           spacing={3}
           style={{
             display: "flex",
+            flexWrap: "wrap",
             justifyContent: "space-around",
             alignItems: "center"
           }}

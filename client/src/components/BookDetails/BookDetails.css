@@ -1,0 +1,13 @@
+.grid
+{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    justify-content: center;
+    grid-gap: 50px;
+}
+@media(max-width:760px)
+{
+    .grid{
+        grid-template-columns: 1fr;
+    }
+}
