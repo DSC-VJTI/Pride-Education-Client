@@ -119,7 +119,7 @@ const Navbar = () => {
             </NavLink>
           </Typography>
           <NavLink
-            to={isProd ? "/coming" : "/support"}
+            to="/support"
             className="hideOnMobile"
             style={{
               textDecoration: "none",
@@ -131,7 +131,7 @@ const Navbar = () => {
             Support
           </NavLink>
           <NavLink
-            to={isProd ? "/coming" : "/classes"}
+            to="/classes"
             className="hideOnMobile"
             style={{
               textDecoration: "none",
