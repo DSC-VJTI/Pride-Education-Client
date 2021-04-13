@@ -49,78 +49,124 @@ const TestDetails = ({ product }) => {
   };
   return (
     <div>
-      <div className={classes.root}>
-        <Typography style={{ margin: "0px", padding: "0px" }}>
-          {product.name}
-        </Typography>
-        <Button
-          text={"Add To Cart"}
-          onClick={AddToCart}
-          style={{ margin: "1rem" }}
-        ></Button>
-      </div>
+      <Grid container spacing={2} className={classes.root}>
+        <Grid
+          item
+          xs={12}
+          spacing={3}
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            alignItems: "center"
+          }}
+        >
+          <Typography style={{ margin: "0px", padding: "0px" }}>
+            {product.name}
+          </Typography>
+          <Button
+            text={"Add To Cart"}
+            onClick={AddToCart}
+            style={{ margin: "1rem" }}
+          ></Button>
+        </Grid>
 
-      <Divider variant="fullWidth" />
+        <Divider variant="fullWidth" />
 
-      <Typography>Price</Typography>
-      <Typography variant={"h6"}>About this Item</Typography>
-      <Divider />
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="left" size="small">
-                Details
-              </TableCell>
-              <TableCell align="left" size="small">
-                Information
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            <TableRow>
-              <TableCell component="th" scope="row" align="left" size="small">
-                Name
-              </TableCell>
-              <TableCell align="left" size="small">
-                {product.name}
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell component="th" scope="row" align="left" size="small">
-                Price
-              </TableCell>
-              <TableCell align="left" size="small">
-                ₹ {product.price}
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell component="th" scope="row" align="left" size="small">
-                Discount
-              </TableCell>
-              <TableCell align="left" size="small">
-                ₹ {product.discount}
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell component="th" scope="row" align="left" size="small">
-                Subject
-              </TableCell>
-              <TableCell align="left" size="small">
-                {product.test.subject}
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell component="th" scope="row" align="left" size="small">
-                System Requirements
-              </TableCell>
-              <TableCell align="left" size="small">
-                Windows 7 Minimum
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
+        <Grid item xs={12}>
+          <Typography>Price</Typography>
+          <Typography variant={"h6"}>About this Item</Typography>
+          <Divider />
+          <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell
+                    align="left"
+                    size="small"
+                    style={{ width: "fit-content" }}
+                  >
+                    Details
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    size="small"
+                    style={{ width: "fit-content" }}
+                  >
+                    Information
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow style={{ width: "fit-content" }}>
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    align="left"
+                    size="small"
+                  >
+                    Name
+                  </TableCell>
+                  <TableCell align="left" size="small">
+                    {product.name}
+                  </TableCell>
+                </TableRow>
+                <TableRow style={{ width: "fit-content" }}>
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    align="left"
+                    size="small"
+                  >
+                    Price
+                  </TableCell>
+                  <TableCell align="left" size="small">
+                    ₹ {product.price}
+                  </TableCell>
+                </TableRow>
+                <TableRow style={{ width: "fit-content" }}>
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    align="left"
+                    size="small"
+                  >
+                    Discount
+                  </TableCell>
+                  <TableCell align="left" size="small">
+                    ₹ {product.discount}
+                  </TableCell>
+                </TableRow>
+                <TableRow style={{ width: "fit-content" }}>
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    align="left"
+                    size="small"
+                  >
+                    Subject
+                  </TableCell>
+                  <TableCell align="left" size="small">
+                    {product.test.subject}
+                  </TableCell>
+                </TableRow>
+                <TableRow style={{ width: "fit-content" }}>
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    align="left"
+                    size="small"
+                  >
+                    System Requirements
+                  </TableCell>
+                  <TableCell align="left" size="small">
+                    Windows 7 Minimum
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Grid>
+      </Grid>
     </div>
   );
 };

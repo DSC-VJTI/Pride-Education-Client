@@ -46,9 +46,9 @@ const ClassPane = ({ Course, CoursesList }) => {
   }, []);
   const breakPoints = [
     { width: 1, itemsToShow: 1 },
-    { width: 600, itemsToShow: 2 },
-    { width: 900, itemsToShow: 3 },
-    { width: 1100, itemsToShow: 3 }
+    { width: 600, itemsToShow: 1 },
+    { width: 900, itemsToShow: 1 },
+    { width: 1100, itemsToShow: 2 }
   ];
 
   const classes = ClassPaneStyles();

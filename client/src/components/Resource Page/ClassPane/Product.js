@@ -44,7 +44,16 @@ const Product = ({ title, instructor, buttonText, obj, rou, type, lang }) => {
   const isCourse = type === "course";
   return (
     <Card className={classes.classHolder}>
-      <img src={img1} className={classes.CardImage} alt="Instructor" />
+      <img
+        src={img1}
+        style={{
+          display: "block",
+          maxWidth: "300px",
+          minWidth: "200px"
+        }}
+        className={classes.CardImage}
+        alt="Instructor"
+      />
       <CardHeader title={title} subheader={instructor} />
 
       <Button className={classes.classButton}>

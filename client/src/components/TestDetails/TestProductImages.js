@@ -5,12 +5,14 @@ import img1 from "../../assets/images/resourceImages/img1.jpeg";
 const TestImages = () => {
   return (
     <div>
-      <ReactPlayer
-        url="https://www.youtube.com/watch?v=UVCP4bKy9Iw"
-        controls
-        maxWidth="100%"
-        playsinline
-      />
+      <Grid container xs={12}>
+        <ReactPlayer
+          url="https://www.youtube.com/watch?v=UVCP4bKy9Iw"
+          controls
+          maxWidth="550px"
+          playsinline
+        />
+      </Grid>
     </div>
   );
 };
