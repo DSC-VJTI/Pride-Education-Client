@@ -47,6 +47,9 @@ img{
     h1,.pageLinks,.socialHandles{
         margin:13px 5px;
     }
+    .logo{
+        margin-top: 30px;
+    }
 }
 @media (max-width:391px)
 {
