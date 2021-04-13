@@ -19,34 +19,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const prevOrders = [
-  {
-    id: 0,
-    title: "SCMPE Full Course",
-    price: 15000,
-    instructor: "CA Abhishek Khilwani",
-    buyDate: new Date()
-  },
-  {
-    id: 1,
-    title: "SCMPE Full Course",
-    price: 15000,
-    instructor: "CA Abhishek Khilwani",
-    buyDate: new Date()
-  },
-  {
-    id: 2,
-    title: "SCMPE Full Course",
-    price: 15000,
-    instructor: "CA Abhishek Khilwani",
-    buyDate: new Date()
-  }
-];
-
 const MyOrders = () => {
   const state = useAuthState();
   const [value, setValue] = useState([]);
-  // const [value, setValue] = useState([]);
   const classes = useStyles();
   const fetchingOrders = async () => {
     const fetchedOrders = await axios.post(
