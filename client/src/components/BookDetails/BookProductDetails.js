@@ -1,14 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { Grid, makeStyles } from "@material-ui/core";
 import BookDetails from "./BookDetails";
-
+import download from "../../Resources/img1.jpeg";
 import ProductImages from "./BookProductImages";
 import axios from "axios";
 import { BASE_URL } from "../../constants";
+
 const ProductDetailsStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
-    margin: "auto"
+    "& div.MuiGrid-root.MuiGrid-spacing-xs-3": {
+      paddingTop: "10vh",
+      "@media (max-width: 1000px)": {
+        paddingTop: "1vh"
+      }
+    },
+    "& img": {
+      marginLeft: "auto",
+      marginRight: "auto",
+      display: "block",
+      width: "100%",
+      height: "auto",
+      maxWidth: "500px"
+    }
   },
   paper: {
     padding: theme.spacing(2),
@@ -16,6 +29,7 @@ const ProductDetailsStyles = makeStyles((theme) => ({
     color: theme.palette.text.primary
   }
 }));
+
 const BookProductDetails = ({ match }) => {
   const classes = ProductDetailsStyles();
   const [product, setProduct] = useState([]);
@@ -33,14 +47,13 @@ const BookProductDetails = ({ match }) => {
   return (
     <div className={classes.root} style={{ margin: "2rem" }}>
       <Grid container spacing={3}>
-        <Grid container item xs={6}>
-          <Grid item xs={12} style={{ margin: "0rem 1.5rem" }}>
-            <ProductImages />
-          </Grid>
+        <Grid container item md={6} xs={12}>
+          <img src={download} className={classes.root} />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item md={6} lg={5} xs={12}>
           {"book" in product && <BookDetails product={product} />}
         </Grid>
+        <Grid item lg={1} xs={false}></Grid>
       </Grid>
     </div>
   );

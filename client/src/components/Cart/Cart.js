@@ -48,18 +48,22 @@ const Cart = () => {
 
   const classes = CartStyles();
 
+  const deleteProduct = async (deleteId) => {
+    const deletedProduct = await axios.delete(`${BASE_URL}/cart/${deleteId}`, {
+      headers: {
+        Authorization: `Bearer ${state.token}`
+      }
+    });
+
+    console.log(deletedProduct);
+  };
   const handleOnClick = (e) => {
-    // setValue(
-    //   value.filter((item) => {
-    //     return item._id !== e;
-    //   })
-    // );
-    axios
-      .delete(`${BASE_URL}/cart/${e}`, {
-        headers: { Authorization: `Bearer ${state.token}` }
+    deleteProduct(e);
+    setValue(
+      value.filter((item) => {
+        return item._id !== e;
       })
-      .then((response) => console.log(response))
-      .catch((err) => console.log(err));
+    );
   };
 
   useEffect(() => {
@@ -124,7 +128,7 @@ const Cart = () => {
                     item
                     xs={12}
                     className={classes.paper}
-                    key={cartItem.id}
+                    key={cartItem._id}
                   >
                     <Card>
                       <CardActions>
@@ -132,11 +136,11 @@ const Cart = () => {
                           id={cartItem._id}
                           title={cartItem.name}
                           content="Course"
-                          views={cartItem.views}
-                          validity={cartItem.validity}
+                          views={cartItem.course.views}
+                          validity={cartItem.course.validity}
                           price={cartItem.price}
                           instructor={cartItem.course.faculty}
-                          duration={cartItem.duration}
+                          duration={cartItem.course.duration}
                           onClick={handleOnClick}
                         />
                       </CardActions>
@@ -149,7 +153,7 @@ const Cart = () => {
                     item
                     xs={12}
                     className={classes.paper}
-                    key={cartItem.id}
+                    key={cartItem._id}
                   >
                     <Card>
                       <CardActions>
@@ -172,7 +176,7 @@ const Cart = () => {
                     item
                     xs={12}
                     className={classes.paper}
-                    key={cartItem.id}
+                    key={cartItem._id}
                   >
                     <Card>
                       <CardActions>
