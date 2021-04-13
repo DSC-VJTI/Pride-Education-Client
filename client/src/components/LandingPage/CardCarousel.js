@@ -45,8 +45,14 @@ const CardCarousel = () => {
           className="addMarginTop"
           breakPoints={breakPoints}
         >
-          {testimonials.map((testimonial) => {
-            return <AniCard name={testimonial.name} text={testimonial.text} />;
+          {testimonials.map((testimonial, idx) => {
+            return (
+              <AniCard
+                key={idx}
+                name={testimonial.name}
+                text={testimonial.text}
+              />
+            );
           })}
         </ReactElasticCarousel>
       </Box>
