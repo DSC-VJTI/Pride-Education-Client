@@ -2,7 +2,6 @@ import React from "react";
 import { Divider, Grid, Typography, makeStyles } from "@material-ui/core";
 import download from "../../Resources/img1.jpeg";
 import Button from "../UI Elements/Button";
-import "./Order.css";
 const useStyles = makeStyles((theme) => ({
   root: {
     "& img": {

@@ -100,7 +100,6 @@ const OrderController = {
 
   async getOrdersByUserId(req: Request, res: Response): Promise<Response> {
     try {
-      // const user_id = req.params.id;
       const user_id = req.body._id;
       const data = await Order.find({ user: user_id })
         .populate({

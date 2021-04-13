@@ -34,7 +34,6 @@ const MyOrders = () => {
       }
     );
     setValue(fetchedOrders.data.data);
-    console.log(fetchedOrders.data.data);
   };
   useEffect(() => {
     fetchingOrders();
