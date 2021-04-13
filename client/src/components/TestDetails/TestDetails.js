@@ -24,7 +24,7 @@ const DetailsStyles = makeStyles((theme) => ({
     justifyContent: "center"
   },
   table: {
-    minWidth: 650
+    minWidth: 250
   }
 }));
 
