@@ -6,7 +6,8 @@
     align-items: center;
 }
 img{
-    width: 10%;
+    width: 5%;
+    min-width: 70px;
 }
 .footer{
     margin-top: 120px;
@@ -46,6 +47,9 @@ img{
     h1,.pageLinks,.socialHandles{
         margin:13px 5px;
     }
+    .logo{
+        margin-top: 30px;
+    }
 }
 @media (max-width:391px)
 {
@@ -62,7 +66,7 @@ img{
 @media (max-width:920px)
 {
    img{
-       width:12%!important;
+       width:12%;
    }
    .pageLinks{
        margin:40px 0;
