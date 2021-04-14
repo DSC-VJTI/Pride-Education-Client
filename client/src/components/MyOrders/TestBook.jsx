@@ -36,7 +36,6 @@ const TestBook = (props) => {
           <OrderedItem
             title={`${product.test.subject} Full Course`}
             price={product.price}
-            //   buyDate={product.course.applicableExamDate}
             instructor={product.name}
           />
         </Paper>
