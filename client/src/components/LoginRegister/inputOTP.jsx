@@ -10,8 +10,6 @@ import Otp from "../../assets/images/OtpImages/otp.svg";
 import { SnackbarContext } from "../../context/snackbarContext";
 import "./css/InputOTP.css";
 
-//TODO: Add styles to page
-
 const OtpPage = (props) => {
   const [error, setError] = useState("");
   const dispatch = useAuthDispatch();
