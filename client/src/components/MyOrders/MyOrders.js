@@ -4,6 +4,8 @@ import OrderedItem from "./OrderedItem";
 import axios from "axios";
 import { BASE_URL } from "../../constants";
 import { useAuthState } from "../../context/context";
+import Loading from "../UI Elements/Loading";
+import Alert from "../UI Elements/DismissibleAlert";
 const useStyles = makeStyles((theme) => ({
   style: {
     padding: "20px",
@@ -19,10 +21,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const MyOrders = () => {
+const MyOrders = (props) => {
   const state = useAuthState();
   const [value, setValue] = useState([]);
   const classes = useStyles();
+  const [isLoading, setIsLoading] = useState(true);
+
   const fetchingOrders = async () => {
     const fetchedOrders = await axios.post(
       `${BASE_URL}/orders/user`,
@@ -34,45 +38,51 @@ const MyOrders = () => {
       }
     );
     setValue(fetchedOrders.data.data);
+    setIsLoading(false);
   };
   useEffect(() => {
     fetchingOrders();
   }, []);
-  return (
-    <Grid style={{ margin: "10px 0" }} container spacing={0}>
-      <Grid item xs={0} md={2}></Grid>
-      <Grid item md={8} spacing={2} className={classes.paper}>
-        <Container
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center"
-          }}
-          className={classes.style}
-        >
-          {value.map((orderedItem) => (
-            <Paper
-              className="orderPageResponsive"
-              style={{
-                backgroundColor: "rgb(241, 241, 241)",
-                width: "60%",
-                display: "block",
-                margin: "50px!important"
-              }}
-            >
-              <OrderedItem
-                title={`${orderedItem.products[0].test.subject} Full Course`}
-                price={orderedItem.products[0].price}
-                buyDate={orderedItem.orderPlacedAt}
-                instructor={orderedItem.products[0].name}
-              />
-            </Paper>
-          ))}
-        </Container>
+
+  return isLoading ? (
+    <Loading />
+  ) : (
+    <>
+      <Alert alertDisplay={props.alert} />
+      <Grid style={{ margin: "10px 0" }} container spacing={0}>
+        <Grid item xs={0} md={2}></Grid>
+        <Grid item md={8} spacing={2} className={classes.paper}>
+          <Container
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+            className={classes.style}
+          >
+            {value.map((orderedItem) => (
+              <Paper
+                className="orderPageResponsive"
+                style={{
+                  backgroundColor: "rgb(241, 241, 241)",
+                  width: "60%",
+                  display: "block",
+                  margin: "50px!important"
+                }}
+              >
+                <OrderedItem
+                  title={`${orderedItem.products[0].test.subject} Full Course`}
+                  price={orderedItem.products[0].price}
+                  buyDate={orderedItem.orderPlacedAt}
+                  instructor={orderedItem.products[0].name}
+                />
+              </Paper>
+            ))}
+          </Container>
+        </Grid>
       </Grid>
-      <Grid item xs={0} md={2}></Grid>
-    </Grid>
+    </>
   );
 };
 

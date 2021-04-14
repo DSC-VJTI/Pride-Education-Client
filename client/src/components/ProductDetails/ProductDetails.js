@@ -12,6 +12,8 @@ import download from "../../Resources/img1.jpeg";
 import ProductImages from "./ProductImages";
 import axios from "axios";
 import { BASE_URL } from "../../constants";
+import Loading from "../UI Elements/Loading";
+
 const ProductDetailsStyles = makeStyles((theme) => ({
   root: {
     "& div.MuiGrid-root.MuiGrid-spacing-xs-3": {
@@ -57,6 +59,8 @@ const ProductDetails = ({ match }) => {
   const [Validity, setValidity] = useState("7");
   const [Mode, setMode] = useState("PEN DRIVE");
 
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     getProducts();
   }, [Language, Mode, CourseType, Validity]);
@@ -70,13 +74,13 @@ const ProductDetails = ({ match }) => {
       validity: Validity
     });
     setProduct(innerProduct.data.course);
+    setIsLoading(false);
   };
   const handleCourseTypeChange = (event) => {
     setCourseType(event.target.value);
   };
   const handleLanguageChange = (event) => {
     setLanguage(event.target.value);
-    console.log(Language);
   };
   const handleValidityChange = (event) => {
     setValidity(event.target.value);
@@ -85,7 +89,9 @@ const ProductDetails = ({ match }) => {
     setMode(event.target.value);
   };
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <div className={classes.root} style={{ margin: "2rem" }}>
       <Grid container spacing={3}>
         <Grid container item md={6} xs={12}>

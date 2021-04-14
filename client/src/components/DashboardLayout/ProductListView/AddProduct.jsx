@@ -1,11 +1,9 @@
 import DateFnsUtils from "@date-io/date-fns";
 import {
   Button,
-  CircularProgress,
   Container,
   Grid,
   InputLabel,
-  makeStyles,
   MenuItem,
   Paper,
   Select,
@@ -22,8 +20,8 @@ import React, { useEffect, useState } from "react";
 import * as yup from "yup";
 import { useParams } from "react-router-dom";
 import { BASE_URL } from "../../../constants";
-import { green } from "@material-ui/core/colors";
 import { useAuthState } from "../../../context/context";
+import Loading from "../../UI Elements/Loading";
 
 const MyTextField = ({
   placeholder,
@@ -47,21 +45,9 @@ const MyTextField = ({
   );
 };
 
-const useStyles = makeStyles((theme) => ({
-  buttonProgress: {
-    color: green[500],
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    marginTop: -12,
-    marginLeft: -12
-  }
-}));
-
 export default function AddProduct() {
   const { token } = useAuthState();
 
-  const classes = useStyles();
   const [productType, setProductType] = useState("course");
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [product, setProduct] = useState({
@@ -181,7 +167,7 @@ export default function AddProduct() {
         </div>
       </header>
       {isLoading ? (
-        <CircularProgress size={42} className={classes.buttonProgress} />
+        <Loading />
       ) : (
         <Formik
           validateOnChange={true}

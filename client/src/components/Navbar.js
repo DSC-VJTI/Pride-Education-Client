@@ -33,7 +33,6 @@ const NavbarStyles = makeStyles({
     width: "250px",
     "& .MuiPaper-root": {
       justifyContent: "center",
-      // backgroundColor: "#f1f1f1",
       backgroundColor: "#fffff"
     },
     "& .MuiList-root": {

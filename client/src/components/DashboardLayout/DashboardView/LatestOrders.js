@@ -22,6 +22,7 @@ import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 import axios from "axios";
 import { BASE_URL } from "../../../constants";
 import { useAuthState } from "../../../context/context";
+import Loading from "../../UI Elements/Loading";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -35,6 +36,7 @@ const useStyles = makeStyles(() => ({
 const LatestOrders = ({ className, setCounter, ...rest }) => {
   const classes = useStyles();
   const [orders, setOrders] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const { token } = useAuthState();
 
   useEffect(() => {
@@ -53,10 +55,15 @@ const LatestOrders = ({ className, setCounter, ...rest }) => {
       })
       .catch((err) => {
         console.error(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <Card className={clsx(classes.root, className)} {...rest}>
       <CardHeader title="Latest Orders" />
       <Divider />
