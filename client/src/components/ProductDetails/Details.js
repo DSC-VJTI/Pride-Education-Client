@@ -33,7 +33,7 @@ const Details = ({ product }) => {
   const classes = DetailsStyles();
   const state = useAuthState();
   const history = useHistory();
-
+  const { isAuthenticated } = useAuthState();
   const AddToCart = async () => {
     const addingProduct = await axios.post(
       `${BASE_URL}/cart/${product._id}`,
@@ -68,11 +68,21 @@ const Details = ({ product }) => {
               {product.name}
             </Typography>
           </span>
-          <Button
-            text={"Add To Cart"}
-            onClick={AddToCart}
-            style={{ margin: "1rem" }}
-          ></Button>
+          {isAuthenticated ? (
+            <Button
+              text={"Add To Cart"}
+              onClick={AddToCart}
+              style={{ margin: "1rem" }}
+            ></Button>
+          ) : (
+            <Button
+              text={"Login To Add To Cart"}
+              onClick={() => {
+                history.push("/login");
+              }}
+              style={{ margin: "1rem" }}
+            ></Button>
+          )}
         </Grid>
         <Divider variant="fullWidth" />
 
