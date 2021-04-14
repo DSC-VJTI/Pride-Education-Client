@@ -7,6 +7,7 @@ import { useAuthState, useAuthDispatch } from "../../context/context";
 import { useHistory } from "react-router-dom";
 import { Button } from "../UI Elements/Button";
 import Otp from "../../assets/images/OtpImages/otp.svg";
+import SnackBar from "../UI Elements/Snackbar";
 
 const useStyles = makeStyles(() => ({
   card: {}
@@ -19,6 +20,20 @@ const OtpPage = (props) => {
   const dispatch = useAuthDispatch();
   const history = useHistory();
   const { loading, errorMessage } = useAuthState();
+
+  // --------------------- logged in snackbar ---------------------------
+
+  const [loggedin, setLoggedin] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setLoggedin(false);
+  };
+
+  // ---------------------------------------------------------------------------
 
   const [otp, setOtp] = useState("");
 
@@ -34,6 +49,7 @@ const OtpPage = (props) => {
           if (res.error) {
             setError(res.error);
           } else {
+            setLoggedin(true);
             history.push("/");
           }
         });
@@ -96,6 +112,13 @@ const OtpPage = (props) => {
         <Button onClick={handleClick} text="Verify OTP" />
         <small style={{ color: "red" }}>{error}</small>
       </Card>
+      <SnackBar
+        open={loggedin}
+        autoHideDuration={6000}
+        handleClose={handleClose}
+        severity="success"
+        message="You have successfully logged in your account."
+      />
     </main>
   );
 };
