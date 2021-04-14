@@ -76,7 +76,7 @@ const Total = (props) => {
           props.setAlert(1);
           history.push("/orders");
         } catch (err) {
-          props.setAlert(1);
+          props.setAlert(0);
           console.log(err);
         }
       },
