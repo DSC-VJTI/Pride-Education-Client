@@ -35,7 +35,6 @@ const MyOrders = (props) => {
         }
       }
     );
-    // console.log(fetchedOrders.data.data);
     setValue(fetchedOrders.data.data);
   };
   useEffect(() => {

@@ -71,13 +71,10 @@ const Total = (props) => {
             total: props.price * 100,
             user: state.user
           });
-
-          console.log(captureResponse.data);
           props.setAlert(1);
           history.push("/orders");
         } catch (err) {
           props.setAlert(0);
-          console.log(err);
         }
       },
       theme: {

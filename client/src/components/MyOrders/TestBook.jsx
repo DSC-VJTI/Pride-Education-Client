@@ -1,10 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Paper } from "@material-ui/core";
 import OrderedItem from "./OrderedItem";
 const TestBook = (props) => {
-  useEffect(() => {
-    console.log(props.checkTest.products);
-  }, []);
   return props.checkTest.products.map((product) => {
     if (product.course !== undefined) {
       return (
