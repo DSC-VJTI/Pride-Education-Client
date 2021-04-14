@@ -24,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
   },
   tabpanel: {
     background: "#f1f1f1",
+    "& .MuiBox-root": {
+      background: "#f1f1f1"
+    },
     "& html": {
       "& body": {
         height: "100%",
