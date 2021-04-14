@@ -6,6 +6,7 @@ import Toolbar from "../Toolbar";
 import axios from "axios";
 import { BASE_URL } from "../../../constants";
 import { useAuthState } from "../../../context/context";
+import Loading from "../../UI Elements/Loading";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,6 +22,7 @@ const SupportListView = () => {
   const { token } = useAuthState();
   const [queries, setQueries] = useState([]);
   const [counter, setCounter] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     axios
@@ -34,6 +36,9 @@ const SupportListView = () => {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, [counter]);
 
@@ -76,7 +81,9 @@ const SupportListView = () => {
       });
   };
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <Page className={classes.root} title="Enquiries">
       <Container maxWidth={false}>
         <Toolbar title="enquiry" isButtonHidden={true} />

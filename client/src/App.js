@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar";
 import { AuthProvider } from "./context/context";
 import ProtectedRoute from "./ProtectedRoute";
 import { Box } from "@material-ui/core";
+import Loading from "./components/UI Elements/Loading";
 
 const LazyNotFoundView = lazy(() => import("./components/NotFoundView"));
 const LazyClassesPane = lazy(() =>
@@ -63,7 +64,7 @@ function App() {
         <Router>
           <Navbar />
           <Box flexGrow={1}>
-            <Suspense fallback={<h3>Loading...</h3>}>
+            <Suspense fallback={<Loading />}>
               <Switch>
                 <Route path="/classes" component={LazyClassesPane} />
                 <Route

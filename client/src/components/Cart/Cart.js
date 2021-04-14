@@ -15,7 +15,9 @@ import { BASE_URL } from "../../constants";
 import { useAuthState } from "../../context/context";
 import TestSeries from "./TestSeries";
 import Book from "./Book";
+import Loading from "../UI Elements/Loading";
 import Alert from "../UI Elements/DismissibleAlert";
+
 const CartStyles = makeStyles((theme) => ({
   style: {
     marginTop: "30px",
@@ -45,6 +47,7 @@ const Cart = (props) => {
   const [productID, setProductID] = useState([]);
   const [value, setValue] = useState(initialFValues);
   const [total, setTotal] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   const classes = CartStyles();
   const deleteProduct = async (deleteId) => {
@@ -87,13 +90,16 @@ const Cart = (props) => {
     });
 
     setValue(fetchedProduct.data.myCart[0].products);
+    setIsLoading(false);
   };
 
   useEffect(() => {
     fetchingProducts();
   }, []);
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <>
       <Alert alertDisplay={props.alert} />
       <Grid container spacing={3} direction={"row"}>

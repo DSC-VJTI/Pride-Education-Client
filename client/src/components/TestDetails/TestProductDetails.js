@@ -6,6 +6,7 @@ import ProductImages from "./TestProductImages";
 import axios from "axios";
 import { BASE_URL } from "../../constants";
 import download from "../../Resources/img1.jpeg";
+import Loading from "../UI Elements/Loading";
 
 const ProductDetailsStyles = makeStyles((theme) => ({
   root: {
@@ -33,28 +34,36 @@ const ProductDetailsStyles = makeStyles((theme) => ({
 const TestProductDetails = ({ match }) => {
   const classes = ProductDetailsStyles();
   const [product, setProduct] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     getProducts();
   }, []);
+
   const getProducts = async () => {
     const innerProduct = await axios.get(
       `${BASE_URL}/products/${match.params._id}`
     );
 
     setProduct(innerProduct.data.data);
+    setIsLoading(false);
   };
 
   return (
     <div className={classes.root} style={{ margin: "2rem" }}>
-      <Grid container spacing={3}>
-        <Grid container item md={6} xs={12}>
-          <img src={download} className={classes.root} />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <Grid container spacing={3}>
+          <Grid container item md={6} xs={12}>
+            <img src={download} className={classes.root} />
+          </Grid>
+          <Grid item md={6} lg={5} xs={12}>
+            {"test" in product && <TestDetails product={product} />}
+          </Grid>
+          <Grid item lg={1} xs={false}></Grid>
         </Grid>
-        <Grid item md={6} lg={5} xs={12}>
-          {"test" in product && <TestDetails product={product} />}
-        </Grid>
-        <Grid item lg={1} xs={false}></Grid>
-      </Grid>
+      )}
     </div>
   );
 };
