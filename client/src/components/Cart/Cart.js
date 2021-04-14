@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Container,
   Grid,
@@ -15,7 +15,7 @@ import { BASE_URL } from "../../constants";
 import { useAuthState } from "../../context/context";
 import TestSeries from "./TestSeries";
 import Book from "./Book";
-import SnackBar from "../UI Elements/Snackbar";
+import { SnackbarContext } from "../../context/snackbarContext";
 
 const CartStyles = makeStyles((theme) => ({
   style: {
@@ -42,20 +42,19 @@ const CartStyles = makeStyles((theme) => ({
 const initialFValues = [];
 
 const Cart = () => {
+  const [
+    open,
+    setOpen,
+    handleClose,
+    severity,
+    setSeverity,
+    message,
+    setMessage
+  ] = useContext(SnackbarContext);
   const state = useAuthState();
-  console.log(state);
   const [productID, setProductID] = useState([]);
   const [value, setValue] = useState(initialFValues);
   const [total, setTotal] = useState(0);
-  const [open, setOpen] = useState(false);
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(false);
-  };
 
   const classes = CartStyles();
 
@@ -73,6 +72,8 @@ const Cart = () => {
         return item._id !== e;
       })
     );
+    setSeverity("info");
+    setMessage("You have successfully deleted the item from the cart.");
     setOpen(true);
   };
 
@@ -217,13 +218,6 @@ const Cart = () => {
         </Container>
       </Grid>
       <Grid item xs={false} md={false} lg={1}></Grid>
-      <SnackBar
-        open={open}
-        autoHideDuration={6000}
-        handleClose={handleClose}
-        severity="info"
-        message="You have successfully deleted an item from the cart"
-      />
     </Grid>
   );
 };

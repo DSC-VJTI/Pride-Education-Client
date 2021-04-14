@@ -1,5 +1,5 @@
+import { React, useEffect, useState, useContext } from "react";
 import { Card, Container } from "@material-ui/core";
-import { React, useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import OtpInput from "react-otp-input";
 import { login, register } from "../../actions/authActions";
@@ -7,7 +7,7 @@ import { useAuthState, useAuthDispatch } from "../../context/context";
 import { useHistory } from "react-router-dom";
 import { Button } from "../UI Elements/Button";
 import Otp from "../../assets/images/OtpImages/otp.svg";
-import SnackBar from "../UI Elements/Snackbar";
+import { SnackbarContext } from "../../context/snackbarContext";
 
 const useStyles = makeStyles(() => ({
   card: {}
@@ -23,15 +23,15 @@ const OtpPage = (props) => {
 
   // --------------------- logged in snackbar ---------------------------
 
-  const [loggedin, setLoggedin] = useState(false);
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setLoggedin(false);
-  };
+  const [
+    open,
+    setOpen,
+    handleClose,
+    severity,
+    setSeverity,
+    message,
+    setMessage
+  ] = useContext(SnackbarContext);
 
   // ---------------------------------------------------------------------------
 
@@ -49,7 +49,9 @@ const OtpPage = (props) => {
           if (res.error) {
             setError(res.error);
           } else {
-            setLoggedin(true);
+            setSeverity("success");
+            setMessage("You have successfully logged in.");
+            setOpen(true);
             history.push("/");
           }
         });
@@ -64,6 +66,9 @@ const OtpPage = (props) => {
           if (res.error) {
             setError(res.error);
           } else {
+            setSeverity("success");
+            setMessage("You have successfully register for the website");
+            setOpen(true);
             history.push("/");
           }
         });
@@ -112,13 +117,6 @@ const OtpPage = (props) => {
         <Button onClick={handleClick} text="Verify OTP" />
         <small style={{ color: "red" }}>{error}</small>
       </Card>
-      <SnackBar
-        open={loggedin}
-        autoHideDuration={6000}
-        handleClose={handleClose}
-        severity="success"
-        message="You have successfully logged in your account."
-      />
     </main>
   );
 };
