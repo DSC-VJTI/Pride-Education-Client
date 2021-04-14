@@ -113,7 +113,6 @@ function App() {
                     component={LazyBookProductDetails}
                   />
 
-                  {/* Protected routes go here */}
                   <Route path="/product/add" component={LazyAddProduct} />
                   <Route
                     path="/product/edit/:productId"
