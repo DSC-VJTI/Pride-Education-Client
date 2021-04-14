@@ -1,5 +1,5 @@
 import { Container, Grid, makeStyles, Paper } from "@material-ui/core";
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect } from "react";
 import OrderedItem from "./OrderedItem";
 import axios from "axios";
 import { BASE_URL } from "../../constants";
