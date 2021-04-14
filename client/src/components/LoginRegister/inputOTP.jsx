@@ -8,10 +8,7 @@ import { useHistory } from "react-router-dom";
 import { Button } from "../UI Elements/Button";
 import Otp from "../../assets/images/OtpImages/otp.svg";
 import { SnackbarContext } from "../../context/snackbarContext";
-
-const useStyles = makeStyles(() => ({
-  card: {}
-}));
+import "./css/InputOTP.css";
 
 //TODO: Add styles to page
 
@@ -79,33 +76,13 @@ const OtpPage = (props) => {
   };
 
   return (
-    <main
-      style={{
-        width: "100%",
-        height: "100vh",
-        display: "grid",
-        placeItems: "center",
-        background: "#f1f1f1"
-      }}
-    >
-      <Card
-        style={{
-          height: "50vh",
-          width: "40vw",
-          display: "grid",
-          placeItems: "center"
-        }}
-      >
-        <h2
-          style={{
-            textAlign: "center",
-            color: "#f26522"
-          }}
-        >
-          Let's confirm your identity
-        </h2>
-        <img src={Otp} height="100vh" width="100%" alt="OTP Avatar" />
-        <p>Check your email for the OTP and enter below to proceed</p>
+    <main>
+      <div className="center_div">
+        <h2>Let's confirm your identity</h2>
+        <img src={Otp} className="otp_avatar" alt="OTP Avatar" />
+        <p className="addMarginOnTop">
+          Check your email for the OTP and enter below to proceed
+        </p>
 
         <OtpInput
           value={otp}
@@ -116,7 +93,7 @@ const OtpPage = (props) => {
 
         <Button onClick={handleClick} text="Verify OTP" />
         <small style={{ color: "red" }}>{error}</small>
-      </Card>
+      </div>
     </main>
   );
 };

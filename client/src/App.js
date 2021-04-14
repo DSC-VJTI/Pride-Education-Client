@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useContext } from "react";
+import React, { lazy, Suspense, useContext, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Aos from "aos";
@@ -11,6 +11,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import { Box } from "@material-ui/core";
 import { SnackbarContext, SnackbarProvider } from "./context/snackbarContext";
 import SnackBar from "./components/UI Elements/Snackbar";
+import Loading from "./components/UI Elements/Loading";
 
 const LazyNotFoundView = lazy(() => import("./components/NotFoundView"));
 const LazyClassesPane = lazy(() =>
@@ -70,6 +71,7 @@ const SnackBarComponent = () => {
 };
 
 function App() {
+  const [alert, setAlert] = useState(-1);
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
