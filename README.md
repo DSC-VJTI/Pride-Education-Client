@@ -13,8 +13,8 @@
 
 ### Setup
 
-Please read our [Setup Guide](https://github.com/DSC-VJTI/CA-Website/SETUP.md) to get started with local development.
+Please read our [Setup Guide](https://github.com/DSC-VJTI/CA-Website/blob/main/SETUP.md) to get started with local development.
 
 ### Contributing
 
-Please read our [Contributing Guide](https://github.com/DSC-VJTI/CA-Website/CONTRIBUTING.md) before submitting a Pull Request to the project.
+Please read our [Contributing Guide](https://github.com/DSC-VJTI/CA-Website/blob/main/CONTRIBUTING.md) before submitting a Pull Request to the project.
