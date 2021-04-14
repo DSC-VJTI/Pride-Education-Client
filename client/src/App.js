@@ -58,15 +58,13 @@ const SnackBarComponent = () => {
     setMessage
   ] = useContext(SnackbarContext);
   return (
-    <div>
-      <SnackBar
-        open={open}
-        autoHideDuration={6000}
-        handleClose={handleClose}
-        severity={severity}
-        message={message}
-      />
-    </div>
+    <SnackBar
+      open={open}
+      autoHideDuration={6000}
+      handleClose={handleClose}
+      severity={severity}
+      message={message}
+    />
   );
 };
 
