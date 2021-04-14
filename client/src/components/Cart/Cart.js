@@ -40,16 +40,23 @@ const CartStyles = makeStyles((theme) => ({
 
 const initialFValues = [];
 
-const Cart = ({ match }) => {
+const Cart = () => {
   const state = useAuthState();
-
   const [productID, setProductID] = useState([]);
   const [value, setValue] = useState(initialFValues);
   const [total, setTotal] = useState(0);
 
   const classes = CartStyles();
 
+  const deleteProduct = async (deleteId) => {
+    const deletedProduct = await axios.delete(`${BASE_URL}/cart/${deleteId}`, {
+      headers: {
+        Authorization: `Bearer ${state.token}`
+      }
+    });
+  };
   const handleOnClick = (e) => {
+    deleteProduct(e);
     setValue(
       value.filter((item) => {
         return item._id !== e;
@@ -111,64 +118,85 @@ const Cart = ({ match }) => {
             </Typography>
             <Divider />
           </div>
-          {value.map((cartItem) => {
-            if ("course" in cartItem) {
-              return (
-                <Grid item xs={12} className={classes.paper} key={cartItem.id}>
-                  <Card>
-                    <CardActions>
-                      <Item
-                        id={cartItem._id}
-                        title={cartItem.name}
-                        content="Course"
-                        views={cartItem.course.views}
-                        validity={cartItem.course.validity}
-                        price={cartItem.price}
-                        instructor={cartItem.course.faculty}
-                        duration={cartItem.course.duration}
-                        onClick={handleOnClick}
-                      />
-                    </CardActions>
-                  </Card>
-                </Grid>
-              );
-            } else if ("test" in cartItem) {
-              return (
-                <Grid item xs={12} className={classes.paper} key={cartItem.id}>
-                  <Card>
-                    <CardActions>
-                      <TestSeries
-                        id={cartItem._id}
-                        title={cartItem.name}
-                        content="Test Series"
-                        validity={cartItem.validity}
-                        price={cartItem.price}
-                        subject={cartItem.test.subject}
-                        onClick={handleOnClick}
-                      />
-                    </CardActions>
-                  </Card>
-                </Grid>
-              );
-            } else if ("book" in cartItem) {
-              return (
-                <Grid item xs={12} className={classes.paper} key={cartItem.id}>
-                  <Card>
-                    <CardActions>
-                      <Book
-                        id={cartItem._id}
-                        title={cartItem.name}
-                        content="Book"
-                        price={cartItem.price}
-                        instructor={cartItem.book.faculty}
-                        onClick={handleOnClick}
-                      />
-                    </CardActions>
-                  </Card>
-                </Grid>
-              );
-            }
-          })}
+          {value.length != 0 ? (
+            value.map((cartItem) => {
+              if ("course" in cartItem) {
+                return (
+                  <Grid
+                    item
+                    xs={12}
+                    className={classes.paper}
+                    key={cartItem._id}
+                  >
+                    <Card>
+                      <CardActions>
+                        <Item
+                          id={cartItem._id}
+                          title={cartItem.name}
+                          content="Course"
+                          views={cartItem.course.views}
+                          validity={cartItem.course.validity}
+                          price={cartItem.price}
+                          instructor={cartItem.course.faculty}
+                          duration={cartItem.course.duration}
+                          onClick={handleOnClick}
+                        />
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                );
+              } else if ("test" in cartItem) {
+                return (
+                  <Grid
+                    item
+                    xs={12}
+                    className={classes.paper}
+                    key={cartItem._id}
+                  >
+                    <Card>
+                      <CardActions>
+                        <TestSeries
+                          id={cartItem._id}
+                          title={cartItem.name}
+                          content="Test Series"
+                          validity={cartItem.validity}
+                          price={cartItem.price}
+                          subject={cartItem.test.subject}
+                          onClick={handleOnClick}
+                        />
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                );
+              } else if ("book" in cartItem) {
+                return (
+                  <Grid
+                    item
+                    xs={12}
+                    className={classes.paper}
+                    key={cartItem._id}
+                  >
+                    <Card>
+                      <CardActions>
+                        <Book
+                          id={cartItem._id}
+                          title={cartItem.name}
+                          content="Book"
+                          price={cartItem.price}
+                          instructor={cartItem.book.faculty}
+                          onClick={handleOnClick}
+                        />
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                );
+              }
+            })
+          ) : (
+            <div>
+              <h2>Please add some products to the cart</h2>
+            </div>
+          )}
         </Container>
       </Grid>
       <Grid item sm={7} xs={12} md={4} lg={3}>

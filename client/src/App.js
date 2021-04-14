@@ -10,6 +10,7 @@ import { AuthProvider } from "./context/context";
 import ProtectedRoute from "./ProtectedRoute";
 import { Box } from "@material-ui/core";
 
+const LazyNotFoundView = lazy(() => import("./components/NotFoundView"));
 const LazyClassesPane = lazy(() =>
   import("./components/Resource Page/ClassesPane")
 );
@@ -94,6 +95,7 @@ function App() {
                 <ProtectedRoute path="/resources" component={LazyResources} />
                 <Route path="/coming" component={LazyComingSoon} />
                 <Route path="/" exact component={LazyLanding} />
+                <Route component={LazyNotFoundView} />
               </Switch>
             </Suspense>
           </Box>

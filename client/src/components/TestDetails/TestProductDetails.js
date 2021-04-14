@@ -5,10 +5,24 @@ import TestDetails from "./TestDetails";
 import ProductImages from "./TestProductImages";
 import axios from "axios";
 import { BASE_URL } from "../../constants";
+import download from "../../Resources/img1.jpeg";
+
 const ProductDetailsStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
-    margin: "auto"
+    "& div.MuiGrid-root.MuiGrid-spacing-xs-3": {
+      paddingTop: "10vh",
+      "@media (max-width: 1000px)": {
+        paddingTop: "1vh"
+      }
+    },
+    "& img": {
+      marginLeft: "auto",
+      marginRight: "auto",
+      display: "block",
+      width: "100%",
+      height: "auto",
+      maxWidth: "500px"
+    }
   },
   paper: {
     padding: theme.spacing(2),
@@ -33,14 +47,13 @@ const TestProductDetails = ({ match }) => {
   return (
     <div className={classes.root} style={{ margin: "2rem" }}>
       <Grid container spacing={3}>
-        <Grid container item xs={6}>
-          <Grid item xs={12} style={{ margin: "0rem 1.5rem" }}>
-            <ProductImages />
-          </Grid>
+        <Grid container item md={6} xs={12}>
+          <img src={download} className={classes.root} />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item md={6} lg={5} xs={12}>
           {"test" in product && <TestDetails product={product} />}
         </Grid>
+        <Grid item lg={1} xs={false}></Grid>
       </Grid>
     </div>
   );

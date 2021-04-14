@@ -4,10 +4,12 @@ import NavBar from "./NavBar";
 import AdminDashboard from "./DashboardView";
 import Customer from "./CustomerListView";
 import Products from "./ProductListView";
+import Support from "./Support";
+import Orders from "./OrderListView";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.background.dark,
+    backgroundColor: "#f1f1f1",
     display: "flex",
     height: "100%",
     overflow: "hidden",
@@ -17,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flex: "1 1 auto",
     overflow: "hidden",
-    paddingTop: 64,
     [theme.breakpoints.up("lg")]: {
       paddingLeft: 256
     }
@@ -49,9 +50,11 @@ const DashboardLayout = () => {
       <div className={classes.wrapper}>
         <div className={classes.contentContainer}>
           <div className={classes.content}>
-            {contents === 0 && <AdminDashboard />}
+            {contents === 0 && <AdminDashboard setCounter={setContents} />}
             {contents === 1 && <Customer />}
             {contents === 2 && <Products />}
+            {contents === 3 && <Orders />}
+            {contents === 4 && <Support />}
           </div>
         </div>
       </div>

@@ -10,7 +10,7 @@ export interface IJWTResponse {
 }
 
 const jwtHandler = {
-  setJwt(user: IUser, expiresIn: string | number = "5h"): string {
+  setJwt(user: IUser, expiresIn: string | number = "1d"): string {
     const token = jwt.sign(
       {
         user: {
