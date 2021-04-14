@@ -4,6 +4,7 @@ import OrderedItem from "./OrderedItem";
 import axios from "axios";
 import { BASE_URL } from "../../constants";
 import { useAuthState } from "../../context/context";
+import Loading from "../UI Elements/Loading";
 const useStyles = makeStyles((theme) => ({
   style: {
     padding: "20px",
@@ -23,6 +24,8 @@ const MyOrders = () => {
   const state = useAuthState();
   const [value, setValue] = useState([]);
   const classes = useStyles();
+  const [isLoading, setIsLoading] = useState(true);
+
   const fetchingOrders = async () => {
     const fetchedOrders = await axios.post(
       `${BASE_URL}/orders/user`,
@@ -34,11 +37,15 @@ const MyOrders = () => {
       }
     );
     setValue(fetchedOrders.data.data);
+    setIsLoading(false);
   };
   useEffect(() => {
     fetchingOrders();
   }, []);
-  return (
+
+  return isLoading ? (
+    <Loading />
+  ) : (
     <Grid style={{ margin: "10px 0" }} container spacing={0}>
       <Grid item xs={0} md={2}></Grid>
       <Grid item md={8} spacing={2} className={classes.paper}>

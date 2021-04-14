@@ -9,8 +9,9 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { Button, CircularProgress, Container } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import Loading from "../UI Elements/Loading";
 
 const useStyles = makeStyles({
   table: {
@@ -37,9 +38,7 @@ export default function Resources() {
   const classes = useStyles();
 
   return isLoading ? (
-    <Container maxWidth="sm">
-      <CircularProgress />
-    </Container>
+    <Loading />
   ) : (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">

@@ -15,6 +15,7 @@ import { BASE_URL } from "../../constants";
 import { useAuthState } from "../../context/context";
 import TestSeries from "./TestSeries";
 import Book from "./Book";
+import Loading from "../UI Elements/Loading";
 
 const CartStyles = makeStyles((theme) => ({
   style: {
@@ -45,6 +46,7 @@ const Cart = () => {
   const [productID, setProductID] = useState([]);
   const [value, setValue] = useState(initialFValues);
   const [total, setTotal] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   const classes = CartStyles();
 
@@ -88,13 +90,16 @@ const Cart = () => {
     });
 
     setValue(fetchedProduct.data.myCart[0].products);
+    setIsLoading(false);
   };
 
   useEffect(() => {
     fetchingProducts();
   }, []);
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <Grid container spacing={3} direction={"row"}>
       <Grid item xs={false} lg={1}></Grid>
       <Grid
