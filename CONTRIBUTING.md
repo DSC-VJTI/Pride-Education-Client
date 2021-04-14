@@ -20,7 +20,7 @@ Pull requests are the best way to propose changes to the codebase (we use [Githu
 5. Issue that pull request!
 
 ## Report bugs using Github's [issues](https://github.com/DSC-VJTI/CA-Website/issues)
-We use GitHub issues to track public bugs. Report a bug by [opening a new issue](); it's that easy!
+We use GitHub issues to track public bugs. Report a bug by [opening a new issue](https://github.com/DSC-VJTI/CA-Website/issues/new); it's that easy!
 
 **Great Bug Reports** tend to have:
 
