@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+main
+{
+ width: 100%;
+ height: 80vh;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ background-color: #f1f1f1;
+}
+.addMarginOnTop
+{
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+.otp_avatar
+{ display: block;
+
+    min-width: 200px;
+   margin-top: 20px;
+ 
+}
+.center_div
+{  
+    padding: 20px;
+    width: 800px;
+    margin: 0px 20px;
+    height: 400px;
+    background-color: #ffffff;
+    display: grid;
+    place-items: center;
+    
+}
+.center_div h2
+{
+  text-align: center;
+  color: #f26522;
+}
