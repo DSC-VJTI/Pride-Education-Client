@@ -20,9 +20,6 @@ const OtpPage = (props) => {
   const dispatch = useAuthDispatch();
   const history = useHistory();
   const { loading, errorMessage } = useAuthState();
-
-  // --------------------- logged in snackbar ---------------------------
-
   const [
     open,
     setOpen,
@@ -32,9 +29,6 @@ const OtpPage = (props) => {
     message,
     setMessage
   ] = useContext(SnackbarContext);
-
-  // ---------------------------------------------------------------------------
-
   const [otp, setOtp] = useState("");
 
   const handleClick = () => {
@@ -47,7 +41,9 @@ const OtpPage = (props) => {
           otp: otp
         }).then((res) => {
           if (res.error) {
-            setError(res.error);
+            setSeverity("error");
+            setMessage(res.error);
+            setOpen(true);
           } else {
             setSeverity("success");
             setMessage("You have successfully logged in.");
@@ -64,7 +60,9 @@ const OtpPage = (props) => {
           }
         }).then((res) => {
           if (res.error) {
-            setError(res.error);
+            setSeverity("error");
+            setMessage(res.error);
+            setOpen(true);
           } else {
             setSeverity("success");
             setMessage("You have successfully register for the website");
@@ -74,7 +72,9 @@ const OtpPage = (props) => {
         });
       }
     } else {
-      setError("Please input full otp"); // TODO: Display error message on the form here
+      setSeverity("error");
+      setMessage("Please input full otp");
+      setOpen(true);
     }
   };
 

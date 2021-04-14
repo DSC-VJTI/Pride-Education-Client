@@ -13,6 +13,7 @@ const SnackBar = (props) => {
       open={open | false}
       autoHideDuration={autoHideDuration | 5000}
       onClose={handleClose}
+      anchorOrigin={{ vertical: "top", horizontal: "center" }}
     >
       <Alert onClose={handleClose} severity={severity}>
         {message}
