@@ -27,6 +27,7 @@ import "./LandingPage/LandingPage.css";
 import { Book, LogOut, User } from "react-feather";
 import { BASE_URL } from "../constants";
 import axios from "axios";
+import SnackBar from "./UI Elements/Snackbar";
 
 const NavbarStyles = makeStyles({
   list: {
@@ -80,6 +81,17 @@ const Navbar = () => {
           }
         });
     }
+  };
+
+  // ------------------- logout snack bar --------------------
+  const [loggedout, setLoggedout] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setLoggedout(false);
   };
 
   return (
@@ -208,6 +220,7 @@ const Navbar = () => {
                 }}
                 onClick={() => {
                   logout({ dispatch });
+                  setLoggedout(true);
                   history.push("/");
                 }}
               >
@@ -314,6 +327,7 @@ const Navbar = () => {
                   className="fixLinks"
                   onClick={() => {
                     logout({ dispatch });
+                    setLoggedout(true);
                     history.push("/");
                   }}
                 >
@@ -329,6 +343,13 @@ const Navbar = () => {
           </List>
         </div>
       </Drawer>
+      <SnackBar
+        open={loggedout}
+        autoHideDuration={6000}
+        handleClose={handleClose}
+        severity="success"
+        message="You have successfully logged out."
+      />
     </div>
   );
 };
