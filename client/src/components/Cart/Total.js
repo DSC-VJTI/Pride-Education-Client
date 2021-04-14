@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useReducer } from "react";
 import {
   Card,
   makeStyles,
@@ -14,6 +14,8 @@ import Button from "../UI Elements/Button";
 import { key_id, BASE_URL } from "../../constants";
 import Axios from "axios";
 import { useAuthState } from "../../context/context";
+import { useHistory } from "react-router-dom";
+import Alert from "../UI Elements/DismissibleAlert";
 const CartStyles = makeStyles({
   TotalCard: {
     background: "white",
@@ -52,6 +54,7 @@ const Total = (props) => {
   const title = `(Rs.${props.price})`;
   const classes = CartStyles();
   const state = useAuthState();
+  const history = useHistory();
   const paymentHandler = async (e) => {
     e.preventDefault();
     const options = {
@@ -68,8 +71,12 @@ const Total = (props) => {
             total: props.price * 100,
             user: state.user
           });
+
           console.log(captureResponse.data);
+          props.setAlert(1);
+          history.push("/orders");
         } catch (err) {
+          props.setAlert(1);
           console.log(err);
         }
       },
@@ -82,41 +89,43 @@ const Total = (props) => {
   };
 
   return (
-    <Grid container direction="column">
-      <Card className={classes.TotalCard}>
-        <CardContent>
-          <Grid item container direction="column" xs={12} spacing={2}>
-            <Grid item xs={12}>
-              <Typography className={classes.title} component="h5">
-                Your order is eligible for free order
-              </Typography>
+    <>
+      <Grid container direction="column">
+        <Card className={classes.TotalCard}>
+          <CardContent>
+            <Grid item container direction="column" xs={12} spacing={2}>
+              <Grid item xs={12}>
+                <Typography className={classes.title} component="h5">
+                  Your order is eligible for free order
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography color="textSecondary" component="h5">
+                  Select this option at checkout &nbsp;
+                  <Link color="textPrimary">Details</Link>
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography component="h4">
+                  {`Subtotal (${items} items) : ${title}`}
+                </Typography>
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <Typography color="textSecondary" component="h5">
-                Select this option at checkout &nbsp;
-                <Link color="textPrimary">Details</Link>
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <Typography component="h4">
-                {`Subtotal (${items} items) : ${title}`}
-              </Typography>
-            </Grid>
-          </Grid>
-        </CardContent>
-        <CardActions>
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            text="Proceed to buy"
-            type="submit"
-            className={classes.totalButton}
-            onClick={paymentHandler}
-          />
-        </CardActions>
-      </Card>
-    </Grid>
+          </CardContent>
+          <CardActions>
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              text="Proceed to buy"
+              type="submit"
+              className={classes.totalButton}
+              onClick={paymentHandler}
+            />
+          </CardActions>
+        </Card>
+      </Grid>
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Aos from "aos";
@@ -45,6 +45,7 @@ const LazyComingSoon = lazy(() => import("./components/ComingSoon"));
 const LazyLanding = lazy(() => import("./components/LandingPage/Landing"));
 
 function App() {
+  const [alert, setAlert] = useState(-1);
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
@@ -65,12 +66,22 @@ function App() {
             <Suspense fallback={<h3>Loading...</h3>}>
               <Switch>
                 <Route path="/classes" component={LazyClassesPane} />
-                <Route path="/cart" component={LazyCart} />
+                <Route
+                  path="/cart"
+                  component={() => (
+                    <LazyCart setAlert={setAlert} alert={alert} />
+                  )}
+                />
                 <Route exact path="/product" component={LazyCoursePage} />
                 <Route path="/support" component={LazySupportPage} />
                 <Route path="/register" component={LazyRegistration} />
                 <Route path="/login" component={LazyLogin} />
-                <Route path="/orders" component={LazyMyOrders} />
+                <Route
+                  path="/orders"
+                  component={() => (
+                    <LazyMyOrders setAlert={setAlert} alert={alert} />
+                  )}
+                />
                 <Route
                   path="/course/details/:name"
                   component={LazyProductDetails}
