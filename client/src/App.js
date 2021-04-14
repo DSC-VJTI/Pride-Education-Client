@@ -89,7 +89,7 @@ function App() {
           <Router>
             <Navbar />
             <Box flexGrow={1}>
-              <Suspense fallback={<h3>Loading...</h3>}>
+              <Suspense fallback={<Loading />}>
                 <Switch>
                   <Route path="/classes" component={LazyClassesPane} />
                   <Route path="/cart" component={LazyCart} />
