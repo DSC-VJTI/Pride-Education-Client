@@ -19,7 +19,8 @@ const OrderedItem = ({ title, price, instructor, buyDate }) => {
     <>
       <div
         style={{
-          backgroundColor: "rgb(241, 241, 241)"
+          backgroundColor: "rgb(241, 241, 241)",
+          margin: "30px auto"
         }}
       >
         <div>

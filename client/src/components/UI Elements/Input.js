@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
       }
     },
     "& textarea": {
-      // display: 'block',
       padding: ".5rem .75rem",
       lineHeight: "1.25",
       background: "transparent",
