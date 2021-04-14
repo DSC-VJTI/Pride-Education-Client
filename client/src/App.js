@@ -65,7 +65,7 @@ function App() {
             <Suspense fallback={<h3>Loading...</h3>}>
               <Switch>
                 <Route path="/classes" component={LazyClassesPane} />
-                <Route path="/cart" component={LazyCart} />
+
                 <Route exact path="/product" component={LazyCoursePage} />
                 <Route path="/support" component={LazySupportPage} />
                 <Route path="/register" component={LazyRegistration} />
@@ -85,14 +85,17 @@ function App() {
                 />
 
                 {/* Protected routes go here */}
+
                 <Route path="/product/add" component={LazyAddProduct} />
                 <Route
                   path="/product/edit/:productId"
                   component={LazyAddProduct}
                 />
+
                 <Route path="/admin" component={LazyDashboardLayout} />
                 <Route path="/resources/:fileName" component={LazyPdfViewer} />
                 <ProtectedRoute path="/resources" component={LazyResources} />
+                <ProtectedRoute path="/cart" component={LazyCart} />
                 <Route path="/coming" component={LazyComingSoon} />
                 <Route path="/" exact component={LazyLanding} />
                 <Route component={LazyNotFoundView} />
