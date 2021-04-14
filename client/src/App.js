@@ -72,16 +72,11 @@ function App() {
                     <LazyCart setAlert={setAlert} alert={alert} />
                   )}
                 />
+
                 <Route exact path="/product" component={LazyCoursePage} />
                 <Route path="/support" component={LazySupportPage} />
                 <Route path="/register" component={LazyRegistration} />
                 <Route path="/login" component={LazyLogin} />
-                <Route
-                  path="/orders"
-                  component={() => (
-                    <LazyMyOrders setAlert={setAlert} alert={alert} />
-                  )}
-                />
                 <Route
                   path="/course/details/:name"
                   component={LazyProductDetails}
@@ -96,14 +91,22 @@ function App() {
                 />
 
                 {/* Protected routes go here */}
+
                 <Route path="/product/add" component={LazyAddProduct} />
                 <Route
                   path="/product/edit/:productId"
                   component={LazyAddProduct}
                 />
+
                 <Route path="/admin" component={LazyDashboardLayout} />
                 <Route path="/resources/:fileName" component={LazyPdfViewer} />
                 <ProtectedRoute path="/resources" component={LazyResources} />
+                <ProtectedRoute
+                  path="/cart"
+                  component={() => (
+                    <LazyCart setAlert={setAlert} alert={alert} />
+                  )}
+                />
                 <Route path="/coming" component={LazyComingSoon} />
                 <Route path="/" exact component={LazyLanding} />
                 <Route component={LazyNotFoundView} />
