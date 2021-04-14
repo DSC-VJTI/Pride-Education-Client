@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Container,
   Grid,
@@ -15,6 +15,7 @@ import { BASE_URL } from "../../constants";
 import { useAuthState } from "../../context/context";
 import TestSeries from "./TestSeries";
 import Book from "./Book";
+import { SnackbarContext } from "../../context/snackbarContext";
 import Loading from "../UI Elements/Loading";
 import Alert from "../UI Elements/DismissibleAlert";
 
@@ -43,6 +44,15 @@ const CartStyles = makeStyles((theme) => ({
 const initialFValues = [];
 
 const Cart = (props) => {
+  const [
+    open,
+    setOpen,
+    handleClose,
+    severity,
+    setSeverity,
+    message,
+    setMessage
+  ] = useContext(SnackbarContext);
   const state = useAuthState();
   const [productID, setProductID] = useState([]);
   const [value, setValue] = useState(initialFValues);
@@ -64,6 +74,9 @@ const Cart = (props) => {
         return item._id !== e;
       })
     );
+    setSeverity("info");
+    setMessage("You have successfully deleted the item from the cart.");
+    setOpen(true);
   };
 
   useEffect(() => {
