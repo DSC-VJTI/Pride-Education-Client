@@ -14,12 +14,17 @@
     #f26522
   );
 }
+#formBody{
+  width:100vw;
+  height:100vh;
+  background-color: #f1f1f1!important;
+}
 .formOuterBody{
   padding-top: 50px;
   padding-bottom: 100px;
   width: 100%;
-  height: auto;
-  background-color:#f1f1f1;
+  height: 100%;
+  background-color: #f1f1f1!important;
 }
 
 .mainSection {

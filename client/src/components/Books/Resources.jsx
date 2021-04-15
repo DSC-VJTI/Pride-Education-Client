@@ -15,7 +15,7 @@ import Loading from "../UI Elements/Loading";
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650
+    minWidth: 250
   }
 });
 

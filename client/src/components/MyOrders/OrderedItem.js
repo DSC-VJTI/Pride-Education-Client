@@ -2,6 +2,7 @@ import React from "react";
 import { Divider, Grid, Typography, makeStyles } from "@material-ui/core";
 import download from "../../Resources/img1.jpeg";
 import Button from "../UI Elements/Button";
+import DateField from "./DateField";
 const useStyles = makeStyles((theme) => ({
   root: {
     "& img": {
@@ -72,17 +73,7 @@ const OrderedItem = ({ title, price, instructor, buyDate }) => {
           >
             By {instructor}
           </Typography>
-          <Typography
-            style={{
-              fontWeight: "bold",
-              fontSize: "20px"
-            }}
-            variant="body"
-          >
-            {`Bought on : ${new Date(buyDate).getDate()}/${new Date(
-              buyDate
-            ).getMonth()}/${new Date(buyDate).getFullYear()}`}
-          </Typography>
+          <DateField date={buyDate} />
         </div>
         <Button
           style={{

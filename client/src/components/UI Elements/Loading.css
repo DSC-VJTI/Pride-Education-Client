@@ -1,14 +1,14 @@
 .Loader,
 .Loader:before,
 .Loader:after {
-  background: #52b107;
+  background: #f26522;
   -webkit-animation: load1 1s infinite ease-in-out;
   animation: load1 1s infinite ease-in-out;
   width: 1em;
   height: 4em;
 }
 .Loader {
-  color: #52b107;
+  color: #f26522;
   text-indent: -9999em;
   margin: 88px auto;
   position: fixed;
