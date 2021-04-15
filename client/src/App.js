@@ -94,7 +94,7 @@ function App() {
               <Suspense fallback={<h3>Loading...</h3>}>
                 <Switch>
                   <Route path="/classes" component={LazyClassesPane} />
-                  <Route path="/cart" component={LazyCart} />
+                  <ProtectedRoute path="/cart" component={LazyCart} />
                   <Route exact path="/product" component={LazyCoursePage} />
                   <Route path="/support" component={LazySupportPage} />
                   <Route path="/register" component={LazyRegistration} />
