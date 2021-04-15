@@ -9,7 +9,6 @@ import {
   Grid,
   Typography,
   makeStyles,
-  CircularProgress,
   Button,
   CardHeader,
   Divider
@@ -18,6 +17,7 @@ import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 import { useAuthState } from "../../../context/context";
 import axios from "axios";
 import { BASE_URL } from "../../../constants";
+import Loading from "../../UI Elements/Loading";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -70,7 +70,7 @@ const Total = ({
       <Divider />
       <CardContent>
         {isLoading ? (
-          <CircularProgress />
+          <Loading />
         ) : (
           <Grid container justify="space-between" spacing={3}>
             <Grid item xs={6}>

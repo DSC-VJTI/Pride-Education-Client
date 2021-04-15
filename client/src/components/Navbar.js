@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   AppBar,
   Toolbar,
@@ -27,13 +27,14 @@ import "./LandingPage/LandingPage.css";
 import { Book, LogOut, User } from "react-feather";
 import { BASE_URL } from "../constants";
 import axios from "axios";
+import SnackBar from "./UI Elements/Snackbar";
+import { SnackbarContext } from "../context/snackbarContext";
 
 const NavbarStyles = makeStyles({
   list: {
     width: "250px",
     "& .MuiPaper-root": {
       justifyContent: "center",
-      // backgroundColor: "#f1f1f1",
       backgroundColor: "#fffff"
     },
     "& .MuiList-root": {
@@ -51,9 +52,9 @@ const NavbarStyles = makeStyles({
 
 const Navbar = () => {
   const isProd = process.env.NODE_ENV === "production";
-  const [open, setOpen] = useState(false);
+  const [drawer, setDrawer] = useState(false);
   const handleDrawer = () => {
-    setOpen(true);
+    setDrawer(true);
   };
   const {
     token,
@@ -81,6 +82,16 @@ const Navbar = () => {
         });
     }
   };
+
+  const [
+    open,
+    setOpen,
+    handleClose,
+    severity,
+    setSeverity,
+    message,
+    setMessage
+  ] = useContext(SnackbarContext);
 
   return (
     <div>
@@ -208,6 +219,9 @@ const Navbar = () => {
                 }}
                 onClick={() => {
                   logout({ dispatch });
+                  setSeverity("success");
+                  setMessage("You have successfully logged out of the website");
+                  setOpen(true);
                   history.push("/");
                 }}
               >
@@ -217,7 +231,7 @@ const Navbar = () => {
           )}
         </Toolbar>
       </AppBar>
-      <Drawer anchor="left" open={open} onClose={() => setOpen(false)}>
+      <Drawer anchor="left" open={drawer} onClose={() => setDrawer(false)}>
         <div
           style={{
             height: "100%",
@@ -246,7 +260,7 @@ const Navbar = () => {
             </Typography>
             <Divider />
             <NavLink to="/" className="fixLinks">
-              <ListItem button onClick={() => setOpen(false)}>
+              <ListItem button onClick={() => setDrawer(false)}>
                 <ListItemIcon>
                   <HomeIcon htmlColor="rgb(242, 101, 34)" />
                 </ListItemIcon>
@@ -255,7 +269,7 @@ const Navbar = () => {
               <Divider />
             </NavLink>
             <NavLink to="/support" className="fixLinks">
-              <ListItem button onClick={() => setOpen(false)}>
+              <ListItem button onClick={() => setDrawer(false)}>
                 <ListItemIcon>
                   <ContactSupport htmlColor="rgb(242, 101, 34)" />
                 </ListItemIcon>
@@ -264,7 +278,7 @@ const Navbar = () => {
               <Divider />
             </NavLink>
             <NavLink to="/classes" className="fixLinks">
-              <ListItem button onClick={() => setOpen(false)}>
+              <ListItem button onClick={() => setDrawer(false)}>
                 <ListItemIcon>
                   <ShopIcon htmlColor="rgb(242, 101, 34)" />
                 </ListItemIcon>
@@ -272,7 +286,7 @@ const Navbar = () => {
               </ListItem>
             </NavLink>
             <NavLink to={"/resources"} className="fixLinks">
-              <ListItem button onClick={() => setOpen(false)}>
+              <ListItem button onClick={() => setDrawer(false)}>
                 <ListItemIcon>
                   <Book color="rgb(242, 101, 34)" />
                 </ListItemIcon>
@@ -282,7 +296,7 @@ const Navbar = () => {
             {!isAuthenticated ? (
               <>
                 <NavLink to="/login" className="fixLinks">
-                  <ListItem button onClick={() => setOpen(false)}>
+                  <ListItem button onClick={() => setDrawer(false)}>
                     <ListItemIcon>
                       <User color="rgb(242, 101, 34)" />
                     </ListItemIcon>
@@ -290,7 +304,7 @@ const Navbar = () => {
                   </ListItem>
                 </NavLink>
                 <NavLink to="/register" className="fixLinks">
-                  <ListItem button onClick={() => setOpen(false)}>
+                  <ListItem button onClick={() => setDrawer(false)}>
                     <ListItemIcon>
                       <User color="rgb(242, 101, 34)" />
                     </ListItemIcon>
@@ -302,7 +316,7 @@ const Navbar = () => {
               <>
                 {isAdmin && (
                   <NavLink to="/admin" className="fixLinks">
-                    <ListItem button onClick={() => setOpen(false)}>
+                    <ListItem button onClick={() => setDrawer(false)}>
                       <ListItemIcon>
                         <User color="rgb(242, 101, 34)" />
                       </ListItemIcon>
@@ -314,10 +328,15 @@ const Navbar = () => {
                   className="fixLinks"
                   onClick={() => {
                     logout({ dispatch });
+                    setSeverity("success");
+                    setMessage(
+                      "You have successfully logged out of the website"
+                    );
+                    setOpen(true);
                     history.push("/");
                   }}
                 >
-                  <ListItem button onClick={() => setOpen(false)}>
+                  <ListItem button onClick={() => setDrawer(false)}>
                     <ListItemIcon>
                       <LogOut color="rgb(242, 101, 34)" />
                     </ListItemIcon>

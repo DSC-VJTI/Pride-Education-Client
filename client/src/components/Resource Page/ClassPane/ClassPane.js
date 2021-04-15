@@ -5,6 +5,7 @@ import Product from "./Product";
 import ComboBox from "./ComboBox";
 import axios from "axios";
 import { BASE_URL } from "../../../constants";
+import Loading from "../../UI Elements/Loading";
 
 const ClassPaneStyles = makeStyles((theme) => ({
   slider: {
@@ -40,8 +41,10 @@ const ClassPane = ({ Course, CoursesList }) => {
     courses: []
   });
   const [subjects, setSubjects] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     getProducts();
   }, []);
   const breakPoints = [
@@ -78,23 +81,12 @@ const ClassPane = ({ Course, CoursesList }) => {
     });
 
     setSubjects(uniqueSubjects);
+    setIsLoading(false);
   };
 
-  // console.log(us);
-  // const name = [...new Set(products.map((p) => p.name))];
-  // console.log(name);
-
-  const makeUniqueSubs = () => {
-    let subjectArray = [];
-    products.map((prod) => {
-      if ("course" in prod) {
-        subjectArray.concat(prod.course.subject);
-      }
-    });
-    const uniqueSubs = [...new Set(subjectArray)];
-    console.log("these are unique subs", subjectArray);
-  };
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <section>
       <ComboBox title="Test Series" />
       <div>
@@ -102,9 +94,9 @@ const ClassPane = ({ Course, CoursesList }) => {
           breakPoints={breakPoints}
           className={classes.slider}
         >
-          {products.tests.map((prod) => {
+          {products.tests.map((prod, idx) => {
             return (
-              <div data-aos="flip-right">
+              <div key={idx} data-aos="flip-right">
                 <Product
                   title={prod.name}
                   instructor={prod.test.subject}
@@ -124,9 +116,9 @@ const ClassPane = ({ Course, CoursesList }) => {
           breakPoints={breakPoints}
           className={classes.slider}
         >
-          {subjects.map((prod) => {
+          {subjects.map((prod, idx) => {
             return (
-              <div data-aos="flip-right">
+              <div key={idx} data-aos="flip-right">
                 <Product
                   title={prod}
                   instructor="Abhishek Khilwani"
@@ -147,9 +139,9 @@ const ClassPane = ({ Course, CoursesList }) => {
           breakPoints={breakPoints}
           className={classes.slider}
         >
-          {products.books.map((prod) => {
+          {products.books.map((prod, idx) => {
             return (
-              <div data-aos="flip-right">
+              <div key={idx} data-aos="flip-right">
                 <Product
                   title={prod.name}
                   buttonText="View Book"

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useContext, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Aos from "aos";
@@ -9,6 +9,9 @@ import Navbar from "./components/Navbar";
 import { AuthProvider } from "./context/context";
 import ProtectedRoute from "./ProtectedRoute";
 import { Box } from "@material-ui/core";
+import { SnackbarContext, SnackbarProvider } from "./context/snackbarContext";
+import SnackBar from "./components/UI Elements/Snackbar";
+import Loading from "./components/UI Elements/Loading";
 
 const LazyNotFoundView = lazy(() => import("./components/NotFoundView"));
 const LazyClassesPane = lazy(() =>
@@ -44,7 +47,31 @@ const LazyResources = lazy(() => import("./components/Books/Resources"));
 const LazyComingSoon = lazy(() => import("./components/ComingSoon"));
 const LazyLanding = lazy(() => import("./components/LandingPage/Landing"));
 
+const SnackBarComponent = () => {
+  const [
+    open,
+    setOpen,
+    handleClose,
+    severity,
+    setSeverity,
+    message,
+    setMessage
+  ] = useContext(SnackbarContext);
+  return (
+    <div>
+      <SnackBar
+        open={open}
+        autoHideDuration={6000}
+        handleClose={handleClose}
+        severity={severity}
+        message={message}
+      />
+    </div>
+  );
+};
+
 function App() {
+  const [alert, setAlert] = useState(-1);
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
@@ -58,52 +85,57 @@ function App() {
         minHeight: "100vh"
       }}
     >
-      <AuthProvider>
-        <Router>
-          <Navbar />
-          <Box flexGrow={1}>
-            <Suspense fallback={<h3>Loading...</h3>}>
-              <Switch>
-                <Route path="/classes" component={LazyClassesPane} />
-                <Route path="/cart" component={LazyCart} />
-                <Route exact path="/product" component={LazyCoursePage} />
-                <Route path="/support" component={LazySupportPage} />
-                <Route path="/register" component={LazyRegistration} />
-                <Route path="/login" component={LazyLogin} />
-                <Route path="/orders" component={LazyMyOrders} />
-                <Route
-                  path="/course/details/:name"
-                  component={LazyProductDetails}
-                />
-                <Route
-                  path="/test/details/:_id"
-                  component={LazyTestProductDetails}
-                />
-                <Route
-                  path="/book/details/:_id"
-                  component={LazyBookProductDetails}
-                />
+      <SnackbarProvider>
+        <AuthProvider>
+          <SnackBarComponent />
+          <Router>
+            <Navbar />
+            <Box flexGrow={1}>
+              <Suspense fallback={<h3>Loading...</h3>}>
+                <Switch>
+                  <Route path="/classes" component={LazyClassesPane} />
+                  <ProtectedRoute path="/cart" component={LazyCart} />
+                  <Route exact path="/product" component={LazyCoursePage} />
+                  <Route path="/support" component={LazySupportPage} />
+                  <Route path="/register" component={LazyRegistration} />
+                  <Route path="/login" component={LazyLogin} />
+                  <Route path="/orders" component={LazyMyOrders} />
+                  <Route
+                    path="/course/details/:name"
+                    component={LazyProductDetails}
+                  />
+                  <Route
+                    path="/test/details/:_id"
+                    component={LazyTestProductDetails}
+                  />
+                  <Route
+                    path="/book/details/:_id"
+                    component={LazyBookProductDetails}
+                  />
 
-                {/* Protected routes go here */}
-                <Route path="/product/add" component={LazyAddProduct} />
-                <Route
-                  path="/product/edit/:productId"
-                  component={LazyAddProduct}
-                />
-                <Route path="/admin" component={LazyDashboardLayout} />
-                <Route path="/resources/:fileName" component={LazyPdfViewer} />
-                <ProtectedRoute path="/resources" component={LazyResources} />
-                <Route path="/coming" component={LazyComingSoon} />
-                <Route path="/" exact component={LazyLanding} />
-                <Route component={LazyNotFoundView} />
-              </Switch>
-            </Suspense>
-          </Box>
-          <Box>
-            <Footer />
-          </Box>
-        </Router>
-      </AuthProvider>
+                  <Route path="/product/add" component={LazyAddProduct} />
+                  <Route
+                    path="/product/edit/:productId"
+                    component={LazyAddProduct}
+                  />
+                  <Route path="/admin" component={LazyDashboardLayout} />
+                  <Route
+                    path="/resources/:fileName"
+                    component={LazyPdfViewer}
+                  />
+                  <ProtectedRoute path="/resources" component={LazyResources} />
+                  <Route path="/coming" component={LazyComingSoon} />
+                  <Route path="/" exact component={LazyLanding} />
+                  <Route component={LazyNotFoundView} />
+                </Switch>
+              </Suspense>
+            </Box>
+            <Box>
+              <Footer />
+            </Box>
+          </Router>
+        </AuthProvider>
+      </SnackbarProvider>
     </Box>
   );
 }

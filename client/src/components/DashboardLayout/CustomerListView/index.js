@@ -6,6 +6,7 @@ import Toolbar from "../Toolbar";
 import axios from "axios";
 import { BASE_URL } from "../../../constants";
 import { useAuthState } from "../../../context/context";
+import Loading from "../../UI Elements/Loading";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,6 +21,7 @@ const CustomerListView = () => {
   const classes = useStyles();
   const { token } = useAuthState();
   const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     axios
@@ -37,10 +39,15 @@ const CustomerListView = () => {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <Page className={classes.root} title="Customers">
       <Container maxWidth={false}>
         <Toolbar title="customer" isButtonHidden={true} />
