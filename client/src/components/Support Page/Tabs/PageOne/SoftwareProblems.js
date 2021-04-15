@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
       lineHeight: "3rem",
       fontWeight: "600",
       marginTop: "2rem",
-      fontFamily: "Abhaya Libre, Times New Roman, Times, serif",
       color: "#333840",
       letterSpacing: ".03rem",
       marginBottom: ".5rem"
@@ -36,8 +35,6 @@ const useStyles = makeStyles((theme) => ({
     "& h6": {
       fontSize: ".875rem",
       letterSpacing: "1px",
-      fontFamily: `Work Sans,Roboto,-apple-system,
-      BlinkMacSystemFont,Segoe UI,Arial,sans-serif`,
       color: "#333840",
       fontWeight: "400",
       lineHeight: "1.6"
@@ -54,8 +51,6 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "15px",
       fontWeight: "300",
       color: "#333840",
-      fontFamily: `Work Sans, Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Arial,
-       sans-serif`,
       marginBottom: "0.5rem",
       marginTop: "0.5rem",
       "&:hover": {
