@@ -58,15 +58,13 @@ const SnackBarComponent = () => {
     setMessage
   ] = useContext(SnackbarContext);
   return (
-    <div>
-      <SnackBar
-        open={open}
-        autoHideDuration={6000}
-        handleClose={handleClose}
-        severity={severity}
-        message={message}
-      />
-    </div>
+    <SnackBar
+      open={open}
+      autoHideDuration={6000}
+      handleClose={handleClose}
+      severity={severity}
+      message={message}
+    />
   );
 };
 
@@ -91,7 +89,7 @@ function App() {
           <Router>
             <Navbar />
             <Box flexGrow={1}>
-              <Suspense fallback={<h3>Loading...</h3>}>
+              <Suspense fallback={<Loading />}>
                 <Switch>
                   <Route path="/classes" component={LazyClassesPane} />
                   <ProtectedRoute path="/cart" component={LazyCart} />

@@ -8,8 +8,7 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import SoftwareProblems from "./PageOne/SoftwareProblems";
-import ProductEnquiry from "./PageTwo/ProductEnquiry";
-import PersonalDiscussion from "./PageThree/PersonalDiscussion";
+import PersonalDiscussion from "./PageTwo/PersonalDiscussion";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
   },
   tabpanel: {
     background: "#f1f1f1",
+    "& .MuiBox-root": {
+      background: "#f1f1f1"
+    },
     "& html": {
       "& body": {
         height: "100%",
