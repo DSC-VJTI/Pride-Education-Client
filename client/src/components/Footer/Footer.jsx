@@ -54,7 +54,10 @@ const Footer = () => {
                 </a>
               </div>
               <div className="logo">
-                <a href="https://t.me/ca_abhishekkhilwani_scmpe">
+                <a
+                  target="_blank"
+                  href="https://t.me/ca_abhishekkhilwani_scmpe"
+                >
                   <TelegramIcon className="mediaHandles" />
                 </a>
               </div>
