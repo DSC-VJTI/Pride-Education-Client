@@ -28,19 +28,28 @@ const Footer = () => {
           <div className="socialHandles">
             <div className="firstPart">
               <div className="logo">
-                <a href="https://www.youtube.com/channel/UCRSDemzjAQW0R4SqJ4KdSOg">
+                <a
+                  target="_blank"
+                  href="https://www.youtube.com/channel/UCRSDemzjAQW0R4SqJ4KdSOg"
+                >
                   <YouTubeIcon className="mediaHandles" />
                 </a>
               </div>
               <div className="logo">
-                <a href="https://instagram.com/ca_abhishekkhilwani">
+                <a
+                  target="_blank"
+                  href="https://instagram.com/ca_abhishekkhilwani"
+                >
                   <InstagramIcon className="mediaHandles" />
                 </a>
               </div>
             </div>
             <div className="secondPart">
               <div className="logo">
-                <a href="https://www.facebook.com/www.prideca.in/">
+                <a
+                  target="_blank"
+                  href="https://www.facebook.com/www.prideca.in/"
+                >
                   <FacebookIcon className="mediaHandles" />
                 </a>
               </div>
