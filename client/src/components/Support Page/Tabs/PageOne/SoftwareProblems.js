@@ -12,6 +12,9 @@ const useStyles = makeStyles((theme) => ({
     background: "#f1f1f1",
     marginLeft: "auto",
     marginRight: "auto",
+    "& .MuiBox-root": {
+      background: "#f1f1f1"
+    },
     "@media (min-width: 576px)": {
       maxWidth: "94%",
       paddingLeft: "15px",
