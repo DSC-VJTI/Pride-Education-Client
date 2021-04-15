@@ -28,9 +28,11 @@ const DismissibleAlert = (props) => {
     return (
       <div>
         <Snackbar
+          autoHideDuration={6000}
           severity="error"
           anchorOrigin={{ vertical, horizontal }}
           open={open}
+          onClose={handleClose}
           message="I love snacks"
           key={vertical + horizontal}
         >
@@ -44,9 +46,11 @@ const DismissibleAlert = (props) => {
     return (
       <div>
         <Snackbar
+          autoHideDuration={6000}
           severity="error"
           anchorOrigin={{ vertical, horizontal }}
           open={open}
+          onClose={handleClose}
           message="I love snacks"
           key={vertical + horizontal}
         >
