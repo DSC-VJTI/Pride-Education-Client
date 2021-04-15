@@ -4,6 +4,10 @@
   box-sizing: border-box;
   
 }
+.mkresp{
+  width: 100%;
+  
+}
 #heroSection {
   display: grid;
   place-items: center;
