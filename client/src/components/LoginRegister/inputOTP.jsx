@@ -74,7 +74,7 @@ const OtpPage = (props) => {
   };
 
   return (
-    <main>
+    <section id="otpSection">
       <div className="center_div">
         <h2>Let's confirm your identity</h2>
         <img src={Otp} className="otp_avatar" alt="OTP Avatar" />
@@ -92,7 +92,7 @@ const OtpPage = (props) => {
         <Button onClick={handleClick} text="Verify OTP" />
         <small style={{ color: "red" }}>{error}</small>
       </div>
-    </main>
+    </section>
   );
 };
 

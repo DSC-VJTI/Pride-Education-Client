@@ -94,16 +94,10 @@ const App = () => {
               <Suspense fallback={<h3>Loading...</h3>}>
                 <Switch>
                   <Route path="/classes" component={LazyClassesPane} />
-                  <Route
+                  <ProtectedRoute
                     path="/cart"
                     component={() => (
                       <LazyCart setAlert={setAlert} alert={alert} />
-                    )}
-                  />
-                  <Route
-                    path="/orders"
-                    component={() => (
-                      <LazyMyOrders setAlert={setAlert} alert={alert} />
                     )}
                   />
                   <Route exact path="/product" component={LazyCoursePage} />
