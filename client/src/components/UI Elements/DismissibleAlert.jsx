@@ -1,105 +1,67 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Alert from "@material-ui/lab/Alert";
-import IconButton from "@material-ui/core/IconButton";
-import Collapse from "@material-ui/core/Collapse";
-import CloseIcon from "@material-ui/icons/Close";
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import WarningIcon from "@material-ui/icons/Warning";
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    "& > * + *": {
-      marginTop: theme.spacing(2)
-    }
-  }
-}));
-
+import React, { useEffect } from "react";
+import Button from "@material-ui/core/Button";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 const DismissibleAlert = (props) => {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
-  if (props.alertDisplay === -1) {
-    return null;
-  } else if (props.alertDisplay === 1) {
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: "top",
+    horizontal: "center"
+  });
+
+  const { vertical, horizontal, open } = state;
+
+  const handleClick = (newState) => () => {
+    setState({ open: true, ...newState });
+  };
+
+  const handleClose = () => {
+    setState({ ...state, open: false });
+  };
+  function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
+  useEffect(() => {
+    setState({ open: true, ...{ vertical: "top", horizontal: "center" } });
+  }, []);
+  if (props.alertDisplay == 1) {
     return (
-      <div className={classes.root}>
-        <Collapse in={open}>
-          <Alert
-            severity="success"
-            style={{ display: "flex" }}
-            icon={
-              <CheckCircleIcon
-                style={{
-                  color: "green",
-                  fontSize: "35px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center"
-                }}
-                fontSize="inherit"
-              />
-            }
-            action={
-              <IconButton
-                variant="h2"
-                aria-label="close"
-                color="inherit"
-                size="small"
-                onClick={() => {
-                  setOpen(false);
-                }}
-              >
-                <CloseIcon fontSize="35px" />
-              </IconButton>
-            }
-          >
-            <span style={{ fontWeight: "bold", fontSize: "25px" }}>
-              Purchase Done Successfully!
-            </span>
+      <div>
+        <Snackbar
+          autoHideDuration={6000}
+          severity="error"
+          anchorOrigin={{ vertical, horizontal }}
+          open={open}
+          onClose={handleClose}
+          message="I love snacks"
+          key={vertical + horizontal}
+        >
+          <Alert onClose={handleClose} severity="success">
+            Purchase Successful!!
           </Alert>
-        </Collapse>
+        </Snackbar>
+      </div>
+    );
+  } else if (props.alertDisplay == 0) {
+    return (
+      <div>
+        <Snackbar
+          autoHideDuration={6000}
+          severity="error"
+          anchorOrigin={{ vertical, horizontal }}
+          open={open}
+          onClose={handleClose}
+          message="I love snacks"
+          key={vertical + horizontal}
+        >
+          <Alert onClose={handleClose} severity="error">
+            Something went Wrong!!
+          </Alert>
+        </Snackbar>
       </div>
     );
   } else {
-    return (
-      <div className={classes.root}>
-        <Collapse in={open}>
-          <Alert
-            severity="error"
-            style={{ display: "flex" }}
-            icon={
-              <WarningIcon
-                style={{
-                  color: "red",
-                  fontSize: "35px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center"
-                }}
-                fontSize="inherit"
-              />
-            }
-            action={
-              <IconButton
-                variant="h2"
-                aria-label="close"
-                color="inherit"
-                size="small"
-                onClick={() => {
-                  setOpen(false);
-                }}
-              >
-                <CloseIcon fontSize="35px" />
-              </IconButton>
-            }
-          >
-            <span style={{ fontWeight: "bold", fontSize: "25px" }}>
-              Something Went Wrong Please try again!!
-            </span>
-          </Alert>
-        </Collapse>
-      </div>
-    );
+    return null;
   }
 };
 export default DismissibleAlert;

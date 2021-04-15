@@ -6,6 +6,7 @@ import { BASE_URL } from "../../constants";
 import { useAuthState } from "../../context/context";
 import Loading from "../UI Elements/Loading";
 import Alert from "../UI Elements/DismissibleAlert";
+import TestBook from "./TestBook";
 const useStyles = makeStyles((theme) => ({
   style: {
     padding: "20px",
@@ -62,25 +63,11 @@ const MyOrders = (props) => {
             className={classes.style}
           >
             {value.map((orderedItem) => (
-              <Paper
-                className="orderPageResponsive"
-                style={{
-                  backgroundColor: "rgb(241, 241, 241)",
-                  width: "60%",
-                  display: "block",
-                  margin: "50px!important"
-                }}
-              >
-                <OrderedItem
-                  title={`${orderedItem.products[0].test.subject} Full Course`}
-                  price={orderedItem.products[0].price}
-                  buyDate={orderedItem.orderPlacedAt}
-                  instructor={orderedItem.products[0].name}
-                />
-              </Paper>
+              <TestBook checkTest={orderedItem} />
             ))}
           </Container>
         </Grid>
+        <Grid item xs={0} md={2}></Grid>
       </Grid>
     </>
   );

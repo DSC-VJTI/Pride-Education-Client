@@ -58,7 +58,9 @@ const Cart = (props) => {
   const [value, setValue] = useState(initialFValues);
   const [total, setTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-
+  useEffect(() => {
+    props.setAlert(-1);
+  }, []);
   const classes = CartStyles();
   const deleteProduct = async (deleteId) => {
     const deletedProduct = await axios.delete(`${BASE_URL}/cart/${deleteId}`, {
