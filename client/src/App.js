@@ -58,19 +58,17 @@ const SnackBarComponent = () => {
     setMessage
   ] = useContext(SnackbarContext);
   return (
-    <div>
-      <SnackBar
-        open={open}
-        autoHideDuration={6000}
-        handleClose={handleClose}
-        severity={severity}
-        message={message}
-      />
-    </div>
+    <SnackBar
+      open={open}
+      autoHideDuration={6000}
+      handleClose={handleClose}
+      severity={severity}
+      message={message}
+    />
   );
 };
 
-function App() {
+const App = () => {
   const [alert, setAlert] = useState(-1);
   useEffect(() => {
     Aos.init({ duration: 2000 });
@@ -91,15 +89,26 @@ function App() {
           <Router>
             <Navbar />
             <Box flexGrow={1}>
-              <Suspense fallback={<h3>Loading...</h3>}>
+              <Suspense fallback={<Loading />}>
                 <Switch>
                   <Route path="/classes" component={LazyClassesPane} />
-                  <Route path="/cart" component={LazyCart} />
+                  <ProtectedRoute
+                    path="/cart"
+                    component={() => (
+                      <LazyCart setAlert={setAlert} alert={alert} />
+                    )}
+                  />
                   <Route exact path="/product" component={LazyCoursePage} />
                   <Route path="/support" component={LazySupportPage} />
                   <Route path="/register" component={LazyRegistration} />
                   <Route path="/login" component={LazyLogin} />
-                  <Route path="/orders" component={LazyMyOrders} />
+                  <Route
+                    path="/orders"
+                    component={() => (
+                      <LazyMyOrders setAlert={setAlert} alert={alert} />
+                    )}
+                  />
+                  ;
                   <Route
                     path="/course/details/:name"
                     component={LazyProductDetails}
@@ -112,7 +121,6 @@ function App() {
                     path="/book/details/:_id"
                     component={LazyBookProductDetails}
                   />
-
                   <Route path="/product/add" component={LazyAddProduct} />
                   <Route
                     path="/product/edit/:productId"
@@ -138,6 +146,6 @@ function App() {
       </SnackbarProvider>
     </Box>
   );
-}
+};
 
 export default App;
