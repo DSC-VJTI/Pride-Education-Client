@@ -88,7 +88,6 @@ const BookDetails = ({ product }) => {
         <Divider variant="fullWidth" />
 
         <Grid item xs={12}>
-          <Typography>Price</Typography>
           <Typography variant={"h6"}>About this Item</Typography>
           <Divider />
           <TableContainer component={Paper}>
