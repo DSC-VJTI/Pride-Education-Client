@@ -12,7 +12,7 @@ const Landing = () => {
   return (
     <main>
       <a
-        href="https://wa.me/+919082731989"
+        href="https://wa.me/+917507106467"
         className="whatsapp_float"
         target="_blank"
       >
