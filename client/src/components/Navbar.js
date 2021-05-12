@@ -137,7 +137,6 @@ const Navbar = () => {
               color: "#f26522",
               textTransform: "uppercase",
               marginRight: "15px",
-              fontFamily: "Raleway,sans-serif",
               fontWeight: "bold"
             }}
           >
