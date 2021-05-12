@@ -208,6 +208,18 @@ const Navbar = () => {
                   Admin
                 </NavLink>
               )}
+              <NavLink
+                to="/orders"
+                className="hideOnMobile"
+                style={{
+                  textDecoration: "none",
+                  color: "#f26522",
+                  textTransform: "uppercase",
+                  marginRight: "15px"
+                }}
+              >
+                My Orders
+              </NavLink>
               <div
                 className="hideOnMobile"
                 style={{

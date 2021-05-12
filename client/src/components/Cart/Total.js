@@ -71,8 +71,8 @@ const Total = (props) => {
             total: props.price * 100,
             user: state.user
           });
-          props.setAlert(1);
           history.push("/orders");
+          props.setAlert(1);
         } catch (err) {
           props.setAlert(0);
         }
