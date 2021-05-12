@@ -11,6 +11,14 @@ const Landing = () => {
 
   return (
     <main>
+      <a
+        href="https://wa.me/+919082731989"
+        className="whatsapp_float"
+        target="_blank"
+      >
+        {" "}
+        <i className="fa fa-whatsapp whatsapp-icon"></i>
+      </a>
       <Hero />
 
       <About />
