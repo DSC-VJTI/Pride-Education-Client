@@ -13,8 +13,8 @@
 	position:fixed;
 	width:60px;
 	height:60px;
-	bottom:40px;
-	right:40px;
+  top: 50%;
+  left:0%;
 	background-color:#25d366;
 	color:#FFF;
 	border-radius:50px;
@@ -35,8 +35,8 @@
     .whatsapp_float {
         width: 40px;
         height: 40px;
-        bottom: 20px;
-        right: 10px;
+       bottom:0%;
+       left: 0%;
         font-size: 22px;
     }
 }

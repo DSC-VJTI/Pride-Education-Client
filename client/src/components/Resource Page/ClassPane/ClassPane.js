@@ -110,7 +110,7 @@ const ClassPane = ({ Course, CoursesList }) => {
           })}
         </ReactElasticCarousel>
       </div>
-      <ComboBox title="Books" />
+      <ComboBox title="BOOKS" />
       <div>
         <ReactElasticCarousel
           breakPoints={breakPoints}
@@ -130,7 +130,7 @@ const ClassPane = ({ Course, CoursesList }) => {
           })}
         </ReactElasticCarousel>
       </div>
-      <ComboBox title="Test Series" />
+      <ComboBox title="TEST SERIES" />
       <div>
         <ReactElasticCarousel
           breakPoints={breakPoints}
