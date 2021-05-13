@@ -17,9 +17,9 @@ const Hero = () => {
   return (
     <section id="heroSection">
       <HomePageImage imageId={imageId} />
-      <Typography variant="h2" data-aos="fade-right" className="whiteText">
+      {/* <Typography variant="h2" data-aos="fade-right" className="whiteText">
         Welcome To Pride Education
-      </Typography>
+      </Typography> */}
     </section>
   );
 };

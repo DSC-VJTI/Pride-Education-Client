@@ -4,9 +4,29 @@ import HomeImage1 from "../../assets/images/landingImages/HomeImage1.png";
 import HomeImage2 from "../../assets/images/landingImages/HomeImage2.png";
 const HomePageImage = (props) => {
   if (props.imageId == 1) {
-    return <img id="HomeImage" src={HomeImage1} />;
+    return (
+      <img
+        style={{
+          alignItems: "center",
+          width: "95%",
+          height: "92vh"
+        }}
+        className="HomeImage"
+        src={HomeImage1}
+      />
+    );
   } else if (props.imageId == 2) {
-    return <img id="HomeImage" src={HomeImage2} />;
+    return (
+      <img
+        style={{
+          alignItems: "center",
+          width: "95%",
+          height: "92vh"
+        }}
+        className="HomeImage"
+        src={HomeImage2}
+      />
+    );
   } else {
     return null;
   }

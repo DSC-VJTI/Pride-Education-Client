@@ -18,15 +18,18 @@
   height: 100%;
   width: 100%;
 }
-#HomeImage{
-  display: grid;
+.HomeImage{
+  width:100vw;
+  height:100vh;
+  /* display: grid;
   place-items: center;
   background-attachment: fixed;
   background-position: center;
   text-align: center;
-  background-size: cover;
+  background-size: contai;
   height: 91vh;
-  width: 100vw;
+  width: 100vw; */
+
 }
 .whiteText {
   color: #ffffff;
