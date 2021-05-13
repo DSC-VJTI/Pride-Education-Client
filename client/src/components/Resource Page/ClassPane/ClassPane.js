@@ -88,29 +88,7 @@ const ClassPane = ({ Course, CoursesList }) => {
     <Loading />
   ) : (
     <section>
-      <ComboBox title="Test Series" />
-      <div>
-        <ReactElasticCarousel
-          breakPoints={breakPoints}
-          className={classes.slider}
-        >
-          {products.tests.map((prod, idx) => {
-            return (
-              <div key={idx} data-aos="flip-right">
-                <Product
-                  title={prod.name}
-                  instructor={prod.test.subject}
-                  buttonText="View Test"
-                  obj={prod}
-                  rou="/test/details"
-                />
-              </div>
-            );
-          })}
-        </ReactElasticCarousel>
-      </div>
-
-      <ComboBox title="Courses" />
+      <ComboBox title="PEN DRIVE/GOOGLE DRIVE CLASSES" />
       <div>
         <ReactElasticCarousel
           breakPoints={breakPoints}
@@ -132,8 +110,7 @@ const ClassPane = ({ Course, CoursesList }) => {
           })}
         </ReactElasticCarousel>
       </div>
-
-      <ComboBox title="Books" />
+      <ComboBox title="BOOKS" />
       <div>
         <ReactElasticCarousel
           breakPoints={breakPoints}
@@ -147,6 +124,27 @@ const ClassPane = ({ Course, CoursesList }) => {
                   buttonText="View Book"
                   obj={prod}
                   rou="/book/details"
+                />
+              </div>
+            );
+          })}
+        </ReactElasticCarousel>
+      </div>
+      <ComboBox title="TEST SERIES" />
+      <div>
+        <ReactElasticCarousel
+          breakPoints={breakPoints}
+          className={classes.slider}
+        >
+          {products.tests.map((prod, idx) => {
+            return (
+              <div key={idx} data-aos="flip-right">
+                <Product
+                  title={prod.name}
+                  instructor={prod.test.subject}
+                  buttonText="View Test"
+                  obj={prod}
+                  rou="/test/details"
                 />
               </div>
             );

@@ -126,7 +126,7 @@ const Navbar = () => {
                 color: "#f26522"
               }}
             >
-              Pride Education
+              Pride Commerce Academy
             </NavLink>
           </Typography>
           <NavLink
@@ -136,7 +136,8 @@ const Navbar = () => {
               textDecoration: "none",
               color: "#f26522",
               textTransform: "uppercase",
-              marginRight: "15px"
+              marginRight: "15px",
+              fontWeight: "bold"
             }}
           >
             Support
@@ -148,10 +149,11 @@ const Navbar = () => {
               textDecoration: "none",
               color: "#f26522",
               textTransform: "uppercase",
-              marginRight: "15px"
+              marginRight: "15px",
+              fontWeight: "bold"
             }}
           >
-            MarketPlace
+            Buy Books/Pendrive
           </NavLink>
           <NavLink
             to={"/resources"}
@@ -160,10 +162,11 @@ const Navbar = () => {
               textDecoration: "none",
               color: "#f26522",
               textTransform: "uppercase",
-              marginRight: "15px"
+              marginRight: "15px",
+              fontWeight: "bold"
             }}
           >
-            Resources
+            Free Resources
           </NavLink>
           {!isAuthenticated ? (
             <>
@@ -174,7 +177,8 @@ const Navbar = () => {
                   textDecoration: "none",
                   color: "#f26522",
                   textTransform: "uppercase",
-                  marginRight: "15px"
+                  marginRight: "15px",
+                  fontWeight: "bold"
                 }}
               >
                 Login
@@ -186,7 +190,8 @@ const Navbar = () => {
                   textDecoration: "none",
                   color: "#f26522",
                   textTransform: "uppercase",
-                  marginRight: "15px"
+                  marginRight: "15px",
+                  fontWeight: "bold"
                 }}
               >
                 Register
@@ -202,7 +207,8 @@ const Navbar = () => {
                     textDecoration: "none",
                     color: "#f26522",
                     textTransform: "uppercase",
-                    marginRight: "15px"
+                    marginRight: "15px",
+                    fontWeight: "bold"
                   }}
                 >
                   Admin
@@ -215,7 +221,8 @@ const Navbar = () => {
                   textDecoration: "none",
                   color: "#f26522",
                   textTransform: "uppercase",
-                  marginRight: "15px"
+                  marginRight: "15px",
+                  fontWeight: "bold"
                 }}
               >
                 My Orders
@@ -227,6 +234,7 @@ const Navbar = () => {
                   color: "#f26522",
                   textTransform: "uppercase",
                   marginRight: "15px",
+                  fontWeight: "bold",
                   cursor: "pointer"
                 }}
                 onClick={() => {
@@ -294,7 +302,7 @@ const Navbar = () => {
                 <ListItemIcon>
                   <ShopIcon htmlColor="rgb(242, 101, 34)" />
                 </ListItemIcon>
-                <ListItemText primary={"Marketplace"} />
+                <ListItemText primary={"Buy Books/Pendrive"} />
               </ListItem>
             </NavLink>
             <NavLink to={"/resources"} className="fixLinks">
@@ -302,7 +310,7 @@ const Navbar = () => {
                 <ListItemIcon>
                   <Book color="rgb(242, 101, 34)" />
                 </ListItemIcon>
-                <ListItemText primary={"Resources"} />
+                <ListItemText primary={"Free Resources"} />
               </ListItem>
             </NavLink>
             {!isAuthenticated ? (
