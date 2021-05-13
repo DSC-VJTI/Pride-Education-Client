@@ -11,13 +11,22 @@
 #heroSection {
   display: grid;
   place-items: center;
-  background-image: url("./../../assets/images/landingImages/hero.jpg");
   background-attachment: fixed;
   background-position: center;
   text-align: center;
   background-size: cover;
-  height: 100vh;
+  height: 100%;
   width: 100%;
+}
+#HomeImage{
+  display: grid;
+  place-items: center;
+  background-attachment: fixed;
+  background-position: center;
+  text-align: center;
+  background-size: cover;
+  height: 91vh;
+  width: 100vw;
 }
 .whiteText {
   color: #ffffff;

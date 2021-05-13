@@ -3,106 +3,56 @@
     padding: 0;
     box-sizing: border-box;
 }
+.footer{
+    width:100vw;
+    height:auto;
+    padding: 7px 0;
+    background-color: #212529;
+    display:flex;
+}
 .main_footer{
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content:center;
     align-items: center;
+    flex-direction:column;
+    /* justify-content: center; */
+    position:relative;
 }
-img{
-    width: 5%;
-    min-width: 70px;
-}
-.footer{
-    padding: 7px 0;
-    background-color: rgb(241, 241, 241);
-}
-.pageLinks{
+.first_part{
+    position:relative;
+    top:0;
+    left:0;
+    padding:20px 0px;
     display:flex;
-    justify-content:space-around;
-    align-items:center;
-    width:70%;
+    width:90%;
+    justify-content: center;
+    margin-right:100px;
 }
-.pageLinks a{
-    color: rgb(242, 101, 34);
-    font-size:17.5px;
-    text-decoration:none;
+.social{
+    display:flex;
+    flex-direction:column;
+    margin:0px 55px;
 }
-.socialHandles{
-    width:20%;
+.second_head{
+margin:6px 10px;
+margin-left:80px;
 }
-.mediaHandles{
-    color:rgb(242, 101, 34);
+.stick{
+margin:6px 10px;
 }
-.firstPart,.secondPart{
+.copy{
+margin:20px 10px;
+}
+.second_part{
     display:flex;
     justify-content: center;
+    align-items: center;
 }
-.logo{
-    margin:5px 15px;
-    color:rgb(242, 101, 34);;
-}
-@media (max-width:685px)
-{
-    .main_footer{
-        flex-direction: column;
-    }
-    h1,.pageLinks,.socialHandles{
-        margin:13px 5px;
-    }
-    .logo{
-        margin-top: 30px;
-    }
-}
-@media (max-width:391px)
-{
-    .LogoHeading{
-        flex-direction: column;
-    }
-    .pageLinks{
-        flex-direction: column;
-    }
-    .footerLinks{
-        margin:10px 2px;
-    }
-}
-@media (max-width:920px)
-{
-   img{
-       width:12%;
-   }
-   .pageLinks{
-       margin:40px 0;
-   }
-}
-@media (max-height:690px)
-{
-    .footer{
-        margin-top:200px!important;
-    }
-}
-@media (max-height:600px)
-{
-    .footer{
-        margin-top:300px!important;
-    }
-}
-@media (max-height:515px)
-{
-    .footer{
-        margin-top:350px!important;
-    }
-}
-@media (max-height:450px)
-{
-    .footer{
-        margin-top:400px!important;
-    }
-}
-@media (max-height:390px)
-{
-    .footer{
-        margin-top:450px!important;
-    }
+.middlePart{
+    padding:0.6px 0;
+    opacity:0.6;
+    width:80%;
+    margin:10px 0;
+    background-color:white;
 }
