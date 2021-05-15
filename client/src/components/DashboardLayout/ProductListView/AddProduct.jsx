@@ -71,7 +71,8 @@ export default function AddProduct() {
     },
     book: {
       url: ""
-    }
+    },
+    imageUrl: ""
   });
   const [file, setFile] = useState();
   const productId = useParams().productId;
@@ -129,6 +130,7 @@ export default function AddProduct() {
     name: yup.string().required(),
     price: yup.number().required().positive(),
     discount: yup.number().optional().moreThan(-1), // Discount can be zero
+    imageUrl: yup.string().optional(),
     course: yup
       .object({
         level: yup.string().optional(),
@@ -181,6 +183,7 @@ export default function AddProduct() {
             formData.append("name", reqBody["name"]);
             formData.append("price", reqBody["price"]);
             formData.append("discount", reqBody["discount"] || 0);
+            formData.append("imageurl", file);
             switch (productType) {
               case "course":
                 reqBody["course"]["applicableDate"] = selectedDate;
@@ -261,6 +264,14 @@ export default function AddProduct() {
                         <MenuItem value="test">Test</MenuItem>
                         <MenuItem value="book">Book</MenuItem>
                       </Select>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <input
+                        type="file"
+                        name="imageUrl"
+                        id="imageUrl"
+                        onChange={(e) => setFile(e.target.files[0])}
+                      />
                     </Grid>
                     <Grid item xs={12}>
                       <Typography
