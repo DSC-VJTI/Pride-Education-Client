@@ -71,9 +71,9 @@ export default function AddProduct() {
     },
     book: {
       url: ""
-    },
-    imageUrl: ""
+    }
   });
+  const [imageUrl, setImageUrl] = useState();
   const [file, setFile] = useState();
   const productId = useParams().productId;
   const isEditPage = !!productId;
@@ -130,7 +130,6 @@ export default function AddProduct() {
     name: yup.string().required(),
     price: yup.number().required().positive(),
     discount: yup.number().optional().moreThan(-1), // Discount can be zero
-    imageUrl: yup.string().optional(),
     course: yup
       .object({
         level: yup.string().optional(),
@@ -183,7 +182,7 @@ export default function AddProduct() {
             formData.append("name", reqBody["name"]);
             formData.append("price", reqBody["price"]);
             formData.append("discount", reqBody["discount"] || 0);
-            formData.append("imageUrl", file);
+            formData.append("files", imageUrl);
             switch (productType) {
               case "course":
                 reqBody["course"]["applicableDate"] = selectedDate;
@@ -193,7 +192,7 @@ export default function AddProduct() {
                 formData.append("test", JSON.stringify(reqBody["test"]));
                 break;
               case "book":
-                formData.append("book", file);
+                formData.append("files", file);
                 break;
             }
             formData.append("type", productType);
@@ -270,7 +269,7 @@ export default function AddProduct() {
                         type="file"
                         name="imageUrl"
                         id="imageUrl"
-                        onChange={(e) => setFile(e.target.files[0])}
+                        onChange={(e) => setImageUrl(e.target.files[0])}
                       />
                     </Grid>
                     <Grid item xs={12}>

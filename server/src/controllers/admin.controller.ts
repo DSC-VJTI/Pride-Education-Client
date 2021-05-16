@@ -47,21 +47,22 @@ const AdminController = {
   ): Promise<express.Response> {
     try {
       const { name, discount, price, type } = req.body as IProductBody;
-      if (!req.file) {
+      if (!req.files) {
         return res.status(400).send("No file uploaded.");
       }
+      // req.files[0] is always the product image
       // Create new blob in the bucket referencing the file
-      const blob = bucket.file(req.file.originalname);
+      const files = req.files as Array<Express.Multer.File>;
+      const blob = bucket.file(files[0].originalname);
 
       const imageUrl = `https://firebasestorage.googleapis.com/v0/b/${
         bucket.name
       }/o/${encodeURI(blob.name)}?alt=media`;
 
-      console.log(imageUrl);
       // Create writable stream and specifying file mimetype
       const blobWriter = blob.createWriteStream({
         metadata: {
-          contentType: req.file.mimetype
+          contentType: files[0].mimetype
         }
       });
 
@@ -69,28 +70,28 @@ const AdminController = {
         res.status(500).json({ error: err.message })
       );
 
-      blobWriter.end(req.file.buffer);
+      blobWriter.end(files[0].buffer);
       let product = new Product({ name, discount, price, imageUrl });
       switch (type) {
         case "course":
           product.course = await Course.create(JSON.parse(req.body.course));
           break;
         case "book": {
-          if (!req.file) {
+          if (files.length < 2) {
             return res.status(400).send("No file uploaded.");
           }
           // Create new blob in the bucket referencing the file
-          const blob = bucket.file(req.file.originalname);
+          const blob = bucket.file(files[1].originalname);
 
           const url = `https://firebasestorage.googleapis.com/v0/b/${
             bucket.name
           }/o/${encodeURI(blob.name)}?alt=media`;
-          const book = await Book.create({ url, file: req.file.originalname });
+          const book = await Book.create({ url, file: files[1].originalname });
 
           // Create writable stream and specifying file mimetype
           const blobWriter = blob.createWriteStream({
             metadata: {
-              contentType: req.file.mimetype
+              contentType: files[1].mimetype
             }
           });
 
@@ -98,7 +99,7 @@ const AdminController = {
             res.status(500).json({ error: err.message })
           );
 
-          blobWriter.end(req.file.buffer);
+          blobWriter.end(files[1].buffer);
           product.book = book;
           break;
         }
