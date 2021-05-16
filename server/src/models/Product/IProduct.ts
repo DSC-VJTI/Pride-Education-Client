@@ -10,4 +10,5 @@ export default interface IProduct extends Document {
   course: ICourse["_id"];
   test: ITest["_id"];
   book: IBook["_id"];
+  imageUrl: string;
 }

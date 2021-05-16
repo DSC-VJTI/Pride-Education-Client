@@ -35,7 +35,7 @@ router.post(
   "/admin/createProduct/",
   auth.isAuthenticated,
   adminMiddleware.isAdmin,
-  uploader.single("book"),
+  uploader.array("files"),
   admin.newProduct
 );
 router.put(
