@@ -178,12 +178,21 @@ export default function AddProduct() {
           onSubmit={async (data, { setSubmitting, resetForm }) => {
             setSubmitting(true);
             // Preprocess Data
+            console.log("Data");
+            console.log(data);
             let formData = new FormData();
             let reqBody = { ...data };
+            console.log("Req Body");
+            console.log(reqBody["name"]);
+            console.log(reqBody["price"]);
+
             formData.append("name", reqBody["name"]);
             formData.append("price", reqBody["price"]);
             formData.append("discount", reqBody["discount"] || 0);
-            formData.append("imageurl", file);
+            console.log("Form data");
+            console.log(formData.values);
+
+            formData.append("imageUrl", file);
             switch (productType) {
               case "course":
                 reqBody["course"]["applicableDate"] = selectedDate;

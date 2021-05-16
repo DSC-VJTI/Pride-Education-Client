@@ -37,7 +37,7 @@ interface IProductBody {
   course?: ICourseBody;
   test?: ITestBody;
   book?: IBookBody;
-  imageUrl: string;
+  imageUrl?: string;
 }
 
 const AdminController = {
@@ -47,9 +47,6 @@ const AdminController = {
   ): Promise<express.Response> {
     try {
       const { name, discount, price, type } = req.body as IProductBody;
-      console.log(req);
-      // console.log(imageUrl);
-      //================================================================
       if (!req.file) {
         return res.status(400).send("No file uploaded.");
       }
@@ -74,9 +71,6 @@ const AdminController = {
 
       blobWriter.end(req.file.buffer);
       let product = new Product({ name, discount, price, imageUrl });
-
-      //===============================================================
-      //let product = new Product({ name, discount, price });
       switch (type) {
         case "course":
           product.course = await Course.create(JSON.parse(req.body.course));
@@ -111,11 +105,12 @@ const AdminController = {
         case "test":
           product.test = await Test.create(JSON.parse(req.body.test));
           break;
-        default:
+        default: {
           return res.status(400).json({
             error:
               "Any one out of course, test or book expected in res.body.type"
           });
+        }
       }
       product = await product.save();
       return res.status(201).json({

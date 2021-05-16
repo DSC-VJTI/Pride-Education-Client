@@ -35,6 +35,7 @@ router.post(
   "/admin/createProduct/",
   auth.isAuthenticated,
   adminMiddleware.isAdmin,
+  uploader.single("imageUrl"),
   uploader.single("book"),
   admin.newProduct
 );
