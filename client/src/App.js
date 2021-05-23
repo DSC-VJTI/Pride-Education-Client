@@ -131,7 +131,8 @@ const App = () => {
                     path="/resources/:fileName"
                     component={LazyPdfViewer}
                   />
-                  <ProtectedRoute path="/resources" component={LazyResources} />
+                  {/* <ProtectedRoute path="/resources" component={LazyResources} /> */}
+                  <Route path="/resources" component={LazyResources} />
                   <Route path="/coming" component={LazyComingSoon} />
                   <Route path="/" exact component={LazyLanding} />
                   <Route component={LazyNotFoundView} />
