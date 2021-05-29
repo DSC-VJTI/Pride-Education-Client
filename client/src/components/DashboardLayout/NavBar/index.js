@@ -39,10 +39,6 @@ const items = [
   {
     icon: Database,
     title: "Orders"
-  },
-  {
-    icon: HelpCircleIcon,
-    title: "Support"
   }
 ];
 

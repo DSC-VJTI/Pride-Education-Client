@@ -16,7 +16,8 @@ const ProductSchema: Schema = new Schema({
   book: {
     type: Schema.Types.ObjectId,
     ref: "Book"
-  }
+  },
+  imageUrl: { type: String, required: false }
 });
 
 export default model<IProduct>("Product", ProductSchema);

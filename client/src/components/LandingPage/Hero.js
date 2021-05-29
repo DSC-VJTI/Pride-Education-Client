@@ -1,12 +1,22 @@
 import { Typography } from "@material-ui/core";
-import React from "react";
-
+import React, { useState, useEffect } from "react";
+import HomePageImage from "./HomePageImage";
 const Hero = () => {
+  const [imageId, setImageId] = useState(1);
+  const flipImages = () => {
+    if (imageId === 1) {
+      setImageId(2);
+    }
+    if (imageId === 2) {
+      setImageId(1);
+    }
+  };
+  useEffect(() => {
+    setTimeout(flipImages, 5000);
+  }, [imageId]);
   return (
     <section id="heroSection">
-      <Typography variant="h2" data-aos="fade-right" className="whiteText">
-        Welcome To Pride Education
-      </Typography>
+      <HomePageImage imageId={imageId} />
     </section>
   );
 };

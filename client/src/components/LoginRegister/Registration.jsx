@@ -230,7 +230,7 @@ const Registration = () => {
                     value={props.values.level}
                     errorSignal={props.touched.level}
                     errorMsg={props.errors.level}
-                    menuItems={["Foundation", "ICPC", "Final"]}
+                    menuItems={["Foundation", "Inter", "Final"]}
                   />
                 </div>
                 <div

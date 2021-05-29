@@ -126,21 +126,9 @@ const Navbar = () => {
                 color: "#f26522"
               }}
             >
-              Pride Education
+              Pride Commerce Academy
             </NavLink>
           </Typography>
-          <NavLink
-            to="/support"
-            className="hideOnMobile"
-            style={{
-              textDecoration: "none",
-              color: "#f26522",
-              textTransform: "uppercase",
-              marginRight: "15px"
-            }}
-          >
-            Support
-          </NavLink>
           <NavLink
             to="/classes"
             className="hideOnMobile"
@@ -148,10 +136,11 @@ const Navbar = () => {
               textDecoration: "none",
               color: "#f26522",
               textTransform: "uppercase",
-              marginRight: "15px"
+              marginRight: "15px",
+              fontWeight: "bold"
             }}
           >
-            MarketPlace
+            Buy Books/Pendrive
           </NavLink>
           <NavLink
             to={"/resources"}
@@ -160,10 +149,11 @@ const Navbar = () => {
               textDecoration: "none",
               color: "#f26522",
               textTransform: "uppercase",
-              marginRight: "15px"
+              marginRight: "15px",
+              fontWeight: "bold"
             }}
           >
-            Resources
+            Free Resources
           </NavLink>
           {!isAuthenticated ? (
             <>
@@ -174,7 +164,8 @@ const Navbar = () => {
                   textDecoration: "none",
                   color: "#f26522",
                   textTransform: "uppercase",
-                  marginRight: "15px"
+                  marginRight: "15px",
+                  fontWeight: "bold"
                 }}
               >
                 Login
@@ -186,7 +177,8 @@ const Navbar = () => {
                   textDecoration: "none",
                   color: "#f26522",
                   textTransform: "uppercase",
-                  marginRight: "15px"
+                  marginRight: "15px",
+                  fontWeight: "bold"
                 }}
               >
                 Register
@@ -202,12 +194,26 @@ const Navbar = () => {
                     textDecoration: "none",
                     color: "#f26522",
                     textTransform: "uppercase",
-                    marginRight: "15px"
+                    marginRight: "15px",
+                    fontWeight: "bold"
                   }}
                 >
                   Admin
                 </NavLink>
               )}
+              <NavLink
+                to="/orders"
+                className="hideOnMobile"
+                style={{
+                  textDecoration: "none",
+                  color: "#f26522",
+                  textTransform: "uppercase",
+                  marginRight: "15px",
+                  fontWeight: "bold"
+                }}
+              >
+                My Orders
+              </NavLink>
               <div
                 className="hideOnMobile"
                 style={{
@@ -215,6 +221,7 @@ const Navbar = () => {
                   color: "#f26522",
                   textTransform: "uppercase",
                   marginRight: "15px",
+                  fontWeight: "bold",
                   cursor: "pointer"
                 }}
                 onClick={() => {
@@ -282,7 +289,7 @@ const Navbar = () => {
                 <ListItemIcon>
                   <ShopIcon htmlColor="rgb(242, 101, 34)" />
                 </ListItemIcon>
-                <ListItemText primary={"Marketplace"} />
+                <ListItemText primary={"Buy Books/Pendrive"} />
               </ListItem>
             </NavLink>
             <NavLink to={"/resources"} className="fixLinks">
@@ -290,7 +297,7 @@ const Navbar = () => {
                 <ListItemIcon>
                   <Book color="rgb(242, 101, 34)" />
                 </ListItemIcon>
-                <ListItemText primary={"Resources"} />
+                <ListItemText primary={"Free Resources"} />
               </ListItem>
             </NavLink>
             {!isAuthenticated ? (
