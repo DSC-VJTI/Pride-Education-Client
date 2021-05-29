@@ -99,7 +99,6 @@ const App = () => {
                     )}
                   />
                   <Route exact path="/product" component={LazyCoursePage} />
-                  <Route path="/support" component={LazySupportPage} />
                   <Route path="/register" component={LazyRegistration} />
                   <Route path="/login" component={LazyLogin} />
                   <Route

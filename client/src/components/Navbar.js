@@ -129,19 +129,7 @@ const Navbar = () => {
               Pride Commerce Academy
             </NavLink>
           </Typography>
-          <NavLink
-            to={isProd ? "/coming" : "/support"}
-            className="hideOnMobile"
-            style={{
-              textDecoration: "none",
-              color: "#f26522",
-              textTransform: "uppercase",
-              marginRight: "15px",
-              fontWeight: "bold"
-            }}
-          >
-            Support
-          </NavLink>
+
           <NavLink
             to={isProd ? "/coming" : "/classes"}
             className="hideOnMobile"
