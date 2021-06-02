@@ -8,17 +8,49 @@
   width: 100%;
   
 }
+/* for desktop */
+.whatsapp_float {
+	position:fixed;
+	width:60px;
+	height:60px;
+  top: 50%;
+  left:0%;
+	background-color:#25d366;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+        font-size:30px;
+	box-shadow: 2px 2px 3px #999;
+        z-index:100;
+}
+
+.whatsapp-icon {
+	margin-top:16px;
+}
+/* for mobile */
+@media screen and (max-width: 767px){
+     .whatsapp-icon {
+	 margin-top:10px;
+     }
+    .whatsapp_float {
+        width: 40px;
+        height: 40px;
+       bottom:0%;
+       left: 0%;
+        font-size: 22px;
+    }
+}
 #heroSection {
   display: grid;
   place-items: center;
-  background-image: url("./../../assets/images/landingImages/hero.jpg");
   background-attachment: fixed;
   background-position: center;
   text-align: center;
   background-size: cover;
-  height: 100vh;
+  height: 100%;
   width: 100%;
 }
+
 .whiteText {
   color: #ffffff;
 }

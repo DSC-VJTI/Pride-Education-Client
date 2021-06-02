@@ -12,6 +12,8 @@ import Paper from "@material-ui/core/Paper";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import Loading from "../UI Elements/Loading";
+import { useAuthState } from "../../context/context";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   table: {
@@ -22,6 +24,8 @@ const useStyles = makeStyles({
 export default function Resources() {
   const [books, setBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { isAuthenticated } = useAuthState();
+  const history = useHistory();
 
   useEffect(() => {
     axios
@@ -69,15 +73,27 @@ export default function Resources() {
                   </Link>
                 </TableCell>
                 <TableCell align="center">
-                  <Button color="inherit" variant="contained">
-                    <a
-                      href={row.book.url + "&download=1"}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                  {isAuthenticated ? (
+                    <Button color="inherit" variant="contained">
+                      <a
+                        href={row.book.url + "&download=1"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Download
+                      </a>
+                    </Button>
+                  ) : (
+                    <Button
+                      text={"Login To Add To Cart"}
+                      onClick={() => {
+                        history.push("/login");
+                      }}
+                      style={{ margin: "1rem" }}
                     >
                       Download
-                    </a>
-                  </Button>
+                    </Button>
+                  )}
                 </TableCell>
               </TableRow>
             );

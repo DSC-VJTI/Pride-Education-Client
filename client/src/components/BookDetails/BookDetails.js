@@ -35,6 +35,8 @@ const BookDetails = ({ product }) => {
 
   const history = useHistory();
 
+  const discountedPrice = product.price - product.discount;
+
   const state = useAuthState();
   const { isAuthenticated } = useAuthState();
   const AddToCart = async () => {
@@ -88,7 +90,6 @@ const BookDetails = ({ product }) => {
         <Divider variant="fullWidth" />
 
         <Grid item xs={12}>
-          <Typography>Price</Typography>
           <Typography variant={"h6"}>About this Item</Typography>
           <Divider />
           <TableContainer component={Paper}>
@@ -135,22 +136,17 @@ const BookDetails = ({ product }) => {
                     Price
                   </TableCell>
                   <TableCell align="left" size="small">
-                    ₹ {product.price}
+                    <span
+                      style={{
+                        textDecoration: "line-through red"
+                      }}
+                    >
+                      ₹{product.price}
+                    </span>
+                    ₹{discountedPrice}
                   </TableCell>
                 </TableRow>
-                <TableRow style={{ width: "fit-content" }}>
-                  <TableCell
-                    component="th"
-                    scope="row"
-                    align="left"
-                    size="small"
-                  >
-                    Discount
-                  </TableCell>
-                  <TableCell align="left" size="small">
-                    ₹ {product.discount}
-                  </TableCell>
-                </TableRow>
+
                 <TableRow style={{ width: "fit-content" }}>
                   <TableCell
                     component="th"

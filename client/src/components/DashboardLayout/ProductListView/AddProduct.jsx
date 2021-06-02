@@ -73,6 +73,7 @@ export default function AddProduct() {
       url: ""
     }
   });
+  const [imageUrl, setImageUrl] = useState();
   const [file, setFile] = useState();
   const productId = useParams().productId;
   const isEditPage = !!productId;
@@ -181,6 +182,7 @@ export default function AddProduct() {
             formData.append("name", reqBody["name"]);
             formData.append("price", reqBody["price"]);
             formData.append("discount", reqBody["discount"] || 0);
+            formData.append("files", imageUrl);
             switch (productType) {
               case "course":
                 reqBody["course"]["applicableDate"] = selectedDate;
@@ -190,7 +192,7 @@ export default function AddProduct() {
                 formData.append("test", JSON.stringify(reqBody["test"]));
                 break;
               case "book":
-                formData.append("book", file);
+                formData.append("files", file);
                 break;
             }
             formData.append("type", productType);
@@ -261,6 +263,14 @@ export default function AddProduct() {
                         <MenuItem value="test">Test</MenuItem>
                         <MenuItem value="book">Book</MenuItem>
                       </Select>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <input
+                        type="file"
+                        name="imageUrl"
+                        id="imageUrl"
+                        onChange={(e) => setImageUrl(e.target.files[0])}
+                      />
                     </Grid>
                     <Grid item xs={12}>
                       <Typography

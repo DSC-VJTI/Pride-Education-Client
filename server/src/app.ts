@@ -7,7 +7,6 @@ import dbConnect from "./config/dbconnect";
 dotenv.config();
 const app = express();
 dbConnect();
-
 app.use(express.json({ limit: "10mb" }));
 app.use(cors());
 
