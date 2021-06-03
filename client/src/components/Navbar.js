@@ -137,11 +137,24 @@ const Navbar = () => {
               textDecoration: "none",
               color: "#f26522",
               textTransform: "uppercase",
-              marginRight: "15px",
+              marginRight: "20px",
               fontWeight: "bold"
             }}
           >
             Buy Books/Pendrive
+          </NavLink>
+          <NavLink
+            to={isProd ? "/coming" : "/classes"}
+            className="hideOnMobile"
+            style={{
+              textDecoration: "none",
+              color: "#f26522",
+              textTransform: "uppercase",
+              marginRight: "20px",
+              fontWeight: "bold"
+            }}
+          >
+            Display Cart
           </NavLink>
           <NavLink
             to={"/resources"}
@@ -150,7 +163,7 @@ const Navbar = () => {
               textDecoration: "none",
               color: "#f26522",
               textTransform: "uppercase",
-              marginRight: "15px",
+              marginRight: "20px",
               fontWeight: "bold"
             }}
           >
@@ -165,7 +178,7 @@ const Navbar = () => {
                   textDecoration: "none",
                   color: "#f26522",
                   textTransform: "uppercase",
-                  marginRight: "15px",
+                  marginRight: "20px",
                   fontWeight: "bold"
                 }}
               >
@@ -178,7 +191,7 @@ const Navbar = () => {
                   textDecoration: "none",
                   color: "#f26522",
                   textTransform: "uppercase",
-                  marginRight: "15px",
+                  marginRight: "20px",
                   fontWeight: "bold"
                 }}
               >
@@ -195,7 +208,7 @@ const Navbar = () => {
                     textDecoration: "none",
                     color: "#f26522",
                     textTransform: "uppercase",
-                    marginRight: "15px",
+                    marginRight: "20px",
                     fontWeight: "bold"
                   }}
                 >
@@ -209,7 +222,7 @@ const Navbar = () => {
                   textDecoration: "none",
                   color: "#f26522",
                   textTransform: "uppercase",
-                  marginRight: "15px",
+                  marginRight: "20px",
                   fontWeight: "bold"
                 }}
               >
@@ -221,7 +234,7 @@ const Navbar = () => {
                   textDecoration: "none",
                   color: "#f26522",
                   textTransform: "uppercase",
-                  marginRight: "15px",
+                  marginRight: "20px",
                   fontWeight: "bold",
                   cursor: "pointer"
                 }}
