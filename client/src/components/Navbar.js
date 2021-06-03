@@ -123,7 +123,9 @@ const Navbar = () => {
               to="/"
               style={{
                 textDecoration: "none",
-                color: "#f26522"
+                color: "#f26522",
+                marginRight: "15px",
+                fontWeight: "bold"
               }}
             >
               Pride Commerce Academy
