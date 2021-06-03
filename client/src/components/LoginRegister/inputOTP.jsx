@@ -1,5 +1,5 @@
 import { React, useEffect, useState, useContext } from "react";
-import { Card, Container } from "@material-ui/core";
+import { Card, Container, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import OtpInput from "react-otp-input";
 import { login, register } from "../../actions/authActions";
@@ -74,25 +74,28 @@ const OtpPage = (props) => {
   };
 
   return (
-    <section id="otpSection">
-      <div className="center_div">
-        <h2>Let's confirm your identity</h2>
-        <img src={Otp} className="otp_avatar" alt="OTP Avatar" />
-        <p className="addMarginOnTop">
-          Check your email for the OTP and enter below to proceed
-        </p>
+    <>
+      <section id="otpSection">
+        <div className="center_div">
+          <h2>Let's confirm your identity</h2>
+          <img src={Otp} className="otp_avatar" alt="OTP Avatar" />
+          <Typography variant="h6" className="addMarginOnTop">
+            Check your email for the OTP and enter below to proceed
+          </Typography>
 
-        <OtpInput
-          value={otp}
-          onChange={setOtp}
-          numInputs={6}
-          separator={<span>-</span>}
-        />
+          <OtpInput
+            className="otpInput"
+            value={otp}
+            onChange={setOtp}
+            numInputs={6}
+            separator={<span>&nbsp; - &nbsp;</span>}
+          />
 
-        <Button onClick={handleClick} text="Verify OTP" />
-        <small style={{ color: "red" }}>{error}</small>
-      </div>
-    </section>
+          <Button onClick={handleClick} text="Verify OTP" />
+          <small style={{ color: "red" }}>{error}</small>
+        </div>
+      </section>
+    </>
   );
 };
 
