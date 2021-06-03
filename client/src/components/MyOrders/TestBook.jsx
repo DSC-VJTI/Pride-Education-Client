@@ -9,9 +9,7 @@ const TestBook = (props) => {
           className="orderPageResponsive"
           style={{
             backgroundColor: "rgb(241, 241, 241)",
-            width: "60%",
-            display: "block",
-            margin: "100px 0!important"
+            maxWidth: 300
           }}
         >
           <OrderedItem
@@ -28,9 +26,7 @@ const TestBook = (props) => {
           className="orderPageResponsive"
           style={{
             backgroundColor: "rgb(241, 241, 241)",
-            width: "60%",
-            display: "block",
-            margin: "100px 0!important"
+            maxWidth: 300
           }}
         >
           <OrderedItem
