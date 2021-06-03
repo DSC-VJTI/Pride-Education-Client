@@ -11,11 +11,13 @@ const useStyles = makeStyles((theme) => ({
   style: {
     padding: "20px",
     minWidth: "100px",
-    margin: "15px"
+    margin: "15px",
+    "& > *": {
+      margin: theme.spacing(1)
+    }
   },
   paper: {
     "& .MuiPaper-root": {
-      flexGrow: 1,
       padding: theme.spacing(2),
       marginBottom: "10px"
     }
@@ -56,9 +58,9 @@ const MyOrders = (props) => {
           <Container
             style={{
               display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center"
+              flexDirection: "row",
+              justifyContent: "center",
+              flexWrap: "wrap"
             }}
             className={classes.style}
           >

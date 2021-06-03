@@ -8,11 +8,6 @@
   height: auto;
   padding: 2rem 2rem;
   width: 50%;
-  background-image: linear-gradient(
-    to right,
-    #ff5200,
-    #f26522
-  );
 }
 #formBody{
   width:100vw;
@@ -30,7 +25,9 @@
 .mainSection {
   width: 100%;
   height: auto;
-  border: 1px solid #fff;
+  border: 1px solid #ff5200;
+  border-radius: 20px;
+  box-shadow: 2px 2px 8px rgb(0 0 0 / 15%), -2px -2px 8px rgb(0 0 0 / 15%);
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
