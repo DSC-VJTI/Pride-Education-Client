@@ -54,6 +54,7 @@ const Cart = (props) => {
     setMessage
   ] = useContext(SnackbarContext);
   const state = useAuthState();
+  console.log(state);
   const [productID, setProductID] = useState([]);
   const [value, setValue] = useState(initialFValues);
   const [total, setTotal] = useState(0);

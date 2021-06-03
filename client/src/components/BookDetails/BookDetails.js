@@ -160,19 +160,6 @@ const BookDetails = ({ product }) => {
                     <a href={product.book.url}>Download Now</a>
                   </TableCell>
                 </TableRow>
-                <TableRow style={{ width: "fit-content" }}>
-                  <TableCell
-                    component="th"
-                    scope="row"
-                    align="left"
-                    size="small"
-                  >
-                    System Requirements
-                  </TableCell>
-                  <TableCell align="left" size="small">
-                    Windows 7 Minimum
-                  </TableCell>
-                </TableRow>
               </TableBody>
             </Table>
           </TableContainer>

@@ -65,9 +65,9 @@ const ClassPane = () => {
 
   const breakPoints = [
     { width: 1, itemsToShow: 1 },
-    { width: 600, itemsToShow: 1 },
-    { width: 900, itemsToShow: 1 },
-    { width: 1100, itemsToShow: 2 }
+    { width: 400, itemsToShow: 2 },
+    { width: 800, itemsToShow: 3 },
+    { width: 1200, itemsToShow: 4 }
   ];
 
   const classes = ClassPaneStyles();
