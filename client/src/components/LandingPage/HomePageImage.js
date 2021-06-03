@@ -9,7 +9,6 @@ const HomePageImage = (props) => {
         style={{
           alignItems: "center",
           width: "95%",
-          height: "87vh",
 
           margin: "10px 0"
         }}
@@ -18,7 +17,7 @@ const HomePageImage = (props) => {
           style={{
             alignItems: "center",
             width: "100%",
-            height: "100%"
+            height: "auto"
           }}
           src={HomeImage1}
         />
@@ -30,7 +29,6 @@ const HomePageImage = (props) => {
         style={{
           alignItems: "center",
           width: "95%",
-          height: "87vh",
 
           margin: "10px 0"
         }}
@@ -39,7 +37,7 @@ const HomePageImage = (props) => {
           style={{
             alignItems: "center",
             width: "100%",
-            height: "100%"
+            height: "auto"
           }}
           src={HomeImage2}
         />
