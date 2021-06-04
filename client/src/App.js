@@ -46,6 +46,9 @@ const LazyPdfViewer = lazy(() => import("./components/Books/PdfViewer"));
 const LazyResources = lazy(() => import("./components/Books/Resources"));
 const LazyComingSoon = lazy(() => import("./components/ComingSoon"));
 const LazyLanding = lazy(() => import("./components/LandingPage/Landing"));
+const LazyNewTestDetails = lazy(() =>
+  import("./components/NewTestDetails/NewTestDetails")
+);
 
 const SnackBarComponent = () => {
   const [
@@ -116,6 +119,7 @@ const App = () => {
                     path="/test/details/:_id"
                     component={LazyTestProductDetails}
                   />
+                  <Route path="/test-details" component={LazyNewTestDetails} />
                   <Route
                     path="/book/details/:_id"
                     component={LazyBookProductDetails}

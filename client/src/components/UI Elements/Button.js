@@ -3,7 +3,7 @@ import { Box, Button as MuiButton, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    textAlign: "left",
+    textAlign: "center",
     "& .MuiButton-root": {
       fontFamily:
         "Work Sans, Roboto,-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif",
