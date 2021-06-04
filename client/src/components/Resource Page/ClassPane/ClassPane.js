@@ -203,7 +203,7 @@ const ClassPane = () => {
                   instructor={prod.test.subject}
                   buttonText="View Test"
                   obj={prod}
-                  rou="/test/details"
+                  rou="/test-details"
                 />
               </div>
             );

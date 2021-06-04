@@ -51,7 +51,8 @@ const Product = ({ title, instructor, buttonText, obj, rou, type, lang }) => {
         <Link
           style={{ textDecoration: "none", color: "white" }}
           to={{
-            pathname: "/test-details"
+            pathname: isCourse ? `${rou}/${obj}` : `${rou}/${obj._id}`,
+            state: obj
           }}
         >
           {buttonText}
