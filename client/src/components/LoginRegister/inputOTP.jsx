@@ -91,7 +91,7 @@ const OtpPage = (props) => {
             separator={<span>&nbsp; - &nbsp;</span>}
           />
 
-          <Button onClick={handleClick} text="Verify OTP" />
+          <Button onClick={handleClick} className="btn" text="Verify OTP" />
           <small style={{ color: "red" }}>{error}</small>
         </div>
       </section>
