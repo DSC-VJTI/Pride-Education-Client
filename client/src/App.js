@@ -46,6 +46,9 @@ const LazyPdfViewer = lazy(() => import("./components/Books/PdfViewer"));
 const LazyResources = lazy(() => import("./components/Books/Resources"));
 const LazyComingSoon = lazy(() => import("./components/ComingSoon"));
 const LazyLanding = lazy(() => import("./components/LandingPage/Landing"));
+const LazyAddCart = lazy(() =>
+  import("./components/ProductDetails/ProductDetails")
+);
 const LazyNewTestDetails = lazy(() =>
   import("./components/NewTestDetails/NewTestDetails")
 );
@@ -95,6 +98,7 @@ const App = () => {
               <Suspense fallback={<Loading />}>
                 <Switch>
                   <Route path="/classes" component={LazyClassesPane} />
+                  <Route path="/displayCart" component={LazyAddCart} />
                   <ProtectedRoute
                     path="/cart"
                     component={() => (

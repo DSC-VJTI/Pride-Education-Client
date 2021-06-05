@@ -146,7 +146,7 @@ const Navbar = () => {
             Buy Books/Pendrive
           </NavLink>
           <NavLink
-            to={isProd ? "/coming" : "/classes"}
+            to={`/cart/${user._id}`}
             className="hideOnMobile"
             style={{
               textDecoration: "none",

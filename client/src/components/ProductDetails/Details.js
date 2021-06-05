@@ -74,7 +74,9 @@ const Details = ({ product }) => {
               text={"Add To Cart"}
               onClick={AddToCart}
               style={{ margin: "1rem" }}
-            ></Button>
+            >
+              Add To Cart
+            </Button>
           ) : (
             <Button
               text={"Login To Add To Cart"}
