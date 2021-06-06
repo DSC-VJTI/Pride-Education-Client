@@ -133,7 +133,7 @@ const Footer = (props) => {
                       margin: "2px 4px"
                     }}
                   >
-                    Pridecommerceacedmy@gmail.com
+                    pridecommerceacademy@gmail.com
                   </h4>
                 </div>
               </div>
