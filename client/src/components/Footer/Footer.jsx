@@ -206,78 +206,41 @@ const Footer = () => {
           </div>
           <div className="middlePart"></div>
           <div className="second_part" style={{ margin: "0 30px" }}>
-            <div className="second_head">
-              <h4
-                style={{
-                  color: "white",
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                  cursor: "pointer"
-                }}
-                onClick={() => history.push("/privacy-policy")}
-              >
-                Privacy Policy
-              </h4>
+            <div
+              className="second_head"
+              onClick={() => history.push("/privacy-policy")}
+            >
+              Privacy Policy
             </div>
-            <div className="stick">
-              <h4
-                style={{ color: "white", fontSize: "20px", fontWeight: "bold" }}
-              >
-                |
-              </h4>
+            {/* <div className="stick">
+              |
+            </div> */}
+            <div
+              className="second_head"
+              onClick={() => history.push("/terms-and-conditions")}
+            >
+              Terms and Conditions
             </div>
-            <div className="second_head">
-              <h4
-                style={{
-                  color: "white",
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                  cursor: "pointer"
-                }}
-                onClick={() => history.push("/terms-and-conditions")}
-              >
-                Terms and Conditions
-              </h4>
+            {/* <div className="stick">
+              |
+            </div> */}
+            <div
+              className="second_head"
+              onClick={() => history.push("/refund-policy")}
+            >
+              Cancellation/Refund Policy
             </div>
-            <div className="stick">
-              <h4
-                style={{ color: "white", fontSize: "20px", fontWeight: "bold" }}
-              >
-                |
-              </h4>
-            </div>
-            <div className="second_head">
-              <h4
-                style={{
-                  color: "white",
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                  cursor: "pointer"
-                }}
-                onClick={() => history.push("/refund-policy")}
-              >
-                Cancellation/Refund Policy
-              </h4>
-            </div>
-            <div className="stick">
-              <h4
-                style={{ color: "white", fontSize: "20px", fontWeight: "bold" }}
-              >
-                |
-              </h4>
-            </div>
+            {/* <div className="stick">
+              |
+            </div> */}
             <div className="copy">
-              <h4
-                style={{ color: "white", fontSize: "20px", fontWeight: "bold" }}
+              <a
+                style={{ color: "white", textDecoration: "none" }}
+                href="https://dscvjti.tech/"
+                target="_blank"
               >
-                <a
-                  style={{ color: "white", textDecoration: "none" }}
-                  href="https://dscvjti.tech/"
-                  target="_blank"
-                >
-                  Made by @DSC VJTI
-                </a>
-              </h4>
+                Made by @DSC VJTI
+              </a>
             </div>
           </div>
         </footer>

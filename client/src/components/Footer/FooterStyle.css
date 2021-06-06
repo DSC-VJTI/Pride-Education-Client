@@ -35,18 +35,29 @@
     margin:0px 55px;
 }
 .second_head{
-margin:6px 10px;
+    margin:6px 10px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
 }
 .stick{
-margin:6px 10px;
+    margin:6px 10px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
 }
 .copy{
-margin:20px 10px;
+    margin:20px 10px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
 }
 .second_part{
     display:flex;
     justify-content: center;
     align-items: center;
+    width: 100vw;
 }
 .middlePart{
     padding:0.6px 0;
