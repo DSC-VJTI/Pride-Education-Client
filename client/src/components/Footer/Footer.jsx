@@ -143,7 +143,7 @@ const Footer = () => {
                         wordBreak: "break-all"
                       }}
                     >
-                      gsamarthancompany@gmail.com
+                      pridecommerceacademy@gmail.com
                     </h4>
                   </div>
                 </div>
