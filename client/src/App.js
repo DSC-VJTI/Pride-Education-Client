@@ -52,6 +52,15 @@ const LazyAddCart = lazy(() =>
 const LazyNewTestDetails = lazy(() =>
   import("./components/NewTestDetails/NewTestDetails")
 );
+const LazyPrivacyPolicy = lazy(() =>
+  import("./components/PrivacyPolicy/PrivacyPolicy")
+);
+const LazyTermsAndConditions = lazy(() =>
+  import("./components/TermsAndConditions/TermsAndConditions")
+);
+const LazyRefundPolicy = lazy(() =>
+  import("./components/RefundPolicy/RefundPolicy")
+);
 
 const SnackBarComponent = () => {
   const [
@@ -141,6 +150,12 @@ const App = () => {
                   {/* <ProtectedRoute path="/resources" component={LazyResources} /> */}
                   <Route path="/resources" component={LazyResources} />
                   <Route path="/coming" component={LazyComingSoon} />
+                  <Route path="/privacy-policy" component={LazyPrivacyPolicy} />
+                  <Route
+                    path="/terms-and-conditions"
+                    component={LazyTermsAndConditions}
+                  />
+                  <Route path="/refund-policy" component={LazyRefundPolicy} />
                   <Route path="/" exact component={LazyLanding} />
                   <Route component={LazyNotFoundView} />
                 </Switch>
