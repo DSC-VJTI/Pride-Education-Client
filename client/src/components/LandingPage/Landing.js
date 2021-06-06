@@ -5,11 +5,12 @@ import "./LandingPage.css";
 import CardCarousel from "./CardCarousel";
 import { useAuthState } from "../../context/context";
 import Button from "@material-ui/core/Button";
+import { useHistory } from "react-router-dom";
 
 const Landing = () => {
   // Just do this to access user details and token.
   const state = useAuthState();
-
+  const history = useHistory();
   return (
     <main>
       <a
@@ -22,7 +23,13 @@ const Landing = () => {
       </a>
       <Hero />
       <div style={{ textAlign: "center", margin: "10px 0px 22px 0px" }}>
-        <Button variant="contained" color="primary" size="large">
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          onClick={() => history.push("/product")}
+          style={{ backgroundColor: "rgb(242, 101, 34)" }}
+        >
           Explore our Products
         </Button>
       </div>
