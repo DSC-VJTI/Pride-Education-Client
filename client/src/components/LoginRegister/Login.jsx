@@ -97,6 +97,7 @@ const Login = (props) => {
                       value={email}
                       onChange={onLogin}
                       required="required"
+                      className="inp"
                     />
                     <small
                       style={{
