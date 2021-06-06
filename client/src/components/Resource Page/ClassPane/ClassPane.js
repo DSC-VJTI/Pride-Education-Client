@@ -143,7 +143,6 @@ const ClassPane = () => {
             }
           }}
         >
-          <option value="CA">CA</option>
           <option value="CA Final">CA Final</option>
         </select>
       </div>
