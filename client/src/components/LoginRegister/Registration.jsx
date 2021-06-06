@@ -92,6 +92,7 @@ const Registration = () => {
                     onChange={props.handleChange}
                     onBlur={props.handleBlur}
                     value={props.values.name}
+                    className="inp"
                   />
                   {props.touched.name ? (
                     <small
@@ -123,6 +124,7 @@ const Registration = () => {
                     onChange={props.handleChange}
                     onBlur={props.handleBlur}
                     value={props.values.email}
+                    className="inp"
                   />
                   {props.touched.email ? (
                     <small
@@ -150,6 +152,7 @@ const Registration = () => {
                     onChange={props.handleChange}
                     onBlur={props.handleBlur}
                     value={props.values.mobileNumber}
+                    className="inp"
                   />
                   {props.touched.mobileNumber ? (
                     <small
@@ -181,6 +184,7 @@ const Registration = () => {
                     onChange={props.handleChange}
                     onBlur={props.handleBlur}
                     value={props.values.address}
+                    className="inp"
                   />
                   {props.touched.address ? (
                     <small
@@ -212,6 +216,7 @@ const Registration = () => {
                     errorSignal={props.touched.field}
                     errorMsg={props.errors.field}
                     menuItems={["CA", "CS", "B.COM"]}
+                    className="inp"
                   />
                 </div>
                 <div

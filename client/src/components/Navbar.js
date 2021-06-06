@@ -145,19 +145,25 @@ const Navbar = () => {
           >
             Buy Books/Pendrive
           </NavLink>
-          <NavLink
-            to={isProd ? "/coming" : "/classes"}
-            className="hideOnMobile"
-            style={{
-              textDecoration: "none",
-              color: "#f26522",
-              textTransform: "uppercase",
-              marginRight: "20px",
-              fontWeight: "bold"
-            }}
-          >
-            Display Cart
-          </NavLink>
+
+          {token ? (
+            <NavLink
+              to={`/cart/${token}`}
+              className="hideOnMobile"
+              style={{
+                textDecoration: "none",
+                color: "#f26522",
+                textTransform: "uppercase",
+                marginRight: "20px",
+                fontWeight: "bold"
+              }}
+            >
+              Display Cart
+            </NavLink>
+          ) : (
+            <></>
+          )}
+
           <NavLink
             to={"/resources"}
             className="hideOnMobile"
