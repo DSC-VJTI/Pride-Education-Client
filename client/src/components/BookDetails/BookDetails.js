@@ -22,8 +22,9 @@ import { Link, useHistory } from "react-router-dom";
 const DetailsStyles = makeStyles((theme) => ({
   root: {
     background: "#f1f1f1",
-    borderRadius: "2rem",
-    justifyContent: "center"
+    justifyContent: "center",
+    boxShadow: "2px 2px 8px rgb(0 0 0 / 15%), -2px -2px 8px rgb(0 0 0 / 15%)",
+    padding: "0px 25px 25px 25px"
   },
   table: {
     minWidth: 250
@@ -63,11 +64,11 @@ const BookDetails = ({ product }) => {
           spacing={3}
           style={{
             display: "flex",
-            justifyContent: "space-around",
+            justifyContent: "space-between",
             alignItems: "center"
           }}
         >
-          <Typography style={{ margin: "0px", padding: "0px" }}>
+          <Typography variant={"h4"} style={{ margin: "0px", padding: "0px" }}>
             {product.name}
           </Typography>
           {isAuthenticated ? (
@@ -90,8 +91,9 @@ const BookDetails = ({ product }) => {
         <Divider variant="fullWidth" />
 
         <Grid item xs={12}>
-          <Typography variant={"h6"}>About this Item</Typography>
-          <Divider />
+          <Typography variant={"h6"} style={{ marginBottom: 10 }}>
+            About this Item
+          </Typography>
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
               <TableHead>

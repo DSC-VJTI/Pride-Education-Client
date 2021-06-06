@@ -23,7 +23,7 @@
     position:relative;
     top:0;
     left:0;
-    padding:20px 0px;
+    padding-top: 20px;
     display:flex;
     width:90%;
     justify-content: center;
@@ -36,7 +36,6 @@
 }
 .second_head{
 margin:6px 10px;
-margin-left:80px;
 }
 .stick{
 margin:6px 10px;
