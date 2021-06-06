@@ -133,7 +133,7 @@ const Footer = (props) => {
                       margin: "2px 4px"
                     }}
                   >
-                    gsamarthancompany@gmail.com
+                    Pridecommerceacedmy@gmail.com
                   </h4>
                 </div>
               </div>
@@ -277,7 +277,7 @@ const Footer = (props) => {
                   href="https://dscvjti.tech/"
                   target="_blank"
                 >
-                  Made by @DSC VJTI
+                  Made by DSC VJTI
                 </a>
               </h4>
             </div>
