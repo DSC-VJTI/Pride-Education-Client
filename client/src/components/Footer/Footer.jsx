@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import Logo from "../../assets/images/FooterImages/Logo.jpg";
 import { withRouter } from "react-router-dom";
 import "./FooterStyle.css";
+import { useHistory } from "react-router-dom";
 const Footer = (props) => {
   const history = useHistory();
   if (props.location.pathname == "/admin") return <>:</>;
