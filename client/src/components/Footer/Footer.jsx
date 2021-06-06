@@ -12,200 +12,223 @@ import { Link } from "react-router-dom";
 import Logo from "../../assets/images/FooterImages/Logo.jpg";
 import "./FooterStyle.css";
 import { useHistory } from "react-router-dom";
+import Grid from "@material-ui/core/Grid";
+
 const Footer = () => {
   const history = useHistory();
   return (
     <>
-      <section className="footer">
-        <footer className="main_footer">
-          <div className="first_part">
-            <div className="heading">
-              <h1
-                style={{ color: "white", fontSize: "35px", margin: "0 55px" }}
+      <div className="footer">
+        <div className="first_part">
+          <Grid container spacing={3} justify="center">
+            <Grid item xs={12} sm={12} md={4}>
+              <div
+                style={{
+                  color: "white",
+                  fontSize: "35px",
+                  fontWeight: "bold",
+                  textAlign: "center"
+                }}
               >
                 Pride Commerce Academy
-              </h1>
-            </div>
-            <div className="info" style={{ margin: "0 55px" }}>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  margin: "0px 0 20px 0 "
-                }}
-              >
-                <RoomIcon
-                  style={{
-                    color: "white",
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                    margin: "2px 4px"
-                  }}
-                />
-                <div style={{ margin: "2px 5px" }}>
-                  <div style={{ display: "flex", flexDirection: "column" }}>
-                    <h4
-                      style={{
-                        color: "white",
-                        fontSize: "16px",
-                        fontWeight: "bold",
-                        margin: "2px 4px"
-                      }}
-                    >
-                      First Floor,Laxmi Anand Complex,Near Golibar Square,
-                    </h4>
-                    <h4
-                      style={{
-                        color: "white",
-                        fontSize: "16px",
-                        fontWeight: "bold",
-                        margin: "2px 4px"
-                      }}
-                    >
-                      Itwari,Nagpur-440002
-                    </h4>
-                  </div>
-                </div>
               </div>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  margin: "20px 0"
-                }}
-              >
-                <PhoneIcon
+            </Grid>
+            <Grid item xs={12} sm={12} md={4} style={{ textAlign: "center" }}>
+              <div style={{ display: "inline-block" }}>
+                <div
                   style={{
-                    color: "white",
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                    margin: "2px 4px"
+                    display: "flex",
+                    alignItems: "center",
+                    margin: "0px 0 20px 0 "
                   }}
-                />
-                <div style={{ margin: "2px 5px" }}>
-                  <div style={{ display: "flex", flexDirection: "column" }}>
-                    <h4
-                      style={{
-                        color: "white",
-                        fontSize: "16px",
-                        fontWeight: "bold",
-                        margin: "2px 4px"
-                      }}
-                    >
-                      Cell No. &nbsp;&nbsp;&nbsp;&nbsp;: 7507106467
-                    </h4>
-                    <h4
-                      style={{
-                        color: "white",
-                        fontSize: "16px",
-                        fontWeight: "bold",
-                        margin: "2px 4px"
-                      }}
-                    >
-                      Office No. : 8766927764
-                    </h4>
-                  </div>
-                </div>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  margin: "20px 0"
-                }}
-              >
-                <EmailIcon
-                  style={{
-                    color: "white",
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                    margin: "2px 4px"
-                  }}
-                />
-                <div style={{ margin: "2px 5px" }}>
-                  <h4
+                >
+                  <RoomIcon
                     style={{
                       color: "white",
-                      fontSize: "16px",
+                      fontSize: "20px",
                       fontWeight: "bold",
                       margin: "2px 4px"
                     }}
-                  >
-                    gsamarthancompany@gmail.com
-                  </h4>
+                  />
+                  <div style={{ margin: "2px 5px" }}>
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                      <h4
+                        style={{
+                          color: "white",
+                          fontSize: "16px",
+                          fontWeight: "bold",
+                          margin: "2px 4px",
+                          textAlign: "left"
+                        }}
+                      >
+                        First Floor,Laxmi Anand Complex,Near Golibar Square,
+                      </h4>
+                      <h4
+                        style={{
+                          color: "white",
+                          fontSize: "16px",
+                          fontWeight: "bold",
+                          margin: "2px 4px",
+                          textAlign: "left"
+                        }}
+                      >
+                        Itwari,Nagpur-440002
+                      </h4>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    margin: "20px 0"
+                  }}
+                >
+                  <PhoneIcon
+                    style={{
+                      color: "white",
+                      fontSize: "20px",
+                      fontWeight: "bold",
+                      margin: "2px 4px"
+                    }}
+                  />
+                  <div style={{ margin: "2px 5px" }}>
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                      <h4
+                        style={{
+                          color: "white",
+                          fontSize: "16px",
+                          fontWeight: "bold",
+                          margin: "2px 4px"
+                        }}
+                      >
+                        Cell No. &nbsp;&nbsp;&nbsp;&nbsp;: 7507106467
+                      </h4>
+                      <h4
+                        style={{
+                          color: "white",
+                          fontSize: "16px",
+                          fontWeight: "bold",
+                          margin: "2px 4px"
+                        }}
+                      >
+                        Office No. : 8766927764
+                      </h4>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    margin: "20px 0"
+                  }}
+                >
+                  <EmailIcon
+                    style={{
+                      color: "white",
+                      fontSize: "20px",
+                      fontWeight: "bold",
+                      margin: "2px 4px"
+                    }}
+                  />
+                  <div style={{ margin: "2px 5px" }}>
+                    <h4
+                      style={{
+                        color: "white",
+                        fontSize: "16px",
+                        fontWeight: "bold",
+                        margin: "2px 4px",
+                        wordBreak: "break-all"
+                      }}
+                    >
+                      gsamarthancompany@gmail.com
+                    </h4>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="social">
-              <h1
-                style={{
-                  textTransform: "capitalize",
-                  color: "white",
-                  marginBottom: "10px",
-                  fontSize: "20px",
-                  fontWeight: "bold"
-                }}
-              >
-                Follow Us
-              </h1>
-              <div style={{ color: "white", display: "flex" }}>
-                <a
-                  style={{ color: "white", textDecoration: "none" }}
-                  target="_blank"
-                  href="https://www.youtube.com/channel/UCRSDemzjAQW0R4SqJ4KdSOg"
+            </Grid>
+            <Grid item xs={12} sm={12} md={4}>
+              <div className="social">
+                <h1
+                  style={{
+                    textTransform: "capitalize",
+                    color: "white",
+                    marginBottom: "10px",
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                    textAlign: "center"
+                  }}
                 >
-                  <YouTubeIcon
-                    style={{
-                      margin: "10px 10px",
-                      fontSize: "20px",
-                      fontWeight: "bold"
-                    }}
-                  />
-                </a>
-                <a
-                  style={{ color: "white", textDecoration: "none" }}
-                  target="_blank"
-                  href="https://instagram.com/ca_abhishekkhilwani"
+                  Follow Us
+                </h1>
+                <div
+                  style={{
+                    color: "white",
+                    display: "flex",
+                    justifyContent: "center"
+                  }}
                 >
-                  <InstagramIcon
-                    style={{
-                      margin: "10px 10px",
-                      fontSize: "20px",
-                      fontWeight: "bold"
-                    }}
-                  />
-                </a>
-                <a
-                  style={{ color: "white", textDecoration: "none" }}
-                  target="_blank"
-                  href="https://www.facebook.com/www.prideca.in/"
-                >
-                  <FacebookIcon
-                    style={{
-                      margin: "10px 10px",
-                      fontSize: "20px",
-                      fontWeight: "bold"
-                    }}
-                  />
-                </a>
-                <a
-                  style={{ color: "white", textDecoration: "none" }}
-                  target="_blank"
-                  href="https://t.me/ca_abhishekkhilwani_scmpe"
-                >
-                  <TelegramIcon
-                    style={{
-                      margin: "10px 10px",
-                      fontSize: "20px",
-                      fontWeight: "bold"
-                    }}
-                  />
-                </a>
+                  <a
+                    style={{ color: "white", textDecoration: "none" }}
+                    target="_blank"
+                    href="https://www.youtube.com/channel/UCRSDemzjAQW0R4SqJ4KdSOg"
+                  >
+                    <YouTubeIcon
+                      style={{
+                        margin: "10px 10px",
+                        fontSize: "20px",
+                        fontWeight: "bold"
+                      }}
+                    />
+                  </a>
+                  <a
+                    style={{ color: "white", textDecoration: "none" }}
+                    target="_blank"
+                    href="https://instagram.com/ca_abhishekkhilwani"
+                  >
+                    <InstagramIcon
+                      style={{
+                        margin: "10px 10px",
+                        fontSize: "20px",
+                        fontWeight: "bold"
+                      }}
+                    />
+                  </a>
+                  <a
+                    style={{ color: "white", textDecoration: "none" }}
+                    target="_blank"
+                    href="https://www.facebook.com/www.prideca.in/"
+                  >
+                    <FacebookIcon
+                      style={{
+                        margin: "10px 10px",
+                        fontSize: "20px",
+                        fontWeight: "bold"
+                      }}
+                    />
+                  </a>
+                  <a
+                    style={{ color: "white", textDecoration: "none" }}
+                    target="_blank"
+                    href="https://t.me/ca_abhishekkhilwani_scmpe"
+                  >
+                    <TelegramIcon
+                      style={{
+                        margin: "10px 10px",
+                        fontSize: "20px",
+                        fontWeight: "bold"
+                      }}
+                    />
+                  </a>
+                </div>
               </div>
-            </div>
-          </div>
-          <div className="middlePart"></div>
-          <div className="second_part" style={{ margin: "0 30px" }}>
+            </Grid>
+          </Grid>
+        </div>
+        <div className="middlePart"></div>
+        <div>
+          <div style={{ display: "flex", justifyContent: "center" }}>
             <div
               className="second_head"
               onClick={() => history.push("/privacy-policy")}
@@ -233,18 +256,18 @@ const Footer = () => {
             {/* <div className="stick">
               |
             </div> */}
-            <div className="copy">
-              <a
-                style={{ color: "white", textDecoration: "none" }}
-                href="https://dscvjti.tech/"
-                target="_blank"
-              >
-                Made by @DSC VJTI
-              </a>
-            </div>
           </div>
-        </footer>
-      </section>
+          <div className="copy">
+            <a
+              style={{ color: "white", textDecoration: "none" }}
+              href="https://dscvjti.tech/"
+              target="_blank"
+            >
+              Made by @DSC VJTI
+            </a>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
