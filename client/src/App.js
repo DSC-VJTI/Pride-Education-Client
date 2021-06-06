@@ -98,7 +98,7 @@ const App = () => {
               <Suspense fallback={<Loading />}>
                 <Switch>
                   <Route path="/classes" component={LazyClassesPane} />
-                  <Route path="/displayCart" component={LazyAddCart} />
+                  <Route path="/prodDetails" component={LazyAddCart} />
                   <ProtectedRoute
                     path="/cart"
                     component={() => (

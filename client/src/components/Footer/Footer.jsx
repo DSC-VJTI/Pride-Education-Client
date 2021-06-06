@@ -10,8 +10,10 @@ import EmailIcon from "@material-ui/icons/Email";
 import PhoneIcon from "@material-ui/icons/Phone";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/images/FooterImages/Logo.jpg";
+import { withRouter } from "react-router-dom";
 import "./FooterStyle.css";
-const Footer = () => {
+const Footer = (props) => {
+  if (props.location.pathname == "/admin") return <>:</>;
   return (
     <>
       <section className="footer">
@@ -237,4 +239,4 @@ const Footer = () => {
     </>
   );
 };
-export default Footer;
+export default withRouter(Footer);
