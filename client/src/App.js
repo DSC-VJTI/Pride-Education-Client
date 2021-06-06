@@ -46,8 +46,20 @@ const LazyPdfViewer = lazy(() => import("./components/Books/PdfViewer"));
 const LazyResources = lazy(() => import("./components/Books/Resources"));
 const LazyComingSoon = lazy(() => import("./components/ComingSoon"));
 const LazyLanding = lazy(() => import("./components/LandingPage/Landing"));
+const LazyAddCart = lazy(() =>
+  import("./components/ProductDetails/ProductDetails")
+);
 const LazyNewTestDetails = lazy(() =>
   import("./components/NewTestDetails/NewTestDetails")
+);
+const LazyPrivacyPolicy = lazy(() =>
+  import("./components/PrivacyPolicy/PrivacyPolicy")
+);
+const LazyTermsAndConditions = lazy(() =>
+  import("./components/TermsAndConditions/TermsAndConditions")
+);
+const LazyRefundPolicy = lazy(() =>
+  import("./components/RefundPolicy/RefundPolicy")
 );
 
 const SnackBarComponent = () => {
@@ -95,6 +107,7 @@ const App = () => {
               <Suspense fallback={<Loading />}>
                 <Switch>
                   <Route path="/classes" component={LazyClassesPane} />
+                  <Route path="/prodDetails" component={LazyAddCart} />
                   <ProtectedRoute
                     path="/cart"
                     component={() => (
@@ -137,6 +150,12 @@ const App = () => {
                   {/* <ProtectedRoute path="/resources" component={LazyResources} /> */}
                   <Route path="/resources" component={LazyResources} />
                   <Route path="/coming" component={LazyComingSoon} />
+                  <Route path="/privacy-policy" component={LazyPrivacyPolicy} />
+                  <Route
+                    path="/terms-and-conditions"
+                    component={LazyTermsAndConditions}
+                  />
+                  <Route path="/refund-policy" component={LazyRefundPolicy} />
                   <Route path="/" exact component={LazyLanding} />
                   <Route component={LazyNotFoundView} />
                 </Switch>
