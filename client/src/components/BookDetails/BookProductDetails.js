@@ -48,7 +48,10 @@ const BookProductDetails = ({ match }) => {
     <div className={classes.root} style={{ margin: "2rem" }}>
       <Grid container spacing={3}>
         <Grid container item md={6} xs={12}>
-          <img src={download} className={classes.root} />
+          <img
+            src={product.imageUrl ? product.imageUrl : download}
+            className={classes.root}
+          />
         </Grid>
         <Grid item md={6} lg={5} xs={12}>
           {"book" in product && <BookDetails product={product} />}
