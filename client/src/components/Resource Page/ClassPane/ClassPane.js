@@ -186,6 +186,7 @@ const ClassPane = () => {
                   buttonText="View Book"
                   obj={prod}
                   rou="/book/details"
+                  imageUrl={prod.imageUrl}
                 />
               </div>
             );
@@ -207,6 +208,7 @@ const ClassPane = () => {
                   buttonText="View Test"
                   obj={prod}
                   rou="/test-details"
+                  imageUrl={prod.imageUrl}
                 />
               </div>
             );
