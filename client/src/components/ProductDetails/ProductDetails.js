@@ -88,7 +88,7 @@ const ProductDetails = ({ match }) => {
   const handleModeChange = (event) => {
     setMode(event.target.value);
   };
-
+  console.log(product);
   return isLoading ? (
     <Loading />
   ) : (
@@ -96,7 +96,10 @@ const ProductDetails = ({ match }) => {
       <Grid container spacing={3}>
         <Grid container item md={6} xs={12}>
           <Grid container item xs={12}>
-            <img src={download} className={classes.root} />
+            <img
+              src={product.imageUrl ? product.imageUrl : download}
+              className={classes.root}
+            />
           </Grid>
           <Grid container item xs={12} className={classes.selectors}>
             <Grid item xs={6} sm={3}>
