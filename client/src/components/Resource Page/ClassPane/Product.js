@@ -54,7 +54,7 @@ const Product = ({
   return (
     <Card className={classes.classHolder}>
       <img
-        src={imageUrl ? imageUrl : img2}
+        src={imageUrl ? imageUrl : img1}
         className={classes.CardImage}
         alt="Instructor"
       />
