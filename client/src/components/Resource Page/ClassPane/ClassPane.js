@@ -84,8 +84,11 @@ const ClassPane = () => {
     allProducts.map((prod) => {
       if ("test" in prod) tests.push(prod);
       else if ("course" in prod && prod.course.level.includes(subject)) {
-        if (!uniqueSubjects.includes(prod.course.subject))
-          uniqueSubjects.push(prod.course.subject);
+        if (!uniqueSubjects.find((val) => val.name === prod.course.subject))
+          uniqueSubjects.push({
+            name: prod.course.subject,
+            imageUrl: prod.imageUrl
+          });
         courses.push(prod);
       } else if ("book" in prod) books.push(prod);
     });
@@ -156,12 +159,13 @@ const ClassPane = () => {
             return (
               <div key={idx} data-aos="flip-right">
                 <Product
-                  title={prod}
+                  title={prod.name}
                   instructor="Abhishek Khilwani"
                   buttonText="View Course"
-                  obj={prod}
+                  obj={prod.name}
                   rou="/course/details"
                   type="course"
+                  imageUrl={prod.imageUrl}
                 />
               </div>
             );
