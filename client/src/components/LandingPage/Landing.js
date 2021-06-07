@@ -27,7 +27,7 @@ const Landing = () => {
           variant="contained"
           color="primary"
           size="large"
-          onClick={() => history.push("/product")}
+          onClick={() => history.push("/classes")}
           style={{ backgroundColor: "rgb(242, 101, 34)" }}
         >
           Explore our Products

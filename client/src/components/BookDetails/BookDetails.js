@@ -143,12 +143,43 @@ const BookDetails = ({ product }) => {
                         textDecoration: "line-through red"
                       }}
                     >
-                      ₹{product.price}
-                    </span>
-                    ₹{discountedPrice}
+                      ₹800
+                    </span>{" "}
+                    ₹650 <span style={{ color: "red" }}>(18.75% OFF)</span>
                   </TableCell>
                 </TableRow>
-
+                <TableRow style={{ width: "fit-content" }}>
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    align="left"
+                    size="small"
+                  >
+                    Applicable Attempt
+                  </TableCell>
+                  <TableCell align="left" size="small">
+                    Nov-2021
+                  </TableCell>
+                </TableRow>
+                <TableRow style={{ width: "fit-content" }}>
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    align="left"
+                    size="small"
+                  >
+                    Includes / Coverage
+                  </TableCell>
+                  <TableCell align="left" size="small">
+                    <ol>
+                      <li>ICAI LATEST UPDATED STUDY MAT QUS. </li>
+                      <li>ALL RTP'S QUS. TILL JAN' 21.</li>
+                      <li>ALL MTP'S TILL JAN' 21.</li>
+                      <li>CASE STUDY DIGEST</li>
+                      <li>ALL ADDITIONAL QUS</li>
+                    </ol>
+                  </TableCell>
+                </TableRow>
                 <TableRow style={{ width: "fit-content" }}>
                   <TableCell
                     component="th"
@@ -160,6 +191,20 @@ const BookDetails = ({ product }) => {
                   </TableCell>
                   <TableCell align="left" size="small">
                     <a href={product.book.url}>Download Now</a>
+                  </TableCell>
+                </TableRow>
+                <TableRow style={{ width: "fit-content" }}>
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    align="left"
+                    size="small"
+                  >
+                    Note
+                  </TableCell>
+                  <TableCell align="left" size="small">
+                    DISPATCH WILL START WITHIN FEW DAYS AFTER THE ORDER DATE.
+                    ONCE AN ORDER IS BOOKED, IT CAN'T BE CANCELLED.
                   </TableCell>
                 </TableRow>
               </TableBody>

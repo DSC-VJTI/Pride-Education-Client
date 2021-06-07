@@ -35,7 +35,8 @@ const Details = ({ product }) => {
   const state = useAuthState();
   const history = useHistory();
   const { isAuthenticated } = useAuthState();
-  const discountedPrice = product.price - product.discount;
+  const discountedPrice =
+    product.price - (product.discount * product.price) / 100;
   const AddToCart = async () => {
     const addingProduct = await axios.post(
       `${BASE_URL}/cart/${product._id}`,
@@ -199,7 +200,10 @@ const Details = ({ product }) => {
                       {" "}
                       ₹ {product.price}
                     </span>{" "}
-                    ₹{discountedPrice}
+                    ₹{discountedPrice}{" "}
+                    <span style={{ color: "red" }}>
+                      ({product.discount}% OFF)
+                    </span>
                   </TableCell>
                 </TableRow>
                 <TableRow style={{ width: "fit-content" }}>
