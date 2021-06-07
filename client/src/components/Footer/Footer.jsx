@@ -229,7 +229,13 @@ const Footer = () => {
         </div>
         <div className="middlePart"></div>
         <div>
-          <div style={{ display: "flex", justifyContent: "center" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              flexWrap: "wrap"
+            }}
+          >
             <div
               className="second_head"
               onClick={() => history.push("/privacy-policy")}
