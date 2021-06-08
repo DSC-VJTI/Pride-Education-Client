@@ -39,12 +39,25 @@ const ProductStyles = makeStyles({
   }
 });
 
-const Product = ({ title, instructor, buttonText, obj, rou, type, lang }) => {
+const Product = ({
+  title,
+  instructor,
+  buttonText,
+  obj,
+  rou,
+  type,
+  lang,
+  imageUrl
+}) => {
   const classes = ProductStyles();
   const isCourse = type === "course";
   return (
     <Card className={classes.classHolder}>
-      <img src={img1} className={classes.CardImage} alt="Instructor" />
+      <img
+        src={imageUrl ? imageUrl : img1}
+        className={classes.CardImage}
+        alt="Instructor"
+      />
       <CardHeader title={title} subheader={instructor} />
 
       <Button className={classes.classButton}>
