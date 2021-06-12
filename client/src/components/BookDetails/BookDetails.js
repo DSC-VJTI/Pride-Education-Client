@@ -36,7 +36,8 @@ const BookDetails = ({ product }) => {
 
   const history = useHistory();
 
-  const discountedPrice = product.price - product.discount;
+  const discountedPrice =
+    product.price - (product.discount * product.price) / 100;
 
   const state = useAuthState();
   const { isAuthenticated } = useAuthState();
@@ -138,14 +139,23 @@ const BookDetails = ({ product }) => {
                     Price
                   </TableCell>
                   <TableCell align="left" size="small">
-                    <span
-                      style={{
-                        textDecoration: "line-through red"
-                      }}
-                    >
-                      ₹800
-                    </span>{" "}
-                    ₹650 <span style={{ color: "red" }}>(18.75% OFF)</span>
+                    {product.discount === 0 ? (
+                      <span>₹{product.price}</span>
+                    ) : (
+                      <>
+                        <span
+                          style={{
+                            textDecoration: "line-through red"
+                          }}
+                        >
+                          ₹{product.price}
+                        </span>{" "}
+                        ₹{discountedPrice}{" "}
+                        <span style={{ color: "red" }}>
+                          ({product.discount}% OFF)
+                        </span>
+                      </>
+                    )}
                   </TableCell>
                 </TableRow>
                 <TableRow style={{ width: "fit-content" }}>

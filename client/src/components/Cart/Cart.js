@@ -86,7 +86,11 @@ const Cart = (props) => {
     if (value.length !== 0) {
       var sum = 0;
       value.forEach((item) => {
-        sum = sum + item.price;
+        if (item.discount) {
+          sum += item.price - (item.discount * item.price) / 100;
+        } else {
+          sum += item.price;
+        }
       });
       setTotal(sum);
       const tempID = value.map((item) => {
@@ -112,7 +116,7 @@ const Cart = (props) => {
   useEffect(() => {
     fetchingProducts();
   }, []);
-
+  console.log(value);
   return isLoading ? (
     <Loading />
   ) : (
@@ -160,8 +164,11 @@ const Cart = (props) => {
                             views={cartItem.course.views}
                             validity={cartItem.course.validity}
                             price={cartItem.price}
+                            discount={cartItem.discount}
                             instructor={cartItem.course.faculty}
                             duration={cartItem.course.duration}
+                            subject={cartItem.course.subject}
+                            imageUrl={cartItem.imageUrl}
                             onClick={handleOnClick}
                           />
                         </CardActions>
@@ -206,7 +213,9 @@ const Cart = (props) => {
                             title={cartItem.name}
                             content="Book"
                             price={cartItem.price}
+                            discount={cartItem.discount}
                             instructor={cartItem.book.faculty}
+                            imageUrl={cartItem.imageUrl}
                             onClick={handleOnClick}
                           />
                         </CardActions>
