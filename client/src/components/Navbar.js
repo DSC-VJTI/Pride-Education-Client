@@ -18,6 +18,7 @@ import InboxIcon from "@material-ui/icons/Inbox";
 import MailIcon from "@material-ui/icons/Mail";
 import { Link, useHistory } from "react-router-dom";
 import { ContactSupport, Menu } from "@material-ui/icons";
+import RateReviewIcon from "@material-ui/icons/RateReview";
 import { NavLink } from "react-router-dom";
 import HomeIcon from "@material-ui/icons/Home";
 import ShopIcon from "@material-ui/icons/Shop";
@@ -352,6 +353,14 @@ const Navbar = () => {
                     </ListItem>
                   </NavLink>
                 )}
+                <NavLink to={`/cart/${token}`} className="fixLinks">
+                  <ListItem button onClick={() => setDrawer(false)}>
+                    <ListItemIcon>
+                      <RateReviewIcon style={{ color: "rgb(242, 101, 34)" }} />
+                    </ListItemIcon>
+                    <ListItemText primary={"Display Cart"} />
+                  </ListItem>
+                </NavLink>
                 <div
                   className="fixLinks"
                   onClick={() => {

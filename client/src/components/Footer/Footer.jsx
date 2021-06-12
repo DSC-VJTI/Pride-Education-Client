@@ -15,8 +15,9 @@ import "./FooterStyle.css";
 import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 
-const Footer = () => {
+const Footer = (props) => {
   const history = useHistory();
+  if (props.location.pathname == "/admin") return <>:</>;
   return (
     <>
       <div className="footer">
@@ -229,7 +230,13 @@ const Footer = () => {
         </div>
         <div className="middlePart"></div>
         <div>
-          <div style={{ display: "flex", justifyContent: "center" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              flexWrap: "wrap"
+            }}
+          >
             <div
               className="second_head"
               onClick={() => history.push("/privacy-policy")}
