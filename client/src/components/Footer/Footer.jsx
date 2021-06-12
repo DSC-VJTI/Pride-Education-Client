@@ -15,8 +15,9 @@ import "./FooterStyle.css";
 import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 
-const Footer = () => {
+const Footer = (props) => {
   const history = useHistory();
+  if (props.location.pathname == "/admin") return <>:</>;
   return (
     <>
       <div className="footer">
