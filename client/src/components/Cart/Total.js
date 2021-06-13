@@ -61,14 +61,14 @@ const Total = (props) => {
       key: key_id,
       name: "Client CA",
       description: "Test mode for our client",
-      amount: 10 * 100,
+      amount: props.price * 100,
       handler: async (response) => {
         try {
           const paymentId = response.razorpay_payment_id;
           const url = `${BASE_URL}/pay/${paymentId}/`;
           const captureResponse = await Axios.post(url, {
             productIds: props.productID,
-            total: 10 * 100,
+            total: props.price * 100,
             user: state.user
           });
           history.push("/orders");
