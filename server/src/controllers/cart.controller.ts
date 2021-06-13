@@ -11,7 +11,7 @@ const cartController = {
       const myCart = await Cart.find({ user: userId })
         .populate({
           path: "products",
-          select: ["_id", "name", "price", "discount"],
+          select: ["_id", "name", "price", "discount", "imageUrl"],
           populate: [
             {
               path: "course",
@@ -65,7 +65,7 @@ const cartController = {
       myCart = await Cart.findOne({ user: userId })
         .populate({
           path: "products",
-          select: ["_id", "name", "price", "discount"],
+          select: ["_id", "name", "price", "discount", "imageUrl"],
           populate: [
             {
               path: "course",
