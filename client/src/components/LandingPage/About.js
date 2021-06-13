@@ -1,20 +1,21 @@
 import { Typography, Box } from "@material-ui/core";
 import React from "react";
-import aboutImage from "../../assets/images/landingImages/about.jpg";
+import aboutImage from "../../assets/images/landingImages/aboutus.jpeg";
 import "./LandingPage.css";
 const About = () => {
   return (
     <section id="aboutSection">
-      <Box p={3}>
-        <Typography
-          variant="h2"
-          className="centerText headingText "
-          data-aos="fade-up"
-        >
-          About Us
-        </Typography>
-        <div className="container">
-          <div className="grid twoCols">
+      <br />
+      <Typography
+        variant="h2"
+        className="centerText headingText "
+        data-aos="fade-up"
+      >
+        About Us
+      </Typography>
+      <br />
+      <div className="container">
+        {/* <div className="grid twoCols">
             <Box p={2}>
               <div className="aboutLeft">
                 <Typography
@@ -30,20 +31,19 @@ const About = () => {
                   best costing education to students.
                 </Typography>
               </div>
-            </Box>
-            <div className="aboutRight">
-              <figure>
-                <img
-                  src={aboutImage}
-                  className="mkresp"
-                  alt="random"
-                  data-aos="fade-right"
-                />
-              </figure>
-            </div>
-          </div>
-        </div>
-      </Box>
+            </Box> */}
+        {/* <div className="aboutRight"> */}
+        <figure>
+          <img
+            src={aboutImage}
+            className="mkresp"
+            alt="random"
+            data-aos="fade-right"
+          />
+        </figure>
+        {/* </div> */}
+        {/* </div> */}
+      </div>
     </section>
   );
 };
