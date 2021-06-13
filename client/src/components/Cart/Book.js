@@ -38,6 +38,8 @@ const Book = ({
   const history = useHistory();
   const classes = useStyles();
 
+  const discountedPrice = price - (discount * price) / 100;
+
   const handleOnClick = (e) => {
     onClick(id);
   };
