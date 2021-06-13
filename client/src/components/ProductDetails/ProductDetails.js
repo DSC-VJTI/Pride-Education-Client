@@ -88,7 +88,7 @@ const ProductDetails = ({ match }) => {
   const handleModeChange = (event) => {
     setMode(event.target.value);
   };
-  console.log(product);
+
   return isLoading ? (
     <Loading />
   ) : (
