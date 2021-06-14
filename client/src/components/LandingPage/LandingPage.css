@@ -6,8 +6,9 @@
 }
 .mkresp{
   width:100%;
-  height: 100vh;
-  max-height: 600px;
+  height: auto;
+  max-width: 800px;
+  margin: 0 auto;
   display: block;
 }
 /* for desktop */
