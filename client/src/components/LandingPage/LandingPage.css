@@ -10,7 +10,9 @@
   max-height: 600px;
   display: block;
 }
+
 /* for desktop */
+
 .whatsapp_float {
 	position:fixed;
 	width:60px;
