@@ -10,7 +10,7 @@
  display: flex;
  justify-content: center;
  align-items: center;
- background-color: #ff5f5f;
+ background-color: #fff;
  margin-bottom: 540px !important;
 
 }
@@ -82,6 +82,7 @@
     background-color: #ffffff;
     display: grid;
     place-items: center;
+    box-shadow: 2px 2px 20px 2px grey;
     
 }
 .center_div h2

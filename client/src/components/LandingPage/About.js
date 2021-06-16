@@ -14,8 +14,9 @@ const About = () => {
         About Us
       </Typography>
       <br />
-      <div className="container">
-        {/* <div className="grid twoCols">
+      <center>
+        <div className="container">
+          {/* <div className="grid twoCols">
             <Box p={2}>
               <div className="aboutLeft">
                 <Typography
@@ -32,18 +33,22 @@ const About = () => {
                 </Typography>
               </div>
             </Box> */}
-        {/* <div className="aboutRight"> */}
-        <figure>
-          <img
-            src={aboutImage}
-            className="mkresp"
-            alt="random"
-            data-aos="fade-right"
-          />
-        </figure>
-        {/* </div> */}
-        {/* </div> */}
-      </div>
+          {/* <div className="aboutRight"> */}
+
+          <figure>
+            <img
+              src={aboutImage}
+              className="mkresp"
+              alt="random"
+              data-aos="fade-right"
+            />
+          </figure>
+
+          {/* </div> */}
+          {/* </div> */}
+        </div>
+      </center>
+
     </section>
   );
 };
