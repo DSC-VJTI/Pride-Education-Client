@@ -48,6 +48,7 @@ const About = () => {
           {/* </div> */}
         </div>
       </center>
+
     </section>
   );
 };

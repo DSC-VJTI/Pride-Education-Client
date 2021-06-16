@@ -3,6 +3,8 @@ import { Grid, Typography, makeStyles, Divider } from "@material-ui/core";
 import download from "../../Resources/img1.jpeg";
 import Fab from "@material-ui/core/Fab";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { useHistory } from "react-router-dom";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     "& img": {
@@ -23,8 +25,20 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Book = ({ title, content, price, instructor, onClick, id }) => {
+const Book = ({
+  title,
+  content,
+  price,
+  discount,
+  instructor,
+  onClick,
+  id,
+  imageUrl
+}) => {
+  const history = useHistory();
   const classes = useStyles();
+
+  const discountedPrice = price - (discount * price) / 100;
 
   const handleOnClick = (e) => {
     onClick(id);
@@ -33,30 +47,37 @@ const Book = ({ title, content, price, instructor, onClick, id }) => {
     <Grid container spacing={4} className={classes.root}>
       <Grid item xs={12} sm={5} style={{ paddingLeft: "10px" }}>
         <div>
-          <img src={download} />
+          <img src={imageUrl ? imageUrl : download} />
         </div>
       </Grid>
       <Grid item xs={12} container sm={7} style={{ paddingLeft: "40px" }}>
         <Grid item xs={8}>
-          <Typography variant="h6" style={{ color: "#f26522" }}>
+          <Typography
+            variant="h6"
+            style={{ color: "#f26522", cursor: "pointer" }}
+            onClick={() => history.push(`/book/details/${id}`)}
+          >
             {title}
-          </Typography>
-          <Typography variant="subtitle2">
-            <ul>
-              <li>{`Content Type: ${content}`}</li>
-            </ul>
           </Typography>
         </Grid>
         <Grid item xs={4}>
           <Typography variant="h6" style={{ color: "#f26522" }}>
-            ₹{price}
+            {discount === 0 ? (
+              <span>₹{price}</span>
+            ) : (
+              <>
+                <span
+                  style={{
+                    textDecoration: "line-through red"
+                  }}
+                >
+                  ₹{price}
+                </span>{" "}
+                ₹{discountedPrice}{" "}
+                <span style={{ color: "red" }}>({discount}% OFF)</span>
+              </>
+            )}
           </Typography>
-
-          <Divider />
-          <Typography variant="subtitle2" style={{ margin: "1rem 0rem" }}>
-            By {instructor}
-          </Typography>
-
           <div
             style={{
               paddingTop: "38px",

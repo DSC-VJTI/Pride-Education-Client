@@ -46,7 +46,10 @@ const TestSeries = ({
       </Grid>
       <Grid item xs={12} container sm={7} style={{ paddingLeft: "40px" }}>
         <Grid item xs={8}>
-          <Typography variant="h6" style={{ color: "#f26522" }}>
+          <Typography
+            variant="h6"
+            style={{ color: "#f26522", cursor: "pointer" }}
+          >
             {title}
           </Typography>
           <Typography variant="subtitle2">
