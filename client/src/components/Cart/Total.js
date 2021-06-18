@@ -59,8 +59,8 @@ const Total = (props) => {
     e.preventDefault();
     const options = {
       key: key_id,
-      name: "Client CA",
-      description: "Test mode for our client",
+      name: "Pride CA Academy",
+      description: "Your Payment Details",
       amount: props.price * 100,
       handler: async (response) => {
         try {
